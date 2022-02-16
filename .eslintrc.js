@@ -1,0 +1,36 @@
+module.exports = {
+  env: {
+    es2021: true,
+    jest: true,
+  },
+  extends: ['airbnb', 'plugin:react/recommended'],
+  parser: 'babel-eslint',
+  plugins: ['react'],
+  rules: {
+    'comma-dangle': 'off',
+    'import/prefer-default-export': 'off',
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-one-expression-per-line': 'off',
+    'no-nested-ternary': 'off',
+    indent: ['error', 2],
+    'react/jsx-closing-bracket-location': ['error', 'tag-aligned'],
+    'react/jsx-closing-tag-location': 'error',
+    'react/prop-types': 'off',
+    'operator-linebreak': ['error', 'after'],
+    'object-curly-newline': ['error', { multiline: true }],
+    'no-use-before-define': ['error', { functions: true, classes: true, variables: false }],
+    'no-lonely-if': 'off',
+    'max-len': [
+      'error',
+      {
+        code: 100,
+        comments: 100,
+      },
+    ],
+    'react/state-in-constructor': 'off',
+    'react-hooks/rules-of-hooks': 'off',
+    'react-hooks/exhaustive-deps': 'off',
+    'import/order': ['error', { groups: ['external', ['internal', 'sibling']] }],
+  },
+  settings: { 'import/resolver': {} },
+};
