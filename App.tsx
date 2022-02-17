@@ -1,11 +1,14 @@
+import React, { FC } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text } from 'react-native';
+import { Login } from '@root/pages';
 
-export default function App() {
+const App: FC = () => {
   return (
     <>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar backgroundColor="transparent"  style="dark"/>
+      <StatusBar backgroundColor="transparent" style="dark" />
+      <Login />
     </>
   );
-}
+};
+
+export default App;

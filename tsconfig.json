@@ -14,6 +14,10 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "baseUrl": "./",
+    "paths": {
+      "@root/*": ["./src/*"],
+      "@assets/*": ["./src/assets/*"],
+    },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false
