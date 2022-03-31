@@ -1,4 +1,4 @@
-import { colors, dimensions } from '@root/config/theme';
+import { colors, dimensions, font } from '@root/config/theme';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -52,11 +52,11 @@ export const SignUp = styled(SignIn)`
 `;
 
 export const LabelSignIn = styled.Text`
-  font-size: ${dimensions.fonts.large};
+  font-size: ${font.size.large};
   color: ${colors.basic.white};
   font-weight: bold;
 `;
 
 export const LabelSignUp = styled(LabelSignIn)`
-  font-size: ${dimensions.fonts.medium};
+  font-size: ${font.size.medium};
 `;

@@ -1,2 +1,1 @@
-export * from './Login';
-export * from './Terms';
+export * from './auth';

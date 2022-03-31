@@ -3,7 +3,7 @@ import { ActivityIndicator } from 'react-native';
 import { handlerInputMask } from '@root/utils';
 
 import { colors } from '@root/config/theme';
-import logo from '../../assets/icons/logo.png';
+import logo from '../../../assets/icons/logo.png';
 
 import * as S from './styles';
 

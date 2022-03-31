@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { colors, dimensions } from '@root/config/theme';
 import { WebView } from 'react-native-webview';
 
-import * as C from '../../components';
+import * as C from '../../../components';
 import * as S from './styles';
 
 const top = dimensions.screen.height * 0.45;

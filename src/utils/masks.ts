@@ -10,7 +10,8 @@ const masks: Masks<string> = {
   phone: (value: string) =>
     value
       .replace(/^(\d{2})(\d{1})/, '($1) $2')
-      .replace(/^\((\d{2})\) (\d{4,5})(\d{1,4})/, '($1) $2-$3'),
+      .replace(/^\((\d{2})\) (\d{1})(\d{1})/, '($1) $2 $3')
+      .replace(/^\((\d{2})\) (\d{1}) (\d{4})(\d{1,4})/, '($1) $2 $3-$4'),
 };
 
 const getMask = (key: string) => (key in masks ? masks[key] : (value: string) => value);

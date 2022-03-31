@@ -5,10 +5,4 @@ const screen = {
   width: Dimensions.get('window').width,
 };
 
-export const fonts = {
-  extraLarge: '25px',
-  large: '20px',
-  medium: '15px',
-};
-
-export const dimensions = { screen, fonts };
+export const dimensions = { screen };
