@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useReducer } from 'react';
+import React, { FC, useReducer } from 'react';
 import { handlerInputMask } from '@src/utils';
 import { Animated } from 'react-native';
 
@@ -12,9 +12,6 @@ export const Identifiers: FC = () => {
 
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
-
-  const name = useMemo(() => state.name, [state.name]);
-  const phone = useMemo(() => state.phone, [state.phone]);
 
   const handleNext = () => {
     // TODO: verificar se telefone foi preenchido corretamente (tamanho igual a 11)
@@ -56,8 +53,8 @@ export const Identifiers: FC = () => {
             <C_S.Input
               onFocus={onOpenInput}
               onBlur={onCloseInput}
-              onChangeText={(name) => dispatch({ type: 'changeName', payload: name })}
-              value={name}
+              value={state.name}
+              onChangeText={(payload) => dispatch({ type: 'changeName', payload })}
               placeholder="Nome completo"
             />
           </C_S.InputContainer>
@@ -67,10 +64,10 @@ export const Identifiers: FC = () => {
             <C_S.Input
               onFocus={onOpenInput}
               onBlur={onCloseInput}
-              onChangeText={(phone) => {
-                dispatch({ type: 'changePhone', payload: handlerInputMask(phone, 'phone') });
+              value={state.phone}
+              onChangeText={(payload) => {
+                dispatch({ type: 'changePhone', payload: handlerInputMask(payload, 'phone') });
               }}
-              value={phone}
               maxLength={16}
               keyboardType="number-pad"
               placeholder="(99) 9 9999-9999"

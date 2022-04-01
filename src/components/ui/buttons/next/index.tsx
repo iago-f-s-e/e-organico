@@ -25,8 +25,7 @@ export const NextButton = ({ handle, loading, animated }: Props): JSX.Element =>
         alignItems: 'center',
         height: animated.height,
         opacity: animated.opacity,
-        marginBottom: 20,
-        marginTop: 20,
+        marginBottom: 10,
       }}
     >
       <S.Container onPress={handle} disabled={disabled} style={opacity}>

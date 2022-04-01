@@ -1,4 +1,4 @@
-import React, { FC, useReducer, useMemo } from 'react';
+import React, { FC, useReducer } from 'react';
 
 import * as C from '@src/components';
 import { handlerInputMask } from '@src/utils';
@@ -12,11 +12,6 @@ export const Credentials: FC = () => {
 
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
-
-  const email = useMemo(() => state.email, [state.email]);
-  const document = useMemo(() => state.document, [state.document]);
-  const password = useMemo(() => state.password, [state.password]);
-  const confPassword = useMemo(() => state.confPassword, [state.confPassword]);
 
   const handleNext = () => {
     // TODO: verificar se cpf foi preenchido corretamente com o algoritmo de validação e tamanho igual a 11
@@ -41,7 +36,7 @@ export const Credentials: FC = () => {
             <C_S.Input
               onFocus={onOpenInput}
               onBlur={onCloseInput}
-              value={email}
+              value={state.email}
               onChangeText={(payload) => dispatch({ type: 'changeEmail', payload })}
               placeholder="email@email.com"
             />
@@ -52,7 +47,7 @@ export const Credentials: FC = () => {
             <C_S.Input
               onFocus={onOpenInput}
               onBlur={onCloseInput}
-              value={document}
+              value={state.document}
               onChangeText={(payload) => {
                 dispatch({
                   type: 'changeDocument',
@@ -70,7 +65,7 @@ export const Credentials: FC = () => {
             <C_S.Input
               onFocus={onOpenInput}
               onBlur={onCloseInput}
-              value={password}
+              value={state.password}
               onChangeText={(payload) => dispatch({ type: 'changePassword', payload })}
               secureTextEntry
               placeholder="*********"
@@ -82,7 +77,7 @@ export const Credentials: FC = () => {
             <C_S.Input
               onFocus={onOpenInput}
               onBlur={onCloseInput}
-              value={confPassword}
+              value={state.confPassword}
               onChangeText={(payload) => dispatch({ type: 'changeConfPassword', payload })}
               secureTextEntry
               placeholder="*********"
