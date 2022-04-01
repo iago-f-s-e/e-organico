@@ -1,7 +1,7 @@
 import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 
-import { colors } from '@root/config/theme';
+import { colors } from '@src/config/theme';
 import * as S from './styles';
 import { Props } from './types';
 

@@ -15,8 +15,7 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "@root/*": ["./src/*"],
-      "@assets/*": ["./src/assets/*"],
+      "@src/*": ["./src/*"]
     },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

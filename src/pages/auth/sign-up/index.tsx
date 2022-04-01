@@ -1,70 +1,26 @@
-import { handlerInputMask } from '@root/utils';
-import React, { FC, useState, useMemo } from 'react';
+import React, { FC, useMemo, useReducer } from 'react';
+import { handlerInputMask } from '@src/utils';
 import { Animated } from 'react-native';
 
-import * as C from '../../../components';
+import * as C from '@src/components';
 import * as S from './styles';
+import { initialState, reducer } from './reducer';
 
-// TODO: remover useState e usar useReducer
 export const SignUp: FC = () => {
-  const [sizeImage] = useState<Animated.ValueXY>(new Animated.ValueXY({ x: 150, y: 150 }));
-  const [sizeButton] = useState<Animated.ValueXY>(new Animated.ValueXY({ x: 150, y: 40 }));
-  const [opacityButton] = useState<Animated.ValueXY>(new Animated.ValueXY({ x: 1, y: 0 }));
-  const [_name, setName] = useState<string>('');
-  const [_phone, setPhone] = useState<string>('');
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  const onOpenInput = () => {
-    Animated.parallel([
-      Animated.timing(sizeImage.x, {
-        toValue: 100,
-        duration: 200,
-        useNativeDriver: false,
-      }),
-      Animated.timing(sizeImage.y, {
-        toValue: 100,
-        duration: 200,
-        useNativeDriver: false,
-      }),
-      Animated.timing(opacityButton.x, {
-        toValue: 0,
-        duration: 200,
-        useNativeDriver: false,
-      }),
-      Animated.timing(sizeButton.y, {
-        toValue: 0,
-        duration: 200,
-        useNativeDriver: false,
-      }),
-    ]).start();
+  const onOpenInput = () => dispatch({ type: 'onOpenInput' });
+  const onCloseInput = () => dispatch({ type: 'onCloseInput' });
+
+  const name = useMemo(() => state.name, [state.name]);
+  const phone = useMemo(() => state.phone, [state.phone]);
+
+  const handleNext = () => {
+    // TODO: verificar se telefone foi preenchido corretamente (tamanho igual a 11)
+    // TODO: verificar se o nome foi preenchido
+    // TODO: verificar se escolheu a foto de perfil
+    // TODO: adicionar useToast para mostrar logs
   };
-
-  const onCloseInput = () => {
-    Animated.parallel([
-      Animated.timing(sizeImage.x, {
-        toValue: 150,
-        duration: 200,
-        useNativeDriver: false,
-      }),
-      Animated.timing(sizeImage.y, {
-        toValue: 150,
-        duration: 200,
-        useNativeDriver: false,
-      }),
-      Animated.timing(opacityButton.x, {
-        toValue: 1,
-        duration: 200,
-        useNativeDriver: false,
-      }),
-      Animated.timing(sizeButton.y, {
-        toValue: 40,
-        duration: 200,
-        useNativeDriver: false,
-      }),
-    ]).start();
-  };
-
-  const name = useMemo(() => _name, [_name]);
-  const phone = useMemo(() => _phone, [_phone]);
 
   return (
     <S.Container>
@@ -81,8 +37,8 @@ export const SignUp: FC = () => {
               alignSelf: 'center',
               justifyContent: 'center',
               alignItems: 'center',
-              height: sizeImage.y,
-              width: sizeImage.x,
+              height: state.sizeImage.y,
+              width: state.sizeImage.x,
             }}
           >
             <C.Avatar />
@@ -99,7 +55,7 @@ export const SignUp: FC = () => {
             <S.Input
               onFocus={onOpenInput}
               onBlur={onCloseInput}
-              onChangeText={(name) => setName(name)}
+              onChangeText={(name) => dispatch({ type: 'changeName', payload: name })}
               value={name}
               placeholder="Nome completo"
             />
@@ -110,7 +66,9 @@ export const SignUp: FC = () => {
             <S.Input
               onFocus={onOpenInput}
               onBlur={onCloseInput}
-              onChangeText={(phone) => setPhone(handlerInputMask(phone, 'phone'))}
+              onChangeText={(phone) => {
+                dispatch({ type: 'changePhone', payload: handlerInputMask(phone, 'phone') });
+              }}
               value={phone}
               maxLength={16}
               keyboardType="number-pad"
@@ -123,18 +81,13 @@ export const SignUp: FC = () => {
           style={{
             justifyContent: 'center',
             alignItems: 'center',
-            height: sizeButton.y,
-            opacity: opacityButton.x,
+            height: state.sizeButton.y,
+            opacity: state.opacityButton.x,
             marginBottom: 20,
             marginTop: 20,
           }}
         >
-          <C.NextButton
-            handle={() => {
-              // TODO: verificar ser telefone existe
-              // TODO: navegar para proxima etapa
-            }}
-          />
+          <C.NextButton handle={handleNext} loading={state.loading} />
         </Animated.View>
       </S.Container>
     </S.Container>

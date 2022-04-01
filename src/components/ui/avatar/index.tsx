@@ -1,8 +1,7 @@
 import React from 'react';
 import { Image } from 'react-native';
+import defaultImage from '@src/assets/images/icon-user.png';
 import { Props } from './types';
-
-import defaultImage from '../../../assets/images/icon-user.png';
 
 export const Avatar = ({ uri }: Props): JSX.Element => {
   const image = !uri?.length ? defaultImage : { uri };

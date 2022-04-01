@@ -1,9 +1,9 @@
 import React, { FC, useState, useMemo } from 'react';
 import { ActivityIndicator } from 'react-native';
-import { handlerInputMask } from '@root/utils';
+import { handlerInputMask } from '@src/utils';
 
-import { colors } from '@root/config/theme';
-import logo from '../../../assets/icons/logo.png';
+import { colors } from '@src/config/theme';
+import logo from '@src/assets/icons/logo.png';
 
 import * as S from './styles';
 

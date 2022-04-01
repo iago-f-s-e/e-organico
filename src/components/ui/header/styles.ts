@@ -1,4 +1,4 @@
-import { colors } from '@root/config/theme';
+import { colors } from '@src/config/theme';
 
 import styled from 'styled-components/native';
 

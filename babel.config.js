@@ -21,7 +21,7 @@ module.exports = function(api) {
             ".png"
           ],
           alias: {
-            '@root': './src',
+            '@src': './src',
             '@assets': './src/assets',
           }
         }

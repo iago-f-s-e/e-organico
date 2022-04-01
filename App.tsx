@@ -8,7 +8,7 @@ import {
   WorkSans_600SemiBold,
 } from '@expo-google-fonts/work-sans';
 
-import { SignUp } from '@root/pages';
+import { SignUp } from '@src/pages';
 
 // TODO: corrigir status bar
 
