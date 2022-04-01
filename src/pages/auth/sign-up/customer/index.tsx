@@ -13,6 +13,11 @@ export const Customer: FC = () => {
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
 
+  const handleNext = () => {
+    // TODO: verificar dados obrigatórios
+    // TODO: verificar se o cep foi preenchido corretamente com regex
+  };
+
   return (
     <C_S.Container>
       <C.Header
@@ -113,7 +118,7 @@ export const Customer: FC = () => {
         </S.Scroll>
 
         <C.NextButton
-          handle={() => {}}
+          handle={handleNext}
           animated={{ height: state.sizeButton.y, opacity: state.opacityButton.x }}
           loading={state.loading}
         />
