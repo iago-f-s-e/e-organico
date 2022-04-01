@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Animated } from 'react-native';
 import { colors } from '@src/config/theme';
 import { IfElse } from '@src/components/business';
 import { Loading } from '../../loading';
@@ -8,7 +9,7 @@ import { Props } from './types';
 
 // TODO: bloquear o botão e mostrar que está em loading
 
-export const NextButton = ({ handle, loading }: Props): JSX.Element => {
+export const NextButton = ({ handle, loading, animated }: Props): JSX.Element => {
   const opacity = useMemo(() => {
     if (loading) return { opacity: 0.5 };
 
@@ -18,14 +19,25 @@ export const NextButton = ({ handle, loading }: Props): JSX.Element => {
   const disabled = useMemo(() => loading, [loading]);
 
   return (
-    <S.Container onPress={handle} disabled={disabled} style={opacity}>
-      <IfElse
-        condition={loading}
-        render={{
-          toBeTruthy: () => <Loading color={colors.basic.white} sizeType="large" />,
-          toBeFalsy: () => <S.Label>Próximo</S.Label>,
-        }}
-      />
-    </S.Container>
+    <Animated.View
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: animated.height,
+        opacity: animated.opacity,
+        marginBottom: 20,
+        marginTop: 20,
+      }}
+    >
+      <S.Container onPress={handle} disabled={disabled} style={opacity}>
+        <IfElse
+          condition={loading}
+          render={{
+            toBeTruthy: () => <Loading color={colors.basic.white} sizeType="large" />,
+            toBeFalsy: () => <S.Label>Próximo</S.Label>,
+          }}
+        />
+      </S.Container>
+    </Animated.View>
   );
 };

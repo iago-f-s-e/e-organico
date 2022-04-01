@@ -78,18 +78,11 @@ export const Identifiers: FC = () => {
           </C_S.InputContainer>
         </S.IdentifiersContainer>
 
-        <Animated.View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: state.sizeButton.y,
-            opacity: state.opacityButton.x,
-            marginBottom: 20,
-            marginTop: 20,
-          }}
-        >
-          <C.NextButton handle={handleNext} loading={state.loading} />
-        </Animated.View>
+        <C.NextButton
+          handle={handleNext}
+          animated={{ height: state.sizeButton.y, opacity: state.opacityButton.x }}
+          loading={state.loading}
+        />
       </C_S.Container>
     </C_S.Container>
   );
