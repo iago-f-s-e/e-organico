@@ -5,16 +5,6 @@ export const Container = styled.View`
   flex: 1;
 `;
 
-export const ImageContainer = styled.View`
-  padding-top: 20px;
-  flex: 0.5;
-`;
-
-export const CredentialContainer = styled(Container)`
-  justify-content: center;
-  align-items: center;
-`;
-
 export const InputContainer = styled.View`
   justify-content: center;
 
