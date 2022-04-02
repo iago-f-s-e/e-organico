@@ -21,8 +21,8 @@ export const BackButton = styled(Button)`
   flex-direction: row;
 
   position: absolute;
-  top: 20;
-  left: 10;
+  top: 20px;
+  left: 10px;
 
   align-items: center;
   justify-content: center;

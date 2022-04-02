@@ -1,7 +1,7 @@
 import React, { FC, useReducer } from 'react';
 
-import * as C from '@src/components';
 import { handlerInputMask } from '@src/utils';
+import * as C from '@src/components';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 

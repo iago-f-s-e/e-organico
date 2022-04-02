@@ -1,14 +1,18 @@
-import React, { FC, useReducer } from 'react';
+import React, { FC, useReducer, useMemo } from 'react';
+
+import { handlerInputMask } from '@src/utils';
 
 import * as C from '@src/components';
-import { handlerInputMask } from '@src/utils';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
 import { initialState, reducer } from './reducer';
 
-export const Customer: FC = () => {
+export const Address: FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  // TODO: verificar o tipo de usuário e mudar o placeholder
+  const placeholderComplement = useMemo(() => 'Bloco 99 Apto 99 (opcional)', []);
 
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
@@ -16,6 +20,7 @@ export const Customer: FC = () => {
   const handleNext = () => {
     // TODO: verificar dados obrigatórios
     // TODO: verificar se o cep foi preenchido corretamente com regex
+    // TODO: navegar para finished caso seja comprador e para property_images caso seja produtor
   };
 
   return (
@@ -111,7 +116,7 @@ export const Customer: FC = () => {
                 onBlur={onCloseInput}
                 value={state.complement}
                 onChangeText={(payload) => dispatch({ type: 'changeComplement', payload })}
-                placeholder="Bloco 99 Apto 99 (opcional)"
+                placeholder={placeholderComplement}
               />
             </C_S.InputContainer>
           </S.CustomerContainer>

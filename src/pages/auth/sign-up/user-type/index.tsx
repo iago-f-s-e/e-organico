@@ -6,6 +6,9 @@ import * as S from './styles';
 
 // TODO: criar navegação
 
+// TODO: navegar para cadastro de endereço
+// TODO: identificar que é um produtor ou comprador
+
 export const UserType: FC = () => {
   return (
     <C_S.Container>
