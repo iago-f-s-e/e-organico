@@ -8,7 +8,7 @@ const initialState: Toast = {
   visible: false,
 };
 
-const toastSlice = createSlice({
+export const toastSlice = createSlice({
   name: 'toast',
   initialState,
   reducers: {
@@ -16,6 +16,3 @@ const toastSlice = createSlice({
     showToast: (_, { payload }: Payload): Toast => ({ ...payload, visible: true }),
   },
 });
-
-export const { hideToast, showToast } = toastSlice.actions;
-export const toast = toastSlice.reducer;

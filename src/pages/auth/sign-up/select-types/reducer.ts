@@ -1,6 +1,6 @@
+import { CertificationType } from '@src/store/slices/producer/types';
 import { Animated } from 'react-native';
 
-type CertificationType = 'IN CONVERSION' | 'AUDIT' | 'OCS' | 'SPG';
 type Delivery = 'YES' | 'NO';
 
 type State = {

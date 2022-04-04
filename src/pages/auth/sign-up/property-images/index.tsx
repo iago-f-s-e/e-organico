@@ -23,10 +23,6 @@ export const PropertyImages: FC = () => {
     appDispatch(showToast({ message: 'teste', type: 'info' }));
   };
 
-  const handleNext2 = () => {
-    appDispatch(showToast({ message: 'teste2', type: 'error' }));
-  };
-
   return (
     <C_S.Container>
       <C.Header
@@ -66,12 +62,6 @@ export const PropertyImages: FC = () => {
             </S.ImageContainer>
           </S.ImagesContainer>
         </S.PropertyImagesContainer>
-
-        <C.NextButton
-          handle={handleNext2}
-          animated={{ height: state.sizeButton.y, opacity: state.opacityButton.x }}
-          loading={state.loading}
-        />
 
         <C.NextButton
           handle={handleNext}

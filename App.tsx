@@ -6,6 +6,7 @@ import * as Work from '@expo-google-fonts/work-sans';
 
 import { PropertyImages } from '@src/pages';
 import { Toast } from '@src/components';
+import { KeyboardAvoidingView } from 'react-native';
 import { store } from './src/store';
 
 // TODO: corrigir status bar
@@ -25,8 +26,10 @@ const App: FC = () => {
   return (
     <Provider store={store}>
       {/* <StatusBar backgroundColor="transparent" style="auto" /> */}
-      <Toast />
-      <PropertyImages />
+      <KeyboardAvoidingView style={{ flex: 1 }}>
+        <Toast />
+        <PropertyImages />
+      </KeyboardAvoidingView>
     </Provider>
   );
 };
