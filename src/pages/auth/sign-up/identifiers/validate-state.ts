@@ -14,9 +14,9 @@ type Success = {
 };
 type Response = Error | Success;
 
-type FormatState = (state: State) => Response;
+type ValidateState = (state: State) => Response;
 
-export const formatState: FormatState = ({ name, phone, image }): Response => {
+export const validateState: ValidateState = ({ name, phone, image }): Response => {
   const _name = name.trim();
   const _phone = handleRemoveMask(phone, 'phone');
   const _uri = image.uri.trim();
@@ -33,5 +33,5 @@ export const formatState: FormatState = ({ name, phone, image }): Response => {
     return { type: 'error', message: 'Image não selecionada' };
   }
 
-  return { type: 'success', name: _name, phone: _phone, image };
+  return { type: 'success', name: _name, phone, image };
 };

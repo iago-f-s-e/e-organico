@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { useFonts } from 'expo-font';
 import * as Work from '@expo-google-fonts/work-sans';
 
-import { Identifiers } from '@src/pages';
+import { Credentials } from '@src/pages';
 import { Toast } from '@src/components';
 import { KeyboardAvoidingView } from 'react-native';
 import { store } from './src/store';
@@ -28,7 +28,7 @@ const App: FC = () => {
       {/* <StatusBar backgroundColor="transparent" style="auto" /> */}
       <KeyboardAvoidingView style={{ flex: 1 }}>
         <Toast />
-        <Identifiers />
+        <Credentials />
       </KeyboardAvoidingView>
     </Provider>
   );

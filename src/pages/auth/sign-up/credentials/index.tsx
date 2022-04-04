@@ -2,23 +2,36 @@ import React, { FC, useReducer } from 'react';
 
 import { handlerInputMask } from '@src/utils';
 import * as C from '@src/components';
+import { useToast as _useToast } from '@src/hooks';
+import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
 import { initialState, reducer } from './reducer';
+import { validateState } from './validate-state';
+
+// TODO: focar no input em caso de erro
+// TODO: navegar para endereço
 
 export const Credentials: FC = () => {
+  const appDispatch = useAppDispatch();
+  const consumer = useAppSelector((state) => state.signUpConsumer);
+  const useToast = _useToast();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
 
   const handleNext = () => {
-    // TODO: verificar se cpf foi preenchido corretamente com o algoritmo de validação e tamanho igual a 11
-    // TODO: verificar se o email foi preenchido corretamente com regex
-    // TODO: verificar tamanho mínimo para senha
-    // TODO: verificar se as senhas são iguais
-    // TODO: adicionar useToast para mostrar logs
+    const response = validateState(state);
+
+    if (response.type === 'error') {
+      return useToast.error(response.message);
+    }
+
+    const { type: _, ...payload } = response;
+
+    appDispatch(changeSignUpConsumer({ ...consumer, ...payload }));
   };
 
   return (

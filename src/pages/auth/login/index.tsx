@@ -7,6 +7,7 @@ import logo from '@src/assets/icons/logo.png';
 
 import * as S from './styles';
 
+// TODO: trocar useState por useReduce
 export const Login: FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [phone, setPhone] = useState<string>('');

@@ -9,7 +9,7 @@ import { useToast as _useToast } from '@src/hooks';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 import { initialState, reducer } from './reducer';
-import { formatState } from './format-state';
+import { validateState } from './validate-state';
 
 type PickerResults = {
   cancelled: boolean;
@@ -18,6 +18,7 @@ type PickerResults = {
 };
 
 // TODO: permitir remover imagem
+// TODO: focar no input em caso de erro
 // TODO: navegar para credenciais
 
 export const Identifiers: FC = () => {
@@ -29,7 +30,7 @@ export const Identifiers: FC = () => {
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
 
-  const handlePickerImage = async () => {
+  const handlePickerImage = useCallback(async () => {
     const result = (await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       quality: 1,
@@ -42,20 +43,18 @@ export const Identifiers: FC = () => {
     const { cancelled: _, ...payload } = result;
 
     dispatch({ type: 'changeImage', payload });
-  };
+  }, []);
 
   const handleNext = useCallback(() => {
-    const response = formatState(state);
+    const response = validateState(state);
 
     if (response.type === 'error') {
       return useToast.error(response.message);
     }
 
-    const { name, phone, image } = response;
+    const { type: _, ...payload } = response;
 
-    appDispatch(changeSignUpConsumer({ ...consumer, name, phone, image }));
-
-    // TODO: verificar se escolheu a foto de perfil
+    appDispatch(changeSignUpConsumer({ ...consumer, ...payload }));
   }, [state, useToast, consumer, appDispatch]);
 
   return (
