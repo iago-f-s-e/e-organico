@@ -1,6 +1,7 @@
 import React, { FC, useReducer, useCallback } from 'react';
 import { handlerInputMask } from '@src/utils';
 import { Animated } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 
 import * as C from '@src/components';
 import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
@@ -9,6 +10,15 @@ import * as C_S from '../common-styles';
 import * as S from './styles';
 import { initialState, reducer } from './reducer';
 import { formatState } from './format-state';
+
+type PickerResults = {
+  cancelled: boolean;
+  uri: string;
+  base64: string;
+};
+
+// TODO: permitir remover imagem
+// TODO: navegar para credenciais
 
 export const Identifiers: FC = () => {
   const appDispatch = useAppDispatch();
@@ -19,6 +29,21 @@ export const Identifiers: FC = () => {
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
 
+  const handlePickerImage = async () => {
+    const result = (await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      quality: 1,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      aspect: [4, 3],
+    })) as PickerResults;
+
+    if (result.cancelled) return;
+
+    const { cancelled: _, ...payload } = result;
+
+    dispatch({ type: 'changeImage', payload });
+  };
+
   const handleNext = useCallback(() => {
     const response = formatState(state);
 
@@ -26,9 +51,9 @@ export const Identifiers: FC = () => {
       return useToast.error(response.message);
     }
 
-    const { name, phone } = response;
+    const { name, phone, image } = response;
 
-    appDispatch(changeSignUpConsumer({ ...consumer, name, phone }));
+    appDispatch(changeSignUpConsumer({ ...consumer, name, phone, image }));
 
     // TODO: verificar se escolheu a foto de perfil
   }, [state, useToast, consumer, appDispatch]);
@@ -52,13 +77,9 @@ export const Identifiers: FC = () => {
               width: state.sizeImage.x,
             }}
           >
-            <C.Avatar />
+            <C.Avatar uri={state.image.uri} />
           </Animated.View>
-          <C.SelectImage
-            onSelect={() => {
-              // TODO: selecionar imagem
-            }}
-          />
+          <C.SelectImage onSelect={handlePickerImage} />
         </S.ImageContainer>
         <S.IdentifiersContainer>
           <C_S.InputContainer>

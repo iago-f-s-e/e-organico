@@ -1,3 +1,8 @@
+type Image = {
+  uri: string;
+  base64: string;
+};
+
 type Address = {
   street: string;
   number: number;
@@ -14,5 +19,6 @@ export type SignUpPayload = {
   email: string;
   document: string;
   password: string;
+  image: Image;
   address: Address;
 };

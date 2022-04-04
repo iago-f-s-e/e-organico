@@ -1,29 +1,43 @@
 import { Animated } from 'react-native';
 
+type Image = {
+  uri: string;
+  base64: string;
+};
+
 export type State = {
   sizeImage: Animated.ValueXY;
   sizeButton: Animated.ValueXY;
   opacityButton: Animated.ValueXY;
   name: string;
   phone: string;
+  image: Image;
   loading: boolean;
 };
 
-type Actions = 'onOpenInput' | 'onCloseInput' | 'changeName' | 'changePhone' | 'changeLoading';
+type Actions =
+  | 'onOpenInput'
+  | 'onCloseInput'
+  | 'changeName'
+  | 'changePhone'
+  | 'changeImage'
+  | 'changeLoading';
 
 type Action = {
   type: Actions;
-  payload?: boolean | string;
+  payload?: boolean | string | Image;
 };
 
 type Reducer = (state: State, action: Action) => State;
 
 const reducers: { [key in Actions]: Reducer } = {
-  changeLoading: (state, action): State => ({ ...state, loading: Boolean(action.payload) }),
+  changeLoading: (state, { payload }): State => ({ ...state, loading: Boolean(payload) }),
 
-  changeName: (state, action): State => ({ ...state, name: String(action.payload) }),
+  changeName: (state, { payload }): State => ({ ...state, name: String(payload) }),
 
-  changePhone: (state, action): State => ({ ...state, phone: String(action.payload) }),
+  changePhone: (state, { payload }): State => ({ ...state, phone: String(payload) }),
+
+  changeImage: (state, { payload }): State => ({ ...state, image: payload as Image }),
 
   onCloseInput: (state, _): State => {
     Animated.parallel([
@@ -87,6 +101,10 @@ export const initialState: State = {
   name: '',
   phone: '',
   loading: false,
+  image: {
+    base64: '',
+    uri: '',
+  },
 };
 
 export const reducer: Reducer = (state, action) => reducers[action.type](state, action);

@@ -13,6 +13,10 @@ const initialState: SignUpConsumer = {
     street: '',
     zipCode: '',
   },
+  image: {
+    base64: '',
+    uri: '',
+  },
   document: '',
   email: '',
   name: '',
