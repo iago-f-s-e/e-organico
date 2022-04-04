@@ -5,6 +5,7 @@ import * as C_S from '../common-styles';
 import * as S from './styles';
 
 // TODO: criar navegação
+// TODO: entrypoint
 
 // TODO: navegar para cadastro de endereço
 // TODO: identificar que é um produtor ou comprador

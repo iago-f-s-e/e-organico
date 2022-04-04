@@ -1,4 +1,4 @@
-import React, { FC, useReducer } from 'react';
+import React, { FC, useReducer, useCallback } from 'react';
 
 import { handlerInputMask } from '@src/utils';
 import * as C from '@src/components';
@@ -22,7 +22,7 @@ export const Credentials: FC = () => {
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     const response = validateState(state);
 
     if (response.type === 'error') {
@@ -32,7 +32,7 @@ export const Credentials: FC = () => {
     const { type: _, ...payload } = response;
 
     appDispatch(changeSignUpConsumer({ ...consumer, ...payload }));
-  };
+  }, [appDispatch, consumer, state, useToast]);
 
   return (
     <C_S.Container>

@@ -1,14 +1,20 @@
-import React, { FC, useReducer, useMemo } from 'react';
+import React, { FC, useReducer, useMemo, useCallback } from 'react';
 
 import { handlerInputMask } from '@src/utils';
 
 import * as C from '@src/components';
+import { useToast as _useToast } from '@src/hooks';
+import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
 import { initialState, reducer } from './reducer';
+import { validateState } from './validate-state';
 
 export const Address: FC = () => {
+  const appDispatch = useAppDispatch();
+  const consumer = useAppSelector((state) => state.signUpConsumer);
+  const useToast = _useToast();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // TODO: verificar o tipo de usuário e mudar o placeholder
@@ -17,12 +23,20 @@ export const Address: FC = () => {
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
 
-  const handleNext = () => {
-    // TODO: verificar dados obrigatórios
-    // TODO: verificar se o cep foi preenchido corretamente com regex
+  const handleNext = useCallback(() => {
     // TODO: navegar para finished caso seja comprador e para property_images caso seja produtor
     // TODO: trocar o label para "confirmar" caso seja comprador
-  };
+
+    const response = validateState(state);
+
+    if (response.type === 'error') {
+      return useToast.error(response.message);
+    }
+
+    const { type: _, ...payload } = response;
+
+    appDispatch(changeSignUpConsumer({ ...consumer, ...payload }));
+  }, [appDispatch, consumer, state, useToast]);
 
   return (
     <C_S.Container>

@@ -1,6 +1,6 @@
 import { Animated } from 'react-native';
 
-type State = {
+export type State = {
   sizeImage: Animated.ValueXY;
   sizeButton: Animated.ValueXY;
   opacityButton: Animated.ValueXY;
