@@ -1,24 +1,37 @@
-import React, { FC, useReducer } from 'react';
+import React, { FC, useReducer, useCallback } from 'react';
 import { handlerInputMask } from '@src/utils';
 import { Animated } from 'react-native';
 
 import * as C from '@src/components';
+import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
+import { useToast as _useToast } from '@src/hooks';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 import { initialState, reducer } from './reducer';
+import { formatState } from './format-state';
 
 export const Identifiers: FC = () => {
+  const appDispatch = useAppDispatch();
+  const consumer = useAppSelector((state) => state.signUpConsumer);
+  const useToast = _useToast();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
 
-  const handleNext = () => {
-    // TODO: verificar se telefone foi preenchido corretamente (tamanho igual a 11)
-    // TODO: verificar se o nome foi preenchido
+  const handleNext = useCallback(() => {
+    const response = formatState(state);
+
+    if (response.type === 'error') {
+      return useToast.error(response.message);
+    }
+
+    const { name, phone } = response;
+
+    appDispatch(changeSignUpConsumer({ ...consumer, name, phone }));
+
     // TODO: verificar se escolheu a foto de perfil
-    // TODO: adicionar useToast para mostrar logs
-  };
+  }, [state, useToast, consumer, appDispatch]);
 
   return (
     <C_S.Container>

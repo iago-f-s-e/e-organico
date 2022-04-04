@@ -1,12 +1,12 @@
 type Mask = 'phone' | 'document' | 'zipCode';
 
-type HandlerInputMask = (value: string, mask: Mask) => string;
+type HandlerMask = (value: string, mask: Mask) => string;
 
 type Masks<T> = {
   [key: string]: (value: T) => T;
 };
 
-const masks: Masks<string> = {
+const inputMasks: Masks<string> = {
   phone: (value: string) =>
     value
       .replace(/^(\d{2})(\d{1})/, '($1) $2')
@@ -22,8 +22,18 @@ const masks: Masks<string> = {
   zipCode: (value: string) => value.replace(/^(\d{5})(\d{1})/, '$1-$2'),
 };
 
-const getMask = (key: string) => (key in masks ? masks[key] : (value: string) => value);
+const removeMasks: Masks<string> = {
+  phone: (value: string) => value.replace(/\D/g, ''),
 
-export const handlerInputMask: HandlerInputMask = (value, mask) => {
-  return getMask(mask)(value);
+  document: (value: string) => value.replace(/\D/g, ''),
+
+  zipCode: (value: string) => value.replace(/\D/g, ''),
 };
+
+const inputMask = (key: string) => (key in inputMasks ? inputMasks[key] : (value: string) => value);
+
+const removeMask = (key: string) =>
+  key in removeMasks ? removeMasks[key] : (value: string) => value;
+
+export const handlerInputMask: HandlerMask = (value, mask) => inputMask(mask)(value);
+export const handleRemoveMask: HandlerMask = (value, mask) => removeMask(mask)(value);

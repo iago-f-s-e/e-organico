@@ -10,7 +10,7 @@ export const Toast = (): JSX.Element => {
   const { toast } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
-  const [translate] = useState(new Animated.ValueXY({ x: 0, y: -100 }));
+  const [translate] = useState(new Animated.ValueXY({ x: 0, y: -200 }));
 
   const handleHideToast = () => dispatch(hideToast());
 
@@ -29,7 +29,7 @@ export const Toast = (): JSX.Element => {
   const handleOnClose = () => {
     Animated.parallel([
       Animated.timing(translate.y, {
-        toValue: -100,
+        toValue: -200,
         duration: 600,
         useNativeDriver: false,
       }),
@@ -43,6 +43,8 @@ export const Toast = (): JSX.Element => {
   }, [toast.visible]); // eslint-disable-line
 
   const icon = useMemo(() => getIcon(toast.type), [toast.type]);
+
+  const message = useMemo(() => toast.message, [toast.message]);
 
   const color = useMemo(() => {
     if (toast.type === 'error') return colors.actions.error;
@@ -75,7 +77,7 @@ export const Toast = (): JSX.Element => {
       }}
     >
       {icon}
-      <S.Message>Test</S.Message>
+      <S.Message>{message}</S.Message>
     </Animated.View>
   );
 };
