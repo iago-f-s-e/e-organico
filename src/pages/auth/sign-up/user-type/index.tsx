@@ -1,16 +1,22 @@
 import React, { FC } from 'react';
 
 import * as C from '@src/components';
+import { changeSignUpUserType, useAppDispatch } from '@src/store';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
 // TODO: criar navegação
 // TODO: entrypoint
 
-// TODO: navegar para cadastro de endereço
-// TODO: identificar que é um produtor ou comprador
+// TODO: navegar para identifiers
 
 export const UserType: FC = () => {
+  const dispatch = useAppDispatch();
+
+  const handleNavigate = (type: 'consumer' | 'producer') => {
+    dispatch(changeSignUpUserType({ type }));
+  };
+
   return (
     <C_S.Container>
       <C.Header
@@ -23,11 +29,11 @@ export const UserType: FC = () => {
         <S.UserTypeContainer>
           <S.Title>Você é</S.Title>
 
-          <S.ButtonType>
+          <S.ButtonType onPress={() => handleNavigate('consumer')}>
             <S.Label>Comprador</S.Label>
           </S.ButtonType>
 
-          <S.ButtonType>
+          <S.ButtonType onPress={() => handleNavigate('producer')}>
             <S.Label>Produtor</S.Label>
           </S.ButtonType>
         </S.UserTypeContainer>

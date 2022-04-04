@@ -13,12 +13,15 @@ import { validateState } from './validate-state';
 
 export const Address: FC = () => {
   const appDispatch = useAppDispatch();
-  const consumer = useAppSelector((state) => state.signUpConsumer);
+  const { signUpConsumer, signUpUserType } = useAppSelector((state) => state);
   const useToast = _useToast();
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // TODO: verificar o tipo de usuário e mudar o placeholder
-  const placeholderComplement = useMemo(() => 'Bloco 99 Apto 99 (opcional)', []);
+  const placeholderComplement = useMemo(() => {
+    if (signUpUserType.type === 'consumer') return 'Bloco 99 Apto 99 (opcional)';
+
+    return 'Fazenda nova esperança';
+  }, [signUpUserType.type]);
 
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
@@ -35,8 +38,8 @@ export const Address: FC = () => {
 
     const { type: _, ...payload } = response;
 
-    appDispatch(changeSignUpConsumer({ ...consumer, ...payload }));
-  }, [appDispatch, consumer, state, useToast]);
+    appDispatch(changeSignUpConsumer({ ...signUpConsumer, ...payload }));
+  }, [appDispatch, signUpConsumer, state, useToast]);
 
   return (
     <C_S.Container>
