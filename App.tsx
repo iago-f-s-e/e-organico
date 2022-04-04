@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { useFonts } from 'expo-font';
 import * as Work from '@expo-google-fonts/work-sans';
 
-import { SelectTypes } from '@src/pages';
+import { PropertyImages } from '@src/pages';
 
 // TODO: corrigir status bar
 
@@ -22,7 +22,7 @@ const App: FC = () => {
   return (
     <>
       {/* <StatusBar backgroundColor="transparent" style="auto" /> */}
-      <SelectTypes />
+      <PropertyImages />
     </>
   );
 };

@@ -4,3 +4,4 @@ export * from './identifiers';
 export * from './user-type';
 export * from './address';
 export * from './finished';
+export * from './property-images';
