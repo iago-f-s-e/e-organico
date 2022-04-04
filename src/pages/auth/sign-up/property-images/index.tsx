@@ -12,7 +12,7 @@ import { initialState, reducer } from './reducer';
 // TODO: selecionar imagens
 // TODO: liberar next somente depois das 4 imagens
 // TODO: verificar tamanho das imagens
-// TODO: navegar para cadastro de feiras
+// TODO: navegar para select de certificação
 
 export const PropertyImages: FC = () => {
   const [state, _] = useReducer(reducer, initialState);

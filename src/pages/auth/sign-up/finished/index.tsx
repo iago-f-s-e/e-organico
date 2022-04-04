@@ -3,6 +3,8 @@ import React, { FC } from 'react';
 import icon from '@src/assets/icons/registered.png';
 import * as S from './styles';
 
+// TODO: verificar o tipo de usuário e renderizar "acessar o app ou perfil em analise"
+
 export const Finished: FC = () => {
   return (
     <S.FinishedContainer>

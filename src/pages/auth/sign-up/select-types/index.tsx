@@ -7,6 +7,8 @@ import * as S from './styles';
 
 import { initialState, reducer } from './reducer';
 
+// TODO: navegar para cadastro de feiras
+
 export const SelectTypes: FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 

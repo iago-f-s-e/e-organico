@@ -21,6 +21,7 @@ export const Address: FC = () => {
     // TODO: verificar dados obrigatórios
     // TODO: verificar se o cep foi preenchido corretamente com regex
     // TODO: navegar para finished caso seja comprador e para property_images caso seja produtor
+    // TODO: trocar o label para "confirmar" caso seja comprador
   };
 
   return (
