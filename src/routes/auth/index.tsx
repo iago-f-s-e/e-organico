@@ -1,0 +1,40 @@
+import React, { FC } from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import { Login } from '@src/pages/auth/login';
+import { Terms } from '@src/pages/auth/terms';
+import * as SignUp from '@src/pages/auth/sign-up';
+
+const Stack = createStackNavigator();
+
+export type AuthScreens =
+  | 'login'
+  | 'terms'
+  | 'sign-up-user-type'
+  | 'sign-up-identifiers'
+  | 'sign-up-credentials'
+  | 'sign-up-address'
+  | 'sign-up-property-images'
+  | 'sign-up-select-types'
+  | 'sign-up-finished';
+
+export const AuthRoutes: FC = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        cardStyle: { backgroundColor: '#fefffe' },
+      }}
+    >
+      <Stack.Screen name="login" component={Login} />
+      <Stack.Screen name="terms" component={Terms} />
+      <Stack.Screen name="sign-up-user-type" component={SignUp.UserType} />
+      <Stack.Screen name="sign-up-identifiers" component={SignUp.Identifiers} />
+      <Stack.Screen name="sign-up-credentials" component={SignUp.Credentials} />
+      <Stack.Screen name="sign-up-address" component={SignUp.Address} />
+      <Stack.Screen name="sign-up-property-images" component={SignUp.PropertyImages} />
+      <Stack.Screen name="sign-up-select-types" component={SignUp.SelectTypes} />
+      <Stack.Screen name="sign-up-finished" component={SignUp.Finished} />
+    </Stack.Navigator>
+  );
+};
