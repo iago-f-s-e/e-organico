@@ -24,6 +24,7 @@ const initialState: SignUpProducer = {
   phone: '',
   certification: 'IN CONVERSION',
   makeDelivery: false,
+  propertyImages: [],
 };
 
 export const signUpProducerSlice = createSlice({
