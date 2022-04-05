@@ -12,8 +12,6 @@ import { KeyboardAvoidingView } from 'react-native';
 import { store, persistor } from './src/store';
 import { EntryPoint } from './src';
 
-// TODO: corrigir status bar
-
 const App: FC = () => {
   const [loaded] = useFonts({
     WorkSansLight: Work.WorkSans_300Light,

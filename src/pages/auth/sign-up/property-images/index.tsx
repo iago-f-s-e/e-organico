@@ -5,7 +5,7 @@ import defaultImage from '@src/assets/images/default-picker-image.png';
 
 import * as C from '@src/components';
 import { changeSignUpProducer, useAppDispatch, useAppSelector } from '@src/store';
-import { useNavigation, useToast as _useToast } from '@src/hooks';
+import { useAppNavigation, useToast as _useToast } from '@src/hooks';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
@@ -20,15 +20,11 @@ type PickerResults = {
   type: ImagePicker.MediaTypeOptions;
 };
 
-// TODO: colocar detalhes das fotos
-// TODO: navegar para select de certificação
-// TODO: ativar base64
-
 export const PropertyImages: FC = () => {
   const appDispatch = useAppDispatch();
   const { signUpConsumer, signUpProducer } = useAppSelector((state) => state);
   const useToast = _useToast();
-  const { navigateTo } = useNavigation();
+  const { navigateTo, goBack } = useAppNavigation();
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
@@ -84,12 +80,7 @@ export const PropertyImages: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header
-        handle={() => {
-          // TODO: navigation.goBack()
-        }}
-        iconType="navigate-go-back"
-      />
+      <C.Header handle={goBack} iconType="navigate-go-back" />
       <C_S.Container>
         <S.PropertyImagesContainer>
           <S.Title>Envie fotos da sua propriedade</S.Title>

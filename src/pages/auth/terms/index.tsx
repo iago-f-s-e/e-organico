@@ -3,27 +3,20 @@ import { colors, dimensions } from '@src/config/theme';
 import { WebView } from 'react-native-webview';
 
 import * as C from '@src/components';
-import { useNavigation } from '@src/hooks';
+import { useAppNavigation } from '@src/hooks';
 import * as S from './styles';
 
 const top = dimensions.screen.height * 0.45;
 const left = dimensions.screen.width * 0.45;
 
-// TODO: navegar para cadastro
-
 export const Terms: FC = () => {
-  const { navigateTo } = useNavigation();
+  const { navigateTo, goBack } = useAppNavigation();
 
   const [loaded, setLoaded] = useState<boolean>(false);
 
   return (
     <S.Container>
-      <C.Header
-        handle={() => {
-          // TODO: navigation.goBack()
-        }}
-        iconType="navigate-go-back"
-      />
+      <C.Header handle={goBack} iconType="navigate-go-back" />
       <WebView
         onLoad={() => setLoaded(true)}
         source={{ uri: 'https://eorganico-termo-de-uso.vercel.app/' }}

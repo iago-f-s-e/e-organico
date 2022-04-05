@@ -3,7 +3,7 @@ import React, { FC, useReducer, useMemo, useCallback } from 'react';
 import { handlerInputMask } from '@src/utils';
 
 import * as C from '@src/components';
-import { useNavigation, useToast as _useToast } from '@src/hooks';
+import { useAppNavigation, useToast as _useToast } from '@src/hooks';
 import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
 import * as C_S from '../common-styles';
 import * as S from './styles';
@@ -15,7 +15,7 @@ export const Address: FC = () => {
   const appDispatch = useAppDispatch();
   const { signUpConsumer, signUpUserType } = useAppSelector((state) => state);
   const useToast = _useToast();
-  const { navigateTo } = useNavigation();
+  const { navigateTo, goBack } = useAppNavigation();
 
   const [state, dispatch] = useReducer(reducer, { ...initialState, ...signUpConsumer.address });
 
@@ -35,9 +35,6 @@ export const Address: FC = () => {
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
 
   const handleNext = useCallback(() => {
-    // TODO: navegar para finished caso seja comprador e para property_images caso seja produtor
-    // TODO: trocar o label para "confirmar" caso seja comprador
-
     const response = validateState(state);
 
     if (response.type === 'error') {
@@ -53,13 +50,7 @@ export const Address: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header
-        handle={() => {
-          // TODO: navigation.goBack()
-        }}
-        iconType="navigate-go-back"
-        title="Cadastre seu endereço"
-      />
+      <C.Header handle={goBack} iconType="navigate-go-back" title="Cadastre seu endereço" />
       <C_S.Container>
         <S.Scroll showsVerticalScrollIndicator={false}>
           <S.CustomerContainer>

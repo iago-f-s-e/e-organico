@@ -8,8 +8,6 @@ import storage from '@react-native-async-storage/async-storage';
 import { State } from './types';
 import * as R from '../reducers';
 
-// TODO: clear persisto
-
 const reducers = combineReducers<State>({ ...R });
 
 const persistConfig = { key: 'persist:root', storage, stateReconciler };

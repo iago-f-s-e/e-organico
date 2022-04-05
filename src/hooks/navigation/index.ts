@@ -1,5 +1,5 @@
 import { useRoute as getRoute, Route } from '@react-navigation/native';
-import { useNavigation as _useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/core';
 import { CombineNavigation } from '@src/@types/routes';
 import { AuthScreens } from '@src/routes/auth';
 
@@ -14,9 +14,8 @@ type UseNavigate = {
   goBack: () => void;
 };
 
-// TODO: testar o route
-export const useNavigation = (): UseNavigate => {
-  const { navigate, addListener, goBack } = _useNavigation<CombineNavigation>();
+export const useAppNavigation = (): UseNavigate => {
+  const { navigate, addListener, goBack } = useNavigation<CombineNavigation>();
 
   const navigateTo = (path: Paths) => navigate(path);
 

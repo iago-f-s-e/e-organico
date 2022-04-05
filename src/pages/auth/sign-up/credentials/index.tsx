@@ -2,7 +2,7 @@ import React, { FC, useReducer, useCallback } from 'react';
 
 import { handlerInputMask } from '@src/utils';
 import * as C from '@src/components';
-import { useNavigation, useToast as _useToast } from '@src/hooks';
+import { useAppNavigation, useToast as _useToast } from '@src/hooks';
 import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
 import * as C_S from '../common-styles';
 import * as S from './styles';
@@ -11,13 +11,12 @@ import { initialState, reducer } from './reducer';
 import { validateState } from './validate-state';
 
 // TODO: focar no input em caso de erro
-// TODO: navegar para endereço
 
 export const Credentials: FC = () => {
   const appDispatch = useAppDispatch();
   const consumer = useAppSelector((state) => state.signUpConsumer);
   const useToast = _useToast();
-  const { navigateTo } = useNavigation();
+  const { navigateTo, goBack } = useAppNavigation();
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
@@ -46,12 +45,7 @@ export const Credentials: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header
-        handle={() => {
-          // TODO: navigation.goBack()
-        }}
-        iconType="navigate-go-back"
-      />
+      <C.Header handle={goBack} iconType="navigate-go-back" />
       <C_S.Container>
         <S.CredentialsContainer>
           <C_S.InputContainer>

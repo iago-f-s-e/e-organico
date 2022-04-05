@@ -2,18 +2,13 @@ import React, { FC } from 'react';
 
 import * as C from '@src/components';
 import { changeSignUpUserType, useAppDispatch } from '@src/store';
-import { useNavigation } from '@src/hooks';
+import { useAppNavigation } from '@src/hooks';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
-// TODO: criar navegação
-// TODO: entrypoint
-
-// TODO: navegar para identifiers
-
 export const UserType: FC = () => {
-  const { navigateTo } = useNavigation();
   const dispatch = useAppDispatch();
+  const { navigateTo, goBack } = useAppNavigation();
 
   const handleNavigate = (type: 'consumer' | 'producer') => {
     dispatch(changeSignUpUserType({ type }));
@@ -23,12 +18,7 @@ export const UserType: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header
-        handle={() => {
-          // TODO: navigation.goBack()
-        }}
-        iconType="navigate-go-back"
-      />
+      <C.Header handle={goBack} iconType="navigate-go-back" />
       <C_S.Container>
         <S.UserTypeContainer>
           <S.Title>Você é</S.Title>
