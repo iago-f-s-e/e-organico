@@ -3,6 +3,7 @@ import { colors, dimensions } from '@src/config/theme';
 import { WebView } from 'react-native-webview';
 
 import * as C from '@src/components';
+import { useNavigation } from '@src/hooks';
 import * as S from './styles';
 
 const top = dimensions.screen.height * 0.45;
@@ -11,6 +12,8 @@ const left = dimensions.screen.width * 0.45;
 // TODO: navegar para cadastro
 
 export const Terms: FC = () => {
+  const { navigateTo } = useNavigation();
+
   const [loaded, setLoaded] = useState<boolean>(false);
 
   return (
@@ -37,12 +40,7 @@ export const Terms: FC = () => {
             />
           ),
           toBeTruthy: () => (
-            <C.FooterButton
-              label="Aceitar"
-              handle={() => {
-                // TODO: navegar para cadastro
-              }}
-            />
+            <C.FooterButton label="Aceitar" handle={() => navigateTo('sign-up-user-type')} />
           ),
         }}
       />

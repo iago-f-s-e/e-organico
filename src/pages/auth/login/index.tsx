@@ -5,10 +5,13 @@ import { handlerInputMask } from '@src/utils';
 import { colors } from '@src/config/theme';
 import logo from '@src/assets/icons/logo.png';
 
+import { useNavigation } from '@src/hooks';
 import * as S from './styles';
 
 // TODO: trocar useState por useReduce
 export const Login: FC = () => {
+  const { navigateTo } = useNavigation();
+
   const [loading, setLoading] = useState<boolean>(false);
   const [phone, setPhone] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -52,7 +55,7 @@ export const Login: FC = () => {
           {labelOrLoading}
         </S.SignIn>
 
-        <S.SignUp disabled={loading}>
+        <S.SignUp disabled={loading} onPress={() => navigateTo('terms')}>
           <S.LabelSignUp>Cadastrar-se</S.LabelSignUp>
         </S.SignUp>
       </S.Content>

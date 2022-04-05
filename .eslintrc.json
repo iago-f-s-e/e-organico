@@ -15,7 +15,8 @@
     "Atomics": "readonly",
     "__DEV__": "readonly",
     "SharedArrayBuffer": "readonly",
-    "JSX": true
+    "JSX": true,
+    "ReactNavigation": true
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

@@ -5,7 +5,7 @@ import defaultImage from '@src/assets/images/default-picker-image.png';
 
 import * as C from '@src/components';
 import { changeSignUpProducer, useAppDispatch, useAppSelector } from '@src/store';
-import { useToast as _useToast } from '@src/hooks';
+import { useNavigation, useToast as _useToast } from '@src/hooks';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
@@ -28,10 +28,11 @@ export const PropertyImages: FC = () => {
   const appDispatch = useAppDispatch();
   const { signUpConsumer, signUpProducer } = useAppSelector((state) => state);
   const useToast = _useToast();
+  const { navigateTo } = useNavigation();
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
-    images: signUpProducer.propertyImages,
+    images: [...signUpProducer.propertyImages],
   });
 
   const images = useMemo(() => {
@@ -40,15 +41,16 @@ export const PropertyImages: FC = () => {
     return new Array(imagesQuantity).fill('').map((_, index) => {
       const hasImage = state.images[index];
 
-      if (hasImage) return { uri: hasImage.uri };
+      if (hasImage && !!hasImage.uri.length) return { uri: hasImage.uri };
 
       return defaultImage;
     });
   }, [state]);
 
-  const handlePickerImage = useCallback(async (index: 0 | 1 | 2 | 3) => {
+  const handlePickerImage = async (index: 0 | 1 | 2 | 3) => {
     const result = (await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
+      base64: true,
       quality: 1,
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],
@@ -59,12 +61,12 @@ export const PropertyImages: FC = () => {
     const image = { uri: result.uri, base64: result.base64 };
 
     dispatch({ type: 'changeImages', payload: { index, image } });
-  }, []);
+  };
 
   const handleNext = useCallback(() => {
-    const propertyImages = state.images.filter((image) => !!image);
+    const images = state.images.filter((image) => !!image);
 
-    if (propertyImages.length !== 4) {
+    if (images.length !== 4) {
       return useToast.error('Todas as imagens são obrigatórias!');
     }
 
@@ -73,10 +75,12 @@ export const PropertyImages: FC = () => {
         ...signUpProducer,
         ...signUpConsumer,
         userType: 'producer',
-        propertyImages,
+        propertyImages: [...images],
       }),
     );
-  }, [appDispatch, useToast, state, signUpProducer, signUpConsumer]);
+
+    return navigateTo('sign-up-select-types');
+  }, [appDispatch, useToast, state, signUpProducer, signUpConsumer, navigateTo]);
 
   return (
     <C_S.Container>

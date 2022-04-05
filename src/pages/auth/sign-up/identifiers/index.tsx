@@ -5,7 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 import * as C from '@src/components';
 import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
-import { useToast as _useToast } from '@src/hooks';
+import { useNavigation, useToast as _useToast } from '@src/hooks';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 import { initialState, reducer } from './reducer';
@@ -22,13 +22,13 @@ type PickerResults = {
 
 // TODO: permitir remover imagem
 // TODO: focar no input em caso de erro
-// TODO: navegar para credenciais
-// TODO: ativar base64
 
 export const Identifiers: FC = () => {
   const appDispatch = useAppDispatch();
   const consumer = useAppSelector((state) => state.signUpConsumer);
   const useToast = _useToast();
+  const { navigateTo } = useNavigation();
+
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     image: consumer.image,
@@ -42,6 +42,7 @@ export const Identifiers: FC = () => {
   const handlePickerImage = useCallback(async () => {
     const result = (await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
+      base64: true,
       quality: 1,
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],
@@ -64,7 +65,9 @@ export const Identifiers: FC = () => {
     const { type: _, ...payload } = response;
 
     appDispatch(changeSignUpConsumer({ ...consumer, ...payload }));
-  }, [state, useToast, consumer, appDispatch]);
+
+    return navigateTo('sign-up-credentials');
+  }, [state, useToast, consumer, appDispatch, navigateTo]);
 
   return (
     <C_S.Container>

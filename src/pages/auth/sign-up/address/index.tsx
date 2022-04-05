@@ -3,7 +3,7 @@ import React, { FC, useReducer, useMemo, useCallback } from 'react';
 import { handlerInputMask } from '@src/utils';
 
 import * as C from '@src/components';
-import { useToast as _useToast } from '@src/hooks';
+import { useNavigation, useToast as _useToast } from '@src/hooks';
 import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
 import * as C_S from '../common-styles';
 import * as S from './styles';
@@ -15,13 +15,20 @@ export const Address: FC = () => {
   const appDispatch = useAppDispatch();
   const { signUpConsumer, signUpUserType } = useAppSelector((state) => state);
   const useToast = _useToast();
+  const { navigateTo } = useNavigation();
 
   const [state, dispatch] = useReducer(reducer, { ...initialState, ...signUpConsumer.address });
 
   const placeholderComplement = useMemo(() => {
     if (signUpUserType.type === 'consumer') return 'Bloco 99 Apto 99 (opcional)';
 
-    return 'Fazenda nova esperança';
+    return 'Fazenda Nova Esperança (opcional)';
+  }, [signUpUserType.type]);
+
+  const pathNavigation = useMemo(() => {
+    if (signUpUserType.type === 'consumer') return 'sign-up-finished';
+
+    return 'sign-up-property-images';
   }, [signUpUserType.type]);
 
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
@@ -37,10 +44,12 @@ export const Address: FC = () => {
       return useToast.error(response.message);
     }
 
-    const { type: _, ...payload } = response;
+    const { type: _, ...address } = response;
 
-    appDispatch(changeSignUpConsumer({ ...signUpConsumer, ...payload }));
-  }, [appDispatch, signUpConsumer, state, useToast]);
+    appDispatch(changeSignUpConsumer({ ...signUpConsumer, address }));
+
+    return navigateTo(pathNavigation);
+  }, [appDispatch, signUpConsumer, state, useToast, pathNavigation, navigateTo]);
 
   return (
     <C_S.Container>
@@ -62,6 +71,7 @@ export const Address: FC = () => {
                 value={state.street}
                 onChangeText={(payload) => dispatch({ type: 'changeStreet', payload })}
                 placeholder="Rua Dr. Azevedo"
+                autoCapitalize="words"
               />
             </C_S.InputContainer>
 
@@ -103,6 +113,7 @@ export const Address: FC = () => {
                 value={state.district}
                 onChangeText={(payload) => dispatch({ type: 'changeDistrict', payload })}
                 placeholder="Centro"
+                autoCapitalize="words"
               />
             </C_S.InputContainer>
 
@@ -114,6 +125,7 @@ export const Address: FC = () => {
                 value={state.city}
                 onChangeText={(payload) => dispatch({ type: 'changeCity', payload })}
                 placeholder="Aracaju"
+                autoCapitalize="words"
               />
             </C_S.InputContainer>
 
@@ -125,6 +137,7 @@ export const Address: FC = () => {
                 value={state.state}
                 onChangeText={(payload) => dispatch({ type: 'changeState', payload })}
                 placeholder="Sergipe"
+                autoCapitalize="words"
               />
             </C_S.InputContainer>
 

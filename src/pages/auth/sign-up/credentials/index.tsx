@@ -2,7 +2,7 @@ import React, { FC, useReducer, useCallback } from 'react';
 
 import { handlerInputMask } from '@src/utils';
 import * as C from '@src/components';
-import { useToast as _useToast } from '@src/hooks';
+import { useNavigation, useToast as _useToast } from '@src/hooks';
 import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
 import * as C_S from '../common-styles';
 import * as S from './styles';
@@ -17,6 +17,8 @@ export const Credentials: FC = () => {
   const appDispatch = useAppDispatch();
   const consumer = useAppSelector((state) => state.signUpConsumer);
   const useToast = _useToast();
+  const { navigateTo } = useNavigation();
+
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     document: consumer.document,
@@ -38,7 +40,9 @@ export const Credentials: FC = () => {
     const { type: _, ...payload } = response;
 
     appDispatch(changeSignUpConsumer({ ...consumer, ...payload }));
-  }, [appDispatch, consumer, state, useToast]);
+
+    return navigateTo('sign-up-address');
+  }, [appDispatch, consumer, state, useToast, navigateTo]);
 
   return (
     <C_S.Container>

@@ -2,7 +2,7 @@ import React, { FC, useReducer, useCallback } from 'react';
 import { Picker } from '@react-native-picker/picker';
 
 import { changeSignUpProducer, useAppDispatch, useAppSelector } from '@src/store';
-import { useToast as _useToast } from '@src/hooks';
+import { useNavigation, useToast as _useToast } from '@src/hooks';
 
 import * as C from '@src/components';
 import * as C_S from '../common-styles';
@@ -15,6 +15,7 @@ import { initialState, reducer } from './reducer';
 export const SelectTypes: FC = () => {
   const appDispatch = useAppDispatch();
   const { signUpProducer } = useAppSelector((state) => state);
+  const { navigateTo } = useNavigation();
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
@@ -35,7 +36,9 @@ export const SelectTypes: FC = () => {
         certification,
       }),
     );
-  }, [appDispatch, state, signUpProducer]);
+
+    return navigateTo('sign-up-finished');
+  }, [appDispatch, state, signUpProducer, navigateTo]);
 
   return (
     <C_S.Container>

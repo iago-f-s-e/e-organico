@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import * as C from '@src/components';
 import { changeSignUpUserType, useAppDispatch } from '@src/store';
+import { useNavigation } from '@src/hooks';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
@@ -11,10 +12,13 @@ import * as S from './styles';
 // TODO: navegar para identifiers
 
 export const UserType: FC = () => {
+  const { navigateTo } = useNavigation();
   const dispatch = useAppDispatch();
 
   const handleNavigate = (type: 'consumer' | 'producer') => {
     dispatch(changeSignUpUserType({ type }));
+
+    return navigateTo('sign-up-identifiers');
   };
 
   return (
