@@ -8,7 +8,7 @@ const initialState: SignUpProducer = {
     city: '',
     complement: '',
     district: '',
-    number: -1,
+    number: '',
     state: '',
     street: '',
     zipCode: '',
@@ -23,7 +23,7 @@ const initialState: SignUpProducer = {
   password: '',
   phone: '',
   certification: 'IN CONVERSION',
-  makeDelivery: false,
+  makeDelivery: 'NO',
   propertyImages: [],
 };
 

@@ -5,7 +5,7 @@ type Image = {
 
 type Address = {
   street: string;
-  number: number;
+  number: string;
   zipCode: string;
   district: string;
   city: string;

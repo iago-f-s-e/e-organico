@@ -1,5 +1,8 @@
-import React, { FC, useReducer } from 'react';
+import React, { FC, useReducer, useCallback } from 'react';
 import { Picker } from '@react-native-picker/picker';
+
+import { changeSignUpProducer, useAppDispatch, useAppSelector } from '@src/store';
+import { useToast as _useToast } from '@src/hooks';
 
 import * as C from '@src/components';
 import * as C_S from '../common-styles';
@@ -10,12 +13,29 @@ import { initialState, reducer } from './reducer';
 // TODO: navegar para cadastro de feiras
 
 export const SelectTypes: FC = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const appDispatch = useAppDispatch();
+  const { signUpProducer } = useAppSelector((state) => state);
+
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialState,
+    certification: signUpProducer.certification,
+    delivery: signUpProducer.makeDelivery,
+  });
 
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
 
-  const handleNext = () => {};
+  const handleNext = useCallback(() => {
+    const { certification, delivery: makeDelivery } = state;
+
+    appDispatch(
+      changeSignUpProducer({
+        ...signUpProducer,
+        makeDelivery,
+        certification,
+      }),
+    );
+  }, [appDispatch, state, signUpProducer]);
 
   return (
     <C_S.Container>

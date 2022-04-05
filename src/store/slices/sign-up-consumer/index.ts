@@ -8,7 +8,7 @@ const initialState: SignUpConsumer = {
     city: '',
     complement: '',
     district: '',
-    number: -1,
+    number: '',
     state: '',
     street: '',
     zipCode: '',

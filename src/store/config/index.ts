@@ -1,13 +1,27 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { combineReducers } from 'redux';
+import { persistReducer, persistStore } from 'redux-persist';
+import stateReconciler from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import storage from '@react-native-async-storage/async-storage';
 
 import { State } from './types';
-import * as reducers from '../reducers';
+import * as R from '../reducers';
 
-export const store = configureStore<State>({ reducer: { ...reducers } });
+const reducers = combineReducers<State>({ ...R });
 
-type RootState = ReturnType<typeof store.getState>;
+const persistConfig = { key: 'root', storage, stateReconciler };
+
+const persistedReducer = persistReducer(persistConfig, reducers);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (_default) => _default({ serializableCheck: false }),
+});
+
+export const persistor = persistStore(store);
+
 type Dispatch = typeof store.dispatch;
 
 export const useAppDispatch = () => useDispatch<Dispatch>(); // eslint-disable-line
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useAppSelector: TypedUseSelectorHook<State> = useSelector;

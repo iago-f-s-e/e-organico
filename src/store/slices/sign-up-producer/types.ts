@@ -10,7 +10,7 @@ type Image = {
 type ProducerPayload = {
   userType: 'producer';
   certification: CertificationType;
-  makeDelivery: boolean;
+  makeDelivery: 'YES' | 'NO';
   propertyImages: Image[];
 };
 

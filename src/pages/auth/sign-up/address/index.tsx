@@ -15,7 +15,8 @@ export const Address: FC = () => {
   const appDispatch = useAppDispatch();
   const { signUpConsumer, signUpUserType } = useAppSelector((state) => state);
   const useToast = _useToast();
-  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const [state, dispatch] = useReducer(reducer, { ...initialState, ...signUpConsumer.address });
 
   const placeholderComplement = useMemo(() => {
     if (signUpUserType.type === 'consumer') return 'Bloco 99 Apto 99 (opcional)';

@@ -15,6 +15,9 @@ type PickerResults = {
   cancelled: boolean;
   uri: string;
   base64: string;
+  height: number;
+  width: number;
+  type: ImagePicker.MediaTypeOptions;
 };
 
 // TODO: colocar detalhes das fotos
@@ -25,7 +28,11 @@ export const PropertyImages: FC = () => {
   const appDispatch = useAppDispatch();
   const { signUpConsumer, signUpProducer } = useAppSelector((state) => state);
   const useToast = _useToast();
-  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialState,
+    images: signUpProducer.propertyImages,
+  });
 
   const images = useMemo(() => {
     const imagesQuantity = 4;
@@ -49,7 +56,7 @@ export const PropertyImages: FC = () => {
 
     if (result.cancelled) return;
 
-    const { cancelled: _, ...image } = result;
+    const image = { uri: result.uri, base64: result.base64 };
 
     dispatch({ type: 'changeImages', payload: { index, image } });
   }, []);

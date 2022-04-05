@@ -15,17 +15,26 @@ type PickerResults = {
   cancelled: boolean;
   uri: string;
   base64: string;
+  height: number;
+  width: number;
+  type: ImagePicker.MediaTypeOptions;
 };
 
 // TODO: permitir remover imagem
 // TODO: focar no input em caso de erro
 // TODO: navegar para credenciais
+// TODO: ativar base64
 
 export const Identifiers: FC = () => {
   const appDispatch = useAppDispatch();
   const consumer = useAppSelector((state) => state.signUpConsumer);
   const useToast = _useToast();
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialState,
+    image: consumer.image,
+    name: consumer.name,
+    phone: consumer.phone,
+  });
 
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
@@ -40,7 +49,7 @@ export const Identifiers: FC = () => {
 
     if (result.cancelled) return;
 
-    const { cancelled: _, ...payload } = result;
+    const payload = { uri: result.uri, base64: result.base64 };
 
     dispatch({ type: 'changeImage', payload });
   }, []);
