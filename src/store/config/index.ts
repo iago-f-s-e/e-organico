@@ -10,7 +10,7 @@ import * as R from '../reducers';
 
 const reducers = combineReducers<State>({ ...R });
 
-const persistConfig = { key: 'persist:root', storage, stateReconciler };
+const persistConfig = { key: 'root', storage, stateReconciler };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 

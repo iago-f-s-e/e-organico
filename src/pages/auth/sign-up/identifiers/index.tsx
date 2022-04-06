@@ -5,8 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 import * as C from '@src/components';
 import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
-import { useAppNavigation, useToast as _useToast } from '@src/hooks';
-import { useSignUp } from '@src/hooks/use-auth';
+import { useAppNavigation, useToast as _useToast, useSignUp } from '@src/hooks';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 import { initialState, reducer } from './reducer';

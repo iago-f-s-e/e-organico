@@ -3,7 +3,7 @@ import React, { FC, useReducer, useMemo, useCallback } from 'react';
 import { handlerInputMask } from '@src/utils';
 
 import * as C from '@src/components';
-import { useAppNavigation, useToast as _useToast } from '@src/hooks';
+import { useAppNavigation, useToast as _useToast, useSignUp, useStorage } from '@src/hooks';
 import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
 import * as C_S from '../common-styles';
 import * as S from './styles';
@@ -15,6 +15,8 @@ export const Address: FC = () => {
   const appDispatch = useAppDispatch();
   const { signUpConsumer, signUpUserType } = useAppSelector((state) => state);
   const useToast = _useToast();
+  const { registerConsumer } = useSignUp();
+  const { clearPersist } = useStorage();
   const { navigateTo, goBack } = useAppNavigation();
 
   const [state, dispatch] = useReducer(reducer, { ...initialState, ...signUpConsumer.address });
@@ -25,14 +27,24 @@ export const Address: FC = () => {
     return 'Fazenda Nova Esperança (opcional)';
   }, [signUpUserType.type]);
 
-  const pathNavigation = useMemo(() => {
-    if (signUpUserType.type === 'consumer') return 'sign-up-finished';
-
-    return 'sign-up-property-images';
-  }, [signUpUserType.type]);
-
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
+
+  const handleUserType = useCallback(async () => {
+    if (signUpUserType.type === 'producer') return navigateTo('sign-up-property-images');
+
+    dispatch({ type: 'changeLoading', payload: true });
+
+    const { error } = await registerConsumer(signUpConsumer);
+
+    dispatch({ type: 'changeLoading', payload: false });
+
+    if (error) return;
+
+    clearPersist();
+
+    return navigateTo('sign-up-finished');
+  }, [signUpConsumer, navigateTo, registerConsumer, signUpUserType, clearPersist]);
 
   const handleNext = useCallback(() => {
     const response = validateState(state);
@@ -45,8 +57,8 @@ export const Address: FC = () => {
 
     appDispatch(changeSignUpConsumer({ ...signUpConsumer, address }));
 
-    return navigateTo(pathNavigation);
-  }, [appDispatch, signUpConsumer, state, useToast, pathNavigation, navigateTo]);
+    return handleUserType();
+  }, [appDispatch, signUpConsumer, state, useToast, handleUserType]);
 
   return (
     <C_S.Container>

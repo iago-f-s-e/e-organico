@@ -40,5 +40,6 @@ export const signUpProducerSlice = createSlice({
       ...state,
       ...payload,
     }),
+    clearSignUpProducer: (): SignUpProducer => initialState,
   },
 });

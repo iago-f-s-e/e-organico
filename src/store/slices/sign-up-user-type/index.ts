@@ -11,5 +11,6 @@ export const signUpUserTypeSlice = createSlice({
   initialState,
   reducers: {
     changeSignUpUserType: (_, { payload }: Payload): SignUpUserType => ({ ...payload }),
+    clearSignUpUserType: (): SignUpUserType => initialState,
   },
 });

@@ -32,5 +32,6 @@ export const signUpConsumerSlice = createSlice({
       ...state,
       ...payload,
     }),
+    clearSignUpConsumer: (): SignUpConsumer => initialState,
   },
 });

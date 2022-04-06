@@ -2,9 +2,8 @@ import React, { FC, useReducer, useCallback } from 'react';
 
 import { handlerInputMask } from '@src/utils';
 import * as C from '@src/components';
-import { useAppNavigation, useToast as _useToast } from '@src/hooks';
+import { useAppNavigation, useToast as _useToast, useSignUp } from '@src/hooks';
 import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
-import { useSignUp } from '@src/hooks/use-auth';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
