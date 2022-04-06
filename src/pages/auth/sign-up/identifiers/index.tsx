@@ -6,6 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as C from '@src/components';
 import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
 import { useAppNavigation, useToast as _useToast } from '@src/hooks';
+import { useSignUp } from '@src/hooks/use-auth';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 import { initialState, reducer } from './reducer';
@@ -27,6 +28,7 @@ export const Identifiers: FC = () => {
   const appDispatch = useAppDispatch();
   const consumer = useAppSelector((state) => state.signUpConsumer);
   const useToast = _useToast();
+  const { reservePhone } = useSignUp();
   const { navigateTo, goBack } = useAppNavigation();
 
   const [state, dispatch] = useReducer(reducer, {
@@ -55,7 +57,7 @@ export const Identifiers: FC = () => {
     dispatch({ type: 'changeImage', payload });
   }, []);
 
-  const handleNext = useCallback(() => {
+  const handleNext = useCallback(async () => {
     const response = validateState(state);
 
     if (response.type === 'error') {
@@ -64,10 +66,18 @@ export const Identifiers: FC = () => {
 
     const { type: _, ...payload } = response;
 
+    dispatch({ type: 'changeLoading', payload: true });
+
+    const { error } = await reservePhone(payload.phone);
+
+    dispatch({ type: 'changeLoading', payload: false });
+
+    if (error) return;
+
     appDispatch(changeSignUpConsumer({ ...consumer, ...payload }));
 
     return navigateTo('sign-up-credentials');
-  }, [state, useToast, consumer, appDispatch, navigateTo]);
+  }, [state, useToast, consumer, appDispatch, navigateTo, reservePhone]);
 
   return (
     <C_S.Container>
