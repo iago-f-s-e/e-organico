@@ -4,6 +4,7 @@ import { handlerInputMask } from '@src/utils';
 import * as C from '@src/components';
 import { useAppNavigation, useToast as _useToast } from '@src/hooks';
 import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
+import { useSignUp } from '@src/hooks/use-auth';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
@@ -16,6 +17,7 @@ export const Credentials: FC = () => {
   const appDispatch = useAppDispatch();
   const consumer = useAppSelector((state) => state.signUpConsumer);
   const useToast = _useToast();
+  const { reserveCredentials } = useSignUp();
   const { navigateTo, goBack } = useAppNavigation();
 
   const [state, dispatch] = useReducer(reducer, {
@@ -29,7 +31,7 @@ export const Credentials: FC = () => {
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
 
-  const handleNext = useCallback(() => {
+  const handleNext = useCallback(async () => {
     const response = validateState(state);
 
     if (response.type === 'error') {
@@ -38,10 +40,18 @@ export const Credentials: FC = () => {
 
     const { type: _, ...payload } = response;
 
+    dispatch({ type: 'changeLoading', payload: true });
+
+    const { error } = await reserveCredentials(payload.email, payload.document);
+
+    dispatch({ type: 'changeLoading', payload: false });
+
+    if (error) return;
+
     appDispatch(changeSignUpConsumer({ ...consumer, ...payload }));
 
     return navigateTo('sign-up-address');
-  }, [appDispatch, consumer, state, useToast, navigateTo]);
+  }, [appDispatch, consumer, state, useToast, navigateTo, reserveCredentials]);
 
   return (
     <C_S.Container>

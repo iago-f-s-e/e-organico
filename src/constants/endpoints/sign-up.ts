@@ -10,4 +10,6 @@ export const SIGN_UP: MixedEndPoints<MixedEndPoints<string>> = {
 
 export const enum signUp {
   'RESERVER_PHONE' = 'auth/sign-up/reserve-phone',
+  'RESERVER_EMAIL' = 'auth/sign-up/reserve-email',
+  'RESERVER_DOCUMENT' = 'auth/sign-up/reserve-document',
 }
