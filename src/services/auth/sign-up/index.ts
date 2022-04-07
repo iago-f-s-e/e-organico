@@ -1,7 +1,22 @@
 import { signUp } from '@src/constants/endpoints';
+import { CertificationType } from '@src/store/slices/producer/types';
 import { SignUpConsumer } from '@src/store/slices/sign-up-consumer/types';
+import { SignUpProducer } from '@src/store/slices/sign-up-producer/types';
 import { AxiosResponse } from 'axios';
 import { httpClient } from '../../http-client';
+
+type ProducerDTO = {
+  certificationType: CertificationType;
+  makeDelivery: boolean;
+};
+
+// TODO: remover omits
+export type RegisterProducerDTO = Omit<
+  SignUpProducer,
+  'image' | 'certification' | 'makeDelivery' | 'propertyImages' | 'userType'
+> & {
+  producer: ProducerDTO;
+};
 
 export function reservePhone(phone: string, device: string): Promise<AxiosResponse> {
   return httpClient.post(signUp.RESERVER_PHONE, { phone, device });
@@ -17,4 +32,8 @@ export function reserveEmail(email: string, device: string): Promise<AxiosRespon
 
 export function registerConsumer(data: SignUpConsumer): Promise<AxiosResponse> {
   return httpClient.post(signUp.REGISTER_CONSUMER, data);
+}
+
+export function registerProducer(data: RegisterProducerDTO): Promise<AxiosResponse> {
+  return httpClient.post(signUp.REGISTER_PRODUCER, data);
 }
