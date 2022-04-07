@@ -11,10 +11,12 @@ type ReservePhone = (props: SignUpConsumer, onError: OnError) => Promise<Respons
 export const handleRegisterConsumer: ReservePhone = async (consumer, onError) => {
   const document = handleRemoveMask(consumer.document, 'document');
   const phone = handleRemoveMask(consumer.phone, 'phone');
+  const zipCode = handleRemoveMask(consumer.address.zipCode, 'zipCode');
+  const address = { ...consumer.address, zipCode };
 
-  const { image: _image, address: __address, ..._consumer } = consumer;
+  const { image: _image, ..._consumer } = consumer;
 
-  const data = { ..._consumer, document, phone } as SignUpConsumer;
+  const data = { ..._consumer, document, phone, address } as SignUpConsumer;
 
   try {
     await registerConsumer(data);
