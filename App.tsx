@@ -29,7 +29,7 @@ const App: FC = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
-          <StatusBar barStyle="dark-content" translucent backgroundColor="transparent" />
+          <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
           <KeyboardAvoidingView style={{ flex: 1 }}>
             <Toast />
             <Markets />

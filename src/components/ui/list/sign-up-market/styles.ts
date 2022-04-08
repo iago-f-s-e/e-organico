@@ -20,20 +20,22 @@ export const ContainerAddress = styled.View`
 
 export const Section = styled.View``;
 
-export const Header = styled.TouchableOpacity`
+export const Header = styled.TouchableOpacity<{ selected: boolean }>`
   width: 100%;
   height: 50px;
   flex-direction: row;
   padding: 0 5px;
   align-items: center;
   justify-content: space-between;
+
+  background-color: ${({ selected }) => (selected ? colors.main.primary : colors.basic.white)};
 `;
 
 export const ContentAddress = styled.View`
   flex-direction: row;
 `;
 
-export const SelectOrRemove = styled.TouchableOpacity`
+export const SelectOrRemove = styled.TouchableOpacity<{ selected: boolean }>`
   align-self: center;
 
   justify-content: center;
@@ -46,13 +48,7 @@ export const SelectOrRemove = styled.TouchableOpacity`
 
   border-radius: 8px;
 
-  background-color: ${colors.main.primary};
-`;
-
-export const Name = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.large};
-  color: ${colors.main.primary};
+  background-color: ${({ selected }) => (selected ? colors.actions.danger : colors.main.primary)};
 `;
 
 export const Title = styled.Text`
@@ -77,7 +73,13 @@ export const DataAddress = styled.Text`
   color: ${colors.basic.grey};
 `;
 
-export const LabelConfirm = styled.Text`
+export const Name = styled.Text<{ selected: boolean }>`
+  font-family: ${font.family.semiBold};
+  font-size: ${font.size.large};
+  color: ${({ selected }) => (selected ? colors.basic.white : colors.main.primary)};
+`;
+
+export const LabelSelectOrRemove = styled.Text`
   font-family: ${font.family.semiBold};
   font-size: ${font.size.medium};
   color: ${colors.basic.white};

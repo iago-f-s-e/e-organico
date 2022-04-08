@@ -1,32 +1,109 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Animated, FlatList } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
 import { Market } from '@src/store/slices/market/types';
 
 import { colors } from '@src/config/theme';
+import { useAppSelector } from '@src/store';
 import * as S from './styles';
 
-import { initialState, reducer } from './reducer';
 import { ListWorkDay } from '../work-day';
+import { getIcon } from './util';
 
 type Props = {
   market: Market;
+  actions: {
+    select: (market: Market) => void;
+    remove: (market: Market) => void;
+    onOpenAnimation: () => void;
+    onCloseAnimation: () => void;
+  };
 };
 
-export const ListSignUpMarket = ({ market }: Props): JSX.Element => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+export const ListSignUpMarket = ({ market, actions }: Props): JSX.Element => {
+  const { signUpMarket } = useAppSelector((state) => state);
 
-  const openOrCloseAnimation = useCallback(() => {
-    if (state.opened) return dispatch({ type: 'onCloseAnimation' });
+  const [sizeContainer] = useState(new Animated.ValueXY({ x: 0, y: 50 }));
+  const [opacityContent] = useState(new Animated.ValueXY({ x: 1, y: 0 }));
+  const [opened, setOpened] = useState<boolean>(false);
 
-    return dispatch({ type: 'onOpenAnimation' });
-  }, [state.opened]);
+  const selected = useMemo(
+    () => !!signUpMarket.find(({ id }) => market.id === id),
+    [market.id, signUpMarket],
+  );
+
+  const icon = useMemo(() => getIcon(selected, opened), [selected, opened]);
+  const label = useMemo(() => {
+    if (selected) return 'Remover';
+
+    return 'Selecionar';
+  }, [selected]);
+
+  const handleOpenAnimation = () => {
+    actions.onOpenAnimation();
+
+    Animated.parallel([
+      Animated.timing(sizeContainer.y, {
+        toValue: 400,
+        duration: 200,
+        useNativeDriver: false,
+      }),
+      Animated.timing(opacityContent.x, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: false,
+      }),
+    ]).start();
+
+    setOpened(true);
+  };
+
+  const handleCloseAnimation = () => {
+    actions.onCloseAnimation();
+
+    Animated.parallel([
+      Animated.timing(sizeContainer.y, {
+        toValue: 50,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+      Animated.timing(opacityContent.x, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+    ]).start();
+
+    setOpened(false);
+  };
+
+  const openOrCloseAnimation = () => {
+    if (opened) return handleCloseAnimation();
+
+    return handleOpenAnimation();
+  };
+
+  const handleSelect = () => {
+    actions.select(market);
+    openOrCloseAnimation();
+  };
+
+  const handleRemove = () => {
+    actions.remove(market);
+    openOrCloseAnimation();
+  };
+
+  const handleSelectOrRemove = () => {
+    if (selected) return handleRemove();
+
+    return handleSelect();
+  };
 
   return (
     <Animated.View
       style={{
         flex: 1,
-        height: state.sizeContainer.y,
+        height: sizeContainer.y,
+        marginVertical: 8,
         borderWidth: 1,
         borderRadius: 15,
         borderColor: colors.main.primary,
@@ -35,16 +112,16 @@ export const ListSignUpMarket = ({ market }: Props): JSX.Element => {
       }}
     >
       <S.Container>
-        <S.Header onPress={openOrCloseAnimation}>
-          <S.Name>{market.name}</S.Name>
-          <AntDesign name="down" size={20} color={colors.main.primary} />
+        <S.Header selected={selected} onPress={openOrCloseAnimation}>
+          <S.Name selected={selected}>{market.name}</S.Name>
+          {icon}
         </S.Header>
 
         <Animated.View
           style={{
             flex: 1,
             justifyContent: 'space-between',
-            opacity: state.opacityContent.x,
+            opacity: opacityContent.x,
             backgroundColor: colors.basic.white,
           }}
         >
@@ -87,8 +164,8 @@ export const ListSignUpMarket = ({ market }: Props): JSX.Element => {
             </S.ContainerWorkDays>
           </S.Section>
 
-          <S.SelectOrRemove>
-            <S.LabelConfirm>Selecionar</S.LabelConfirm>
+          <S.SelectOrRemove selected={selected} onPress={handleSelectOrRemove}>
+            <S.LabelSelectOrRemove>{label}</S.LabelSelectOrRemove>
           </S.SelectOrRemove>
         </Animated.View>
       </S.Container>
