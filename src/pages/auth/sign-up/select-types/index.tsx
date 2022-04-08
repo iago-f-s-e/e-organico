@@ -1,8 +1,8 @@
 import React, { FC, useReducer, useCallback } from 'react';
 import { Picker } from '@react-native-picker/picker';
 
-import { useAppSelector } from '@src/store';
-import { useAppNavigation, useSignUp, useStorage, useToast as _useToast } from '@src/hooks';
+import { changeSignUpProducer, useAppDispatch, useAppSelector } from '@src/store';
+import { useAppNavigation, useSignUp, useToast as _useToast } from '@src/hooks';
 
 import * as C from '@src/components';
 import * as C_S from '../common-styles';
@@ -13,11 +13,10 @@ import { initialState, reducer } from './reducer';
 // TODO: navegar para cadastro de feiras
 
 export const SelectTypes: FC = () => {
-  // const appDispatch = useAppDispatch();
+  const appDispatch = useAppDispatch();
   const { signUpProducer } = useAppSelector((state) => state);
   const { navigateTo, goBack } = useAppNavigation();
   const { registerProducer } = useSignUp();
-  const { clearPersist } = useStorage();
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     certification: signUpProducer.certification,
@@ -38,19 +37,16 @@ export const SelectTypes: FC = () => {
 
     if (error) return;
 
-    clearPersist();
+    appDispatch(
+      changeSignUpProducer({
+        ...signUpProducer,
+        makeDelivery,
+        certification,
+      }),
+    );
 
-    // TODO: atualizar o state e só finalizar depois de escolher os produtos inicias
-    // appDispatch(
-    //   changeSignUpProducer({
-    //     ...signUpProducer,
-    //     makeDelivery,
-    //     certification,
-    //   }),
-    // );
-
-    return navigateTo('sign-up-finished');
-  }, [state, navigateTo, signUpProducer, registerProducer, clearPersist]);
+    return navigateTo('sign-up-market');
+  }, [state, navigateTo, signUpProducer, registerProducer, appDispatch]);
 
   return (
     <C_S.Container>

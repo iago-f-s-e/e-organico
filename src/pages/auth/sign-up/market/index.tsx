@@ -4,15 +4,16 @@ import { FlatList } from 'react-native';
 // TODO: navegar para produtos iniciais
 
 import * as C from '@src/components';
-import { Market } from '@src/store/slices/market/types';
+import { Market as MarketState } from '@src/store/slices/market/types';
 import { ListSignUpMarket } from '@src/components/ui/list';
-import { useAppDispatch } from '@src/store';
-import { addSignUpMarket, removeSignUpMarket } from '@src/store/actions/sign-up-market';
+import { useAppDispatch, useAppSelector } from '@src/store';
+import { addSignUpMarket, removeSignUpMarket } from '@src/store';
+import { useAppNavigation, useToast as _useToast } from '@src/hooks';
 import * as C_S from '../common-styles';
 
 import { initialState, reducer } from './reducer';
 
-const markets: Market[] = [
+const markets: MarketState[] = [
   {
     id: 'id',
     name: 'feira do zé',
@@ -115,27 +116,34 @@ const markets: Market[] = [
   },
 ];
 
-export const Markets: FC = () => {
+export const Market: FC = () => {
   const appDispatch = useAppDispatch();
+  const { navigateTo, goBack } = useAppNavigation();
+  const { signUpMarket } = useAppSelector((state) => state);
 
+  const useToast = _useToast();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const onOpenAnimation = () => dispatch({ type: 'onOpenAnimation' });
   const onCloseAnimation = () => dispatch({ type: 'onCloseAnimation' });
 
-  const handleSelect = (market: Market) => {
+  const handleSelect = (market: MarketState) => {
     appDispatch(addSignUpMarket(market));
   };
 
-  const handleRemove = (market: Market) => {
+  const handleRemove = (market: MarketState) => {
     appDispatch(removeSignUpMarket(market));
   };
 
-  const handleNext = () => {};
+  const handleNext = () => {
+    if (!signUpMarket.length) return useToast.error('Selecione pelo menos uma feira!');
+
+    return navigateTo('login'); // TODO: navegar para produtos iniciais
+  };
 
   return (
     <C_S.Container>
-      <C.Header handle={() => {}} title="Seleção de feiras" iconType="navigate-go-back" />
+      <C.Header handle={goBack} title="Seleção de feiras" iconType="navigate-go-back" />
       <C_S.Container>
         <FlatList
           style={{ paddingVertical: 8, paddingHorizontal: 16 }}

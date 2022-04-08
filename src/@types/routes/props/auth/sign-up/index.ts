@@ -8,6 +8,7 @@ type IdentifiersNavigation = StackNavigationProp<AuthStack, 'sign-up-identifiers
 type PropertyImagesNavigation = StackNavigationProp<AuthStack, 'sign-up-property-images'>;
 type SelectTypesNavigation = StackNavigationProp<AuthStack, 'sign-up-select-types'>;
 type UserTypeNavigation = StackNavigationProp<AuthStack, 'sign-up-user-type'>;
+type MarketNavigation = StackNavigationProp<AuthStack, 'sign-up-market'>;
 
 export type SignUpNavigation =
   | AddressNavigation
@@ -16,4 +17,5 @@ export type SignUpNavigation =
   | IdentifiersNavigation
   | PropertyImagesNavigation
   | SelectTypesNavigation
-  | UserTypeNavigation;
+  | UserTypeNavigation
+  | MarketNavigation;

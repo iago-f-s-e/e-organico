@@ -1,5 +1,3 @@
-// Monday (segunda-feira), Tuesday (terça-feira), Wednesday (quarta-feira), Thursday (quinta-feira), Friday (sexta-feira), Saturday (sábado), e Sunday (domingo).
-
 import { Address } from '../address/types';
 
 export type EUDay =

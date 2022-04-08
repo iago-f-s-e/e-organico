@@ -17,7 +17,8 @@ export type AuthScreens =
   | 'sign-up-address'
   | 'sign-up-property-images'
   | 'sign-up-select-types'
-  | 'sign-up-finished';
+  | 'sign-up-finished'
+  | 'sign-up-market';
 
 export const AuthRoutes: FC = () => {
   return (
@@ -35,6 +36,7 @@ export const AuthRoutes: FC = () => {
       <Stack.Screen name="sign-up-address" component={SignUp.Address} />
       <Stack.Screen name="sign-up-property-images" component={SignUp.PropertyImages} />
       <Stack.Screen name="sign-up-select-types" component={SignUp.SelectTypes} />
+      <Stack.Screen name="sign-up-market" component={SignUp.Market} />
       <Stack.Screen name="sign-up-finished" component={SignUp.Finished} />
     </Stack.Navigator>
   );
