@@ -11,7 +11,7 @@ import { Toast } from '@src/components';
 import { KeyboardAvoidingView } from 'react-native';
 import { store, persistor } from './src/store';
 // import { EntryPoint } from './src';
-import { Market } from './src/pages/auth/sign-up/market';
+import { InitialProduct } from './src/pages/auth/sign-up/initial-product';
 
 const App: FC = () => {
   const [loaded] = useFonts({
@@ -32,7 +32,7 @@ const App: FC = () => {
           <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
           <KeyboardAvoidingView style={{ flex: 1 }}>
             <Toast />
-            <Market />
+            <InitialProduct />
             {/* <EntryPoint /> */}
           </KeyboardAvoidingView>
         </NavigationContainer>

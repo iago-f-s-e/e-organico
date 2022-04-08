@@ -1,0 +1,120 @@
+import { colors, font } from '@src/config/theme';
+import styled from 'styled-components/native';
+
+export const Container = styled.View`
+  flex: 1;
+`;
+
+export const Content = styled.View`
+  align-items: center;
+`;
+
+export const Header = styled.TouchableOpacity<{ selected: boolean }>`
+  width: 100%;
+  height: 50px;
+  flex-direction: row;
+  padding: 0 5px;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: ${({ selected }) => (selected ? colors.main.primary : colors.basic.white)};
+`;
+
+export const SelectOrRemove = styled.TouchableOpacity<{ selected: boolean }>`
+  align-self: center;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 50%;
+  height: 20px;
+
+  margin: 10px;
+
+  border-radius: 8px;
+
+  background-color: ${({ selected }) => (selected ? colors.actions.danger : colors.main.primary)};
+`;
+
+export const Name = styled.Text<{ selected: boolean }>`
+  font-family: ${font.family.semiBold};
+  font-size: ${font.size.large};
+  color: ${({ selected }) => (selected ? colors.basic.white : colors.main.primary)};
+`;
+
+export const LabelSelectOrRemove = styled.Text`
+  font-family: ${font.family.semiBold};
+  font-size: ${font.size.medium};
+  color: ${colors.basic.white};
+`;
+
+export const StockAndPrice = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 90%;
+  height: 40px;
+`;
+export const InputContainer = styled.View`
+  width: 45%;
+  height: 100%;
+`;
+
+export const StockContainer = styled.View`
+  width: 100%;
+  height: 100%;
+
+  flex-direction: row;
+
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: ${colors.main.primary};
+`;
+
+export const PriceContainer = styled.View`
+  width: 100%;
+  height: 100%;
+
+  padding: 12px;
+  justify-content: center;
+  border-radius: 3px;
+
+  background-color: ${colors.main.primary};
+`;
+
+export const InputStock = styled.TextInput`
+  flex: 1;
+
+  text-align: center;
+  font-family: ${font.family.semiBold};
+  font-size: ${font.size.medium};
+  color: ${colors.main.primary};
+`;
+
+export const InputPrice = styled.TextInput`
+  flex: 1;
+
+  height: 50px;
+
+  background-color: #ff0;
+
+  text-align: center;
+  padding-left: 3px;
+  font-family: ${font.family.semiBold};
+  font-size: ${font.size.medium};
+  color: ${colors.basic.white};
+`;
+
+export const IncrementOrDecrement = styled.TouchableOpacity`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+
+  max-width: 20%;
+`;
+
+export const Label = styled.Text`
+  font-family: ${font.family.semiBold};
+  font-size: ${font.size.small};
+  color: ${colors.main.primary};
+`;

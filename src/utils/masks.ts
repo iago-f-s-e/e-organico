@@ -1,4 +1,4 @@
-type Mask = 'phone' | 'document' | 'zipCode';
+type Mask = 'phone' | 'document' | 'zipCode' | 'money';
 
 type HandlerMask = (value: string, mask: Mask) => string;
 
@@ -6,7 +6,17 @@ type Masks<T> = {
   [key: string]: (value: T) => T;
 };
 
+function formatTheComa(value: string, withComma: boolean): string {
+  const _value = (Number(value.replace(/\D/g, '')) / 100).toFixed(2);
+
+  if (!withComma) return _value;
+
+  return _value.replace('.', ',');
+}
+
 const inputMasks: Masks<string> = {
+  money: (value) => `R$ ${formatTheComa(value, true)}`,
+
   phone: (value: string) =>
     value
       .replace(/^(\d{2})(\d{1})/, '($1) $2')
@@ -23,6 +33,8 @@ const inputMasks: Masks<string> = {
 };
 
 const removeMasks: Masks<string> = {
+  money: (value: string) => formatTheComa(value, false),
+
   phone: (value: string) => value.replace(/\D/g, ''),
 
   document: (value: string) => value.replace(/\D/g, ''),

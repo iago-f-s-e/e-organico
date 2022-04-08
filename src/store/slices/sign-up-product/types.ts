@@ -1,9 +1,9 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { Product } from '../product/types';
 
-type SignUpProductPayload = {
+export type SignUpProductPayload = {
   product: Product;
-  stock: number;
+  stock: string;
   unitMeasure: string;
   harvestDate: string;
 };

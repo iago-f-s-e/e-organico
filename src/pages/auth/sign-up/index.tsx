@@ -6,3 +6,4 @@ export * from './address';
 export * from './finished';
 export * from './property-images';
 export * from './market';
+export * from './initial-product';
