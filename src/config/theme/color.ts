@@ -1,5 +1,6 @@
 type Main = {
   primary: string;
+  secondary: string;
   lightPrimary: string;
 };
 
@@ -59,7 +60,8 @@ type Colors = {
 };
 
 const main: Main = {
-  primary: '#7BED8D',
+  primary: '#1BE080',
+  secondary: '#00D07D',
   lightPrimary: 'rgba(123, 237, 141, 0.5)',
 };
 
