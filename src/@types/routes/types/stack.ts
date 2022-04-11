@@ -9,4 +9,5 @@ export type AuthStack = {
   'sign-up-select-types': undefined;
   'sign-up-finished': undefined;
   'sign-up-market': undefined;
+  'sign-up-initial-product': undefined;
 };

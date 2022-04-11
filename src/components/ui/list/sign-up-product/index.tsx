@@ -1,14 +1,19 @@
 import React, { useState, useMemo } from 'react';
 import { Animated } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import { Feather } from '@expo/vector-icons';
 
-import { colors } from '@src/config/theme';
+import { colors, font } from '@src/config/theme';
 import { useAppSelector } from '@src/store';
 import { Product } from '@src/store/slices/product/types';
 import { SignUpProductPayload } from '@src/store/slices/sign-up-product/types';
+import { handlerInputMask } from '@src/utils';
+
+import { translateUnitMeasure, translateDate } from '@src/utils';
 import * as S from './styles';
 
 import { getIcon } from './util';
+import { DatePicker } from '../../date-picker';
 
 type Props = {
   product: Product;
@@ -26,18 +31,22 @@ const initialState: SignUpProductPayload = {
     name: '',
     unitMeasures: [],
   },
-  stock: '',
-  harvestDate: '',
+  price: 'R$ 0,00',
+  stock: '0',
+  harvestDate: new Date(),
   unitMeasure: '',
 };
+
+// TODO: Mostrar detalhes no header
 
 export const ListSignUpProduct = ({ product, actions }: Props): JSX.Element => {
   const { signUpProduct } = useAppSelector((state) => state);
 
   const [state, setState] = useState<SignUpProductPayload>(initialState);
   const [sizeContainer] = useState(new Animated.ValueXY({ x: 0, y: 50 }));
-  const [opacityContent] = useState(new Animated.ValueXY({ x: 1, y: 0 }));
+  const [opacityContent] = useState(new Animated.ValueXY({ x: 0, y: 0 }));
   const [opened, setOpened] = useState<boolean>(false);
+  const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
 
   const current = useMemo(() => {
     const found = signUpProduct.find((value) => product.id === value.product.id);
@@ -48,7 +57,9 @@ export const ListSignUpProduct = ({ product, actions }: Props): JSX.Element => {
       return found;
     }
 
-    setState((state) => ({ ...state, product }));
+    const unitMeasure = product.unitMeasures[0]?.name || '';
+
+    setState((state) => ({ ...state, unitMeasure, product }));
     return found;
   }, [signUpProduct, product]);
 
@@ -121,6 +132,27 @@ export const ListSignUpProduct = ({ product, actions }: Props): JSX.Element => {
     return handleSelect();
   };
 
+  const handleInputPrice = (price: string) => {
+    setState((state) => ({ ...state, price: handlerInputMask(price, 'money') }));
+  };
+
+  const handleInputStock = (stock: string) => {
+    const _stock = Number(stock);
+    const isInvalid = Number.isNaN(_stock) || _stock < 0;
+
+    if (isInvalid) return;
+
+    setState((state) => ({ ...state, stock }));
+  };
+
+  const handleDatePicker = (harvestDate: Date) => {
+    setState((state) => ({ ...state, harvestDate }));
+  };
+
+  const handleUnitPicker = (unitMeasure: string) => {
+    setState((state) => ({ ...state, unitMeasure }));
+  };
+
   return (
     <Animated.View
       style={{
@@ -149,20 +181,51 @@ export const ListSignUpProduct = ({ product, actions }: Props): JSX.Element => {
           }}
         >
           <S.Content>
+            <S.PickerContainer>
+              <S.Label>Unidade de medida: </S.Label>
+              <S.PickerContent>
+                <Picker
+                  dropdownIconColor={colors.main.secondary}
+                  onValueChange={(value) => handleUnitPicker(value)}
+                  selectedValue={state.unitMeasure}
+                >
+                  {product.unitMeasures.map(({ name }) => (
+                    <Picker.Item
+                      key={name}
+                      style={{ fontFamily: font.family.bold, fontSize: 14 }}
+                      color={colors.main.secondary}
+                      label={translateUnitMeasure(name)}
+                      value={name}
+                    />
+                  ))}
+                </Picker>
+              </S.PickerContent>
+            </S.PickerContainer>
+
+            <S.PickerContainer>
+              <S.Label>Data de colheita: </S.Label>
+              <S.DatePickerContent onPress={() => setShowDatePicker(true)}>
+                <DatePicker
+                  show={showDatePicker}
+                  hide={() => setShowDatePicker(false)}
+                  value={state.harvestDate}
+                  select={(value) => handleDatePicker(value)}
+                />
+                <Feather name="edit" size={15} color={colors.main.primary} />
+                <S.LabelDate>{translateDate(state.harvestDate)}</S.LabelDate>
+              </S.DatePickerContent>
+            </S.PickerContainer>
+
             <S.StockAndPrice>
               <S.InputContainer>
                 <S.Label>Estoque:</S.Label>
 
                 <S.StockContainer>
-                  <S.IncrementOrDecrement>
-                    <S.LabelSelectOrRemove>-</S.LabelSelectOrRemove>
-                  </S.IncrementOrDecrement>
-
-                  <S.InputStock />
-
-                  <S.IncrementOrDecrement>
-                    <S.LabelSelectOrRemove>+</S.LabelSelectOrRemove>
-                  </S.IncrementOrDecrement>
+                  <S.InputStock
+                    value={state.stock}
+                    onChangeText={(value) => handleInputStock(value)}
+                    keyboardType="number-pad"
+                  />
                 </S.StockContainer>
               </S.InputContainer>
 
@@ -171,7 +234,11 @@ export const ListSignUpProduct = ({ product, actions }: Props): JSX.Element => {
 
                 <S.PriceContainer>
                   <Feather name="edit" size={15} color={colors.basic.white} />
-                  <S.InputPrice placeholder="teste" />
+                  <S.InputPrice
+                    value={state.price}
+                    onChangeText={(value) => handleInputPrice(value)}
+                    keyboardType="number-pad"
+                  />
                 </S.PriceContainer>
               </S.InputContainer>
             </S.StockAndPrice>

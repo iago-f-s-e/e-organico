@@ -5,20 +5,26 @@ import { Product } from '@src/store/slices/product/types';
 import * as C from '@src/components';
 import { ListSignUpProduct } from '@src/components/ui/list/sign-up-product';
 import { SignUpProductPayload } from '@src/store/slices/sign-up-product/types';
-import { addSignUpProduct, removeSignUpProduct, useAppDispatch } from '@src/store';
+import { addSignUpProduct, removeSignUpProduct, useAppDispatch, useAppSelector } from '@src/store';
+import { useAppNavigation, useStorage, useToast as _useToast } from '@src/hooks';
 import * as C_S from '../common-styles';
 
 import { initialState, reducer } from './reducer';
 
+// TODO: remover dados mocados
 const products: Product[] = [
-  { id: 'produto1', name: 'maçã', unitMeasures: [{ name: 'Un' }] },
-  { id: 'produto2', name: 'goiaba', unitMeasures: [{ name: 'Un' }, { name: 'duzia' }] },
-  { id: 'produto3', name: 'goiaba', unitMeasures: [{ name: 'Un' }, { name: 'duzia' }] },
+  { id: 'produto1', name: 'maçã', unitMeasures: [{ name: 'un' }] },
+  { id: 'produto2', name: 'goiaba', unitMeasures: [{ name: 'un' }, { name: 'duzia' }] },
+  { id: 'produto3', name: 'goiaba', unitMeasures: [{ name: 'un' }, { name: 'duzia' }] },
 ];
 
 export const InitialProduct: FC = () => {
   const appDispatch = useAppDispatch();
+  const { navigateTo, goBack } = useAppNavigation();
+  const { clearPersist } = useStorage();
+  const { signUpProduct } = useAppSelector((state) => state);
 
+  const useToast = _useToast();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const onOpenAnimation = () => dispatch({ type: 'onOpenAnimation' });
@@ -32,9 +38,17 @@ export const InitialProduct: FC = () => {
     appDispatch(removeSignUpProduct(payload));
   };
 
+  const handleNext = () => {
+    if (!signUpProduct.length) return useToast.error('Selecione pelo menos uma feira!');
+
+    clearPersist();
+
+    return navigateTo('sign-up-finished');
+  };
+
   return (
     <C_S.Container>
-      <C.Header handle={() => []} title="Seleção de produtos" iconType="navigate-go-back" />
+      <C.Header handle={goBack} title="Seleção de produtos" iconType="navigate-go-back" />
       <C_S.Container>
         <FlatList
           style={{ paddingVertical: 8, paddingHorizontal: 16 }}
@@ -55,7 +69,7 @@ export const InitialProduct: FC = () => {
         />
 
         <C.NextButton
-          handle={() => {}}
+          handle={handleNext}
           animated={{ height: state.sizeButton.y, opacity: state.opacityButton.x }}
           loading={state.loading}
         />

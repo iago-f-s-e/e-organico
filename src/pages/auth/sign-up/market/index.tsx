@@ -13,6 +13,8 @@ import * as C_S from '../common-styles';
 
 import { initialState, reducer } from './reducer';
 
+// TODO: remover dados mocados
+
 const markets: MarketState[] = [
   {
     id: 'id',
@@ -138,7 +140,7 @@ export const Market: FC = () => {
   const handleNext = () => {
     if (!signUpMarket.length) return useToast.error('Selecione pelo menos uma feira!');
 
-    return navigateTo('login'); // TODO: navegar para produtos iniciais
+    return navigateTo('sign-up-initial-product'); // TODO: navegar para produtos iniciais
   };
 
   return (

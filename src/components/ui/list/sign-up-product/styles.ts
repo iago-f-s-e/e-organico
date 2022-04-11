@@ -6,7 +6,38 @@ export const Container = styled.View`
 `;
 
 export const Content = styled.View`
+  flex: 1;
   align-items: center;
+  justify-content: space-around;
+`;
+
+export const PickerContainer = styled.View`
+  width: 90%;
+  height: 40px;
+`;
+
+export const DatePickerContent = styled.TouchableOpacity`
+  flex-direction: row;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 50%;
+  height: 100%;
+
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: ${colors.main.primary};
+`;
+
+export const PickerContent = styled.View`
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: ${colors.main.primary};
 `;
 
 export const Header = styled.TouchableOpacity<{ selected: boolean }>`
@@ -72,11 +103,13 @@ export const StockContainer = styled.View`
 `;
 
 export const PriceContainer = styled.View`
+  flex-direction: row;
+  justify-content: center;
+
   width: 100%;
   height: 100%;
 
   padding: 12px;
-  justify-content: center;
   border-radius: 3px;
 
   background-color: ${colors.main.primary};
@@ -92,29 +125,25 @@ export const InputStock = styled.TextInput`
 `;
 
 export const InputPrice = styled.TextInput`
-  flex: 1;
+  height: 100%;
+  width: 100%;
 
-  height: 50px;
-
-  background-color: #ff0;
-
-  text-align: center;
   padding-left: 3px;
   font-family: ${font.family.semiBold};
   font-size: ${font.size.medium};
   color: ${colors.basic.white};
 `;
 
-export const IncrementOrDecrement = styled.TouchableOpacity`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-
-  max-width: 20%;
-`;
-
 export const Label = styled.Text`
   font-family: ${font.family.semiBold};
   font-size: ${font.size.small};
+  color: ${colors.main.primary};
+`;
+
+export const LabelDate = styled.Text`
+  margin-left: 10px;
+
+  font-family: ${font.family.semiBold};
+  font-size: ${font.size.medium};
   color: ${colors.main.primary};
 `;

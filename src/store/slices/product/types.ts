@@ -1,5 +1,7 @@
+export type UnitMeasureTypes = 'un' | 'kg' | 'L' | 'mg' | 'g' | 'duzia' | 'penca';
+
 export type UnitMeasure = {
-  name: string;
+  name: UnitMeasureTypes;
 };
 
 export type Product = {

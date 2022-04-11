@@ -46,7 +46,7 @@ export const PropertyImages: FC = () => {
   const handlePickerImage = async (index: 0 | 1 | 2 | 3) => {
     const result = (await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
-      base64: true,
+      base64: false,
       quality: 1,
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],

@@ -12,6 +12,7 @@ export const useStorage = (): UseStorage => {
     appDispatch(store.clearSignUpProducer());
     appDispatch(store.clearSignUpUserType());
     appDispatch(store.clearSignUpMarket());
+    appDispatch(store.clearSignUpProduct());
   };
 
   return { clearPersist };

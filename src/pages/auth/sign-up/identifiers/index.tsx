@@ -21,6 +21,7 @@ type PickerResults = {
 };
 
 // TODO: permitir remover imagem
+// TODO: corrigir storage das images em base64
 // TODO: focar no input em caso de erro
 
 export const Identifiers: FC = () => {
@@ -43,7 +44,7 @@ export const Identifiers: FC = () => {
   const handlePickerImage = useCallback(async () => {
     const result = (await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
-      base64: true,
+      base64: false,
       quality: 1,
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],
