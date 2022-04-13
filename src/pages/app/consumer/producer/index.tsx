@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { FlatList } from 'react-native';
 
-import * as C from '@src/components';
 import { User } from '@src/store/slices/user/types';
-import * as S from './styles';
+import * as C from '@src/components';
+import * as C_S from '../common-styles';
 
 const defaultImage =
   'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
@@ -93,12 +93,12 @@ const producers: User[] = [
 
 export const Producer: FC = () => {
   return (
-    <S.Container nestedScrollEnabled showsVerticalScrollIndicator={false}>
-      <S.Content>
-        <S.TitleContainer>
-          <S.Title>Últimos feirantes</S.Title>
-          <S.ShowMore>ver mais</S.ShowMore>
-        </S.TitleContainer>
+    <C_S.Container nestedScrollEnabled showsVerticalScrollIndicator={false}>
+      <C_S.Content>
+        <C_S.TitleContainer>
+          <C_S.Title>Últimos feirantes</C_S.Title>
+          <C_S.ShowMore>ver mais</C_S.ShowMore>
+        </C_S.TitleContainer>
         <FlatList
           data={producers}
           keyExtractor={(_, index) => index.toString()}
@@ -106,13 +106,13 @@ export const Producer: FC = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
         />
-      </S.Content>
+      </C_S.Content>
 
-      <S.Content>
-        <S.TitleContainer>
-          <S.Title>Todas os feirantes</S.Title>
-          <S.ShowMore>ver mais</S.ShowMore>
-        </S.TitleContainer>
+      <C_S.Content>
+        <C_S.TitleContainer>
+          <C_S.Title>Todas os feirantes</C_S.Title>
+          <C_S.ShowMore>ver mais</C_S.ShowMore>
+        </C_S.TitleContainer>
 
         <C.Map
           data={producers}
@@ -120,7 +120,7 @@ export const Producer: FC = () => {
             <C.ListConsumerProducer key={index.toString()} producer={value} />
           )}
         />
-      </S.Content>
-    </S.Container>
+      </C_S.Content>
+    </C_S.Container>
   );
 };

@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { FlatList } from 'react-native';
 
-import * as C from '@src/components';
 import { Market as MarketState } from '@src/store/slices/market/types';
-import * as S from './styles';
+import * as C from '@src/components';
+import * as C_S from '../common-styles';
 
 const markets: MarketState[] = [
   {
@@ -260,12 +260,12 @@ const markets: MarketState[] = [
 
 export const Market: FC = () => {
   return (
-    <S.Container nestedScrollEnabled showsVerticalScrollIndicator={false}>
-      <S.Content>
-        <S.TitleContainer>
-          <S.Title>Ultimas feiras</S.Title>
-          <S.ShowMore>ver mais</S.ShowMore>
-        </S.TitleContainer>
+    <C_S.Container nestedScrollEnabled showsVerticalScrollIndicator={false}>
+      <C_S.Content>
+        <C_S.TitleContainer>
+          <C_S.Title>Ultimas feiras</C_S.Title>
+          <C_S.ShowMore>ver mais</C_S.ShowMore>
+        </C_S.TitleContainer>
         <FlatList
           data={markets}
           keyExtractor={(_, index) => index.toString()}
@@ -273,13 +273,13 @@ export const Market: FC = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
         />
-      </S.Content>
+      </C_S.Content>
 
-      <S.Content>
-        <S.TitleContainer>
-          <S.Title>Feiras mais populares</S.Title>
-          <S.ShowMore>ver mais</S.ShowMore>
-        </S.TitleContainer>
+      <C_S.Content>
+        <C_S.TitleContainer>
+          <C_S.Title>Feiras mais populares</C_S.Title>
+          <C_S.ShowMore>ver mais</C_S.ShowMore>
+        </C_S.TitleContainer>
 
         <FlatList
           data={markets}
@@ -288,19 +288,19 @@ export const Market: FC = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
         />
-      </S.Content>
+      </C_S.Content>
 
-      <S.Content>
-        <S.TitleContainer>
-          <S.Title>Todas as feiras</S.Title>
-          <S.ShowMore>ver mais</S.ShowMore>
-        </S.TitleContainer>
+      <C_S.Content>
+        <C_S.TitleContainer>
+          <C_S.Title>Todas as feiras</C_S.Title>
+          <C_S.ShowMore>ver mais</C_S.ShowMore>
+        </C_S.TitleContainer>
 
         <C.Map
           data={markets}
           render={(value, index) => <C.ListConsumerMarket key={index.toString()} market={value} />}
         />
-      </S.Content>
-    </S.Container>
+      </C_S.Content>
+    </C_S.Container>
   );
 };
