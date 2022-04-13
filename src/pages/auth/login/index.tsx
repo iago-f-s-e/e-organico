@@ -19,11 +19,16 @@ export const Login: FC = () => {
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
 
+  // TODO: usar component IfElse
   const labelOrLoading = useMemo(() => {
     if (!state.loading) return <S.LabelSignIn>Entrar</S.LabelSignIn>;
 
     return <ActivityIndicator color={colors.basic.white} size="large" />;
   }, [state.loading]);
+
+  const handleLogin = () => {
+    return navigateTo('app');
+  };
 
   return (
     <S.Container>
@@ -65,7 +70,7 @@ export const Login: FC = () => {
             placeholder="*********"
           />
         </S.InputContainer>
-        <S.SignIn disabled={state.loading} onPress={() => {}}>
+        <S.SignIn disabled={state.loading} onPress={handleLogin}>
           {labelOrLoading}
         </S.SignIn>
 

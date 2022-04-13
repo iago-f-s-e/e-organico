@@ -10,9 +10,7 @@ import * as Work from '@expo-google-fonts/work-sans';
 import { Toast } from '@src/components';
 import { KeyboardAvoidingView } from 'react-native';
 import { store, persistor } from './src/store';
-// import { EntryPoint } from './src';
-
-import * as Consumer from './src/pages/app/consumer';
+import { EntryPoint } from './src';
 
 const App: FC = () => {
   const [loaded] = useFonts({
@@ -33,7 +31,7 @@ const App: FC = () => {
           <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
           <KeyboardAvoidingView style={{ flex: 1 }}>
             <Toast />
-            <Consumer.Producer />
+            <EntryPoint />
           </KeyboardAvoidingView>
         </NavigationContainer>
       </PersistGate>

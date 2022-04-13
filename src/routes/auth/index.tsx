@@ -5,10 +5,12 @@ import { Login } from '@src/pages/auth/login';
 import { Terms } from '@src/pages/auth/terms';
 import * as SignUp from '@src/pages/auth/sign-up';
 import { AuthStack } from '@src/@types/routes/types';
+import { AppRoutes } from '../app';
 
 const Stack = createStackNavigator<AuthStack>();
 
 export type AuthScreens =
+  | 'app'
   | 'login'
   | 'terms'
   | 'sign-up-user-type'
@@ -40,6 +42,7 @@ export const AuthRoutes: FC = () => {
       <Stack.Screen name="sign-up-market" component={SignUp.Market} />
       <Stack.Screen name="sign-up-initial-product" component={SignUp.InitialProduct} />
       <Stack.Screen name="sign-up-finished" component={SignUp.Finished} />
+      <Stack.Screen name="app" component={AppRoutes} />
     </Stack.Navigator>
   );
 };

@@ -1,4 +1,5 @@
 export type AuthStack = {
+  app: undefined;
   login: undefined;
   terms: undefined;
   'sign-up-user-type': undefined;
@@ -10,4 +11,12 @@ export type AuthStack = {
   'sign-up-finished': undefined;
   'sign-up-market': undefined;
   'sign-up-initial-product': undefined;
+};
+
+export type AppStack = {
+  home: undefined;
+};
+
+export type ConsumerStack = {
+  home: undefined;
 };
