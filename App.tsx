@@ -12,6 +12,8 @@ import { KeyboardAvoidingView } from 'react-native';
 import { store, persistor } from './src/store';
 import { EntryPoint } from './src';
 
+import * as Consumer from './src/pages/app/consumer';
+
 const App: FC = () => {
   const [loaded] = useFonts({
     WorkSansLight: Work.WorkSans_300Light,
@@ -31,7 +33,7 @@ const App: FC = () => {
           <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
           <KeyboardAvoidingView style={{ flex: 1 }}>
             <Toast />
-            <EntryPoint />
+            <Consumer.Market />
           </KeyboardAvoidingView>
         </NavigationContainer>
       </PersistGate>

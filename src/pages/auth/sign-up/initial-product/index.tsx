@@ -3,7 +3,6 @@ import { FlatList } from 'react-native';
 import { Product } from '@src/store/slices/product/types';
 
 import * as C from '@src/components';
-import { ListSignUpProduct } from '@src/components/ui/list/sign-up-product';
 import { SignUpProductPayload } from '@src/store/slices/sign-up-product/types';
 import { addSignUpProduct, removeSignUpProduct, useAppDispatch, useAppSelector } from '@src/store';
 import { useAppNavigation, useStorage, useToast as _useToast } from '@src/hooks';
@@ -55,7 +54,7 @@ export const InitialProduct: FC = () => {
           data={products}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
-            <ListSignUpProduct
+            <C.ListSignUpProduct
               product={item}
               actions={{
                 remove: handleRemove,

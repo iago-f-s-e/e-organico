@@ -5,7 +5,6 @@ import { FlatList } from 'react-native';
 
 import * as C from '@src/components';
 import { Market as MarketState } from '@src/store/slices/market/types';
-import { ListSignUpMarket } from '@src/components/ui/list';
 import { useAppDispatch, useAppSelector } from '@src/store';
 import { addSignUpMarket, removeSignUpMarket } from '@src/store';
 import { useAppNavigation, useToast as _useToast } from '@src/hooks';
@@ -152,7 +151,7 @@ export const Market: FC = () => {
           data={markets}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
-            <ListSignUpMarket
+            <C.ListSignUpMarket
               market={item}
               actions={{
                 remove: handleRemove,

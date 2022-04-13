@@ -23,6 +23,7 @@ type Entity = {
   greyIcon: string;
   text: string;
   banner: string;
+  heart: string;
   border: string;
   drawer: string;
 };
@@ -85,6 +86,8 @@ const entity: Entity = {
   text: '#E0D7E5',
   banner: '#5F3E63',
   border: '#483F53',
+  // heart: '#A40031',
+  heart: '#F00040',
   drawer: 'rgba(30, 30, 29, 0.95)',
 };
 
