@@ -1,11 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
+import { Image } from '../image/types';
 import { CertificationType } from '../producer/types';
 import { SignUpPayload } from '../sign-up/types';
-
-type Image = {
-  uri: string;
-  base64: string;
-};
 
 type ProducerPayload = {
   userType: 'producer';

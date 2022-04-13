@@ -292,7 +292,7 @@ export const Market: FC = () => {
 
       <S.Content>
         <S.TitleContainer>
-          <S.Title>Todas feiras</S.Title>
+          <S.Title>Todas as feiras</S.Title>
           <S.ShowMore>ver mais</S.ShowMore>
         </S.TitleContainer>
 

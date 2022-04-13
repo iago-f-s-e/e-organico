@@ -30,7 +30,7 @@ export const validateState: ValidateState = ({ name, phone, image }): Response =
   }
 
   if (!_uri.length) {
-    return { type: 'error', message: 'Image não selecionada' };
+    return { type: 'error', message: 'Imagem não selecionada' };
   }
 
   return { type: 'success', name: _name, phone, image };

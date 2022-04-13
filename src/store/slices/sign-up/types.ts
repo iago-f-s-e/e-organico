@@ -1,9 +1,5 @@
 import { Address } from '../address/types';
-
-type Image = {
-  uri: string;
-  base64: string;
-};
+import { Image } from '../image/types';
 
 export type SignUpPayload = {
   phone: string;

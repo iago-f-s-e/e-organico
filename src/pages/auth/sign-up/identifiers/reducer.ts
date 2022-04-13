@@ -1,9 +1,5 @@
+import { Image } from '@src/store/slices/image/types';
 import { Animated } from 'react-native';
-
-type Image = {
-  uri: string;
-  base64: string;
-};
 
 export type State = {
   sizeImage: Animated.ValueXY;
