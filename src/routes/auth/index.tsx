@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Login } from '@src/pages/auth/login';
 import { Terms } from '@src/pages/auth/terms';
 import * as SignUp from '@src/pages/auth/sign-up';
-import { AuthStack } from '@src/@types/routes/types';
+import { AuthStack } from '@src/@types/routes';
 import { AppRoutes } from '../app';
 
 const Stack = createStackNavigator<AuthStack>();

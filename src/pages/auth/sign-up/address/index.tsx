@@ -31,7 +31,7 @@ export const Address: FC = () => {
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
 
   const handleUserType = useCallback(async () => {
-    if (signUpUserType.type === 'producer') return navigateTo('sign-up-property-images');
+    if (signUpUserType.type === 'producer') return navigateTo<'auth'>('sign-up-property-images');
 
     dispatch({ type: 'changeLoading', payload: true });
 
@@ -43,7 +43,7 @@ export const Address: FC = () => {
 
     clearPersist();
 
-    return navigateTo('sign-up-finished');
+    return navigateTo<'auth'>('sign-up-finished');
   }, [signUpConsumer, navigateTo, registerConsumer, signUpUserType, clearPersist]);
 
   const handleNext = useCallback(() => {

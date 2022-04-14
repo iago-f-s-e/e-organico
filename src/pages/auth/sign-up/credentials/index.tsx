@@ -49,7 +49,7 @@ export const Credentials: FC = () => {
 
     appDispatch(changeSignUpConsumer({ ...consumer, ...payload }));
 
-    return navigateTo('sign-up-address');
+    return navigateTo<'auth'>('sign-up-address');
   }, [appDispatch, consumer, state, useToast, navigateTo, reserveCredentials]);
 
   return (

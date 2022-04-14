@@ -139,7 +139,7 @@ export const Market: FC = () => {
   const handleNext = () => {
     if (!signUpMarket.length) return useToast.error('Selecione pelo menos uma feira!');
 
-    return navigateTo('sign-up-initial-product'); // TODO: navegar para produtos iniciais
+    return navigateTo<'auth'>('sign-up-initial-product'); // TODO: navegar para produtos iniciais
   };
 
   return (

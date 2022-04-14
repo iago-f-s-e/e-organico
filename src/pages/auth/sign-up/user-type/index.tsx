@@ -13,7 +13,7 @@ export const UserType: FC = () => {
   const handleNavigate = (type: 'consumer' | 'producer') => {
     dispatch(changeSignUpUserType({ type }));
 
-    return navigateTo('sign-up-identifiers');
+    return navigateTo<'auth'>('sign-up-identifiers');
   };
 
   return (

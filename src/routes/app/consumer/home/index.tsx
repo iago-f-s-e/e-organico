@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { ConsumerTopTab } from '@src/@types/routes/types';
+import { ConsumerTopTab } from '@src/@types/routes';
 
 import * as Consumer from '@src/pages/app/consumer';
 import { colors } from '@src/config/theme';

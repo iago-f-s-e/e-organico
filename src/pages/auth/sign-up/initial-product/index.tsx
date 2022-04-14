@@ -42,7 +42,7 @@ export const InitialProduct: FC = () => {
 
     clearPersist();
 
-    return navigateTo('sign-up-finished');
+    return navigateTo<'auth'>('sign-up-finished');
   };
 
   return (

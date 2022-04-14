@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { AppBottomTab } from '@src/@types/routes/types';
+import { AppBottomTab } from '@src/@types/routes';
 import { MyBottomTabBar } from '@src/components';
 import { ConsumerRoutes } from './consumer';
 

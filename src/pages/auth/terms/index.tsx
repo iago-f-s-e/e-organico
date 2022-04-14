@@ -33,7 +33,7 @@ export const Terms: FC = () => {
             />
           ),
           toBeTruthy: () => (
-            <C.FooterButton label="Aceitar" handle={() => navigateTo('sign-up-user-type')} />
+            <C.FooterButton label="Aceitar" handle={() => navigateTo<'auth'>('sign-up-user-type')} />
           ),
         }}
       />

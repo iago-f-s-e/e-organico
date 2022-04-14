@@ -6,21 +6,25 @@ import { StackNavigationProp } from '@react-navigation/stack';
 
 type CallOnFocus = () => void;
 
-// TODO: trocar ConsumerScreens por AppScreens
+type Consumer = 'consumer';
+type Auth = 'auth';
 
-type Paths = AuthScreens | ConsumerScreens;
+type NavigationType = Consumer | Auth;
+
+// TODO: trocar ConsumerScreens por AppScreens
+type Paths<Type> = Type extends Auth ? AuthScreens : ConsumerScreens;
 
 type UseNavigate = {
   onFocus: (call: CallOnFocus) => () => void;
   getParams: <T extends object>() => Readonly<T>;
-  navigateTo: (path: Paths) => void;
+  navigateTo: <Type extends NavigationType>(path: Paths<Type>) => void;
   goBack: () => void;
 };
 
 export const useAppNavigation = (): UseNavigate => {
   const { navigate, addListener, goBack } = useNavigation<StackNavigationProp<any>>(); // eslint-disable-line
 
-  const navigateTo = (path: Paths) => navigate(path);
+  const navigateTo = <Type extends NavigationType>(path: Paths<Type>) => navigate(path);
 
   const onFocus = (call: CallOnFocus) => addListener('focus', call);
 

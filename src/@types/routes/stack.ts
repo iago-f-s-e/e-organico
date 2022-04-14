@@ -19,4 +19,5 @@ export type AppStack = {
 
 export type ConsumerStack = {
   home: undefined;
+  'consumer-market': undefined;
 };

@@ -27,7 +27,7 @@ export const Login: FC = () => {
   }, [state.loading]);
 
   const handleLogin = () => {
-    return navigateTo('app');
+    return navigateTo<'auth'>('app');
   };
 
   return (
@@ -74,7 +74,7 @@ export const Login: FC = () => {
           {labelOrLoading}
         </S.SignIn>
 
-        <S.SignUp disabled={state.loading} onPress={() => navigateTo('terms')}>
+        <S.SignUp disabled={state.loading} onPress={() => navigateTo<'auth'>('terms')}>
           <S.LabelSignUp>Cadastrar-se</S.LabelSignUp>
         </S.SignUp>
       </S.Content>

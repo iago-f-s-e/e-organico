@@ -75,7 +75,7 @@ export const PropertyImages: FC = () => {
       }),
     );
 
-    return navigateTo('sign-up-select-types');
+    return navigateTo<'auth'>('sign-up-select-types');
   }, [appDispatch, useToast, state, signUpProducer, signUpConsumer, navigateTo]);
 
   return (

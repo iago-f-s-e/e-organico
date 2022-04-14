@@ -76,7 +76,7 @@ export const Identifiers: FC = () => {
 
     appDispatch(changeSignUpConsumer({ ...consumer, ...payload }));
 
-    return navigateTo('sign-up-credentials');
+    return navigateTo<'auth'>('sign-up-credentials');
   }, [state, useToast, consumer, appDispatch, navigateTo, reservePhone]);
 
   return (

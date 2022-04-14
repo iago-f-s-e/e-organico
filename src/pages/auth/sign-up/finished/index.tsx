@@ -12,7 +12,7 @@ export const Finished: FC = () => {
   const handleAccessApp = () => {
     // TODO: limpar storage
 
-    return navigateTo('login');
+    return navigateTo<'auth'>('login');
   };
 
   return (

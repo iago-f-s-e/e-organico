@@ -45,7 +45,7 @@ export const SelectTypes: FC = () => {
       }),
     );
 
-    return navigateTo('sign-up-market');
+    return navigateTo<'auth'>('sign-up-market');
   }, [state, navigateTo, signUpProducer, registerProducer, appDispatch]);
 
   return (
