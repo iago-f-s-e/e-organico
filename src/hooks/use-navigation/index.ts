@@ -1,11 +1,14 @@
 import { useRoute as getRoute, Route } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/core';
-import { CombineNavigation } from '@src/@types/routes';
 import { AuthScreens } from '@src/routes/auth';
+import { ConsumerScreens } from '@src/routes/app/consumer';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 type CallOnFocus = () => void;
 
-type Paths = AuthScreens;
+// TODO: trocar ConsumerScreens por AppScreens
+
+type Paths = AuthScreens | ConsumerScreens;
 
 type UseNavigate = {
   onFocus: (call: CallOnFocus) => () => void;
@@ -15,7 +18,7 @@ type UseNavigate = {
 };
 
 export const useAppNavigation = (): UseNavigate => {
-  const { navigate, addListener, goBack } = useNavigation<CombineNavigation>();
+  const { navigate, addListener, goBack } = useNavigation<StackNavigationProp<any>>(); // eslint-disable-line
 
   const navigateTo = (path: Paths) => navigate(path);
 
