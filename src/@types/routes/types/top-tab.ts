@@ -1,4 +1,4 @@
 export type ConsumerTopTab = {
-  'consumer-market': undefined;
-  'consumer-producer': undefined;
+  'consumer-markets': undefined;
+  'consumer-producers': undefined;
 };

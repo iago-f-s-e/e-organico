@@ -1,4 +1,5 @@
 import { Address } from '../address/types';
+import { User } from '../user/types';
 
 export type EUDay =
   | 'MONDAY'
@@ -24,9 +25,15 @@ export type WorkDay = {
   close: string;
 };
 
+// TODO: mover isOpen para esse type
 export type Market = {
   id: string;
   name: string;
   address: Address;
   wordDays: WorkDay[];
+};
+
+export type MarketDetail = Market & {
+  producers: User[];
+  isOpen: boolean;
 };

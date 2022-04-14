@@ -1,8 +1,8 @@
 import { ConsumerTabScreens } from '@src/routes/app/consumer/home';
 
 const label: { [key in ConsumerTabScreens]: string } = {
-  'consumer-market': 'Feiras',
-  'consumer-producer': 'Feirantes',
+  'consumer-markets': 'Feiras',
+  'consumer-producers': 'Feirantes',
 };
 
 export const getLabel = (type: string): string => label[type];
