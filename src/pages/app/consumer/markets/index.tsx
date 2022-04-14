@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { FlatList } from 'react-native';
 
-import { Market as MarketState } from '@src/store/slices/market/types';
+import { Market } from '@src/store/slices/market/types';
 import * as C from '@src/components';
 import * as C_S from '../common-styles';
 
-const markets: MarketState[] = [
+const markets: Market[] = [
   {
     id: 'id',
     name: 'feira do zé',
@@ -258,7 +258,7 @@ const markets: MarketState[] = [
   },
 ];
 
-export const Market: FC = () => {
+export const Markets: FC = () => {
   return (
     <C_S.Container nestedScrollEnabled showsVerticalScrollIndicator={false}>
       <C_S.Content>

@@ -1,2 +1,2 @@
-export * from './market';
-export * from './producer';
+export * from './markets';
+export * from './producers';

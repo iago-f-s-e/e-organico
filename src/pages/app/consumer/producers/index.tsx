@@ -91,7 +91,7 @@ const producers: User[] = [
   },
 ];
 
-export const Producer: FC = () => {
+export const Producers: FC = () => {
   return (
     <C_S.Container nestedScrollEnabled showsVerticalScrollIndicator={false}>
       <C_S.Content>
