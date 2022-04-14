@@ -1,8 +1,24 @@
-import { Dimensions } from 'react-native';
+import * as size from '@src/constants/styles';
 
-const screen = {
-  height: Dimensions.get('window').height,
-  width: Dimensions.get('window').width,
+// TODO: corrigir os headers do sign-up
+
+const header = {
+  height: size.HEADER_WITH_STATUS_BAR_HEIGHT,
+  width: size.SCREEN_WIDTH,
 };
 
-export const dimensions = { screen };
+const components = {
+  header,
+};
+
+const screen = {
+  height: size.SCREEN_HEIGHT,
+  width: size.SCREEN_WIDTH,
+};
+
+const statusBar = {
+  height: size.STATUS_BAR_HEIGHT,
+  width: size.SCREEN_WIDTH,
+};
+
+export const dimensions = { screen, components, statusBar };
