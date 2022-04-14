@@ -278,7 +278,6 @@ export const Market: FC = () => {
       <C_S.Content>
         <C_S.TitleContainer>
           <C_S.Title>Feiras mais populares</C_S.Title>
-          <C_S.ShowMore>ver mais</C_S.ShowMore>
         </C_S.TitleContainer>
 
         <FlatList
