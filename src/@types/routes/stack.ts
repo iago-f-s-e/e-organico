@@ -17,7 +17,9 @@ export type AppStack = {
   home: undefined;
 };
 
+// TODO: passar id pelo params
 export type ConsumerStack = {
   home: undefined;
   'consumer-market': undefined;
+  'consumer-producer': undefined;
 };

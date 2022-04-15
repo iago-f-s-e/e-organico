@@ -52,6 +52,9 @@ const market: MarketDetail = {
   ],
 };
 
+// TODO: adicionar filtro de feirantes
+// TODO: adicionar produtos mais vendidos
+
 export const Market: FC = () => {
   return (
     <C_S.Container>
