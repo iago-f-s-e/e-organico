@@ -93,7 +93,7 @@ const producers: User[] = [
 
 export const Producers: FC = () => {
   return (
-    <C_S.Container nestedScrollEnabled showsVerticalScrollIndicator={false}>
+    <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
       <C_S.Content>
         <C_S.TitleContainer>
           <C_S.Title>Últimos feirantes</C_S.Title>
@@ -121,6 +121,6 @@ export const Producers: FC = () => {
           )}
         />
       </C_S.Content>
-    </C_S.Container>
+    </C_S.ScrollContainer>
   );
 };

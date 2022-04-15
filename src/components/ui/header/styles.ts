@@ -1,14 +1,12 @@
-import { colors, font } from '@src/config/theme';
+import { colors, dimensions, font } from '@src/config/theme';
 
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  flex-direction: row;
-  align-items: center;
   justify-content: center;
-
-  height: 60px;
-  padding: 10px 20px 5px;
+  align-items: center;
+  width: 100%;
+  height: ${dimensions.components.header.height}px;
 
   background-color: ${colors.main.primary};
 `;
@@ -35,17 +33,3 @@ export const Title = styled.Text`
   font-family: ${font.family.semiBold};
   color: ${colors.basic.white};
 `;
-
-// const styles = {
-//   iconStyle: {
-//     fontSize: 30,
-//     marginRight: 5,
-//     color: Colors.primary,
-//   },
-//   titleStyle: {
-//     flexDirection: 'row',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   textStyle: { fontSize: 20, textAlign: 'center', maxWidth: width - 100 },
-// };

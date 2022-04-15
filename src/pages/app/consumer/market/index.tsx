@@ -20,7 +20,29 @@ const market: MarketDetail = {
   },
   isOpen: true,
   name: 'feira do zé',
-  producers: [],
+  producers: [
+    {
+      id: 'id',
+      imagePath: _defaultImage,
+      name: 'zé',
+      phone: '99999999999',
+      score: {
+        rating: 5,
+        transactions: 1215511,
+      },
+    },
+
+    {
+      id: 'id2',
+      imagePath: _defaultImage,
+      name: 'zé',
+      phone: '99999999999',
+      score: {
+        rating: 5,
+        transactions: 1215511,
+      },
+    },
+  ],
   wordDays: [
     {
       close: '17:00',
@@ -32,20 +54,23 @@ const market: MarketDetail = {
 
 export const Market: FC = () => {
   return (
-    <C_S.Container nestedScrollEnabled showsVerticalScrollIndicator={false}>
-      <C_S.Content>
-        <C_S.TitleContainer>
-          <C_S.Title>Feirantes</C_S.Title>
-          <C_S.ShowMore>ver mais</C_S.ShowMore>
-        </C_S.TitleContainer>
+    <C_S.Container>
+      <C.Header title="Nome da feira" />
+      <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
+        <C_S.Content>
+          <C_S.TitleContainer>
+            <C_S.Title>Feirantes</C_S.Title>
+            <C_S.ShowMore>ver mais</C_S.ShowMore>
+          </C_S.TitleContainer>
 
-        <C.Map
-          data={market.producers}
-          render={(value, index) => (
-            <C.ListConsumerProducer key={index.toString()} producer={value} />
-          )}
-        />
-      </C_S.Content>
+          <C.Map
+            data={market.producers}
+            render={(value, index) => (
+              <C.ListConsumerProducer key={index.toString()} producer={value} />
+            )}
+          />
+        </C_S.Content>
+      </C_S.ScrollContainer>
     </C_S.Container>
   );
 };

@@ -2,9 +2,11 @@ import React, { FC } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { ConsumerTopTab } from '@src/@types/routes';
 
-import * as Consumer from '@src/pages/app/consumer';
 import { colors } from '@src/config/theme';
 import { TopTabBar } from '@src/components';
+
+import * as Consumer from '@src/pages/app/consumer';
+import * as C from '@src/components';
 import * as C_S from '../../common-styles';
 
 const Tab = createMaterialTopTabNavigator<ConsumerTopTab>();
@@ -14,9 +16,7 @@ export type ConsumerTabScreens = 'consumer-markets' | 'consumer-producers';
 export const ConsumerHome: FC = () => {
   return (
     <C_S.Container>
-      <C_S.Header>
-        <C_S.HeaderTitle>Inicio</C_S.HeaderTitle>
-      </C_S.Header>
+      <C.Header title="Inicio" />
 
       <Tab.Navigator
         tabBar={(props) => <TopTabBar {...props} />}

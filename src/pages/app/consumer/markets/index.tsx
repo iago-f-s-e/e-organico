@@ -260,7 +260,7 @@ const markets: Market[] = [
 
 export const Markets: FC = () => {
   return (
-    <C_S.Container nestedScrollEnabled showsVerticalScrollIndicator={false}>
+    <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
       <C_S.Content>
         <C_S.TitleContainer>
           <C_S.Title>Ultimas feiras</C_S.Title>
@@ -300,6 +300,6 @@ export const Markets: FC = () => {
           render={(value, index) => <C.ListConsumerMarket key={index.toString()} market={value} />}
         />
       </C_S.Content>
-    </C_S.Container>
+    </C_S.ScrollContainer>
   );
 };
