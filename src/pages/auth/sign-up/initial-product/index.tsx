@@ -1,9 +1,8 @@
 import React, { FC, useReducer } from 'react';
 import { FlatList } from 'react-native';
-import { Product } from '@src/store/slices/product/types';
+import { Product, ProductDetail } from '@src/store/slices/product/types';
 
 import * as C from '@src/components';
-import { SignUpProductPayload } from '@src/store/slices/sign-up-product/types';
 import { addSignUpProduct, removeSignUpProduct, useAppDispatch, useAppSelector } from '@src/store';
 import { useAppNavigation, useStorage, useToast as _useToast } from '@src/hooks';
 import * as C_S from '../common-styles';
@@ -29,11 +28,11 @@ export const InitialProduct: FC = () => {
   const onOpenAnimation = () => dispatch({ type: 'onOpenAnimation' });
   const onCloseAnimation = () => dispatch({ type: 'onCloseAnimation' });
 
-  const handleSelect = (payload: SignUpProductPayload) => {
+  const handleSelect = (payload: ProductDetail) => {
     appDispatch(addSignUpProduct(payload));
   };
 
-  const handleRemove = (payload: SignUpProductPayload) => {
+  const handleRemove = (payload: ProductDetail) => {
     appDispatch(removeSignUpProduct(payload));
   };
 

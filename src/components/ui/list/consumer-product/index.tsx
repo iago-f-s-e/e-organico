@@ -1,16 +1,23 @@
 import React from 'react';
-import { Market } from '@src/store/slices/market/types';
+import { ProductDetail } from '@src/store/slices/product/types';
 import { AntDesign } from '@expo/vector-icons';
 
 import { colors } from '@src/config/theme';
 import { useAppNavigation } from '@src/hooks';
+
+import { handlerInputMask, translateUnitMeasure } from '@src/utils';
 import * as C_S from '../common-styles';
+import * as S from './styles';
 
 type Props = {
-  market: Market;
+  data: ProductDetail;
 };
 
-export const ListConsumerMarket = ({ market }: Props): JSX.Element => {
+export const ListConsumerProduct = ({ data }: Props): JSX.Element => {
+  const { product } = data;
+  const price = handlerInputMask(data.price, 'money', { onlyComma: true });
+  const unitMeasure = `p/${translateUnitMeasure(data.unitMeasure)}`;
+
   const { navigateTo } = useAppNavigation();
 
   const handleNavigate = () => {
@@ -21,9 +28,11 @@ export const ListConsumerMarket = ({ market }: Props): JSX.Element => {
     <C_S.Container>
       <C_S.Image />
       <C_S.Content onPress={handleNavigate}>
-        <C_S.Title>{market.name}</C_S.Title>
-        <C_S.Info>{market.address.street}</C_S.Info>
-        <C_S.Info>{market.address.district}</C_S.Info>
+        <C_S.Title>{product.name}</C_S.Title>
+        <S.PriceContainer>
+          <S.Price>{price}</S.Price>
+          <C_S.Info>{unitMeasure}</C_S.Info>
+        </S.PriceContainer>
       </C_S.Content>
 
       <C_S.Like>

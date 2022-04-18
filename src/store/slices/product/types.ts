@@ -9,3 +9,11 @@ export type Product = {
   name: string;
   unitMeasures: UnitMeasure[];
 };
+
+export type ProductDetail = {
+  product: Product;
+  price: string;
+  stock: string;
+  unitMeasure: UnitMeasureTypes;
+  harvestDate: Date;
+};

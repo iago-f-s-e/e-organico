@@ -5,8 +5,7 @@ import { Feather } from '@expo/vector-icons';
 
 import { colors, font } from '@src/config/theme';
 import { useAppSelector } from '@src/store';
-import { Product } from '@src/store/slices/product/types';
-import { SignUpProductPayload } from '@src/store/slices/sign-up-product/types';
+import { Product, ProductDetail, UnitMeasureTypes } from '@src/store/slices/product/types';
 import { handlerInputMask } from '@src/utils';
 
 import { translateUnitMeasure, translateDate } from '@src/utils';
@@ -18,14 +17,14 @@ import { DatePicker } from '../../date-picker';
 type Props = {
   product: Product;
   actions: {
-    select: (state: SignUpProductPayload) => void;
-    remove: (state: SignUpProductPayload) => void;
+    select: (state: ProductDetail) => void;
+    remove: (state: ProductDetail) => void;
     onOpenAnimation: () => void;
     onCloseAnimation: () => void;
   };
 };
 
-const initialState: SignUpProductPayload = {
+const initialState: ProductDetail = {
   product: {
     id: '',
     name: '',
@@ -34,7 +33,7 @@ const initialState: SignUpProductPayload = {
   price: 'R$ 0,00',
   stock: '0',
   harvestDate: new Date(),
-  unitMeasure: '',
+  unitMeasure: 'un',
 };
 
 // TODO: Mostrar detalhes no header
@@ -42,7 +41,7 @@ const initialState: SignUpProductPayload = {
 export const ListSignUpProduct = ({ product, actions }: Props): JSX.Element => {
   const { signUpProduct } = useAppSelector((state) => state);
 
-  const [state, setState] = useState<SignUpProductPayload>(initialState);
+  const [state, setState] = useState<ProductDetail>(initialState);
   const [sizeContainer] = useState(new Animated.ValueXY({ x: 0, y: 50 }));
   const [opacityContent] = useState(new Animated.ValueXY({ x: 0, y: 0 }));
   const [opened, setOpened] = useState<boolean>(false);
@@ -57,7 +56,7 @@ export const ListSignUpProduct = ({ product, actions }: Props): JSX.Element => {
       return found;
     }
 
-    const unitMeasure = product.unitMeasures[0]?.name || '';
+    const unitMeasure = product.unitMeasures[0]?.name || 'un';
 
     setState((state) => ({ ...state, unitMeasure, product }));
     return found;
@@ -133,7 +132,10 @@ export const ListSignUpProduct = ({ product, actions }: Props): JSX.Element => {
   };
 
   const handleInputPrice = (price: string) => {
-    setState((state) => ({ ...state, price: handlerInputMask(price, 'money') }));
+    setState((state) => ({
+      ...state,
+      price: handlerInputMask(price, 'money', { withComma: true }),
+    }));
   };
 
   const handleInputStock = (stock: string) => {
@@ -149,7 +151,7 @@ export const ListSignUpProduct = ({ product, actions }: Props): JSX.Element => {
     setState((state) => ({ ...state, harvestDate }));
   };
 
-  const handleUnitPicker = (unitMeasure: string) => {
+  const handleUnitPicker = (unitMeasure: UnitMeasureTypes) => {
     setState((state) => ({ ...state, unitMeasure }));
   };
 

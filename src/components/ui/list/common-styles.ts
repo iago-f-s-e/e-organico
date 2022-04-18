@@ -24,6 +24,8 @@ export const Image = styled.View`
 `;
 
 export const Content = styled.TouchableOpacity`
+  justify-content: center;
+
   height: 100%;
   width: 70%;
 

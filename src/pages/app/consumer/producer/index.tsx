@@ -129,7 +129,30 @@ const producer: ProducerDetail = {
       ],
     },
   ],
-  products: [],
+  products: [
+    {
+      harvestDate: new Date(),
+      price: '5',
+      product: {
+        id: 'product_id',
+        name: 'Banana',
+        unitMeasures: [],
+      },
+      stock: '5',
+      unitMeasure: 'un',
+    },
+    {
+      harvestDate: new Date(),
+      price: '7.55',
+      product: {
+        id: 'product_id2',
+        name: 'Queijo',
+        unitMeasures: [],
+      },
+      stock: '7.55',
+      unitMeasure: 'un',
+    },
+  ],
   propertyImages: [{ imagePath }, { imagePath }, { imagePath }, { imagePath }],
 };
 
@@ -160,6 +183,11 @@ export const Producer: FC = () => {
             <C_S.Title>Produtos</C_S.Title>
             <C_S.ShowMore>ver mais</C_S.ShowMore>
           </C_S.TitleContainer>
+
+          <C.Map
+            data={producer.products}
+            render={(value, index) => <C.ListConsumerProduct key={index.toString()} data={value} />}
+          />
         </C_S.Content>
       </C_S.ScrollContainer>
     </C_S.Container>
