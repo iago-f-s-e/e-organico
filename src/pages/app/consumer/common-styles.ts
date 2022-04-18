@@ -7,12 +7,13 @@ export const Container = styled.View`
 
 export const ScrollContainer = styled.ScrollView`
   flex: 1;
+  background-color: ${colors.basic.white};
 `;
 
 export const Content = styled.View`
   flex: 1;
 
-  min-height: 200px;
+  min-height: 150px;
   margin: 15px 0;
 `;
 

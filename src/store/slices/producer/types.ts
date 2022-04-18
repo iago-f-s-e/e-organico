@@ -1,3 +1,4 @@
+import { PropertyImage } from '../image/types';
 import { Market } from '../market/types';
 import { Product } from '../product/types';
 import { UserDetail } from '../user/types';
@@ -9,4 +10,5 @@ export type ProducerType = 'producer';
 export type ProducerDetail = UserDetail & {
   markets: Market[];
   products: Product[];
+  propertyImages: PropertyImage[];
 };

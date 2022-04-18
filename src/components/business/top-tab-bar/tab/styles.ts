@@ -7,6 +7,9 @@ export const Container = styled.TouchableOpacity`
 
   justify-content: center;
   align-items: center;
+
+  border-bottom-width: 1px;
+  border-color: ${colors.basic.grey};
 `;
 
 export const Label = styled.Text`
