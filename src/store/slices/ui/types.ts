@@ -1,3 +1,3 @@
-export type UiState = {
+export type Ui = {
   showBottomTab: boolean;
 };

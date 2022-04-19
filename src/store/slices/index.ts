@@ -5,5 +5,3 @@ export * from './sign-up-user-type';
 export * from './sign-up-market';
 export * from './sign-up-product';
 export * from './ui';
-
-// TODO: implementar hide and show bottom tab

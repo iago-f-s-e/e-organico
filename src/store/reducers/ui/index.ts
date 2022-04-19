@@ -1,3 +1,3 @@
-import { toastSlice } from '@src/store/slices';
+import { uiSlice } from '@src/store/slices';
 
-export const toast = toastSlice.reducer;
+export const ui = uiSlice.reducer;

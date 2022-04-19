@@ -1,9 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useReducer, useMemo } from 'react';
 
 import * as C from '@src/components';
 import { ProductDetail } from '@src/store/slices/product/types';
+import { hideBottomTab, showBottomTab, useAppDispatch } from '@src/store';
+import { handlerInputMask } from '@src/utils';
+import { If } from '@src/components';
 import * as C_S from '../common-styles';
 import * as S from './styles';
+
+import { initialState, reducer } from './reducer';
 
 const _defaultImage =
   'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
@@ -23,8 +28,30 @@ const product: ProductDetail = {
 };
 
 // TODO: criar grupo para trazer produtos relacionados
+// TODO: renderizar e atualizar state do reducer apenas dps de carregar os dados
 
 export const Product: FC = () => {
+  const appDispatch = useAppDispatch();
+
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialState,
+    price: Number(product.price),
+    total: handlerInputMask(product.price, 'money', { onlyComma: true }),
+  });
+
+  const handleDecrement = () => dispatch({ type: 'decrementQuantity' });
+  const handleIncrement = () => dispatch({ type: 'incrementQuantity' });
+
+  const canDecrease = useMemo(() => Number(state.quantity) > 1, [state]);
+
+  useEffect(() => {
+    appDispatch(hideBottomTab());
+
+    return () => {
+      appDispatch(showBottomTab());
+    };
+  }, [appDispatch]);
+
   return (
     <C_S.Container>
       <C.Header />
@@ -68,18 +95,20 @@ export const Product: FC = () => {
 
       <S.InputContainer>
         <S.InputContent>
-          <S.IncOrDecButton>
-            <S.IncOrDecLabel>-</S.IncOrDecLabel>
+          <S.IncOrDecButton disabled={!canDecrease} onPress={handleDecrement}>
+            <If condition={canDecrease} render={() => <S.IncOrDecLabel>-</S.IncOrDecLabel>} />
           </S.IncOrDecButton>
-          <S.Quantity>5</S.Quantity>
-          <S.IncOrDecButton>
+
+          <S.Quantity>{state.quantity}</S.Quantity>
+
+          <S.IncOrDecButton onPress={handleIncrement}>
             <S.IncOrDecLabel>+</S.IncOrDecLabel>
           </S.IncOrDecButton>
         </S.InputContent>
 
         <S.InputButton>
           <S.ButtonLabel>Adicionar</S.ButtonLabel>
-          <S.ButtonLabel>R$ 5,00</S.ButtonLabel>
+          <S.ButtonLabel>{state.total}</S.ButtonLabel>
         </S.InputButton>
       </S.InputContainer>
     </C_S.Container>

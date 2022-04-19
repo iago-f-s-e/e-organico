@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { UiState } from './types';
+import { Ui } from './types';
 
-const initialState: UiState = {
+const initialState: Ui = {
   showBottomTab: true,
 };
 
@@ -10,7 +10,7 @@ export const uiSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
-    hideBottomTab: (state): UiState => ({ ...state, showBottomTab: false }),
-    showBottomTab: (state): UiState => ({ ...state, showBottomTab: true }),
+    hideBottomTab: (state): Ui => ({ ...state, showBottomTab: false }),
+    showBottomTab: (state): Ui => ({ ...state, showBottomTab: true }),
   },
 });

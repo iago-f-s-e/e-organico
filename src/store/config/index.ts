@@ -10,7 +10,9 @@ import * as R from '../reducers';
 
 const reducers = combineReducers<State>({ ...R });
 
-const persistConfig = { key: 'root', storage, stateReconciler };
+const blacklist = ['ui'];
+
+const persistConfig = { key: 'root', storage, stateReconciler, blacklist };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
