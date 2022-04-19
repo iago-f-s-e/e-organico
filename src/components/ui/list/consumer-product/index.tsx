@@ -5,7 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { colors } from '@src/config/theme';
 import { useAppNavigation } from '@src/hooks';
 
-import { handlerInputMask, translateUnitMeasure } from '@src/utils';
+import { handleInputMask, translateUnitMeasure } from '@src/utils';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
@@ -15,7 +15,7 @@ type Props = {
 
 export const ListConsumerProduct = ({ data }: Props): JSX.Element => {
   const { product } = data;
-  const price = handlerInputMask(data.price, 'money', { onlyComma: true });
+  const price = handleInputMask(data.price, 'money', { onlyComma: true });
   const unitMeasure = `p/${translateUnitMeasure(data.unitMeasure)}`;
 
   const { navigateTo } = useAppNavigation();

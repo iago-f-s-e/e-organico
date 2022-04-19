@@ -54,6 +54,8 @@ const inputMask = (key: string) => (key in inputMasks ? inputMasks[key] : (value
 const removeMask = (key: string) =>
   key in removeMasks ? removeMasks[key] : (value: string) => value;
 
-export const handlerInputMask: HandlerMask = (value, mask, options?: MoneyOptions) =>
+export const handleInputMask: HandlerMask = (value, mask, options?: MoneyOptions) =>
   inputMask(mask)(value, options);
-export const handleRemoveMask: HandlerMask = (value, mask) => removeMask(mask)(value);
+
+export const handleRemoveMask: HandlerMask = (value, mask, options?: MoneyOptions) =>
+  removeMask(mask)(value, options);

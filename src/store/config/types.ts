@@ -1,4 +1,5 @@
 import { Cart } from '../slices/cart/types';
+import { Section } from '../slices/section/types';
 import { SignUpConsumer } from '../slices/sign-up-consumer/types';
 import { SignUpMarket } from '../slices/sign-up-market/types';
 import { SignUpProducer } from '../slices/sign-up-producer/types';
@@ -9,6 +10,7 @@ import { Ui } from '../slices/ui/types';
 
 export type State = {
   cart: Cart;
+  section: Section;
   signUpConsumer: SignUpConsumer;
   signUpMarket: SignUpMarket;
   signUpProducer: SignUpProducer;

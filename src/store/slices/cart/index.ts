@@ -1,5 +1,6 @@
 import uuid from 'react-native-uuid';
 import { createSlice } from '@reduxjs/toolkit';
+import { handleRemoveMask, handleInputMask } from '@src/utils';
 import * as T from './types';
 
 const initialState: T.Cart = {
@@ -11,11 +12,15 @@ const initialState: T.Cart = {
 const keyGenerator = () => uuid.v4() as string;
 
 const getTotal = (products: T.ProductCartPayload[]): string => {
-  const values = products.map(({ total }) => Number(total));
+  const values = products.map(({ total }) =>
+    Number(handleRemoveMask(total, 'money', { withComma: false })),
+  );
 
-  if (!values.length) return '0.00';
+  if (!values.length) return 'R$ 0.00';
 
-  return values.reduce((acc, curr) => acc + curr).toString();
+  const total = values.reduce((acc, curr) => acc + curr).toString();
+
+  return handleInputMask(total, 'money', { onlyComma: true });
 };
 
 export const cartSlice = createSlice({
@@ -23,7 +28,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     setupCart: (_, { payload }: T.SetupCartPayload): T.Cart => {
-      const { producerId, marketId, product } = payload;
+      const { producerId, product } = payload;
 
       const products: T.ProductCartPayload[] = [
         {
@@ -33,7 +38,6 @@ export const cartSlice = createSlice({
       ];
 
       const current: T.CartPayload = {
-        marketId,
         producerId,
         productQuantity: '1',
         products,

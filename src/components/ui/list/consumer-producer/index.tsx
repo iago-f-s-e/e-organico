@@ -1,10 +1,10 @@
-import React from 'react';
-import {} from 'react-native';
+import React, { useMemo } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 
 import { colors } from '@src/config/theme';
 import { User } from '@src/store/slices/user/types';
 import { useAppNavigation } from '@src/hooks';
+import { canChangeCart, updateSection, useAppDispatch, useAppSelector } from '@src/store';
 import * as S from './styles';
 
 type Props = {
@@ -12,6 +12,9 @@ type Props = {
 };
 
 export const ListConsumerProducer = ({ producer }: Props): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const { cart } = useAppSelector((state) => state);
+
   const { navigateTo } = useAppNavigation();
   const { rating, transactions } = producer.score;
 
@@ -20,7 +23,16 @@ export const ListConsumerProducer = ({ producer }: Props): JSX.Element => {
   const infoRanting = `Avaliação: ${rating}`;
   const infoSales = `Vendas: ${transactions}`;
 
+  const changeCart = useMemo(() => {
+    if (!cart.current) return true;
+
+    return cart.current.producerId === producer.id;
+  }, [cart, producer]);
+
   const handleNavigate = () => {
+    dispatch(updateSection({ producerId: producer.id }));
+    dispatch(canChangeCart(changeCart));
+
     return navigateTo<'consumer'>('consumer-producer');
   };
 

@@ -10,7 +10,6 @@ export type ProductCartPayload = {
 
 export type CartPayload = {
   producerId: string;
-  marketId: string;
   total: string;
   productQuantity: string;
   products: ProductCartPayload[];
@@ -18,7 +17,6 @@ export type CartPayload = {
 
 type SetupCart = {
   producerId: string;
-  marketId: string;
   product: Omit<ProductCartPayload, 'key'>;
 };
 

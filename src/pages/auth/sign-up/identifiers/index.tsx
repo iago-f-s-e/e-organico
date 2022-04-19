@@ -1,5 +1,5 @@
 import React, { FC, useReducer, useCallback } from 'react';
-import { handlerInputMask } from '@src/utils';
+import { handleInputMask } from '@src/utils';
 import { Animated } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
@@ -116,7 +116,7 @@ export const Identifiers: FC = () => {
               onBlur={onCloseInput}
               value={state.phone}
               onChangeText={(payload) => {
-                dispatch({ type: 'changePhone', payload: handlerInputMask(payload, 'phone') });
+                dispatch({ type: 'changePhone', payload: handleInputMask(payload, 'phone') });
               }}
               maxLength={16}
               keyboardType="number-pad"

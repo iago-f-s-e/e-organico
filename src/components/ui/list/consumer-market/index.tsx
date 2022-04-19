@@ -4,6 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 import { colors } from '@src/config/theme';
 import { useAppNavigation } from '@src/hooks';
+import { updateSection, useAppDispatch } from '@src/store';
 import * as C_S from '../common-styles';
 
 type Props = {
@@ -11,9 +12,12 @@ type Props = {
 };
 
 export const ListConsumerMarket = ({ market }: Props): JSX.Element => {
+  const dispatch = useAppDispatch();
   const { navigateTo } = useAppNavigation();
 
   const handleNavigate = () => {
+    dispatch(updateSection({ marketId: market.id }));
+
     return navigateTo<'consumer'>('consumer-market');
   };
 

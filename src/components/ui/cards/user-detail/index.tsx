@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 
-import { handlerInputMask } from '@src/utils';
+import { handleInputMask } from '@src/utils';
 import { ProducerDetail } from '@src/store/slices/producer/types';
 import * as C_S from '../common-styles';
 import * as S from './styles';
@@ -14,7 +14,7 @@ type Props = {
 export const UserDetailCard = ({ producer }: Props): JSX.Element => {
   const rating = `Avaliação: ${producer.score.rating}`;
   const sales = `Vendas: ${producer.score.transactions}`;
-  const zipCode = handlerInputMask(producer.address.zipCode, 'zipCode');
+  const zipCode = handleInputMask(producer.address.zipCode, 'zipCode');
 
   return (
     <C_S.Container>

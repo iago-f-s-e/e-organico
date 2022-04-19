@@ -1,6 +1,6 @@
 import React, { FC, useReducer, useCallback } from 'react';
 
-import { handlerInputMask } from '@src/utils';
+import { handleInputMask } from '@src/utils';
 import * as C from '@src/components';
 import { useAppNavigation, useToast as _useToast, useSignUp } from '@src/hooks';
 import { changeSignUpConsumer, useAppDispatch, useAppSelector } from '@src/store';
@@ -77,7 +77,7 @@ export const Credentials: FC = () => {
               onChangeText={(payload) => {
                 dispatch({
                   type: 'changeDocument',
-                  payload: handlerInputMask(payload, 'document'),
+                  payload: handleInputMask(payload, 'document'),
                 });
               }}
               maxLength={14}

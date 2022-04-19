@@ -2,9 +2,18 @@ import React, { FC, useEffect, useReducer, useMemo } from 'react';
 
 import * as C from '@src/components';
 import { ProductDetail } from '@src/store/slices/product/types';
-import { hideBottomTab, showBottomTab, useAppDispatch } from '@src/store';
-import { handlerInputMask } from '@src/utils';
+import {
+  addProductToCart,
+  hideBottomTab,
+  setupCart,
+  showBottomTab,
+  showToast,
+  useAppDispatch,
+  useAppSelector,
+} from '@src/store';
+import { handleInputMask } from '@src/utils';
 import { If } from '@src/components';
+import { useAppNavigation } from '@src/hooks';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
@@ -32,17 +41,55 @@ const product: ProductDetail = {
 
 export const Product: FC = () => {
   const appDispatch = useAppDispatch();
+  const { cart, section } = useAppSelector((state) => state);
+  const { goBack } = useAppNavigation();
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     price: Number(product.price),
-    total: handlerInputMask(product.price, 'money', { onlyComma: true }),
+    total: handleInputMask(product.price, 'money', { onlyComma: true }),
   });
 
   const handleDecrement = () => dispatch({ type: 'decrementQuantity' });
   const handleIncrement = () => dispatch({ type: 'incrementQuantity' });
+  const handleToastError = () =>
+    appDispatch(
+      showToast({
+        message: 'Você já possui um carrinho de compras em outro feirante!',
+        type: 'error',
+      }),
+    );
+  const handleSetupCart = () =>
+    appDispatch(
+      setupCart({
+        producerId: section.producerId,
+        product: {
+          producerProduct: product,
+          quantity: state.quantity,
+          total: state.total,
+        },
+      }),
+    );
+  const handleAddToCart = () =>
+    appDispatch(
+      addProductToCart({
+        producerProduct: product,
+        quantity: state.quantity,
+        total: state.total,
+      }),
+    );
 
   const canDecrease = useMemo(() => Number(state.quantity) > 1, [state]);
+
+  const handleAdd = () => {
+    if (!cart.canChange) return handleToastError();
+
+    if (!cart.hasCurrent) return handleSetupCart();
+
+    handleAddToCart();
+
+    return goBack();
+  };
 
   useEffect(() => {
     appDispatch(hideBottomTab());
@@ -106,7 +153,7 @@ export const Product: FC = () => {
           </S.IncOrDecButton>
         </S.InputContent>
 
-        <S.InputButton>
+        <S.InputButton onPress={handleAdd}>
           <S.ButtonLabel>Adicionar</S.ButtonLabel>
           <S.ButtonLabel>{state.total}</S.ButtonLabel>
         </S.InputButton>

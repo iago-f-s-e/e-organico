@@ -6,7 +6,7 @@ import { Feather } from '@expo/vector-icons';
 import { colors, font } from '@src/config/theme';
 import { useAppSelector } from '@src/store';
 import { Product, ProductDetail, UnitMeasureTypes } from '@src/store/slices/product/types';
-import { handlerInputMask } from '@src/utils';
+import { handleInputMask } from '@src/utils';
 
 import { translateUnitMeasure, translateDate } from '@src/utils';
 import * as S from './styles';
@@ -134,7 +134,7 @@ export const ListSignUpProduct = ({ product, actions }: Props): JSX.Element => {
   const handleInputPrice = (price: string) => {
     setState((state) => ({
       ...state,
-      price: handlerInputMask(price, 'money', { withComma: true }),
+      price: handleInputMask(price, 'money', { withComma: true }),
     }));
   };
 

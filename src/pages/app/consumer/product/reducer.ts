@@ -1,4 +1,4 @@
-import { handlerInputMask } from '@src/utils';
+import { handleInputMask } from '@src/utils';
 
 export type State = {
   total: string;
@@ -20,7 +20,7 @@ const reducers: { [key in Actions]: Reducer } = {
 
     if (quantity <= 0) return state;
 
-    const total = handlerInputMask((quantity * state.price).toString(), 'money', {
+    const total = handleInputMask((quantity * state.price).toString(), 'money', {
       onlyComma: true,
     });
 
@@ -28,7 +28,7 @@ const reducers: { [key in Actions]: Reducer } = {
   },
   incrementQuantity: (state): State => {
     const quantity = Number(state.quantity) + 1;
-    const total = handlerInputMask((quantity * state.price).toString(), 'money', {
+    const total = handleInputMask((quantity * state.price).toString(), 'money', {
       onlyComma: true,
     });
 

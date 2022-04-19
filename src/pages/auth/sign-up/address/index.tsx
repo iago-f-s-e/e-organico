@@ -1,6 +1,6 @@
 import React, { FC, useReducer, useMemo, useCallback } from 'react';
 
-import { handlerInputMask } from '@src/utils';
+import { handleInputMask } from '@src/utils';
 
 import * as C from '@src/components';
 import { useAppNavigation, useToast as _useToast, useSignUp, useStorage } from '@src/hooks';
@@ -99,7 +99,7 @@ export const Address: FC = () => {
                 onChangeText={(payload) => {
                   dispatch({
                     type: 'changeZipCode',
-                    payload: handlerInputMask(payload, 'zipCode'),
+                    payload: handleInputMask(payload, 'zipCode'),
                   });
                 }}
                 maxLength={9}

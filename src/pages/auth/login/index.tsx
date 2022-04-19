@@ -1,6 +1,6 @@
 import React, { FC, useReducer, useMemo } from 'react';
 import { ActivityIndicator, Animated } from 'react-native';
-import { handlerInputMask } from '@src/utils';
+import { handleInputMask } from '@src/utils';
 
 import { colors } from '@src/config/theme';
 import logo from '@src/assets/icons/logo.png';
@@ -51,7 +51,7 @@ export const Login: FC = () => {
             onBlur={onCloseInput}
             value={state.phone}
             onChangeText={(payload) => {
-              dispatch({ type: 'changePhone', payload: handlerInputMask(payload, 'phone') });
+              dispatch({ type: 'changePhone', payload: handleInputMask(payload, 'phone') });
             }}
             maxLength={16}
             keyboardType="number-pad"
