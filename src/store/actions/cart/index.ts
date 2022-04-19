@@ -3,7 +3,7 @@ import { cartSlice } from '@src/store/slices';
 export const {
   addProductToCart,
   canChangeCart,
-  checkoutCart,
+  clearCart,
   removeProductCart,
   setupCart,
   updateProductCart,

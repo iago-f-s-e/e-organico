@@ -1,4 +1,5 @@
 export * from './cart';
+export * from './section';
 export * from './sign-up-consumer';
 export * from './sign-up-market';
 export * from './sign-up-producer';

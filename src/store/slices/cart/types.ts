@@ -1,39 +1,39 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { ProductDetail } from '../product/types';
 
-export type PayloadProductCart = {
+export type ProductCartPayload = {
   key: string;
   producerProduct: ProductDetail;
   quantity: string;
   total: string;
 };
 
-export type PayloadCart = {
+export type CartPayload = {
   producerId: string;
   marketId: string;
   total: string;
   productQuantity: string;
-  products: PayloadProductCart[];
+  products: ProductCartPayload[];
 };
 
-type SetupCartPayload = {
+type SetupCart = {
   producerId: string;
   marketId: string;
-  product: Omit<PayloadProductCart, 'key'>;
+  product: Omit<ProductCartPayload, 'key'>;
 };
 
 export type Cart = {
-  current: PayloadCart;
+  current: CartPayload;
   hasCurrent: boolean;
   canChange: boolean;
 };
 
-export type PayloadSetupCart = PayloadAction<SetupCartPayload>;
+export type SetupCartPayload = PayloadAction<SetupCart>;
 
-export type PayloadAddProduct = PayloadAction<Omit<PayloadProductCart, 'key'>>;
+export type AddProductPayload = PayloadAction<Omit<ProductCartPayload, 'key'>>;
 
-export type PayloadRemoveProduct = PayloadAction<PayloadProductCart>;
+export type RemoveProductPayload = PayloadAction<ProductCartPayload>;
 
-export type PayloadUpdateProduct = PayloadAction<PayloadProductCart>;
+export type UpdateProductPayload = PayloadAction<ProductCartPayload>;
 
-export type PayloadCanChange = PayloadAction<boolean>;
+export type CanChangePayload = PayloadAction<boolean>;

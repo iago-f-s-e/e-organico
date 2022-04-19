@@ -13,6 +13,8 @@ export const useStorage = (): UseStorage => {
     appDispatch(store.clearSignUpUserType());
     appDispatch(store.clearSignUpMarket());
     appDispatch(store.clearSignUpProduct());
+    appDispatch(store.clearCart());
+    appDispatch(store.clearSection());
   };
 
   return { clearPersist };
