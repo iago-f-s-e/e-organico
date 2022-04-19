@@ -7,7 +7,7 @@ import { ConsumerHome } from './home';
 
 const Stack = createStackNavigator<ConsumerStack>();
 
-export type ConsumerScreens = 'home' | 'consumer-market' | 'consumer-producer';
+export type ConsumerScreens = 'home' | 'consumer-market' | 'consumer-producer' | 'consumer-product';
 
 export const ConsumerRoutes: FC = () => {
   return (
@@ -20,6 +20,7 @@ export const ConsumerRoutes: FC = () => {
       <Stack.Screen name="home" component={ConsumerHome} />
       <Stack.Screen name="consumer-market" component={Consumer.Market} />
       <Stack.Screen name="consumer-producer" component={Consumer.Producer} />
+      <Stack.Screen name="consumer-product" component={Consumer.Product} />
     </Stack.Navigator>
   );
 };

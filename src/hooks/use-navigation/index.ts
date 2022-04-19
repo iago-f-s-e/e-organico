@@ -14,17 +14,23 @@ type NavigationType = Consumer | Auth;
 // TODO: trocar ConsumerScreens por AppScreens
 type Paths<Type> = Type extends Auth ? AuthScreens : ConsumerScreens;
 
+type Params = {
+  id?: string;
+};
+
 type UseNavigate = {
   onFocus: (call: CallOnFocus) => () => void;
   getParams: <T extends object>() => Readonly<T>;
-  navigateTo: <Type extends NavigationType>(path: Paths<Type>) => void;
+  getIdParams: () => Readonly<string>;
+  navigateTo: <Type extends NavigationType>(path: Paths<Type>, params?: Params) => void;
   goBack: () => void;
 };
 
 export const useAppNavigation = (): UseNavigate => {
   const { navigate, addListener, goBack } = useNavigation<StackNavigationProp<any>>(); // eslint-disable-line
 
-  const navigateTo = <Type extends NavigationType>(path: Paths<Type>) => navigate(path);
+  const navigateTo = <Type extends NavigationType>(path: Paths<Type>, params?: Params) =>
+    navigate(path, params);
 
   const onFocus = (call: CallOnFocus) => addListener('focus', call);
 
@@ -32,5 +38,9 @@ export const useAppNavigation = (): UseNavigate => {
     return getRoute<Route<string, T>>().params;
   };
 
-  return { navigateTo, onFocus, getParams, goBack };
+  const getIdParams = () => {
+    return getParams<{ id: string }>().id;
+  };
+
+  return { navigateTo, onFocus, getParams, goBack, getIdParams };
 };

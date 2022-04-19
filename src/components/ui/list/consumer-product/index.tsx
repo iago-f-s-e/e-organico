@@ -21,7 +21,7 @@ export const ListConsumerProduct = ({ data }: Props): JSX.Element => {
   const { navigateTo } = useAppNavigation();
 
   const handleNavigate = () => {
-    return navigateTo<'consumer'>('consumer-market');
+    return navigateTo<'consumer'>('consumer-product', { id: product.id });
   };
 
   return (
