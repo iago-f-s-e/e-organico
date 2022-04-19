@@ -1,3 +1,4 @@
+export * from './cart';
 export * from './sign-up-consumer';
 export * from './sign-up-market';
 export * from './sign-up-producer';

@@ -4,6 +4,7 @@ export type UnitMeasure = {
   name: UnitMeasureTypes;
 };
 
+// TODO: criar propriedade de imagem
 export type Product = {
   id: string;
   name: string;

@@ -1,3 +1,4 @@
+import { Cart } from '../slices/cart/types';
 import { SignUpConsumer } from '../slices/sign-up-consumer/types';
 import { SignUpMarket } from '../slices/sign-up-market/types';
 import { SignUpProducer } from '../slices/sign-up-producer/types';
@@ -7,6 +8,7 @@ import { Toast } from '../slices/toast/types';
 import { Ui } from '../slices/ui/types';
 
 export type State = {
+  cart: Cart;
   signUpConsumer: SignUpConsumer;
   signUpMarket: SignUpMarket;
   signUpProducer: SignUpProducer;
