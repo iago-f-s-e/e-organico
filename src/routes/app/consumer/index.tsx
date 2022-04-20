@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import * as Consumer from '@src/pages/app/consumer';
 import { ConsumerHome } from './home';
-import { ConsumerCart } from './cart';
+import { ConsumerCart, ConsumerCartTabScreens } from './cart';
 
 const Stack = createStackNavigator<ConsumerStack>();
 
@@ -13,7 +13,8 @@ export type ConsumerScreens =
   | 'consumer-market'
   | 'consumer-producer'
   | 'consumer-product'
-  | 'consumer-cart';
+  | 'consumer-cart'
+  | ConsumerCartTabScreens;
 
 export const ConsumerRoutes: FC = () => {
   return (

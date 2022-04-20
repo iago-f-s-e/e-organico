@@ -3,6 +3,7 @@ import React, { FC, useEffect, useMemo } from 'react';
 import { hideBottomTab, useAppDispatch, useAppSelector } from '@src/store';
 
 import * as C from '@src/components';
+import { useAppNavigation } from '@src/hooks';
 import * as C_S from '../../common-styles';
 import * as S from './styles';
 
@@ -10,11 +11,19 @@ export const Products: FC = () => {
   const { cart } = useAppSelector((state) => state);
   const appDispatch = useAppDispatch();
 
+  const { onFocus, navigateTo } = useAppNavigation();
+
   const quantity = useMemo(() => cart.current.products.length, [cart]);
 
+  const handleConfirm = () => {
+    return navigateTo<'consumer'>('consumer-cart-address');
+  };
+
   useEffect(() => {
-    appDispatch(hideBottomTab());
-  }, [appDispatch]);
+    const focus = onFocus(() => appDispatch(hideBottomTab()));
+
+    return focus;
+  }, []); // eslint-disable-line
 
   return (
     <C_S.Container>
@@ -39,7 +48,7 @@ export const Products: FC = () => {
         condition
         render={{
           toBeTruthy: () => (
-            <C_S.ButtonConfirm>
+            <C_S.ButtonConfirm onPress={handleConfirm}>
               <C_S.ButtonLabel>Confirmar</C_S.ButtonLabel>
             </C_S.ButtonConfirm>
           ),
