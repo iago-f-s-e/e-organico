@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { ConsumerCartTopTab } from '@src/@types/routes';
 
@@ -6,6 +6,8 @@ import { colors } from '@src/config/theme';
 
 import * as Consumer from '@src/pages/app/consumer';
 import * as C from '@src/components';
+import { hideBottomTab, useAppDispatch } from '@src/store';
+import { useAppNavigation } from '@src/hooks';
 import * as C_S from '../../common-styles';
 
 const Tab = createMaterialTopTabNavigator<ConsumerCartTopTab>();
@@ -16,6 +18,16 @@ export type ConsumerCartTabScreens =
   | 'consumer-cart-payment';
 
 export const ConsumerCart: FC = () => {
+  const appDispatch = useAppDispatch();
+
+  const { onFocus } = useAppNavigation();
+
+  useEffect(() => {
+    const focus = onFocus(() => appDispatch(hideBottomTab()));
+
+    return focus;
+  }, []); // eslint-disable-line
+
   return (
     <C_S.Container>
       <C.Header title="Carrinho de compras" />

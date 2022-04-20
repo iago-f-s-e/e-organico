@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 
-import { hideBottomTab, useAppDispatch, useAppSelector } from '@src/store';
+import { confirmOrCancelCartProducts, useAppDispatch, useAppSelector } from '@src/store';
 
 import * as C from '@src/components';
 import { useAppNavigation } from '@src/hooks';
@@ -8,22 +8,25 @@ import * as C_S from '../../common-styles';
 import * as S from './styles';
 
 export const Products: FC = () => {
-  const { cart } = useAppSelector((state) => state);
+  const { cart, ui } = useAppSelector((state) => state);
   const appDispatch = useAppDispatch();
 
-  const { onFocus, navigateTo } = useAppNavigation();
+  const { navigateTo } = useAppNavigation();
 
   const quantity = useMemo(() => cart.current.products.length, [cart]);
 
+  const dispatchConfirm = () => appDispatch(confirmOrCancelCartProducts(true));
+  const dispatchCancel = () => appDispatch(confirmOrCancelCartProducts(false));
+
   const handleConfirm = () => {
+    dispatchConfirm();
+
     return navigateTo<'consumer'>('consumer-cart-address');
   };
 
-  useEffect(() => {
-    const focus = onFocus(() => appDispatch(hideBottomTab()));
-
-    return focus;
-  }, []); // eslint-disable-line
+  const handleCancel = () => {
+    return dispatchCancel();
+  };
 
   return (
     <C_S.Container>
@@ -45,7 +48,7 @@ export const Products: FC = () => {
       </C_S.ScrollContainer>
 
       <C.IfElse
-        condition
+        condition={!ui.cartToTab.confirmedProducts}
         render={{
           toBeTruthy: () => (
             <C_S.ButtonConfirm onPress={handleConfirm}>
@@ -53,7 +56,7 @@ export const Products: FC = () => {
             </C_S.ButtonConfirm>
           ),
           toBeFalsy: () => (
-            <C_S.ButtonCancel>
+            <C_S.ButtonCancel onPress={handleCancel}>
               <C_S.ButtonLabel>Cancelar</C_S.ButtonLabel>
             </C_S.ButtonCancel>
           ),
