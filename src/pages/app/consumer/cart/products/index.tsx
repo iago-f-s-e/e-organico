@@ -1,13 +1,16 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 
 import { hideBottomTab, useAppDispatch, useAppSelector } from '@src/store';
 
 import * as C from '@src/components';
 import * as C_S from '../../common-styles';
+import * as S from './styles';
 
 export const Products: FC = () => {
   const { cart } = useAppSelector((state) => state);
   const appDispatch = useAppDispatch();
+
+  const quantity = useMemo(() => cart.current.products.length, [cart]);
 
   useEffect(() => {
     appDispatch(hideBottomTab());
@@ -15,18 +18,14 @@ export const Products: FC = () => {
 
   return (
     <C_S.Container>
+      <S.Content>
+        <S.RowInfo>
+          <S.Info>Quantidade de produtos: </S.Info>
+          <S.Info>{quantity}</S.Info>
+        </S.RowInfo>
+      </S.Content>
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
         <C_S.Content>
-          <C_S.TitleContainer>
-            <C_S.Title>Quantidade de produtos</C_S.Title>
-          </C_S.TitleContainer>
-        </C_S.Content>
-
-        <C_S.Content>
-          <C_S.TitleContainer>
-            <C_S.Title>Produtos, buscar produtos</C_S.Title>
-          </C_S.TitleContainer>
-
           <C.Map
             data={cart.current.products}
             render={(value, index) => (
@@ -35,6 +34,22 @@ export const Products: FC = () => {
           />
         </C_S.Content>
       </C_S.ScrollContainer>
+
+      <C.IfElse
+        condition
+        render={{
+          toBeTruthy: () => (
+            <C_S.ButtonConfirm>
+              <C_S.ButtonLabel>Confirmar</C_S.ButtonLabel>
+            </C_S.ButtonConfirm>
+          ),
+          toBeFalsy: () => (
+            <C_S.ButtonCancel>
+              <C_S.ButtonLabel>Cancelar</C_S.ButtonLabel>
+            </C_S.ButtonCancel>
+          ),
+        }}
+      />
     </C_S.Container>
   );
 };

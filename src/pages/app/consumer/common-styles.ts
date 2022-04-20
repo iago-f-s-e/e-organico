@@ -39,3 +39,23 @@ export const ShowMore = styled.Text`
   font-size: ${font.size.small};
   color: ${colors.main.secondary};
 `;
+
+export const ButtonConfirm = styled.TouchableOpacity`
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 40px;
+
+  background-color: ${colors.main.primary};
+`;
+
+export const ButtonCancel = styled(ButtonConfirm)`
+  background-color: ${colors.actions.danger};
+`;
+
+export const ButtonLabel = styled.Text`
+  font-family: ${font.family.semiBold};
+  font-size: ${font.size.large};
+  color: ${colors.basic.white};
+`;
