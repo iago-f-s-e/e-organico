@@ -41,8 +41,8 @@ export const ConsumerCart: FC = () => {
         }}
       >
         <Tab.Screen name="consumer-cart-products" component={Consumer.Cart.Products} />
-        <Tab.Screen name="consumer-cart-address" component={Consumer.Producers} />
-        <Tab.Screen name="consumer-cart-payment" component={Consumer.Producers} />
+        <Tab.Screen name="consumer-cart-address" component={Consumer.Cart.Address} />
+        <Tab.Screen name="consumer-cart-payment" component={Consumer.Cart.Payment} />
       </Tab.Navigator>
     </C_S.Container>
   );

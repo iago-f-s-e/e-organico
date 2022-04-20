@@ -2,8 +2,8 @@ import React, { FC, useMemo } from 'react';
 
 import { confirmOrCancelCartProducts, useAppDispatch, useAppSelector } from '@src/store';
 
-import * as C from '@src/components';
 import { useAppNavigation } from '@src/hooks';
+import * as C from '@src/components';
 import * as C_S from '../../common-styles';
 import * as S from './styles';
 
