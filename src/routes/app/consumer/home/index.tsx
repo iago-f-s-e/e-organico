@@ -3,7 +3,6 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { ConsumerTopTab } from '@src/@types/routes';
 
 import { colors } from '@src/config/theme';
-import { TopTabBar } from '@src/components';
 
 import * as Consumer from '@src/pages/app/consumer';
 import * as C from '@src/components';
@@ -19,7 +18,7 @@ export const ConsumerHome: FC = () => {
       <C.Header title="Inicio" />
 
       <Tab.Navigator
-        tabBar={(props) => <TopTabBar {...props} />}
+        tabBar={(props) => <C.TopTabBar {...props} />}
         screenOptions={{
           tabBarActiveTintColor: colors.main.secondary,
           tabBarLabelStyle: { fontSize: 12 },

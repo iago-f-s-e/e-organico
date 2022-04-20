@@ -6,7 +6,6 @@ import {
   addProductToCart,
   hideBottomTab,
   setupCart,
-  showBottomTab,
   showToast,
   useAppDispatch,
   useAppSelector,
@@ -42,7 +41,7 @@ const product: ProductDetail = {
 export const Product: FC = () => {
   const appDispatch = useAppDispatch();
   const { cart, section } = useAppSelector((state) => state);
-  const { goBack } = useAppNavigation();
+  const { navigateTo, onFocus } = useAppNavigation();
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
@@ -88,16 +87,14 @@ export const Product: FC = () => {
 
     handleAddToCart();
 
-    return goBack();
+    return navigateTo<'consumer'>('consumer-cart', null, { popNavigation: true });
   };
 
   useEffect(() => {
-    appDispatch(hideBottomTab());
+    const focus = onFocus(() => appDispatch(hideBottomTab()));
 
-    return () => {
-      appDispatch(showBottomTab());
-    };
-  }, [appDispatch]);
+    return focus;
+  }, []); // eslint-disable-line
 
   return (
     <C_S.Container>

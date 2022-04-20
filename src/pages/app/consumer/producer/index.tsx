@@ -1,8 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { FlatList } from 'react-native';
 
 import { ProducerDetail } from '@src/store/slices/producer/types';
 import * as C from '@src/components';
+import { showBottomTab, useAppDispatch } from '@src/store';
+import { useAppNavigation } from '@src/hooks';
 import * as C_S from '../common-styles';
 
 const imagePath =
@@ -157,6 +159,15 @@ const producer: ProducerDetail = {
 };
 
 export const Producer: FC = () => {
+  const appDispatch = useAppDispatch();
+  const { onFocus } = useAppNavigation();
+
+  useEffect(() => {
+    const focus = onFocus(() => appDispatch(showBottomTab()));
+
+    return focus;
+  }, []); // eslint-disable-line 
+
   return (
     <C_S.Container>
       <C.Header title="Nome do produto" />

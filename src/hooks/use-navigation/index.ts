@@ -18,19 +18,34 @@ type Params = {
   id?: string;
 };
 
+type Options = {
+  popNavigation?: boolean;
+};
+
 type UseNavigate = {
   onFocus: (call: CallOnFocus) => () => void;
   getParams: <T extends object>() => Readonly<T>;
   getIdParams: () => Readonly<string>;
-  navigateTo: <Type extends NavigationType>(path: Paths<Type>, params?: Params) => void;
+  navigateTo: <Type extends NavigationType>(
+    path: Paths<Type>,
+    params?: Params | null,
+    options?: Options,
+  ) => void;
   goBack: () => void;
 };
 
 export const useAppNavigation = (): UseNavigate => {
-  const { navigate, addListener, goBack } = useNavigation<StackNavigationProp<any>>(); // eslint-disable-line
+  const { navigate, addListener, goBack, pop } = useNavigation<StackNavigationProp<any>>(); // eslint-disable-line
 
-  const navigateTo = <Type extends NavigationType>(path: Paths<Type>, params?: Params) =>
-    navigate(path, params);
+  const navigateTo = <Type extends NavigationType>(
+    path: Paths<Type>,
+    params?: Params | null,
+    options?: Options,
+  ) => {
+    if (options?.popNavigation) pop();
+
+    return navigate(path, params);
+  };
 
   const onFocus = (call: CallOnFocus) => addListener('focus', call);
 
