@@ -1,17 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Section, Payload } from './types';
+import { Section, UpdateMarketSectionPayload, UpdateProducerSectionPayload } from './types';
 
 const initialState: Section = {
-  consumerId: '',
-  marketId: '',
-  producerId: '',
+  market: null,
+  producer: null,
 };
 
 export const sectionSlice = createSlice({
   name: 'section',
   initialState,
   reducers: {
-    updateSection: (state, { payload }: Payload): Section => ({ ...state, ...payload }),
+    updateMarketSection: (state, { payload }: UpdateMarketSectionPayload): Section => ({
+      ...state,
+      market: payload,
+    }),
+    updateProducerSection: (state, { payload }: UpdateProducerSectionPayload): Section => ({
+      ...state,
+      producer: payload,
+    }),
     clearSection: (): Section => initialState,
   },
 });

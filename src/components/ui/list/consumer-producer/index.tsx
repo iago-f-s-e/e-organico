@@ -4,7 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { colors } from '@src/config/theme';
 import { User } from '@src/store/slices/user/types';
 import { useAppNavigation } from '@src/hooks';
-import { canChangeCart, updateSection, useAppDispatch, useAppSelector } from '@src/store';
+import { canChangeCart, updateProducerSection, useAppDispatch, useAppSelector } from '@src/store';
 
 import * as S from './styles';
 import * as C_S from '../common-styles';
@@ -32,7 +32,7 @@ export const ListConsumerProducer = ({ producer }: Props): JSX.Element => {
   }, [cart, producer]);
 
   const handleNavigate = () => {
-    dispatch(updateSection({ producerId: producer.id }));
+    dispatch(updateProducerSection(producer));
     dispatch(canChangeCart(changeCart));
 
     return navigateTo<'consumer'>('consumer-producer');

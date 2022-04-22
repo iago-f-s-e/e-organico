@@ -62,7 +62,7 @@ export const Product: FC = () => {
   const handleSetupCart = () =>
     appDispatch(
       setupCart({
-        producerId: section.producerId,
+        producerId: section.producer.id,
         product: {
           producerProduct: product,
           quantity: state.quantity,

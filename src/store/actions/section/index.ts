@@ -1,3 +1,3 @@
 import { sectionSlice } from '@src/store/slices';
 
-export const { clearSection, updateSection } = sectionSlice.actions;
+export const { clearSection, updateProducerSection, updateMarketSection } = sectionSlice.actions;
