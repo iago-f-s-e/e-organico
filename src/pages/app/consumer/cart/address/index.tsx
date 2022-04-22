@@ -46,8 +46,15 @@ export const Address: FC = () => {
     <C_S.Container>
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
         <C_S.TitleContainer>
-          <C_S.Title>Feirantes</C_S.Title>
-          <C_S.ShowMore>ver mais</C_S.ShowMore>
+          <C_S.Title>Feira selecionada</C_S.Title>
+        </C_S.TitleContainer>
+
+        <C_S.TitleContainer>
+          <C_S.Title>Renderizar feira selecionada ou feira atual</C_S.Title>
+        </C_S.TitleContainer>
+
+        <C_S.TitleContainer>
+          <C_S.Title>Feiras do feirante</C_S.Title>
         </C_S.TitleContainer>
       </C_S.ScrollContainer>
 

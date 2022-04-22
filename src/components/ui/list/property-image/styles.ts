@@ -12,8 +12,3 @@ export const Container = styled.TouchableOpacity`
 
   margin: 0 2px;
 `;
-
-export const Image = styled.Image`
-  width: 100%;
-  height: 100%;
-`;

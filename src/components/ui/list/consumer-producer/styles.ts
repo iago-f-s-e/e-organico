@@ -14,18 +14,6 @@ export const Container = styled.View`
   margin: 10px 5px;
 `;
 
-export const Image = styled.Image`
-  height: 100%;
-  width: 100%;
-`;
-
-export const ImageContainer = styled.View`
-  height: 60px;
-  width: 60px;
-
-  border-radius: 100px;
-`;
-
 export const Content = styled.TouchableOpacity`
   height: 100%;
   width: 70%;

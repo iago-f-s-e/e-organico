@@ -9,11 +9,14 @@ import * as C_S from '../common-styles';
 
 import { initialState, reducer } from './reducer';
 
+const imagePath =
+  'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
+
 // TODO: remover dados mocados
 const products: Product[] = [
-  { id: 'produto1', name: 'maçã', unitMeasures: [{ name: 'un' }] },
-  { id: 'produto2', name: 'goiaba', unitMeasures: [{ name: 'un' }, { name: 'duzia' }] },
-  { id: 'produto3', name: 'goiaba', unitMeasures: [{ name: 'un' }, { name: 'duzia' }] },
+  { id: 'produto1', name: 'maçã', imagePath, unitMeasures: [{ name: 'un' }] },
+  { id: 'produto2', name: 'goiaba', imagePath, unitMeasures: [{ name: 'un' }, { name: 'duzia' }] },
+  { id: 'produto3', name: 'goiaba', imagePath, unitMeasures: [{ name: 'un' }, { name: 'duzia' }] },
 ];
 
 export const InitialProduct: FC = () => {

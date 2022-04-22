@@ -1,19 +1,14 @@
 import React from 'react';
-import { FlatList } from 'react-native';
 
 import { handleInputMask } from '@src/utils';
 import { ProducerDetail } from '@src/store/slices/producer/types';
 import * as C_S from '../common-styles';
-import * as S from './styles';
-import { ListPropertyImage } from '../../list';
 
 type Props = {
   producer: ProducerDetail;
 };
 
 export const UserDetailCard = ({ producer }: Props): JSX.Element => {
-  const rating = `Avaliação: ${producer.score.rating}`;
-  const sales = `Vendas: ${producer.score.transactions}`;
   const zipCode = handleInputMask(producer.address.zipCode, 'zipCode');
 
   return (
@@ -26,16 +21,14 @@ export const UserDetailCard = ({ producer }: Props): JSX.Element => {
 
           <C_S.InfoContent>
             <C_S.Name>{producer.name}</C_S.Name>
-            <C_S.Info>{rating}</C_S.Info>
-            <C_S.Info>{sales}</C_S.Info>
           </C_S.InfoContent>
         </C_S.InfoContainer>
 
         <C_S.SubTitleContainer>
-          <C_S.SubTitle>Propriedade</C_S.SubTitle>
+          <C_S.SubTitle>Endereço</C_S.SubTitle>
         </C_S.SubTitleContainer>
 
-        <S.PropertyContainer>
+        <C_S.AddressContainer>
           <C_S.AddressSection>
             <C_S.AddressContent>
               <C_S.AddressLabel>Rua:</C_S.AddressLabel>
@@ -78,15 +71,7 @@ export const UserDetailCard = ({ producer }: Props): JSX.Element => {
               <C_S.AddressData>{producer.address.state}</C_S.AddressData>
             </C_S.AddressContent>
           </C_S.AddressSection>
-
-          <FlatList
-            data={producer.propertyImages}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item }) => <ListPropertyImage propertyImage={item} />}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
-        </S.PropertyContainer>
+        </C_S.AddressContainer>
       </C_S.ScrollContainer>
     </C_S.Container>
   );

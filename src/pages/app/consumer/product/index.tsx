@@ -29,6 +29,7 @@ const product: ProductDetail = {
   product: {
     id: 'product_id',
     name: 'Tripa de cobra',
+    imagePath: _defaultImage,
     unitMeasures: [],
   },
   stock: '500',

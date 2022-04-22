@@ -5,10 +5,14 @@ import { Market } from '@src/store/slices/market/types';
 import * as C from '@src/components';
 import * as C_S from '../common-styles';
 
+const imagePath =
+  'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
+
 const markets: Market[] = [
   {
     id: 'id',
     name: 'feira do zé',
+    imagePath,
     address: {
       city: 'cidade',
       complement: 'complement',
@@ -59,6 +63,7 @@ const markets: Market[] = [
   {
     id: 'id2',
     name: 'feira do zé',
+    imagePath,
     address: {
       city: 'cidade',
       complement: 'complement',
@@ -109,6 +114,7 @@ const markets: Market[] = [
   {
     id: 'id3',
     name: 'feira do zé',
+    imagePath,
     address: {
       city: 'cidade',
       complement: 'complement',
@@ -159,6 +165,7 @@ const markets: Market[] = [
   {
     id: 'id4',
     name: 'feira do zé',
+    imagePath,
     address: {
       city: 'cidade',
       complement: 'complement',
@@ -209,6 +216,7 @@ const markets: Market[] = [
   {
     id: 'id5',
     name: 'feira do zé',
+    imagePath,
     address: {
       city: 'cidade',
       complement: 'complement',

@@ -32,6 +32,7 @@ const producer: ProducerDetail = {
     {
       id: 'id',
       name: 'feira do zé',
+      imagePath,
       address: {
         city: 'cidade',
         complement: 'complement',
@@ -83,6 +84,7 @@ const producer: ProducerDetail = {
     {
       id: 'id2',
       name: 'feira do zé',
+      imagePath,
       address: {
         city: 'cidade',
         complement: 'complement',
@@ -138,6 +140,7 @@ const producer: ProducerDetail = {
       product: {
         id: 'product_id',
         name: 'Banana',
+        imagePath,
         unitMeasures: [],
       },
       stock: '5',
@@ -149,6 +152,7 @@ const producer: ProducerDetail = {
       product: {
         id: 'product_id2',
         name: 'Queijo',
+        imagePath,
         unitMeasures: [],
       },
       stock: '7.55',

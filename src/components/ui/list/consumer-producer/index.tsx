@@ -5,7 +5,9 @@ import { colors } from '@src/config/theme';
 import { User } from '@src/store/slices/user/types';
 import { useAppNavigation } from '@src/hooks';
 import { canChangeCart, updateSection, useAppDispatch, useAppSelector } from '@src/store';
+
 import * as S from './styles';
+import * as C_S from '../common-styles';
 
 type Props = {
   producer: User;
@@ -38,9 +40,9 @@ export const ListConsumerProducer = ({ producer }: Props): JSX.Element => {
 
   return (
     <S.Container>
-      <S.ImageContainer>
-        <S.Image source={{ uri: producer.imagePath }} />
-      </S.ImageContainer>
+      <C_S.ImageContainer>
+        <C_S.Image source={{ uri: producer.imagePath }} />
+      </C_S.ImageContainer>
 
       <S.Content onPress={handleNavigate}>
         <S.Title>{producer.name}</S.Title>

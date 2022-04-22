@@ -29,6 +29,7 @@ export type WorkDay = {
 export type Market = {
   id: string;
   name: string;
+  imagePath: string;
   address: Address;
   wordDays: WorkDay[];
 };

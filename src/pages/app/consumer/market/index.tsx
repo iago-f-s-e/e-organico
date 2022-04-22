@@ -18,6 +18,7 @@ const market: MarketDetail = {
     street: 'street',
     zipCode: '99999999',
   },
+  imagePath: _defaultImage,
   isOpen: true,
   name: 'feira do zé',
   producers: [

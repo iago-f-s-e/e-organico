@@ -14,13 +14,16 @@ export const Container = styled.View`
   margin: 10px 5px;
 `;
 
-export const Image = styled.View`
+export const Image = styled.Image`
+  height: 100%;
+  width: 100%;
+`;
+
+export const ImageContainer = styled.View`
   height: 60px;
   width: 60px;
 
   border-radius: 100px;
-
-  background-color: #f00;
 `;
 
 export const Content = styled.TouchableOpacity`

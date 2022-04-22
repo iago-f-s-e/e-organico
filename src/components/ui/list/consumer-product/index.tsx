@@ -26,7 +26,9 @@ export const ListConsumerProduct = ({ data }: Props): JSX.Element => {
 
   return (
     <C_S.Container>
-      <C_S.Image />
+      <C_S.ImageContainer>
+        <C_S.Image source={{ uri: data.product.imagePath }} />
+      </C_S.ImageContainer>
       <C_S.Content onPress={handleNavigate}>
         <C_S.Title>{product.name}</C_S.Title>
         <S.PriceContainer>

@@ -14,10 +14,14 @@ import { initialState, reducer } from './reducer';
 
 // TODO: remover dados mocados
 
+const _defaultImage =
+  'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
+
 const markets: MarketState[] = [
   {
     id: 'id',
     name: 'feira do zé',
+    imagePath: _defaultImage,
     address: {
       city: 'cidade',
       complement: 'complement',
@@ -68,6 +72,7 @@ const markets: MarketState[] = [
   {
     id: 'id2',
     name: 'feira do zé',
+    imagePath: _defaultImage,
     address: {
       city: 'cidade',
       complement: 'complement',

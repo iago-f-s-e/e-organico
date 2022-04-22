@@ -18,7 +18,7 @@ export const ListConsumerProductCart = ({ productCart }: Props): JSX.Element => 
 
   return (
     <C_S.Container>
-      <C_S.Image />
+      <C_S.ImageContainer />
       <C_S.Content onPress={() => {}}>
         <C_S.Title>{productCart.producerProduct.product.name}</C_S.Title>
         <S.ValuesContent>

@@ -23,7 +23,9 @@ export const ListConsumerMarket = ({ market }: Props): JSX.Element => {
 
   return (
     <C_S.Container>
-      <C_S.Image />
+      <C_S.ImageContainer>
+        <C_S.Image source={{ uri: market.imagePath }} />
+      </C_S.ImageContainer>
       <C_S.Content onPress={handleNavigate}>
         <C_S.Title>{market.name}</C_S.Title>
         <C_S.Info>{market.address.street}</C_S.Info>

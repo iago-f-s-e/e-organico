@@ -8,6 +8,7 @@ export type UnitMeasure = {
 export type Product = {
   id: string;
   name: string;
+  imagePath: string;
   unitMeasures: UnitMeasure[];
 };
 

@@ -28,6 +28,7 @@ const initialState: ProductDetail = {
   product: {
     id: '',
     name: '',
+    imagePath: '',
     unitMeasures: [],
   },
   price: 'R$ 0,00',

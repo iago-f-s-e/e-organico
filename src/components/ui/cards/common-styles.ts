@@ -72,3 +72,35 @@ export const SubTitle = styled.Text`
   font-size: ${font.size.medium};
   color: ${colors.basic.grey};
 `;
+
+// ### Address  ###
+
+export const AddressContainer = styled.View`
+  flex: 1;
+  height: 320px;
+`;
+
+export const AddressContent = styled.View`
+  flex: 1;
+  width: 50%;
+`;
+
+export const AddressSection = styled.View`
+  flex-direction: row;
+
+  margin: 5px 0;
+`;
+
+export const AddressLabel = styled.Text`
+  font-family: ${font.family.semiBold};
+  font-size: ${font.size.medium};
+
+  color: ${colors.basic.black};
+  margin-right: 5px;
+`;
+
+export const AddressData = styled.Text`
+  font-family: ${font.family.semiBold};
+  font-size: ${font.size.medium};
+  color: ${colors.basic.grey};
+`;
