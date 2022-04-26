@@ -9,13 +9,16 @@ import * as C_S from '../common-styles';
 
 type Props = {
   market: Market;
+  onSelect?: (market: Market) => void;
 };
 
-export const ListConsumerMarket = ({ market }: Props): JSX.Element => {
+export const ListConsumerMarket = ({ market, onSelect }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const { navigateTo } = useAppNavigation();
 
-  const handleNavigate = () => {
+  const handlePress = () => {
+    if (onSelect) return onSelect(market);
+
     dispatch(updateMarketSection(market));
 
     return navigateTo<'consumer'>('consumer-market');
@@ -26,7 +29,7 @@ export const ListConsumerMarket = ({ market }: Props): JSX.Element => {
       <C_S.ImageContainer>
         <C_S.Image source={{ uri: market.imagePath }} />
       </C_S.ImageContainer>
-      <C_S.Content onPress={handleNavigate}>
+      <C_S.Content onPress={handlePress}>
         <C_S.Title>{market.name}</C_S.Title>
         <C_S.Info>{market.address.street}</C_S.Info>
         <C_S.Info>{market.address.district}</C_S.Info>

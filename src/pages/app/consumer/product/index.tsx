@@ -79,14 +79,18 @@ export const Product: FC = () => {
       }),
     );
 
+  const handleSetupOrAdd = () => {
+    if (!cart.hasCurrent) return handleSetupCart();
+
+    return handleAddToCart();
+  };
+
   const canDecrease = useMemo(() => Number(state.quantity) > 1, [state]);
 
   const handleAdd = () => {
     if (!cart.canChange) return handleToastError();
 
-    if (!cart.hasCurrent) return handleSetupCart();
-
-    handleAddToCart();
+    handleSetupOrAdd();
 
     return navigateTo<'consumer'>('consumer-cart', null, { popNavigation: true });
   };

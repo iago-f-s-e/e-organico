@@ -1,7 +1,7 @@
 import { colors, font } from '@src/config/theme';
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   flex: 1;
   width: 100px;
 
@@ -42,6 +42,18 @@ export const Content = styled.View`
   align-items: center;
 
   width: 100%;
+`;
+
+export const Icon = styled.View`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 25px;
+  height: 25px;
 `;
 
 export const Time = styled.Text`

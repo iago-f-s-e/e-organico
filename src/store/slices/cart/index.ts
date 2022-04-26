@@ -41,6 +41,11 @@ export const cartSlice = createSlice({
         producerId,
         productQuantity: '1',
         products,
+        addressOrMarket: {
+          type: 'delivery', // usar pick como default
+          market: null,
+          selectedDay: null,
+        },
         total: product.total,
       };
 

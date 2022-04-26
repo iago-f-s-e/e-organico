@@ -14,6 +14,19 @@ export const Container = styled.View.attrs(shadow)`
   background-color: ${colors.basic.white};
 `;
 
+export const BigContainer = styled.View.attrs(shadow)`
+  flex: 1;
+
+  align-self: center;
+
+  width: 90%;
+  height: 300px;
+
+  border-radius: 5px;
+
+  background-color: ${colors.basic.white};
+`;
+
 export const ScrollContainer = styled.ScrollView`
   flex: 1;
 

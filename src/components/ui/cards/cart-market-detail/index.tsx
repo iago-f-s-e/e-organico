@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList } from 'react-native';
 
 import { handleInputMask } from '@src/utils';
-import { Market } from '@src/store/slices/market/types';
+import { Market, WorkDay } from '@src/store/slices/market/types';
 import { ListWorkDay } from '../../list/work-day';
 
 import * as C_S from '../common-styles';
@@ -10,13 +10,17 @@ import * as S from './styles';
 
 type Props = {
   market: Market;
+  day: WorkDay;
+  actions: {
+    selectDay: (day: WorkDay) => void;
+  };
 };
 
-export const MarketDetailCard = ({ market }: Props): JSX.Element => {
+export const CartMarketDetailCard = ({ market, actions, day }: Props): JSX.Element => {
   const zipCode = handleInputMask(market.address.zipCode, 'zipCode');
 
   return (
-    <C_S.Container>
+    <C_S.BigContainer>
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
         <C_S.InfoContainer>
           <C_S.ImageContainer>
@@ -76,13 +80,15 @@ export const MarketDetailCard = ({ market }: Props): JSX.Element => {
             </C_S.AddressContent>
 
             <S.WorkDaysSection>
-              <S.WorkDaysTitle>Dias de funcionamento</S.WorkDaysTitle>
+              <S.WorkDaysTitle>Escolha o dia</S.WorkDaysTitle>
               <S.WorkDaysContainer>
                 <FlatList
                   data={market.wordDays}
                   horizontal
                   showsHorizontalScrollIndicator={false}
-                  renderItem={({ item }) => <ListWorkDay workDay={item} />}
+                  renderItem={({ item }) => (
+                    <ListWorkDay workDay={item} selected={day} select={actions.selectDay} />
+                  )}
                   keyExtractor={(_, index) => index.toString()}
                 />
               </S.WorkDaysContainer>
@@ -90,6 +96,6 @@ export const MarketDetailCard = ({ market }: Props): JSX.Element => {
           </C_S.AddressSection>
         </C_S.AddressContainer>
       </C_S.ScrollContainer>
-    </C_S.Container>
+    </C_S.BigContainer>
   );
 };

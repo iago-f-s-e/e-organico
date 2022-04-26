@@ -1,5 +1,20 @@
 import { PayloadAction } from '@reduxjs/toolkit';
+import { Address } from '../address/types';
+import { Market, WorkDay } from '../market/types';
 import { ProductDetail } from '../product/types';
+
+type AddressCart = {
+  type: 'pick';
+  address: Address;
+};
+
+type MarketCart = {
+  type: 'delivery';
+  market: Market;
+  selectedDay: WorkDay;
+};
+
+type AddressOrMarket = AddressCart | MarketCart;
 
 export type ProductCartPayload = {
   key: string;
@@ -12,6 +27,7 @@ export type CartPayload = {
   producerId: string;
   total: string;
   productQuantity: string;
+  addressOrMarket: AddressOrMarket;
   products: ProductCartPayload[];
 };
 

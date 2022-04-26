@@ -28,6 +28,7 @@
   },
   "plugins": ["react", "@typescript-eslint", "react-hooks", "prettier"],
   "rules": {
+    "react/require-default-props": "off",
     "import/no-extraneous-dependencies": "off",
     "no-shadow": "off",
     "no-plusplus": "off",
