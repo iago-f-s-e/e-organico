@@ -44,6 +44,8 @@ export type Cart = {
 
 export type SetupCartPayload = PayloadAction<SetupCart>;
 
+export type SetCartAddressPayload = PayloadAction<AddressOrMarket>;
+
 export type AddProductPayload = PayloadAction<Omit<ProductCartPayload, 'key'>>;
 
 export type RemoveProductPayload = PayloadAction<ProductCartPayload>;

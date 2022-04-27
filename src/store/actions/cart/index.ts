@@ -7,4 +7,6 @@ export const {
   removeProductCart,
   setupCart,
   updateProductCart,
+  setCartAddress,
+  cancelCartAddress,
 } = cartSlice.actions;

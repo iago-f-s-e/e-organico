@@ -1,7 +1,13 @@
 import React, { FC, useEffect, useCallback, useReducer, useMemo } from 'react';
 import { Animated } from 'react-native';
 
-import { confirmOrCancelCartAddress, useAppDispatch, useAppSelector } from '@src/store';
+import {
+  confirmOrCancelCartAddress,
+  cancelCartAddress,
+  setCartAddress,
+  useAppDispatch,
+  useAppSelector,
+} from '@src/store';
 
 import { useAppNavigation, useToast as _useToast } from '@src/hooks';
 import * as C from '@src/components';
@@ -289,6 +295,8 @@ export const Address: FC = () => {
   const dispatchChangeMarket = (payload: Market) => dispatch({ type: 'onChangeMarket', payload });
 
   const handleCancel = () => {
+    appDispatch(cancelCartAddress());
+
     return dispatchCancel();
   };
 
@@ -303,15 +311,23 @@ export const Address: FC = () => {
 
     if (response.type === 'error') return useToast.error(response.message);
 
+    if (response.type !== 'address') return;
+
     appDispatch(confirmOrCancelCartAddress(true));
 
     return navigateTo<'consumer'>('consumer-cart-payment');
   }, [navigateTo, useToast, state, appDispatch]);
+
   const handleConfirmMarket = useCallback(() => {
     const response = validateMarketState(state);
 
     if (response.type === 'error') return useToast.error(response.message);
 
+    if (response.type !== 'market') return;
+
+    const { market, day } = response;
+
+    appDispatch(setCartAddress({ type: 'delivery', market, selectedDay: day }));
     appDispatch(confirmOrCancelCartAddress(true));
 
     return navigateTo<'consumer'>('consumer-cart-payment');
@@ -332,28 +348,39 @@ export const Address: FC = () => {
   useEffect(() => {
     if (cart.current?.addressOrMarket.type !== 'delivery') return; // TODO: adicionar toggle para type
 
-    const hasMarket = !!cart.current?.addressOrMarket.market;
+    const hasMarket = !!cart.current?.addressOrMarket?.market;
 
     if (!hasMarket) {
+      dispatchChangeDay(null);
       dispatchChangeMarket(section.market);
       return;
     }
 
-    dispatchChangeMarket(cart.current?.addressOrMarket.market);
+    dispatchChangeDay(cart.current?.addressOrMarket?.selectedDay);
+    dispatchChangeMarket(cart.current?.addressOrMarket?.market);
   }, [cart, section.market]);
 
   return (
     <C_S.Container>
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
-        <C.If
+        <C.IfElse
           condition={renderAddressCart}
-          render={() => (
-            <C.CartMarket
-              markets={markets}
-              selected={{ market: state.market, day: state.day }}
-              actions={{ selectMarket: dispatchChangeMarket, selectDay: dispatchChangeDay }}
-            />
-          )}
+          render={{
+            toBeFalsy: () => (
+              <C.CartMarket
+                markets={markets}
+                selected={{ market: state.market, day: state.day }}
+                actions={{ selectMarket: dispatchChangeMarket, selectDay: dispatchChangeDay }}
+              />
+            ),
+            toBeTruthy: () => (
+              <C.CartMarket
+                markets={markets}
+                selected={{ market: state.market, day: state.day }}
+                actions={{ selectMarket: dispatchChangeMarket, selectDay: dispatchChangeDay }}
+              />
+            ),
+          }}
         />
       </C_S.ScrollContainer>
 

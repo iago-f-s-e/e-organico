@@ -52,6 +52,24 @@ export const cartSlice = createSlice({
       return { canChange: true, hasCurrent: true, current };
     },
 
+    setCartAddress: (state, { payload }: T.SetCartAddressPayload): T.Cart => ({
+      ...state,
+      current: { ...state.current, addressOrMarket: payload },
+    }),
+
+    cancelCartAddress: (state): T.Cart => ({
+      ...state,
+      current: {
+        ...state.current,
+        addressOrMarket: {
+          market: null,
+          selectedDay: null,
+          address: null,
+          type: state.current.addressOrMarket.type,
+        },
+      },
+    }),
+
     addProductToCart: (state, { payload }: T.AddProductPayload): T.Cart => {
       const product: T.ProductCartPayload = {
         ...payload,

@@ -20,12 +20,7 @@ type Reducer = (state: State, action: Action) => State;
 const reducers: { [key in Actions]: Reducer } = {
   onChangeMarket: (state, { payload }): State => ({ ...state, market: payload as Market }),
 
-  onChangeDay: (state, { payload }): State => {
-    const newDay = payload as WorkDay;
-    const day = state.day?.day === newDay.day ? null : newDay;
-
-    return { ...state, day };
-  },
+  onChangeDay: (state, { payload }): State => ({ ...state, day: payload as WorkDay }),
 
   openButton: (state, _): State => {
     Animated.parallel([
