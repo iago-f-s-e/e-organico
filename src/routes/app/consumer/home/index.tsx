@@ -1,9 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { ConsumerTopTab } from '@src/@types/routes';
 
 import { colors } from '@src/config/theme';
 
+import { showBottomTab, useAppDispatch } from '@src/store';
+import { useAppNavigation } from '@src/hooks';
 import * as Consumer from '@src/pages/app/consumer';
 import * as C from '@src/components';
 import * as C_S from '../../common-styles';
@@ -13,6 +15,16 @@ const Tab = createMaterialTopTabNavigator<ConsumerTopTab>();
 export type ConsumerTabScreens = 'consumer-markets' | 'consumer-producers';
 
 export const ConsumerHome: FC = () => {
+  const appDispatch = useAppDispatch();
+
+  const { onFocus } = useAppNavigation();
+
+  useEffect(() => {
+    const focus = onFocus(() => appDispatch(showBottomTab()));
+
+    return focus;
+  }, []); // eslint-disable-line
+
   return (
     <C_S.Container>
       <C.Header title="Inicio" />

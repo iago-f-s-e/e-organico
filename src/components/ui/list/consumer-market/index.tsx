@@ -1,20 +1,33 @@
 import React from 'react';
 import { Market } from '@src/store/slices/market/types';
-import { AntDesign } from '@expo/vector-icons';
 
-import { colors } from '@src/config/theme';
 import { useAppNavigation } from '@src/hooks';
 import { updateMarketSection, useAppDispatch } from '@src/store';
+import { If } from '@src/components/business';
+import { colors } from '@src/config/theme';
 import * as C_S from '../common-styles';
+import { Selected } from '../../selected';
 
 type Props = {
   market: Market;
+  current?: Market;
+  selected?: Market;
   onSelect?: (market: Market) => void;
 };
 
-export const ListConsumerMarket = ({ market, onSelect }: Props): JSX.Element => {
+export const ListConsumerMarket = ({ market, onSelect, current, selected }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const { navigateTo } = useAppNavigation();
+
+  const isSelected = selected && selected.id === market.id;
+
+  const isCurrent = current && current.id === market.id;
+
+  const borderCurrent = {
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: colors.main.primary,
+  };
 
   const handlePress = () => {
     if (onSelect) return onSelect(market);
@@ -25,7 +38,7 @@ export const ListConsumerMarket = ({ market, onSelect }: Props): JSX.Element => 
   };
 
   return (
-    <C_S.Container>
+    <C_S.Container style={isCurrent ? borderCurrent : undefined}>
       <C_S.ImageContainer>
         <C_S.Image source={{ uri: market.imagePath }} />
       </C_S.ImageContainer>
@@ -33,11 +46,9 @@ export const ListConsumerMarket = ({ market, onSelect }: Props): JSX.Element => 
         <C_S.Title>{market.name}</C_S.Title>
         <C_S.Info>{market.address.street}</C_S.Info>
         <C_S.Info>{market.address.district}</C_S.Info>
-      </C_S.Content>
 
-      <C_S.Like>
-        <AntDesign name="heart" size={24} color={colors.entity.heart} />
-      </C_S.Like>
+        <If condition={isSelected} render={() => <Selected />} />
+      </C_S.Content>
     </C_S.Container>
   );
 };

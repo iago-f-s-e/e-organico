@@ -286,19 +286,21 @@ export const Address: FC = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const renderAddressCart = useMemo(() => cart.current?.addressOrMarket.type === 'pick', [cart]);
+  const renderMarketCart = useMemo(() => cart.current?.addressOrMarket.type === 'pick', [cart]);
+
+  const cartMarket = useMemo(() => {
+    if (cart.current?.addressOrMarket?.type !== 'pick') return null;
+
+    return cart.current?.addressOrMarket?.market;
+  }, [cart]);
 
   const dispatchCancel = () => appDispatch(confirmOrCancelCartAddress(false));
   const dispatchOpenButton = () => dispatch({ type: 'openButton' });
   const dispatchCloseButton = () => dispatch({ type: 'closeButton' });
   const dispatchChangeDay = (payload: WorkDay) => dispatch({ type: 'onChangeDay', payload });
   const dispatchChangeMarket = (payload: Market) => dispatch({ type: 'onChangeMarket', payload });
-
-  const handleCancel = () => {
-    appDispatch(cancelCartAddress());
-
-    return dispatchCancel();
-  };
+  const dispatchToChangeMarket = (payload: boolean) =>
+    dispatch({ type: 'onToChangeMarket', payload });
 
   const handleOpenOrCloseButton = useCallback(() => {
     if (ui.cartToTab.confirmedProducts) return dispatchOpenButton();
@@ -314,9 +316,7 @@ export const Address: FC = () => {
     if (response.type !== 'address') return;
 
     appDispatch(confirmOrCancelCartAddress(true));
-
-    return navigateTo<'consumer'>('consumer-cart-payment');
-  }, [navigateTo, useToast, state, appDispatch]);
+  }, [useToast, state, appDispatch]);
 
   const handleConfirmMarket = useCallback(() => {
     const response = validateMarketState(state);
@@ -327,26 +327,59 @@ export const Address: FC = () => {
 
     const { market, day } = response;
 
-    appDispatch(setCartAddress({ type: 'delivery', market, selectedDay: day }));
+    appDispatch(setCartAddress({ type: 'pick', market, selectedDay: day }));
     appDispatch(confirmOrCancelCartAddress(true));
-
-    return navigateTo<'consumer'>('consumer-cart-payment');
-  }, [navigateTo, useToast, state, appDispatch]);
+  }, [useToast, state, appDispatch]);
 
   const handleConfirm = useCallback(() => {
     const pickOrDelivery = cart.current?.addressOrMarket.type;
 
-    if (pickOrDelivery === 'pick') return handleConfirmAddress();
+    if (pickOrDelivery === 'pick') return handleConfirmMarket();
 
-    return handleConfirmMarket();
+    return handleConfirmAddress();
   }, [cart, handleConfirmMarket, handleConfirmAddress]);
+
+  const handleCancel = () => {
+    appDispatch(cancelCartAddress());
+
+    return dispatchCancel();
+  };
+
+  const handleSelectMarket = (payload: Market) => {
+    if (cart.current?.addressOrMarket?.type === 'pick') {
+      const changeMarket = payload.id !== cart.current?.addressOrMarket?.market?.id;
+
+      dispatchToChangeMarket(changeMarket);
+    }
+
+    dispatchChangeDay(null);
+    dispatchChangeMarket(payload);
+  };
+
+  const handleNavigate = () => navigateTo<'consumer'>('consumer-cart-payment');
+
+  const handleConfirmChange = () => handleConfirmMarket();
+
+  const handleCancelChange = () => {
+    if (cart.current?.addressOrMarket?.type !== 'pick') return;
+
+    dispatchToChangeMarket(false);
+    dispatchChangeDay(cart.current?.addressOrMarket?.selectedDay);
+    dispatchChangeMarket(cart.current?.addressOrMarket?.market);
+  };
+
+  const handleConfirmAndNavigate = () => {
+    handleConfirm();
+
+    return handleNavigate();
+  };
 
   useEffect(() => {
     handleOpenOrCloseButton();
   }, [handleOpenOrCloseButton]);
 
   useEffect(() => {
-    if (cart.current?.addressOrMarket.type !== 'delivery') return; // TODO: adicionar toggle para type
+    if (cart.current?.addressOrMarket.type !== 'pick') return; // TODO: adicionar toggle para type
 
     const hasMarket = !!cart.current?.addressOrMarket?.market;
 
@@ -364,20 +397,32 @@ export const Address: FC = () => {
     <C_S.Container>
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
         <C.IfElse
-          condition={renderAddressCart}
+          condition={renderMarketCart}
           render={{
             toBeFalsy: () => (
               <C.CartMarket
                 markets={markets}
-                selected={{ market: state.market, day: state.day }}
-                actions={{ selectMarket: dispatchChangeMarket, selectDay: dispatchChangeDay }}
+                change={state.toChangeMarket}
+                selected={{ market: state.market, day: state.day, cartMarket }}
+                actions={{
+                  selectMarket: handleSelectMarket,
+                  selectDay: dispatchChangeDay,
+                  cancelChangeMarket: handleCancelChange,
+                  confirmChangeMarket: handleConfirmChange,
+                }}
               />
             ),
             toBeTruthy: () => (
               <C.CartMarket
                 markets={markets}
-                selected={{ market: state.market, day: state.day }}
-                actions={{ selectMarket: dispatchChangeMarket, selectDay: dispatchChangeDay }}
+                change={state.toChangeMarket}
+                selected={{ market: state.market, day: state.day, cartMarket }}
+                actions={{
+                  selectMarket: handleSelectMarket,
+                  selectDay: dispatchChangeDay,
+                  cancelChangeMarket: handleCancelChange,
+                  confirmChangeMarket: handleConfirmChange,
+                }}
               />
             ),
           }}
@@ -395,7 +440,7 @@ export const Address: FC = () => {
           condition={!ui.cartToTab.confirmedAddress}
           render={{
             toBeTruthy: () => (
-              <C_S.ButtonConfirm onPress={handleConfirm}>
+              <C_S.ButtonConfirm onPress={handleConfirmAndNavigate}>
                 <C_S.ButtonLabel>Confirmar</C_S.ButtonLabel>
               </C_S.ButtonConfirm>
             ),

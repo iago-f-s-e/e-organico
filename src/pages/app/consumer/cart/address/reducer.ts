@@ -4,21 +4,24 @@ import { Animated } from 'react-native';
 export type State = {
   sizeButton: Animated.ValueXY;
   opacityButton: Animated.ValueXY;
+  toChangeMarket: boolean;
   market: Market;
   day: WorkDay;
 };
 
-type Actions = 'openButton' | 'closeButton' | 'onChangeMarket' | 'onChangeDay';
+type Actions = 'openButton' | 'closeButton' | 'onChangeMarket' | 'onChangeDay' | 'onToChangeMarket';
 
 type Action = {
   type: Actions;
-  payload?: Market | WorkDay;
+  payload?: Market | WorkDay | boolean;
 };
 
 type Reducer = (state: State, action: Action) => State;
 
 const reducers: { [key in Actions]: Reducer } = {
   onChangeMarket: (state, { payload }): State => ({ ...state, market: payload as Market }),
+
+  onToChangeMarket: (state, { payload }): State => ({ ...state, toChangeMarket: Boolean(payload) }),
 
   onChangeDay: (state, { payload }): State => ({ ...state, day: payload as WorkDay }),
 
@@ -60,6 +63,7 @@ const reducers: { [key in Actions]: Reducer } = {
 export const initialState: State = {
   sizeButton: new Animated.ValueXY({ x: 0, y: 40 }),
   opacityButton: new Animated.ValueXY({ x: 1, y: 0 }),
+  toChangeMarket: false,
   market: null,
   day: null,
 };

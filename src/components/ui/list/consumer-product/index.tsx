@@ -1,8 +1,6 @@
 import React from 'react';
 import { ProductDetail } from '@src/store/slices/product/types';
-import { AntDesign } from '@expo/vector-icons';
 
-import { colors } from '@src/config/theme';
 import { useAppNavigation } from '@src/hooks';
 
 import { handleInputMask, translateUnitMeasure } from '@src/utils';
@@ -36,10 +34,6 @@ export const ListConsumerProduct = ({ data }: Props): JSX.Element => {
           <C_S.Info>{unitMeasure}</C_S.Info>
         </S.PriceContainer>
       </C_S.Content>
-
-      <C_S.Like>
-        <AntDesign name="heart" size={24} color={colors.entity.heart} />
-      </C_S.Like>
     </C_S.Container>
   );
 };

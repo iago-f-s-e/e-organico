@@ -8,17 +8,21 @@ import * as C_S from '../common-styles';
 
 type Props = {
   markets: Market[];
+  change: boolean;
   selected: {
+    cartMarket: Market;
     market: Market;
     day: WorkDay;
   };
   actions: {
     selectMarket: (market: Market) => void;
     selectDay: (day: WorkDay) => void;
+    confirmChangeMarket: () => void;
+    cancelChangeMarket: () => void;
   };
 };
 
-export const CartMarket = ({ markets, selected, actions }: Props): JSX.Element => {
+export const CartMarket = ({ markets, selected, actions, change }: Props): JSX.Element => {
   return (
     <C_S.Container>
       <C_S.Content>
@@ -27,10 +31,13 @@ export const CartMarket = ({ markets, selected, actions }: Props): JSX.Element =
           render={() => (
             <C_S.Content>
               <CartMarketDetailCard
+                change={change}
                 market={selected.market}
                 day={selected.day}
                 actions={{
                   selectDay: actions.selectDay,
+                  cancelChange: actions.cancelChangeMarket,
+                  confirmChange: actions.confirmChangeMarket,
                 }}
               />
             </C_S.Content>
@@ -47,6 +54,8 @@ export const CartMarket = ({ markets, selected, actions }: Props): JSX.Element =
             <ListConsumerMarket
               key={index.toString()}
               market={value}
+              current={selected.market}
+              selected={selected.cartMarket}
               onSelect={(market) => actions.selectMarket(market)}
             />
           )}

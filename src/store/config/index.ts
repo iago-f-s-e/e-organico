@@ -10,7 +10,7 @@ import * as R from '../reducers';
 
 const reducers = combineReducers<State>({ ...R });
 
-const blacklist = ['ui'];
+const blacklist: string[] = [];
 
 const persistConfig = { key: 'root', storage, stateReconciler, blacklist };
 

@@ -4,12 +4,12 @@ import { Market, WorkDay } from '../market/types';
 import { ProductDetail } from '../product/types';
 
 type AddressCart = {
-  type: 'pick';
+  type: 'delivery';
   address: Address;
 };
 
 type MarketCart = {
-  type: 'delivery';
+  type: 'pick';
   market: Market;
   selectedDay: WorkDay;
 };

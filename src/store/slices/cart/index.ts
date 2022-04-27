@@ -42,7 +42,7 @@ export const cartSlice = createSlice({
         productQuantity: '1',
         products,
         addressOrMarket: {
-          type: 'delivery', // usar pick como default
+          type: 'pick',
           market: null,
           selectedDay: null,
         },

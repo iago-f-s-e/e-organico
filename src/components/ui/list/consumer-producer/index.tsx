@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react';
-import { AntDesign } from '@expo/vector-icons';
 
-import { colors } from '@src/config/theme';
 import { User } from '@src/store/slices/user/types';
 import { useAppNavigation } from '@src/hooks';
 import { canChangeCart, updateProducerSection, useAppDispatch, useAppSelector } from '@src/store';
@@ -52,10 +50,6 @@ export const ListConsumerProducer = ({ producer }: Props): JSX.Element => {
           <S.Info>{infoSales}</S.Info>
         </S.InfoContainer>
       </S.Content>
-
-      <S.Like>
-        <AntDesign name="heart" size={24} color={colors.entity.heart} />
-      </S.Like>
     </S.Container>
   );
 };
