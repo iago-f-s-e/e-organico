@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colors, font, shadow } from '@src/config/theme';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -12,6 +12,12 @@ export const Container = styled.View`
   min-width: 300px;
 
   margin: 10px 5px;
+`;
+
+export const ShadowContainer = styled(Container).attrs(shadow)`
+  border-radius: 10px;
+
+  background-color: ${colors.basic.white};
 `;
 
 export const Image = styled.Image`

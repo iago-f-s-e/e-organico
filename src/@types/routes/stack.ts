@@ -24,4 +24,5 @@ export type ConsumerStack = {
   'consumer-producer': undefined;
   'consumer-product': undefined;
   'consumer-cart': undefined;
+  'consumer-payment-methods': undefined;
 };

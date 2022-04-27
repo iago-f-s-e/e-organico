@@ -9,4 +9,5 @@ export const {
   updateProductCart,
   setCartAddress,
   cancelCartAddress,
+  setCartPayment,
 } = cartSlice.actions;

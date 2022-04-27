@@ -41,6 +41,7 @@ export const cartSlice = createSlice({
         producerId,
         productQuantity: '1',
         products,
+        payment: null,
         addressOrMarket: {
           type: 'pick',
           market: null,
@@ -51,6 +52,11 @@ export const cartSlice = createSlice({
 
       return { canChange: true, hasCurrent: true, current };
     },
+
+    setCartPayment: (state, { payload }: T.SetCartPaymentPayload): T.Cart => ({
+      ...state,
+      current: { ...state.current, payment: payload },
+    }),
 
     setCartAddress: (state, { payload }: T.SetCartAddressPayload): T.Cart => ({
       ...state,

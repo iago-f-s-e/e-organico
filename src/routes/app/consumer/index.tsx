@@ -14,6 +14,7 @@ export type ConsumerScreens =
   | 'consumer-producer'
   | 'consumer-product'
   | 'consumer-cart'
+  | 'consumer-payment-methods'
   | ConsumerCartTabScreens;
 
 export const ConsumerRoutes: FC = () => {
@@ -28,6 +29,7 @@ export const ConsumerRoutes: FC = () => {
       <Stack.Screen name="consumer-market" component={Consumer.Market} />
       <Stack.Screen name="consumer-producer" component={Consumer.Producer} />
       <Stack.Screen name="consumer-product" component={Consumer.Product} />
+      <Stack.Screen name="consumer-payment-methods" component={Consumer.PaymentMethods} />
       <Stack.Screen name="consumer-cart" component={ConsumerCart} />
     </Stack.Navigator>
   );

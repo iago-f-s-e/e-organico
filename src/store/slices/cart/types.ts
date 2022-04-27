@@ -1,6 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { Address } from '../address/types';
 import { Market, WorkDay } from '../market/types';
+import { PaymentMethod } from '../payment-method/types';
 import { ProductDetail } from '../product/types';
 
 type AddressCart = {
@@ -28,6 +29,7 @@ export type CartPayload = {
   total: string;
   productQuantity: string;
   addressOrMarket: AddressOrMarket;
+  payment: PaymentMethod;
   products: ProductCartPayload[];
 };
 
@@ -45,6 +47,8 @@ export type Cart = {
 export type SetupCartPayload = PayloadAction<SetupCart>;
 
 export type SetCartAddressPayload = PayloadAction<AddressOrMarket>;
+
+export type SetCartPaymentPayload = PayloadAction<PaymentMethod>;
 
 export type AddProductPayload = PayloadAction<Omit<ProductCartPayload, 'key'>>;
 

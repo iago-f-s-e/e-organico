@@ -4,3 +4,4 @@ export * from './markets';
 export * from './producer';
 export * from './producers';
 export * from './product';
+export * from './payment-methods';
