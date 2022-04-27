@@ -3,7 +3,10 @@ import { Animated } from 'react-native';
 
 import { confirmOrCancelCartProducts, useAppDispatch, useAppSelector } from '@src/store';
 import { useAppNavigation } from '@src/hooks';
+
+import * as C from '@src/components';
 import * as C_S from '../../common-styles';
+import * as S from './styles';
 
 import { initialState, reducer } from './reducer';
 
@@ -14,11 +17,13 @@ export const Payment: FC = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const hasPayment = useMemo(() => !!cart?.current?.payment, [cart]);
+
   const showMoreLabel = useMemo(() => {
-    if (!cart?.current?.payment) return 'selecionar';
+    if (!hasPayment) return 'selecionar';
 
     return 'trocar';
-  }, [cart]);
+  }, [hasPayment]);
 
   const dispatchConfirm = () => appDispatch(confirmOrCancelCartProducts(true));
   const dispatchOpenButton = () => dispatch({ type: 'openButton' });
@@ -52,6 +57,15 @@ export const Payment: FC = () => {
             {showMoreLabel}
           </C_S.ShowMore>
         </C_S.TitleContainer>
+
+        <C.If
+          condition={hasPayment}
+          render={() => (
+            <S.PaymentContent>
+              <S.PaymentName>{cart.current.payment.name}</S.PaymentName>
+            </S.PaymentContent>
+          )}
+        />
       </C_S.ScrollContainer>
 
       <Animated.View

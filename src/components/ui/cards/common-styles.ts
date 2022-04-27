@@ -14,6 +14,17 @@ export const Container = styled.View.attrs(shadow)`
   background-color: ${colors.basic.white};
 `;
 
+export const SmallContainer = styled.View`
+  align-self: center;
+
+  width: 90%;
+  height: 50px;
+
+  border-radius: 5px;
+
+  background-color: ${colors.basic.white};
+`;
+
 export const BigContainer = styled.View.attrs(shadow)`
   flex: 1;
 
@@ -42,6 +53,10 @@ export const InfoContainer = styled.View`
   height: 100px;
 `;
 
+export const SmallInfoContainer = styled(InfoContainer)`
+  height: 100%;
+`;
+
 export const SubTitleContainer = styled.View`
   flex: 1;
   justify-content: center;
@@ -61,6 +76,10 @@ export const ImageContainer = styled.View`
 export const InfoContent = styled.View`
   flex: 1;
   height: 90px;
+`;
+
+export const SmallInfoContent = styled(InfoContent)`
+  height: 95%;
 `;
 
 export const ImageContent = styled.Image`
