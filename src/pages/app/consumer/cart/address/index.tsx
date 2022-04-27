@@ -10,8 +10,8 @@ import {
 } from '@src/store';
 
 import { useAppNavigation, useToast as _useToast } from '@src/hooks';
-import * as C from '@src/components';
 import { Market, WorkDay } from '@src/store/slices/market/types';
+import * as C from '@src/components';
 import * as C_S from '../../common-styles';
 
 import { initialState, reducer } from './reducer';
@@ -286,7 +286,7 @@ export const Address: FC = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const renderMarketCart = useMemo(() => cart.current?.addressOrMarket.type === 'pick', [cart]);
+  const pickOrder = useMemo(() => cart.current?.addressOrMarket.type === 'pick', [cart]);
 
   const cartMarket = useMemo(() => {
     if (cart.current?.addressOrMarket?.type !== 'pick') return null;
@@ -346,13 +346,17 @@ export const Address: FC = () => {
   };
 
   const handleSelectMarket = (payload: Market) => {
+    let day = null;
+
     if (cart.current?.addressOrMarket?.type === 'pick') {
       const changeMarket = payload.id !== cart.current?.addressOrMarket?.market?.id;
 
       dispatchToChangeMarket(changeMarket);
+
+      day = changeMarket ? null : cart.current?.addressOrMarket?.selectedDay;
     }
 
-    dispatchChangeDay(null);
+    dispatchChangeDay(day);
     dispatchChangeMarket(payload);
   };
 
@@ -397,7 +401,7 @@ export const Address: FC = () => {
     <C_S.Container>
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
         <C.IfElse
-          condition={renderMarketCart}
+          condition={pickOrder}
           render={{
             toBeFalsy: () => (
               <C.CartMarket

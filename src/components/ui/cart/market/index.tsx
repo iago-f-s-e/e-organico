@@ -30,6 +30,9 @@ export const CartMarket = ({ markets, selected, actions, change }: Props): JSX.E
           condition={!!selected.market}
           render={() => (
             <C_S.Content>
+              <C_S.TitleContainer>
+                <C_S.Title>Feira selecionada</C_S.Title>
+              </C_S.TitleContainer>
               <CartMarketDetailCard
                 change={change}
                 market={selected.market}
