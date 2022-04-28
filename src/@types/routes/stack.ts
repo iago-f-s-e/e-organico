@@ -26,3 +26,7 @@ export type ConsumerStack = {
   'consumer-cart': undefined;
   'consumer-payment-methods': undefined;
 };
+
+export type TransactionsConsumerStack = {
+  'transactions-consumer': undefined;
+};

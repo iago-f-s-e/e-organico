@@ -1,8 +1,8 @@
 import { useRoute as getRoute, Route } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/core';
-import { AuthScreens } from '@src/routes/auth';
-import { ConsumerScreens } from '@src/routes/app/consumer';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { AppConsumerScreens } from '@src/routes/app';
+import { AuthScreens } from '@src/routes/auth';
 
 type CallOnFocus = () => void;
 
@@ -12,14 +12,16 @@ type Auth = 'auth';
 type NavigationType = Consumer | Auth;
 
 // TODO: trocar ConsumerScreens por AppScreens
-type Paths<Type> = Type extends Auth ? AuthScreens : ConsumerScreens;
+type Paths<Type> = Type extends Auth ? AuthScreens : AppConsumerScreens;
 
 type Params = {
   id?: string;
 };
 
 type Options = {
+  popNavigationToTop?: boolean;
   popNavigation?: boolean;
+  popQuantity?: number;
 };
 
 type UseNavigate = {
@@ -35,14 +37,16 @@ type UseNavigate = {
 };
 
 export const useAppNavigation = (): UseNavigate => {
-  const { navigate, addListener, goBack, pop } = useNavigation<StackNavigationProp<any>>(); // eslint-disable-line
+  const { navigate, addListener, goBack, pop, popToTop } = useNavigation<StackNavigationProp<any>>(); // eslint-disable-line
 
   const navigateTo = <Type extends NavigationType>(
     path: Paths<Type>,
     params?: Params | null,
     options?: Options,
   ) => {
-    if (options?.popNavigation) pop();
+    if (options?.popNavigationToTop) popToTop();
+
+    if (options?.popNavigation) pop(options.popQuantity);
 
     return navigate(path, params);
   };

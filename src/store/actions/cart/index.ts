@@ -10,4 +10,5 @@ export const {
   setCartAddress,
   cancelCartAddress,
   setCartPayment,
+  concludedCart,
 } = cartSlice.actions;

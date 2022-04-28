@@ -1,8 +1,13 @@
 import React, { FC, useEffect, useCallback, useReducer, useMemo } from 'react';
 import { Animated } from 'react-native';
 
-import { confirmOrCancelCartProducts, useAppDispatch, useAppSelector } from '@src/store';
-import { useAppNavigation } from '@src/hooks';
+import {
+  concludedCart,
+  confirmOrCancelCartProducts,
+  useAppDispatch,
+  useAppSelector,
+} from '@src/store';
+import { useAppNavigation, useToast as _useToast } from '@src/hooks';
 
 import * as C from '@src/components';
 import * as C_S from '../../common-styles';
@@ -15,6 +20,7 @@ import { initialState, reducer } from './reducer';
 export const Payment: FC = () => {
   const { ui, cart } = useAppSelector((state) => state);
   const { navigateTo } = useAppNavigation();
+  const useToast = _useToast();
   const appDispatch = useAppDispatch();
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -26,6 +32,8 @@ export const Payment: FC = () => {
 
     return 'trocar';
   }, [hasPayment]);
+
+  const hasCartPayment = useMemo(() => !!cart.current?.payment, [cart]);
 
   const dispatchConfirm = () => appDispatch(confirmOrCancelCartProducts(true));
   const dispatchOpenButton = () => dispatch({ type: 'openButton' });
@@ -39,7 +47,12 @@ export const Payment: FC = () => {
   }, [ui.cartToTab.confirmedProducts, ui.cartToTab.confirmedAddress]);
 
   const handleFinish = () => {
-    return dispatchConfirm();
+    if (!hasCartPayment) return useToast.error('Selecione uma forma de pagamento!');
+
+    dispatchConfirm();
+    appDispatch(concludedCart());
+
+    return navigateTo<'consumer'>('transactions', null, { popNavigationToTop: true });
   };
 
   useEffect(() => {

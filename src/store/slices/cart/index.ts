@@ -5,6 +5,7 @@ import * as T from './types';
 
 const initialState: T.Cart = {
   canChange: true,
+  concluded: false,
   hasCurrent: false,
   current: null,
 };
@@ -28,7 +29,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     setupCart: (_, { payload }: T.SetupCartPayload): T.Cart => {
-      const { producerId, product } = payload;
+      const { producer, product } = payload;
 
       const products: T.ProductCartPayload[] = [
         {
@@ -38,7 +39,7 @@ export const cartSlice = createSlice({
       ];
 
       const current: T.CartPayload = {
-        producerId,
+        producer,
         productQuantity: '1',
         products,
         payment: null,
@@ -50,7 +51,7 @@ export const cartSlice = createSlice({
         total: product.total,
       };
 
-      return { canChange: true, hasCurrent: true, current };
+      return { canChange: true, hasCurrent: true, concluded: false, current };
     },
 
     setCartPayment: (state, { payload }: T.SetCartPaymentPayload): T.Cart => ({
@@ -118,6 +119,8 @@ export const cartSlice = createSlice({
       ...state,
       canChange: payload,
     }),
+
+    concludedCart: (state): T.Cart => ({ ...state, concluded: true }),
 
     clearCart: (): T.Cart => initialState,
   },

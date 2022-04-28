@@ -3,11 +3,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { AppBottomTab } from '@src/@types/routes';
 import { MyBottomTabBar } from '@src/components';
-import { ConsumerRoutes } from './consumer';
+import { ConsumerRoutes, ConsumerScreens } from './consumer';
+import { TransactionsRoutes } from './transactions';
 
-export type AppTabScreens = 'main';
+export type AppTabScreens = 'main' | 'transactions';
 
 const Tab = createBottomTabNavigator<AppBottomTab>();
+
+export type AppConsumerScreens = AppTabScreens | ConsumerScreens;
 
 // TODO: criar bottom tab navigation
 // TODO: verificar tipo de usuário e redenrizar condicionalmente
@@ -18,6 +21,7 @@ export const AppRoutes: FC = () => {
       tabBar={(props) => <MyBottomTabBar {...props} />}
     >
       <Tab.Screen name="main" component={ConsumerRoutes} />
+      <Tab.Screen name="transactions" component={TransactionsRoutes} />
     </Tab.Navigator>
   );
 };

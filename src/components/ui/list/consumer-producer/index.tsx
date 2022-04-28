@@ -24,9 +24,9 @@ export const ListConsumerProducer = ({ producer }: Props): JSX.Element => {
   const infoSales = `Vendas: ${transactions}`;
 
   const changeCart = useMemo(() => {
-    if (!cart.current) return true;
+    if (!cart.hasCurrent) return true;
 
-    return cart.current.producerId === producer.id;
+    return cart.current.producer.id === producer.id;
   }, [cart, producer]);
 
   const handleNavigate = () => {

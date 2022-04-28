@@ -9,12 +9,12 @@ type Props = {
 
 export const PaymentMethodCard = ({ paymentMethod }: Props): JSX.Element => {
   return (
-    <C_S.SmallContainer>
+    <C_S.SmallContainerWithoutShadow>
       <C_S.SmallInfoContainer>
         <C_S.SmallInfoContent>
           <C_S.Name>{paymentMethod.name}</C_S.Name>
         </C_S.SmallInfoContent>
       </C_S.SmallInfoContainer>
-    </C_S.SmallContainer>
+    </C_S.SmallContainerWithoutShadow>
   );
 };

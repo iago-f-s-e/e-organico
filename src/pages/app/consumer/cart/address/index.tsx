@@ -280,9 +280,9 @@ const markets: Market[] = [
 
 export const Address: FC = () => {
   const { ui, section, cart } = useAppSelector((state) => state);
+  const { navigateTo } = useAppNavigation();
   const appDispatch = useAppDispatch();
   const useToast = _useToast();
-  const { navigateTo } = useAppNavigation();
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -308,27 +308,37 @@ export const Address: FC = () => {
     return dispatchCloseButton();
   }, [ui.cartToTab.confirmedProducts]);
 
-  const handleConfirmAddress = useCallback(() => {
+  const handleConfirmAddress = useCallback((): { canNavigate: boolean } => {
     const response = validateMarketState(state);
 
-    if (response.type === 'error') return useToast.error(response.message);
+    if (response.type === 'error') {
+      useToast.error(response.message);
 
-    if (response.type !== 'address') return;
+      return { canNavigate: false };
+    }
+
+    if (response.type !== 'address') return { canNavigate: false };
 
     appDispatch(confirmOrCancelCartAddress(true));
   }, [useToast, state, appDispatch]);
 
-  const handleConfirmMarket = useCallback(() => {
+  const handleConfirmMarket = useCallback((): { canNavigate: boolean } => {
     const response = validateMarketState(state);
 
-    if (response.type === 'error') return useToast.error(response.message);
+    if (response.type === 'error') {
+      useToast.error(response.message);
 
-    if (response.type !== 'market') return;
+      return { canNavigate: false };
+    }
+
+    if (response.type !== 'market') return { canNavigate: false };
 
     const { market, day } = response;
 
     appDispatch(setCartAddress({ type: 'pick', market, selectedDay: day }));
     appDispatch(confirmOrCancelCartAddress(true));
+
+    return { canNavigate: true };
   }, [useToast, state, appDispatch]);
 
   const handleConfirm = useCallback(() => {
@@ -349,7 +359,10 @@ export const Address: FC = () => {
     let day = null;
 
     if (cart.current?.addressOrMarket?.type === 'pick') {
-      const changeMarket = payload.id !== cart.current?.addressOrMarket?.market?.id;
+      const hasCurrentMarket = !!cart.current?.addressOrMarket?.market;
+      const matchIds = payload.id === cart.current?.addressOrMarket?.market?.id;
+
+      const changeMarket = hasCurrentMarket && !matchIds;
 
       dispatchToChangeMarket(changeMarket);
 
@@ -362,7 +375,9 @@ export const Address: FC = () => {
 
   const handleNavigate = () => navigateTo<'consumer'>('consumer-cart-payment');
 
-  const handleConfirmChange = () => handleConfirmMarket();
+  const handleConfirmChange = () => {
+    handleConfirmMarket();
+  };
 
   const handleCancelChange = () => {
     if (cart.current?.addressOrMarket?.type !== 'pick') return;
@@ -373,7 +388,9 @@ export const Address: FC = () => {
   };
 
   const handleConfirmAndNavigate = () => {
-    handleConfirm();
+    const { canNavigate } = handleConfirm();
+
+    if (!canNavigate) return;
 
     return handleNavigate();
   };

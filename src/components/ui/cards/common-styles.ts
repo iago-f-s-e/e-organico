@@ -14,24 +14,26 @@ export const Container = styled.View.attrs(shadow)`
   background-color: ${colors.basic.white};
 `;
 
-export const SmallContainer = styled.View`
+export const MediumContainer = styled.View.attrs(shadow)`
   align-self: center;
 
   width: 90%;
-  height: 50px;
+  height: 215px;
 
   border-radius: 5px;
 
   background-color: ${colors.basic.white};
 `;
 
-export const BigContainer = styled.View.attrs(shadow)`
-  flex: 1;
+export const BigContainer = styled(Container)`
+  height: 300px;
+`;
 
+export const SmallContainerWithoutShadow = styled.View`
   align-self: center;
 
   width: 90%;
-  height: 300px;
+  height: 50px;
 
   border-radius: 5px;
 

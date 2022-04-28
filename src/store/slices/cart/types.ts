@@ -3,6 +3,7 @@ import { Address } from '../address/types';
 import { Market, WorkDay } from '../market/types';
 import { PaymentMethod } from '../payment-method/types';
 import { ProductDetail } from '../product/types';
+import { User } from '../user/types';
 
 type AddressCart = {
   type: 'delivery';
@@ -25,7 +26,7 @@ export type ProductCartPayload = {
 };
 
 export type CartPayload = {
-  producerId: string;
+  producer: User;
   total: string;
   productQuantity: string;
   addressOrMarket: AddressOrMarket;
@@ -34,7 +35,7 @@ export type CartPayload = {
 };
 
 type SetupCart = {
-  producerId: string;
+  producer: User;
   product: Omit<ProductCartPayload, 'key'>;
 };
 
@@ -42,6 +43,7 @@ export type Cart = {
   current: CartPayload;
   hasCurrent: boolean;
   canChange: boolean;
+  concluded: boolean;
 };
 
 export type SetupCartPayload = PayloadAction<SetupCart>;
