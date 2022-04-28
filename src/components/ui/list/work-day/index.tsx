@@ -20,26 +20,23 @@ export const ListWorkDay = ({ workDay, select, selected }: Props): JSX.Element =
   const isSelected = selected && selected.day === workDay.day;
 
   return (
-    <S.Main>
-      <S.Container onPress={() => select?.(workDay)}>
-        <S.Header>
-          <S.Day>{day}</S.Day>
-        </S.Header>
-        <S.Content>
-          <S.Time style={{ transform: [{ rotateZ: '-20deg' }] }}>{time}</S.Time>
+    <S.Container disabled={!select} onPress={() => select?.(workDay)}>
+      <S.Header>
+        <S.Day>{day}</S.Day>
+      </S.Header>
+      <S.Content>
+        <S.Time style={{ transform: [{ rotateZ: '-20deg' }] }}>{time}</S.Time>
 
-          <If
-            condition={isSelected}
-            render={() => (
-              <S.Icon>
-                <AntDesign name="checkcircle" size={20} color={colors.main.primary} />
-              </S.Icon>
-            )}
-          />
-        </S.Content>
-        <S.Footer />
-      </S.Container>
-      <S.Border />
-    </S.Main>
+        <If
+          condition={isSelected}
+          render={() => (
+            <S.Icon>
+              <AntDesign name="checkcircle" size={20} color={colors.main.primary} />
+            </S.Icon>
+          )}
+        />
+      </S.Content>
+      <S.Footer />
+    </S.Container>
   );
 };

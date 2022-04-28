@@ -6,17 +6,20 @@ export const Container = styled.TouchableOpacity`
   width: 100px;
 
   justify-content: space-between;
+
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: ${colors.main.primary};
+
+  overflow: hidden;
+
+  margin: 0 1px;
 `;
 
 export const Border = styled.View`
   flex: 1;
   width: 1px;
   background-color: ${colors.main.primary};
-`;
-
-export const Main = styled.View`
-  flex: 1;
-  flex-direction: row;
 `;
 
 export const Header = styled.View`

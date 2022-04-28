@@ -109,7 +109,7 @@ export const SubTitle = styled.Text`
 
 export const AddressContainer = styled.View`
   flex: 1;
-  height: 320px;
+  min-height: 360px;
 `;
 
 export const AddressContent = styled.View`
@@ -119,7 +119,6 @@ export const AddressContent = styled.View`
 
 export const AddressSection = styled.View`
   flex-direction: row;
-
   margin: 5px 0;
 `;
 
@@ -135,4 +134,26 @@ export const AddressData = styled.Text`
   font-family: ${font.family.semiBold};
   font-size: ${font.size.medium};
   color: ${colors.basic.grey};
+`;
+
+export const WorkDaysSection = styled.View`
+  flex: 1;
+
+  height: 100px;
+`;
+
+export const WorkDaysTitle = styled.Text`
+  text-align: center;
+
+  font-family: ${font.family.semiBold};
+  font-size: ${font.size.medium};
+  color: ${colors.basic.greyText};
+`;
+
+export const WorkDaysContainer = styled.View`
+  height: 125px;
+
+  border-radius: 5px;
+
+  /* overflow: hidden; */
 `;

@@ -1,5 +1,8 @@
+import React, { FC, useEffect } from 'react';
 import { MarketDetail } from '@src/store/slices/market/types';
-import React, { FC } from 'react';
+
+import { showBottomTab, useAppDispatch } from '@src/store';
+import { useAppNavigation } from '@src/hooks';
 
 import * as C from '@src/components';
 import * as C_S from '../common-styles';
@@ -57,10 +60,26 @@ const market: MarketDetail = {
 // TODO: adicionar produtos mais vendidos
 
 export const Market: FC = () => {
+  const appDispatch = useAppDispatch();
+  const { onFocus } = useAppNavigation();
+
+  useEffect(() => {
+    const focus = onFocus(() => appDispatch(showBottomTab()));
+
+    return focus;
+  }, []); // eslint-disable-line
+
   return (
     <C_S.Container>
-      <C.Header title="Nome da feira" />
+      <C.Header title="Feira" />
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
+        <C_S.Content>
+          <C_S.TitleContainer>
+            <C_S.Title>Feira selecionada</C_S.Title>
+          </C_S.TitleContainer>
+          <C.MarketDetailCard market={market} />
+        </C_S.Content>
+
         <C_S.Content>
           <C_S.TitleContainer>
             <C_S.Title>Feirantes</C_S.Title>

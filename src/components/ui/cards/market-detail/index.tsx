@@ -1,71 +1,19 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { Animated } from 'react-native';
+import React from 'react';
 
 import { handleInputMask } from '@src/utils';
-import { Market, WorkDay } from '@src/store/slices/market/types';
+import { Market } from '@src/store/slices/market/types';
 import { ScrollHorizontal } from '@src/components/business/scroll-horizontal';
 import { Map } from '@src/components/business';
 import { ListWorkDay } from '../../list/work-day';
 
 import * as C_S from '../common-styles';
-import * as S from './styles';
 
 type Props = {
   market: Market;
-  day: WorkDay;
-  change: boolean;
-  actions: {
-    selectDay: (day: WorkDay) => void;
-    confirmChange: () => void;
-    cancelChange: () => void;
-  };
 };
 
-export const CartMarketDetailCard = ({ market, actions, day, change }: Props): JSX.Element => {
+export const MarketDetailCard = ({ market }: Props): JSX.Element => {
   const zipCode = handleInputMask(market.address.zipCode, 'zipCode');
-
-  const [sizeContainer] = useState(new Animated.ValueXY({ x: 0, y: 0 }));
-  const [opacityContent] = useState(new Animated.ValueXY({ x: 0, y: 0 }));
-
-  const handleOpenButtons = () => {
-    Animated.parallel([
-      Animated.timing(sizeContainer.y, {
-        toValue: 40,
-        duration: 200,
-        useNativeDriver: false,
-      }),
-      Animated.timing(opacityContent.x, {
-        toValue: 1,
-        duration: 200,
-        useNativeDriver: false,
-      }),
-    ]).start();
-  };
-
-  const handleCloseButtons = () => {
-    Animated.parallel([
-      Animated.timing(sizeContainer.y, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: false,
-      }),
-      Animated.timing(opacityContent.x, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: false,
-      }),
-    ]).start();
-  };
-
-  const handleOpenOrCloseButtons = useCallback(() => {
-    if (change) return handleOpenButtons();
-
-    return handleCloseButtons();
-  }, [change]); // eslint-disable-line
-
-  useEffect(() => {
-    handleOpenOrCloseButtons();
-  }, [handleOpenOrCloseButtons]);
 
   return (
     <C_S.BigContainer>
@@ -84,7 +32,7 @@ export const CartMarketDetailCard = ({ market, actions, day, change }: Props): J
           <C_S.SubTitle>Endereço</C_S.SubTitle>
         </C_S.SubTitleContainer>
 
-        <C_S.AddressContainer>
+        <C_S.AddressContainer style={{ paddingBottom: 50 }}>
           <C_S.AddressSection>
             <C_S.AddressContent>
               <C_S.AddressLabel>Rua:</C_S.AddressLabel>
@@ -129,20 +77,13 @@ export const CartMarketDetailCard = ({ market, actions, day, change }: Props): J
           </C_S.AddressSection>
 
           <C_S.WorkDaysSection>
-            <C_S.WorkDaysTitle>Escolha o dia</C_S.WorkDaysTitle>
+            <C_S.WorkDaysTitle>Dias de funcionamento</C_S.WorkDaysTitle>
             <C_S.WorkDaysContainer>
               <ScrollHorizontal
                 render={() => (
                   <Map
                     data={market.wordDays}
-                    render={(item, index) => (
-                      <ListWorkDay
-                        workDay={item}
-                        selected={day}
-                        select={actions.selectDay}
-                        key={index.toString()}
-                      />
-                    )}
+                    render={(item, index) => <ListWorkDay workDay={item} key={index.toString()} />}
                   />
                 )}
               />
@@ -150,25 +91,6 @@ export const CartMarketDetailCard = ({ market, actions, day, change }: Props): J
           </C_S.WorkDaysSection>
         </C_S.AddressContainer>
       </C_S.ScrollContainer>
-
-      <Animated.View
-        style={{
-          opacity: opacityContent.x,
-          height: sizeContainer.y,
-          width: '100%',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-        }}
-      >
-        <S.ButtonConfirm onPress={actions.confirmChange}>
-          <S.ButtonLabel>Trocar</S.ButtonLabel>
-        </S.ButtonConfirm>
-
-        <S.ButtonCancel onPress={actions.cancelChange}>
-          <S.ButtonLabel>Cancelar troca</S.ButtonLabel>
-        </S.ButtonCancel>
-      </Animated.View>
     </C_S.BigContainer>
   );
 };

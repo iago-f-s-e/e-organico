@@ -170,11 +170,11 @@ export const Producer: FC = () => {
     const focus = onFocus(() => appDispatch(showBottomTab()));
 
     return focus;
-  }, []); // eslint-disable-line 
+  }, []); // eslint-disable-line
 
   return (
     <C_S.Container>
-      <C.Header title="Nome do produto" />
+      <C.Header title="Vendedor" />
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
         <C_S.Content>
           <C.UserDetailCard producer={producer} />
