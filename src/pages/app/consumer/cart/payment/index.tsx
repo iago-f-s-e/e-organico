@@ -10,6 +10,8 @@ import * as S from './styles';
 
 import { initialState, reducer } from './reducer';
 
+// TODO: navegar para pagina de websocket
+
 export const Payment: FC = () => {
   const { ui, cart } = useAppSelector((state) => state);
   const { navigateTo } = useAppNavigation();
@@ -47,25 +49,41 @@ export const Payment: FC = () => {
   return (
     <C_S.Container>
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
-        <C_S.TitleContainer>
-          <C_S.Title>Resumo</C_S.Title>
-        </C_S.TitleContainer>
+        <C_S.Content>
+          <C_S.TitleContainer>
+            <C_S.Title>Resumo</C_S.Title>
+          </C_S.TitleContainer>
 
-        <C_S.TitleContainer>
-          <C_S.Title>Forma de pagamento</C_S.Title>
-          <C_S.ShowMore onPress={() => navigateTo<'consumer'>('consumer-payment-methods')}>
-            {showMoreLabel}
-          </C_S.ShowMore>
-        </C_S.TitleContainer>
+          <S.Section>
+            <S.ValuesSection>
+              <S.Label>Subtotal</S.Label>
+              <S.Data>{cart.current.total}</S.Data>
+            </S.ValuesSection>
 
-        <C.If
-          condition={hasPayment}
-          render={() => (
-            <S.PaymentContent>
-              <S.PaymentName>{cart.current.payment.name}</S.PaymentName>
-            </S.PaymentContent>
-          )}
-        />
+            <S.ValuesSection>
+              <S.LabelMoney>Total</S.LabelMoney>
+              <S.Money>{cart.current.total}</S.Money>
+            </S.ValuesSection>
+          </S.Section>
+        </C_S.Content>
+
+        <C_S.Content>
+          <C_S.TitleContainer>
+            <C_S.Title>Forma de pagamento</C_S.Title>
+            <C_S.ShowMore onPress={() => navigateTo<'consumer'>('consumer-payment-methods')}>
+              {showMoreLabel}
+            </C_S.ShowMore>
+          </C_S.TitleContainer>
+
+          <C.If
+            condition={hasPayment}
+            render={() => (
+              <S.Section>
+                <S.PaymentName>{cart.current.payment.name}</S.PaymentName>
+              </S.Section>
+            )}
+          />
+        </C_S.Content>
       </C_S.ScrollContainer>
 
       <Animated.View
