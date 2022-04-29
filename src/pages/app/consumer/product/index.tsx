@@ -13,7 +13,7 @@ import {
 import { handleInputMask } from '@src/utils';
 import { If } from '@src/components';
 import { useAppNavigation } from '@src/hooks';
-import * as C_S from '../common-styles';
+import * as C_S from '../../common-styles';
 import * as S from './styles';
 
 import { initialState, reducer } from './reducer';

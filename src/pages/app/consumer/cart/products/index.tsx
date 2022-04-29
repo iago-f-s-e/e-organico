@@ -4,7 +4,7 @@ import { confirmOrCancelCartProducts, useAppDispatch, useAppSelector } from '@sr
 
 import { useAppNavigation } from '@src/hooks';
 import * as C from '@src/components';
-import * as C_S from '../../common-styles';
+import * as C_S from '../../../common-styles';
 import * as S from './styles';
 
 export const Products: FC = () => {

@@ -12,7 +12,7 @@ import {
 import { useAppNavigation, useToast as _useToast } from '@src/hooks';
 import { Market, WorkDay } from '@src/store/slices/market/types';
 import * as C from '@src/components';
-import * as C_S from '../../common-styles';
+import * as C_S from '../../../common-styles';
 
 import { initialState, reducer } from './reducer';
 import { validateMarketState } from './validate-state';

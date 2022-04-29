@@ -27,6 +27,11 @@ export type ConsumerStack = {
   'consumer-payment-methods': undefined;
 };
 
+// TODO: passar id pelo params
+export type ProducerStack = {
+  home: undefined;
+};
+
 export type TransactionsConsumerStack = {
   'transactions-consumer': undefined;
 };

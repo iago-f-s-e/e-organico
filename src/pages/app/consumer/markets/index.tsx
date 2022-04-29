@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 
 import { Market } from '@src/store/slices/market/types';
 import * as C from '@src/components';
-import * as C_S from '../common-styles';
+import * as C_S from '../../common-styles';
 
 const imagePath =
   'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';

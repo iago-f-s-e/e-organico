@@ -3,7 +3,7 @@ import React, { FC, useEffect, useMemo } from 'react';
 import { showBottomTab, useAppDispatch, useAppSelector } from '@src/store';
 import { useAppNavigation } from '@src/hooks';
 import * as C from '@src/components';
-import * as C_S from '../common-styles';
+import * as C_S from '../../common-styles';
 import * as S from './styles';
 
 export const Transactions: FC = () => {

@@ -5,7 +5,7 @@ import { ProducerDetail } from '@src/store/slices/producer/types';
 import * as C from '@src/components';
 import { showBottomTab, useAppDispatch } from '@src/store';
 import { useAppNavigation } from '@src/hooks';
-import * as C_S from '../common-styles';
+import * as C_S from '../../common-styles';
 
 const imagePath =
   'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
