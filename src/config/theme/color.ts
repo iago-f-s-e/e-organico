@@ -70,7 +70,7 @@ const main: Main = {
 const basic: Basic = {
   white: '#FFFFFF',
   greyText: '#8D9FAF',
-  black: '#000000',
+  black: '#121212',
   grey: 'rgba(0,0,0,0.5)',
   silver: '#F7F7F7',
   transparent: 'rgba(0,0,0,0)',

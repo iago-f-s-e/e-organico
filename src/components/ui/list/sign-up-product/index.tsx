@@ -25,6 +25,7 @@ type Props = {
 };
 
 const initialState: ProductDetail = {
+  id: '',
   product: {
     id: '',
     name: '',

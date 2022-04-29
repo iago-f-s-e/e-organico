@@ -135,6 +135,7 @@ const producer: ProducerDetail = {
   ],
   products: [
     {
+      id: 'producer_product_id',
       harvestDate: new Date(),
       price: '5',
       product: {
@@ -147,6 +148,7 @@ const producer: ProducerDetail = {
       unitMeasure: 'un',
     },
     {
+      id: 'producer_product_id2',
       harvestDate: new Date(),
       price: '7.55',
       product: {

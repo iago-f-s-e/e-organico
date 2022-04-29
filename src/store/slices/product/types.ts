@@ -13,6 +13,7 @@ export type Product = {
 };
 
 export type ProductDetail = {
+  id: string;
   product: Product;
   price: string;
   stock: string;

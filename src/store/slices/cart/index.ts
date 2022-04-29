@@ -43,7 +43,7 @@ export const cartSlice = createSlice({
         productQuantity: '1',
         products,
         payment: null,
-        addressOrMarket: {
+        pickOrDelivery: {
           type: 'pick',
           market: null,
           selectedDay: null,
@@ -61,18 +61,18 @@ export const cartSlice = createSlice({
 
     setCartAddress: (state, { payload }: T.SetCartAddressPayload): T.Cart => ({
       ...state,
-      current: { ...state.current, addressOrMarket: payload },
+      current: { ...state.current, pickOrDelivery: payload },
     }),
 
     cancelCartAddress: (state): T.Cart => ({
       ...state,
       current: {
         ...state.current,
-        addressOrMarket: {
+        pickOrDelivery: {
           market: null,
           selectedDay: null,
           address: null,
-          type: state.current.addressOrMarket.type,
+          type: state.current.pickOrDelivery.type,
         },
       },
     }),

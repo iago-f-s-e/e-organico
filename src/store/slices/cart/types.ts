@@ -1,35 +1,17 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { Address } from '../address/types';
-import { Market, WorkDay } from '../market/types';
 import { PaymentMethod } from '../payment-method/types';
-import { ProductDetail } from '../product/types';
+import { PickOrDelivery, TransactionProduct } from '../transaction/types';
 import { User } from '../user/types';
 
-type AddressCart = {
-  type: 'delivery';
-  address: Address;
-};
-
-type MarketCart = {
-  type: 'pick';
-  market: Market;
-  selectedDay: WorkDay;
-};
-
-type AddressOrMarket = AddressCart | MarketCart;
-
-export type ProductCartPayload = {
+export type ProductCartPayload = TransactionProduct & {
   key: string;
-  producerProduct: ProductDetail;
-  quantity: string;
-  total: string;
 };
 
 export type CartPayload = {
   producer: User;
   total: string;
   productQuantity: string;
-  addressOrMarket: AddressOrMarket;
+  pickOrDelivery: PickOrDelivery;
   payment: PaymentMethod;
   products: ProductCartPayload[];
 };
@@ -48,7 +30,7 @@ export type Cart = {
 
 export type SetupCartPayload = PayloadAction<SetupCart>;
 
-export type SetCartAddressPayload = PayloadAction<AddressOrMarket>;
+export type SetCartAddressPayload = PayloadAction<PickOrDelivery>;
 
 export type SetCartPaymentPayload = PayloadAction<PaymentMethod>;
 

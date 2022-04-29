@@ -24,6 +24,7 @@ const _defaultImage =
 // TODO: adicionar relacionados
 
 const product: ProductDetail = {
+  id: 'producer_product_id',
   harvestDate: new Date(),
   price: '5.00',
   product: {

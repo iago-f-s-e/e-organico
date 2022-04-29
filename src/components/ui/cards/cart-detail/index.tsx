@@ -17,11 +17,11 @@ export const CartDetailCard = ({ cart }: Props): JSX.Element => {
   const { navigateTo } = useAppNavigation();
 
   const cartMarket = useMemo(() => {
-    if (cart.current.addressOrMarket?.type !== 'pick' || !cart.current.addressOrMarket.market) {
+    if (cart.current.pickOrDelivery?.type !== 'pick' || !cart.current.pickOrDelivery.market) {
       return { hasMarket: false, name: '' };
     }
 
-    return { hasMarket: true, name: cart.current.addressOrMarket.market.name };
+    return { hasMarket: true, name: cart.current.pickOrDelivery.market.name };
   }, [cart]);
 
   const hasPayment = useMemo(() => !!cart.current.payment, [cart]);

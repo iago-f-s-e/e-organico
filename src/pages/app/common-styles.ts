@@ -17,6 +17,17 @@ export const Content = styled.View`
   margin: 15px 0;
 `;
 
+export const MapContent = styled.View`
+  align-items: center;
+  justify-content: center;
+
+  background-color: ${colors.main.primary};
+
+  height: 250px;
+  width: 90%;
+  margin: 15px 0;
+`;
+
 export const TitleContainer = styled.View`
   flex-direction: row;
 

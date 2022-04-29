@@ -3,15 +3,15 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  flex-direction: row;
 
+  align-self: center;
   justify-content: center;
   align-items: center;
 
-  height: 80px;
-  min-width: 300px;
+  min-height: 80px;
+  width: 97%;
 
-  margin: 10px 5px;
+  margin: 10px 0;
 `;
 
 export const ShadowContainer = styled(Container).attrs(shadow)`

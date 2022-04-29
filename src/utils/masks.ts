@@ -11,12 +11,12 @@ type Masks<T> = {
   [key: string]: (value: T, options?: MoneyOptions) => T;
 };
 
-function formatTheComa(value: string, options: MoneyOptions): string {
-  if (options.onlyComma) return Number(value).toFixed(2).replace('.', ',');
+function formatTheComa(value: string, options?: MoneyOptions): string {
+  if (options?.onlyComma) return Number(value).toFixed(2).replace('.', ',');
 
   const _value = (Number(value.replace(/\D/g, '')) / 100).toFixed(2);
 
-  if (!options.withComma) return _value;
+  if (!options?.withComma) return _value;
 
   return _value.replace('.', ',');
 }
