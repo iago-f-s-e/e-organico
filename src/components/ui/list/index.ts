@@ -11,3 +11,4 @@ export * from './property-image';
 
 export * from './producer-transaction';
 export * from './producer-transaction-product';
+export * from './producer-product';

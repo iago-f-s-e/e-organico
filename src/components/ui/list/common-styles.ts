@@ -1,15 +1,18 @@
-import { colors, font, shadow } from '@src/config/theme';
+import { colors, font, shadow, dimensions } from '@src/config/theme';
 import styled from 'styled-components/native';
+
+const width = dimensions.screen.width * 0.97; // width: 97%
 
 export const Container = styled.View`
   flex: 1;
+  flex-direction: row;
 
   align-self: center;
   justify-content: center;
   align-items: center;
 
   min-height: 80px;
-  width: 97%;
+  width: ${width}px;
 
   margin: 10px 0;
 `;
