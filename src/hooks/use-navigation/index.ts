@@ -1,18 +1,23 @@
 import { useRoute as getRoute, Route } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { AppConsumerScreens } from '@src/routes/app';
+import { AppConsumerScreens, AppProducerScreens } from '@src/routes/app';
 import { AuthScreens } from '@src/routes/auth';
 
 type CallOnFocus = () => void;
 
 type Consumer = 'consumer';
+type Producer = 'producer';
 type Auth = 'auth';
 
-type NavigationType = Consumer | Auth;
+type NavigationType = Consumer | Auth | Producer;
 
 // TODO: trocar ConsumerScreens por AppScreens
-type Paths<Type> = Type extends Auth ? AuthScreens : AppConsumerScreens;
+type Paths<Type> = Type extends Auth
+  ? AuthScreens
+  : Type extends Producer
+  ? AppProducerScreens
+  : AppConsumerScreens;
 
 type Params = {
   id?: string;

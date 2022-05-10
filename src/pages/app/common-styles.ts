@@ -45,6 +45,12 @@ export const Title = styled.Text`
   color: ${colors.basic.black};
 `;
 
+export const SubTitle = styled.Text`
+  font-family: ${font.family.semiBold};
+  font-size: ${font.size.small};
+  color: ${colors.basic.grey};
+`;
+
 export const ShowMore = styled.Text`
   font-family: ${font.family.semiBold};
   font-size: ${font.size.small};

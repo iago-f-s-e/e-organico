@@ -3,6 +3,7 @@ import { Transaction } from '@src/store/slices/transaction/types';
 
 import { getWaitingTime, toPTDay, translateTransactionStatus, handleInputMask } from '@src/utils';
 import { If } from '@src/components/business';
+import { useAppNavigation } from '@src/hooks';
 import * as S from './styles';
 
 type Props = {
@@ -11,6 +12,8 @@ type Props = {
 };
 
 export const ListProducerTransaction = ({ transaction, showWaitingTime }: Props): JSX.Element => {
+  const { navigateTo } = useAppNavigation();
+
   const [waitingTime, setWaitingTime] = useState<string>('');
 
   const market = useMemo(() => {
@@ -85,6 +88,16 @@ export const ListProducerTransaction = ({ transaction, showWaitingTime }: Props)
           <S.Label>Quantidade de produtos:</S.Label>
           <S.Data>{transaction.productQuantity}</S.Data>
         </S.Section>
+
+        <S.ButtonsContainer>
+          <S.ConfirmTransactionButton>
+            <S.ConfirmTransactionLabel>Aceitar</S.ConfirmTransactionLabel>
+          </S.ConfirmTransactionButton>
+
+          <S.OpenTransactionButton onPress={() => navigateTo<'producer'>('transaction')}>
+            <S.OpenTransactionLabel>Visualizar</S.OpenTransactionLabel>
+          </S.OpenTransactionButton>
+        </S.ButtonsContainer>
       </S.Content>
     </S.Container>
   );

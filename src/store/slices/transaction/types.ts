@@ -1,7 +1,8 @@
 import { Address } from '../address/types';
 import { Market, WorkDay } from '../market/types';
+import { PaymentMethod } from '../payment-method/types';
 import { ProductDetail } from '../product/types';
-import { User } from '../user/types';
+import { User, UserDetail } from '../user/types';
 
 export type TransactionStatus =
   | 'delivered'
@@ -39,7 +40,7 @@ export type Transaction = PickOrDelivery & {
   number: number;
   type: 'pick' | 'delivery';
   status: TransactionStatus;
-  consumer: User;
+  consumer: UserDetail;
   producer: User;
   total: string;
   createdAt: string;
@@ -48,4 +49,5 @@ export type Transaction = PickOrDelivery & {
 
 export type TransactionDetail = Transaction & {
   products: TransactionProduct[];
+  paymentMethod: PaymentMethod;
 };

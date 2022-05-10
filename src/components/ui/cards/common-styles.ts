@@ -7,7 +7,7 @@ export const Container = styled.View.attrs(shadow)`
   align-self: center;
 
   width: 90%;
-  height: 200px;
+  min-height: 100px;
 
   border-radius: 5px;
 
@@ -111,7 +111,7 @@ export const SubTitle = styled.Text`
 
 export const AddressContainer = styled.View`
   flex: 1;
-  min-height: 360px;
+  min-height: 100px;
 `;
 
 export const AddressContent = styled.View`

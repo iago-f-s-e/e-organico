@@ -11,7 +11,7 @@ type Props = {
   producer: ProducerDetail;
 };
 
-export const UserDetailCard = ({ producer }: Props): JSX.Element => {
+export const ProducerDetailCard = ({ producer }: Props): JSX.Element => {
   const rating = `Avaliação: ${producer.score.rating}`;
   const sales = `Vendas: ${producer.score.transactions}`;
   const zipCode = handleInputMask(producer.address.zipCode, 'zipCode');

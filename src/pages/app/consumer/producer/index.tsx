@@ -179,7 +179,7 @@ export const Producer: FC = () => {
       <C.Header title="Vendedor" />
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
         <C_S.Content>
-          <C.UserDetailCard producer={producer} />
+          <C.ProducerDetailCard producer={producer} />
         </C_S.Content>
 
         <C_S.Content>

@@ -52,6 +52,8 @@ export const Content = styled.View.attrs(shadow)`
 
   background-color: ${colors.basic.white};
 
+  overflow: hidden;
+
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 `;
@@ -76,6 +78,49 @@ export const Section = styled.View`
 
   margin: 2px 0;
   padding: 0 5px;
+`;
+
+export const ButtonsContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  align-self: center;
+  justify-content: space-around;
+
+  width: 90%;
+  height: 50px;
+  margin-top: 10px;
+
+  border-top-width: 1px;
+  border-color: ${colors.others.cloud};
+`;
+
+export const OpenTransactionButton = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+
+  width: 45%;
+  height: 35px;
+
+  border-radius: 5px;
+
+  background-color: ${colors.main.primary};
+`;
+
+export const ConfirmTransactionButton = styled(OpenTransactionButton)`
+  background-color: ${colors.basic.white};
+
+  border-width: 1px;
+  border-color: ${colors.main.primary};
+`;
+
+export const OpenTransactionLabel = styled.Text`
+  font-family: ${font.family.semiBold};
+  font-size: ${font.size.medium};
+  color: ${colors.basic.white};
+`;
+
+export const ConfirmTransactionLabel = styled(OpenTransactionLabel)`
+  color: ${colors.main.primary};
 `;
 
 export const Status = styled.Text`
