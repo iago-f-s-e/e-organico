@@ -13,6 +13,8 @@ export const ScrollContainer = styled.ScrollView`
 export const Content = styled.View`
   flex: 1;
 
+  align-items: center;
+
   min-height: 150px;
   margin: 15px 0;
 `;

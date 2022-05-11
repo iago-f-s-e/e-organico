@@ -1,3 +1,5 @@
+import { Transaction } from '../transaction/types';
+
 export type UnitMeasureTypes = 'un' | 'kg' | 'L' | 'mg' | 'g' | 'duzia' | 'penca';
 
 export type UnitMeasure = {
@@ -19,4 +21,8 @@ export type ProductDetail = {
   stock: string;
   unitMeasure: UnitMeasureTypes;
   harvestDate: Date;
+};
+
+export type ProductWithTransactions = ProductDetail & {
+  lastTransactions: Transaction[];
 };

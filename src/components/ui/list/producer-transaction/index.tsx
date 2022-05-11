@@ -94,7 +94,7 @@ export const ListProducerTransaction = ({ transaction, showWaitingTime }: Props)
             <S.ConfirmTransactionLabel>Aceitar</S.ConfirmTransactionLabel>
           </S.ConfirmTransactionButton>
 
-          <S.OpenTransactionButton onPress={() => navigateTo<'producer'>('transaction')}>
+          <S.OpenTransactionButton onPress={() => navigateTo<'producer'>('producer-transaction')}>
             <S.OpenTransactionLabel>Visualizar</S.OpenTransactionLabel>
           </S.OpenTransactionButton>
         </S.ButtonsContainer>

@@ -7,7 +7,7 @@ import { ProducerHome } from './home';
 
 const Stack = createStackNavigator<ProducerStack>();
 
-export type ProducerScreens = 'home' | 'transaction';
+export type ProducerScreens = 'home' | 'producer-transaction' | 'producer-product';
 
 export const ProducerRoutes: FC = () => {
   return (
@@ -18,7 +18,8 @@ export const ProducerRoutes: FC = () => {
       }}
     >
       <Stack.Screen name="home" component={ProducerHome} />
-      <Stack.Screen name="transaction" component={Producer.Transaction} />
+      <Stack.Screen name="producer-transaction" component={Producer.Transaction} />
+      <Stack.Screen name="producer-product" component={Producer.Product} />
     </Stack.Navigator>
   );
 };

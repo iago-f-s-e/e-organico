@@ -8,3 +8,4 @@ export * from './selected';
 export * from './toast';
 export * from './cards';
 export * from './cart';
+export * from './date-picker';

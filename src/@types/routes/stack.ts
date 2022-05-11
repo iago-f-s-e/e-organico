@@ -30,7 +30,8 @@ export type ConsumerStack = {
 // TODO: passar id pelo params
 export type ProducerStack = {
   home: undefined;
-  transaction: undefined;
+  'producer-transaction': undefined;
+  'producer-product': undefined;
 };
 
 export type TransactionsConsumerStack = {

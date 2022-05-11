@@ -34,6 +34,7 @@ const transactions: Transaction[] = [
       imagePath,
       name: 'consumer-name',
       phone: '99999999999',
+      address: null,
       score: {
         rating: 5,
         transactions: 0,

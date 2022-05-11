@@ -2,6 +2,7 @@ import React from 'react';
 
 import { handleInputMask, translateUnitMeasure } from '@src/utils';
 import { ProductDetail } from '@src/store/slices/product/types';
+import { useAppNavigation } from '@src/hooks';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
@@ -10,6 +11,8 @@ type Props = {
 };
 
 export const ListProducerProduct = ({ data }: Props): JSX.Element => {
+  const { navigateTo } = useAppNavigation();
+
   const price = handleInputMask(data.price, 'money', {
     onlyComma: true,
   });
@@ -24,7 +27,7 @@ export const ListProducerProduct = ({ data }: Props): JSX.Element => {
       <C_S.ImageContainer>
         <C_S.Image source={{ uri: data.product.imagePath }} />
       </C_S.ImageContainer>
-      <C_S.Content onPress={() => {}}>
+      <C_S.Content onPress={() => navigateTo<'producer'>('producer-product')}>
         <C_S.Title>{data.product.name}</C_S.Title>
         <S.ValuesContent>
           <S.ValuesContent>
