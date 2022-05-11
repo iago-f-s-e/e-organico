@@ -12,7 +12,6 @@ type Auth = 'auth';
 
 type NavigationType = Consumer | Auth | Producer;
 
-// TODO: trocar ConsumerScreens por AppScreens
 type Paths<Type> = Type extends Auth
   ? AuthScreens
   : Type extends Producer

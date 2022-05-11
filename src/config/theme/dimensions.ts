@@ -1,6 +1,6 @@
 import * as size from '@src/constants/styles';
 
-// TODO: corrigir os headers do sign-up
+// TODO: corrigir os headers do sign-up (kkkkkk ai eh foda)
 
 const header = {
   height: size.HEADER_WITH_STATUS_BAR_HEIGHT,

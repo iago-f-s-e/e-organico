@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { MarketDetail } from '@src/store/slices/market/types';
 
-import { showBottomTab, useAppDispatch } from '@src/store';
+import { hideBottomTab, useAppDispatch } from '@src/store';
 import { useAppNavigation } from '@src/hooks';
 
 import * as C from '@src/components';
@@ -64,7 +64,7 @@ export const Market: FC = () => {
   const { onFocus } = useAppNavigation();
 
   useEffect(() => {
-    const focus = onFocus(() => appDispatch(showBottomTab()));
+    const focus = onFocus(() => appDispatch(hideBottomTab()));
 
     return focus;
   }, []); // eslint-disable-line

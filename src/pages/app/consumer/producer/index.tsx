@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 
 import { ProducerDetail } from '@src/store/slices/producer/types';
 import * as C from '@src/components';
-import { showBottomTab, useAppDispatch } from '@src/store';
+import { hideBottomTab, useAppDispatch } from '@src/store';
 import { useAppNavigation } from '@src/hooks';
 import * as C_S from '../../common-styles';
 
@@ -169,7 +169,7 @@ export const Producer: FC = () => {
   const { onFocus } = useAppNavigation();
 
   useEffect(() => {
-    const focus = onFocus(() => appDispatch(showBottomTab()));
+    const focus = onFocus(() => appDispatch(hideBottomTab()));
 
     return focus;
   }, []); // eslint-disable-line

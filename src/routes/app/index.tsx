@@ -3,8 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { AppBottomTab } from '@src/@types/routes';
 import { MyBottomTabBar } from '@src/components';
-import { ConsumerScreens } from './consumer';
-import { ProducerRoutes, ProducerScreens } from './producer';
+import { ConsumerRoutes, ConsumerScreens } from './consumer';
+import { ProducerScreens } from './producer';
 import { TransactionsRoutes } from './transactions';
 
 export type AppTabScreens = 'main' | 'transactions';
@@ -23,7 +23,7 @@ export const AppRoutes: FC = () => {
       screenOptions={{ headerShown: false }}
       tabBar={(props) => <MyBottomTabBar {...props} />}
     >
-      <Tab.Screen name="main" component={ProducerRoutes} />
+      <Tab.Screen name="main" component={ConsumerRoutes} />
       <Tab.Screen name="transactions" component={TransactionsRoutes} />
     </Tab.Navigator>
   );
