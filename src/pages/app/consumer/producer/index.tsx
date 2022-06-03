@@ -10,6 +10,7 @@ import * as C_S from '../../common-styles';
 const imagePath =
   'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
 
+// TODO: buscar da api
 const producer: ProducerDetail = {
   address: {
     city: 'city',
@@ -66,12 +67,7 @@ const producer: ProducerDetail = {
       id: 'producer_product_id',
       harvestDate: new Date(),
       price: '5',
-      product: {
-        id: 'product_id',
-        name: 'Banana',
-        imagePath,
-        unitMeasures: [],
-      },
+      product: null,
       stock: '5',
       unitMeasure: 'un',
     },
@@ -79,12 +75,7 @@ const producer: ProducerDetail = {
       id: 'producer_product_id2',
       harvestDate: new Date(),
       price: '7.55',
-      product: {
-        id: 'product_id2',
-        name: 'Queijo',
-        imagePath,
-        unitMeasures: [],
-      },
+      product: null,
       stock: '7.55',
       unitMeasure: 'un',
     },

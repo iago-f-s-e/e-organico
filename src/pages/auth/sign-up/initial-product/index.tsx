@@ -1,6 +1,6 @@
 import React, { FC, useReducer } from 'react';
 import { FlatList } from 'react-native';
-import { Product, ProductDetail } from '@src/store/slices/product/types';
+import { ProductDetail } from '@src/store/slices/product/types';
 
 import * as C from '@src/components';
 import { addSignUpProduct, removeSignUpProduct, useAppDispatch, useAppSelector } from '@src/store';
@@ -8,16 +8,6 @@ import { useAppNavigation, useStorage, useToast as _useToast } from '@src/hooks'
 import * as C_S from '../common-styles';
 
 import { initialState, reducer } from './reducer';
-
-const imagePath =
-  'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
-
-// TODO: remover dados mocados
-const products: Product[] = [
-  { id: 'produto1', name: 'maçã', imagePath, unitMeasures: [{ name: 'un' }] },
-  { id: 'produto2', name: 'goiaba', imagePath, unitMeasures: [{ name: 'un' }, { name: 'duzia' }] },
-  { id: 'produto3', name: 'goiaba', imagePath, unitMeasures: [{ name: 'un' }, { name: 'duzia' }] },
-];
 
 export const InitialProduct: FC = () => {
   const appDispatch = useAppDispatch();
@@ -53,10 +43,11 @@ export const InitialProduct: FC = () => {
       <C_S.Container>
         <FlatList
           style={{ paddingVertical: 8, paddingHorizontal: 16 }}
-          data={products}
+          data={[]}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <C.ListSignUpProduct
+              unitMeasures={[]} // TODO: buscar da api
               product={item}
               actions={{
                 remove: handleRemove,

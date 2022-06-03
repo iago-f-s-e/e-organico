@@ -83,8 +83,8 @@ export const initialState: State = {
     product: {
       name: '',
       id: '',
-      imagePath,
-      unitMeasures: [],
+      image: imagePath,
+      type: '',
     },
     stock: '0',
     unitMeasure: 'L',

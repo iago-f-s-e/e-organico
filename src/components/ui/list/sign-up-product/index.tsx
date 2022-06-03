@@ -15,6 +15,7 @@ import { getIcon } from './util';
 import { DatePicker } from '../../date-picker';
 
 type Props = {
+  unitMeasures: any[];
   product: Product;
   actions: {
     select: (state: ProductDetail) => void;
@@ -29,8 +30,8 @@ const initialState: ProductDetail = {
   product: {
     id: '',
     name: '',
-    imagePath: '',
-    unitMeasures: [],
+    image: '',
+    type: '[]',
   },
   price: 'R$ 0,00',
   stock: '0',
@@ -40,7 +41,7 @@ const initialState: ProductDetail = {
 
 // TODO: Mostrar detalhes no header
 
-export const ListSignUpProduct = ({ product, actions }: Props): JSX.Element => {
+export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JSX.Element => {
   const { signUpProduct } = useAppSelector((state) => state);
 
   const [state, setState] = useState<ProductDetail>(initialState);
@@ -58,11 +59,11 @@ export const ListSignUpProduct = ({ product, actions }: Props): JSX.Element => {
       return found;
     }
 
-    const unitMeasure = product.unitMeasures[0]?.name || 'un';
+    const unitMeasure = unitMeasures[0]?.name || 'un';
 
     setState((state) => ({ ...state, unitMeasure, product }));
     return found;
-  }, [signUpProduct, product]);
+  }, [signUpProduct, product, unitMeasures]);
 
   const selected = useMemo(() => !!current, [current]);
 
@@ -193,7 +194,7 @@ export const ListSignUpProduct = ({ product, actions }: Props): JSX.Element => {
                   onValueChange={(value) => handleUnitPicker(value)}
                   selectedValue={state.unitMeasure}
                 >
-                  {product.unitMeasures.map(({ name }) => (
+                  {unitMeasures.map(({ name }) => (
                     <Picker.Item
                       key={name}
                       style={{ fontFamily: font.family.bold, fontSize: 14 }}

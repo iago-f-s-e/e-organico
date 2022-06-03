@@ -4,37 +4,8 @@ import React, { FC } from 'react';
 import * as C from '@src/components';
 import * as C_S from '../../common-styles';
 
-const imagePath =
-  'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
-
-const products: ProductDetail[] = [
-  {
-    id: 'producer_product_id',
-    harvestDate: new Date(),
-    price: '5',
-    product: {
-      id: 'product_id',
-      name: 'Banana',
-      imagePath,
-      unitMeasures: [],
-    },
-    stock: '5',
-    unitMeasure: 'un',
-  },
-  {
-    id: 'producer_product_id2',
-    harvestDate: new Date(),
-    price: '8.55',
-    product: {
-      id: 'product_id2',
-      name: 'Queijo',
-      imagePath,
-      unitMeasures: [],
-    },
-    stock: '7.55',
-    unitMeasure: 'un',
-  },
-];
+// TODO: buscar da api
+const products: ProductDetail[] = [];
 
 export const Products: FC = () => {
   return (

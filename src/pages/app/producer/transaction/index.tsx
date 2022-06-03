@@ -68,9 +68,9 @@ const transaction: TransactionDetail = {
         price: '5.00',
         product: {
           id: 'product-id',
-          imagePath,
+          image: imagePath,
           name: 'banana frita',
-          unitMeasures: [],
+          type: 'fruta',
         },
         stock: '5.00',
         unitMeasure: 'kg',

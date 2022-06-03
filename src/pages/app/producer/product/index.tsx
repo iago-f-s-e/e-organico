@@ -14,22 +14,8 @@ import * as S from './styles';
 
 import { initialState, reducer } from './reducer';
 
-const imagePath =
-  'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
-
-const producerProduct: ProductDetail = {
-  id: 'product_id',
-  price: '5.55',
-  stock: '800',
-  unitMeasure: 'kg',
-  harvestDate: new Date(),
-  product: {
-    id: 'product_id',
-    imagePath,
-    name: 'banana frita',
-    unitMeasures: [],
-  },
-};
+// TODO: buscar da api
+const producerProduct: ProductDetail = null;
 
 export const Product: FC = () => {
   const appDispatch = useAppDispatch();
@@ -114,7 +100,7 @@ export const Product: FC = () => {
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
         <C_S.Content>
           <S.ImageContainer>
-            <S.Image source={{ uri: state.producerProduct.product.imagePath }} />
+            <S.Image source={{ uri: state.producerProduct.product.image }} />
           </S.ImageContainer>
         </C_S.Content>
 

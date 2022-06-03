@@ -10,8 +10,8 @@ export type UnitMeasure = {
 export type Product = {
   id: string;
   name: string;
-  imagePath: string;
-  unitMeasures: UnitMeasure[];
+  type: string;
+  image: string;
 };
 
 export type ProductDetail = {

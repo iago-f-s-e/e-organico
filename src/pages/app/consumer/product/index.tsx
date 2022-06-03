@@ -22,20 +22,8 @@ const _defaultImage =
   'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
 
 // TODO: adicionar relacionados
-
-const product: ProductDetail = {
-  id: 'producer_product_id',
-  harvestDate: new Date(),
-  price: '5.00',
-  product: {
-    id: 'product_id',
-    name: 'Tripa de cobra',
-    imagePath: _defaultImage,
-    unitMeasures: [],
-  },
-  stock: '500',
-  unitMeasure: 'un',
-};
+// TODO: buscar da api
+const product: ProductDetail = null;
 
 // TODO: criar grupo para trazer produtos relacionados
 // TODO: renderizar e atualizar state do reducer apenas dps de carregar os dados
