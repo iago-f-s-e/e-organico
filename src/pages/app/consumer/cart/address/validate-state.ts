@@ -1,9 +1,9 @@
-import { Market, WorkDay } from '@src/store/slices/market/types';
+import { Market, Workday } from '@src/store/slices/market/types';
 import { State } from './reducer';
 
 type MarketSuccess = {
   type: 'market';
-  day: WorkDay;
+  weekday: Workday;
   market: Market;
 };
 
@@ -30,9 +30,9 @@ export const validateMarketState: ValidateState = (state: State) => {
     return { type: 'error', message: 'Selecione uma feira!' };
   }
 
-  if (!state.day) {
+  if (!state.weekday) {
     return { type: 'error', message: 'Selecione o dia que deseja retirar a compra!' };
   }
 
-  return { type: 'market', day: state.day, market: state.market };
+  return { type: 'market', weekday: state.weekday, market: state.market };
 };

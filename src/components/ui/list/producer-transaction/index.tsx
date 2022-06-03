@@ -17,12 +17,12 @@ export const ListProducerTransaction = ({ transaction, showWaitingTime }: Props)
   const [waitingTime, setWaitingTime] = useState<string>('');
 
   const market = useMemo(() => {
-    if (transaction.type !== 'pick') return { has: false, name: '', day: '' };
+    if (transaction.type !== 'pick') return { has: false, name: '', weekday: '' };
 
     const { name } = transaction.market;
-    const day = toPTDay(transaction.selectedDay.day);
+    const weekday = toPTDay(transaction.selectedDay.weekday);
 
-    return { has: true, name, day };
+    return { has: true, name, weekday };
   }, [transaction]);
 
   const status = translateTransactionStatus(transaction.status, 'producer'); // TODO: usar userType dinâmico
@@ -79,7 +79,7 @@ export const ListProducerTransaction = ({ transaction, showWaitingTime }: Props)
           render={() => (
             <S.Section>
               <S.Label>Dia da entrega:</S.Label>
-              <S.Data>{market.day}</S.Data>
+              <S.Data>{market.weekday}</S.Data>
             </S.Section>
           )}
         />

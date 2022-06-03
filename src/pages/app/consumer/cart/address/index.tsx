@@ -10,273 +10,14 @@ import {
 } from '@src/store';
 
 import { useAppNavigation, useToast as _useToast } from '@src/hooks';
-import { Market, WorkDay } from '@src/store/slices/market/types';
+import { Market, Workday } from '@src/store/slices/market/types';
 import * as C from '@src/components';
 import * as C_S from '../../../common-styles';
 
 import { initialState, reducer } from './reducer';
 import { validateMarketState } from './validate-state';
 
-const imagePath =
-  'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
-
-const markets: Market[] = [
-  {
-    id: 'id',
-    name: 'feira do joão',
-    imagePath,
-    address: {
-      city: 'cidade',
-      complement: 'complement',
-      district: 'district',
-      number: '55',
-      state: 'state',
-      street: 'street',
-      zipCode: '49000-000',
-    },
-    wordDays: [
-      {
-        day: 'MONDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'TUESDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'WEDNESDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'THURSDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'FRIDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'SATURDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'SUNDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-    ],
-  },
-  {
-    id: 'id2',
-    name: 'feira do pedro',
-    imagePath,
-    address: {
-      city: 'cidade',
-      complement: 'complement',
-      district: 'district',
-      number: '55',
-      state: 'state',
-      street: 'street',
-      zipCode: '49000-000',
-    },
-    wordDays: [
-      {
-        day: 'MONDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'TUESDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'WEDNESDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'THURSDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'FRIDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'SATURDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'SUNDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-    ],
-  },
-  {
-    id: 'id3',
-    name: 'feira do zé',
-    imagePath,
-    address: {
-      city: 'cidade',
-      complement: 'complement',
-      district: 'district',
-      number: '55',
-      state: 'state',
-      street: 'street',
-      zipCode: '49000-000',
-    },
-    wordDays: [
-      {
-        day: 'MONDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'TUESDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'WEDNESDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'THURSDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'FRIDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'SATURDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'SUNDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-    ],
-  },
-  {
-    id: 'id4',
-    name: 'feira do zé',
-    imagePath,
-    address: {
-      city: 'cidade',
-      complement: 'complement',
-      district: 'district',
-      number: '55',
-      state: 'state',
-      street: 'street',
-      zipCode: '49000-000',
-    },
-    wordDays: [
-      {
-        day: 'MONDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'TUESDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'WEDNESDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'THURSDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'FRIDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'SATURDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'SUNDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-    ],
-  },
-  {
-    id: 'id5',
-    name: 'feira do zé',
-    imagePath,
-    address: {
-      city: 'cidade',
-      complement: 'complement',
-      district: 'district',
-      number: '55',
-      state: 'state',
-      street: 'street',
-      zipCode: '49000-000',
-    },
-    wordDays: [
-      {
-        day: 'MONDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'TUESDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'WEDNESDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'THURSDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'FRIDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'SATURDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'SUNDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-    ],
-  },
-];
+const markets: Market[] = [];
 
 export const Address: FC = () => {
   const { ui, section, cart } = useAppSelector((state) => state);
@@ -297,7 +38,7 @@ export const Address: FC = () => {
   const dispatchCancel = () => appDispatch(confirmOrCancelCartAddress(false));
   const dispatchOpenButton = () => dispatch({ type: 'openButton' });
   const dispatchCloseButton = () => dispatch({ type: 'closeButton' });
-  const dispatchChangeDay = (payload: WorkDay) => dispatch({ type: 'onChangeDay', payload });
+  const dispatchChangeDay = (payload: Workday) => dispatch({ type: 'onChangeDay', payload });
   const dispatchChangeMarket = (payload: Market) => dispatch({ type: 'onChangeMarket', payload });
   const dispatchToChangeMarket = (payload: boolean) =>
     dispatch({ type: 'onToChangeMarket', payload });
@@ -333,9 +74,9 @@ export const Address: FC = () => {
 
     if (response.type !== 'market') return { canNavigate: false };
 
-    const { market, day } = response;
+    const { market, weekday } = response;
 
-    appDispatch(setCartAddress({ type: 'pick', market, selectedDay: day }));
+    appDispatch(setCartAddress({ type: 'pick', market, selectedDay: weekday }));
     appDispatch(confirmOrCancelCartAddress(true));
 
     return { canNavigate: true };
@@ -356,7 +97,7 @@ export const Address: FC = () => {
   };
 
   const handleSelectMarket = (payload: Market) => {
-    let day = null;
+    let weekday = null;
 
     if (cart.current?.pickOrDelivery?.type === 'pick') {
       const hasCurrentMarket = !!cart.current?.pickOrDelivery?.market;
@@ -366,10 +107,10 @@ export const Address: FC = () => {
 
       dispatchToChangeMarket(changeMarket);
 
-      day = changeMarket ? null : cart.current?.pickOrDelivery?.selectedDay;
+      weekday = changeMarket ? null : cart.current?.pickOrDelivery?.selectedDay;
     }
 
-    dispatchChangeDay(day);
+    dispatchChangeDay(weekday);
     dispatchChangeMarket(payload);
   };
 
@@ -424,7 +165,7 @@ export const Address: FC = () => {
               <C.CartMarket
                 markets={markets}
                 change={state.toChangeMarket}
-                selected={{ market: state.market, day: state.day, cartMarket }}
+                selected={{ market: state.market, weekday: state.weekday, cartMarket }}
                 actions={{
                   selectMarket: handleSelectMarket,
                   selectDay: dispatchChangeDay,
@@ -437,7 +178,7 @@ export const Address: FC = () => {
               <C.CartMarket
                 markets={markets}
                 change={state.toChangeMarket}
-                selected={{ market: state.market, day: state.day, cartMarket }}
+                selected={{ market: state.market, weekday: state.weekday, cartMarket }}
                 actions={{
                   selectMarket: handleSelectMarket,
                   selectDay: dispatchChangeDay,

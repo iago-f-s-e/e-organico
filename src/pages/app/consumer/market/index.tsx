@@ -21,7 +21,7 @@ const market: MarketDetail = {
     street: 'street',
     zipCode: '99999999',
   },
-  imagePath: _defaultImage,
+  image: _defaultImage,
   isOpen: true,
   name: 'feira do zé',
   producers: [
@@ -47,11 +47,12 @@ const market: MarketDetail = {
       },
     },
   ],
-  wordDays: [
+  workdays: [
     {
-      close: '17:00',
-      day: 'FRIDAY',
-      open: '08:00',
+      id: '',
+      closing: '17:00',
+      weekday: 'FRIDAY',
+      opening: '08:00',
     },
   ],
 };

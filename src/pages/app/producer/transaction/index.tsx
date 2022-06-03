@@ -18,9 +18,9 @@ const transaction: TransactionDetail = {
   createdAt: '2022-05-02T19:33:17.552Z',
   market: {
     id: 'market-id',
-    imagePath,
+    image: imagePath,
     name: 'feira',
-    wordDays: [],
+    workdays: [],
     address: {
       city: 'cidade',
       complement: 'complemento',
@@ -34,9 +34,10 @@ const transaction: TransactionDetail = {
   number: 1,
   productQuantity: 1,
   selectedDay: {
-    day: 'FRIDAY',
-    close: null,
-    open: null,
+    id: '',
+    weekday: 'FRIDAY',
+    closing: null,
+    opening: null,
   },
   status: 'waiting-for-confirmation-from-the-producer',
   total: '58.00',
@@ -107,12 +108,12 @@ export const Transaction: FC = () => {
   );
 
   const market = useMemo(() => {
-    if (transaction.type !== 'pick') return { has: false, name: '', day: '' };
+    if (transaction.type !== 'pick') return { has: false, name: '', weekday: '' };
 
     const { name } = transaction.market;
-    const day = toPTDay(transaction.selectedDay.day);
+    const weekday = toPTDay(transaction.selectedDay.weekday);
 
-    return { has: true, name, day };
+    return { has: true, name, weekday };
   }, []);
 
   useEffect(() => {
@@ -177,7 +178,7 @@ export const Transaction: FC = () => {
 
                   <S.Section>
                     <S.Label>Dia Escolhido:</S.Label>
-                    <S.Data>{market.day}</S.Data>
+                    <S.Data>{market.weekday}</S.Data>
                   </S.Section>
                 </>
               )}

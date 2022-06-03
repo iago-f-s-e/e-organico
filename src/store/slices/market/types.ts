@@ -19,19 +19,20 @@ export type PTDay =
   | 'sábado'
   | 'domingo';
 
-export type WorkDay = {
-  day: EUDay;
-  open: string;
-  close: string;
+export type Workday = {
+  id: string;
+  weekday: EUDay;
+  opening: string;
+  closing: string;
 };
 
 // TODO: mover isOpen para esse type
 export type Market = {
   id: string;
   name: string;
-  imagePath: string;
+  image: string;
   address: Address;
-  wordDays: WorkDay[];
+  workdays: Workday[];
 };
 
 export type MarketDetail = Market & {

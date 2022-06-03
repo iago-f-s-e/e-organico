@@ -20,14 +20,15 @@ const transactions: Transaction[] = [
     market: {
       id: 'market-id',
       name: 'feira-name',
-      imagePath,
-      wordDays: [],
+      image: imagePath,
+      workdays: [],
       address: null,
     },
     selectedDay: {
-      close: null,
-      open: null,
-      day: 'MONDAY',
+      id: '',
+      closing: null,
+      opening: null,
+      weekday: 'MONDAY',
     },
     consumer: {
       id: 'consumer-id',

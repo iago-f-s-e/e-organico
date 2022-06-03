@@ -2,26 +2,26 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Animated } from 'react-native';
 
 import { handleInputMask } from '@src/utils';
-import { Market, WorkDay } from '@src/store/slices/market/types';
+import { Market, Workday } from '@src/store/slices/market/types';
 import { ScrollHorizontal } from '@src/components/business/scroll-horizontal';
 import { Map } from '@src/components/business';
-import { ListWorkDay } from '../../list/work-day';
+import { ListWorkday } from '../../list/work-day';
 
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
 type Props = {
   market: Market;
-  day: WorkDay;
+  weekday: Workday;
   change: boolean;
   actions: {
-    selectDay: (day: WorkDay) => void;
+    selectDay: (weekday: Workday) => void;
     confirmChange: () => void;
     cancelChange: () => void;
   };
 };
 
-export const CartMarketDetailCard = ({ market, actions, day, change }: Props): JSX.Element => {
+export const CartMarketDetailCard = ({ market, actions, weekday, change }: Props): JSX.Element => {
   const zipCode = handleInputMask(market.address.zipCode, 'zipCode');
 
   const [sizeContainer] = useState(new Animated.ValueXY({ x: 0, y: 0 }));
@@ -72,7 +72,7 @@ export const CartMarketDetailCard = ({ market, actions, day, change }: Props): J
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
         <C_S.InfoContainer>
           <C_S.ImageContainer>
-            <C_S.ImageContent source={{ uri: market.imagePath }} />
+            <C_S.ImageContent source={{ uri: market.image }} />
           </C_S.ImageContainer>
 
           <C_S.InfoContent>
@@ -134,11 +134,11 @@ export const CartMarketDetailCard = ({ market, actions, day, change }: Props): J
               <ScrollHorizontal
                 render={() => (
                   <Map
-                    data={market.wordDays}
+                    data={market.workdays}
                     render={(item, index) => (
-                      <ListWorkDay
+                      <ListWorkday
                         workDay={item}
-                        selected={day}
+                        selected={weekday}
                         select={actions.selectDay}
                         key={index.toString()}
                       />

@@ -1,4 +1,4 @@
-import { Market, WorkDay } from '@src/store/slices/market/types';
+import { Market, Workday } from '@src/store/slices/market/types';
 import { Animated } from 'react-native';
 
 export type State = {
@@ -6,14 +6,14 @@ export type State = {
   opacityButton: Animated.ValueXY;
   toChangeMarket: boolean;
   market: Market;
-  day: WorkDay;
+  weekday: Workday;
 };
 
 type Actions = 'openButton' | 'closeButton' | 'onChangeMarket' | 'onChangeDay' | 'onToChangeMarket';
 
 type Action = {
   type: Actions;
-  payload?: Market | WorkDay | boolean;
+  payload?: Market | Workday | boolean;
 };
 
 type Reducer = (state: State, action: Action) => State;
@@ -23,7 +23,7 @@ const reducers: { [key in Actions]: Reducer } = {
 
   onToChangeMarket: (state, { payload }): State => ({ ...state, toChangeMarket: Boolean(payload) }),
 
-  onChangeDay: (state, { payload }): State => ({ ...state, day: payload as WorkDay }),
+  onChangeDay: (state, { payload }): State => ({ ...state, weekday: payload as Workday }),
 
   openButton: (state, _): State => {
     Animated.parallel([
@@ -65,7 +65,7 @@ export const initialState: State = {
   opacityButton: new Animated.ValueXY({ x: 1, y: 0 }),
   toChangeMarket: false,
   market: null,
-  day: null,
+  weekday: null,
 };
 
 export const reducer: Reducer = (state, action) => reducers[action.type](state, action);

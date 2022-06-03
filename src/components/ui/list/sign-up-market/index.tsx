@@ -6,7 +6,7 @@ import { colors } from '@src/config/theme';
 import { useAppSelector } from '@src/store';
 import * as S from './styles';
 
-import { ListWorkDay } from '../work-day';
+import { ListWorkday } from '../work-day';
 import { getIcon } from './util';
 
 type Props = {
@@ -155,10 +155,10 @@ export const ListSignUpMarket = ({ market, actions }: Props): JSX.Element => {
             <S.Title>Dias de funcionamento</S.Title>
             <S.ContainerWorkDays>
               <FlatList
-                data={market.wordDays}
+                data={market.workdays}
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => <ListWorkDay workDay={item} />}
+                renderItem={({ item }) => <ListWorkday workDay={item} />}
                 keyExtractor={(_, index) => index.toString()}
               />
             </S.ContainerWorkDays>

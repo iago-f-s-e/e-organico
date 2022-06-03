@@ -40,7 +40,7 @@ export const ListConsumerMarket = ({ market, onSelect, current, selected }: Prop
   return (
     <C_S.Container style={isCurrent ? borderCurrent : undefined}>
       <C_S.ImageContainer>
-        <C_S.Image source={{ uri: market.imagePath }} />
+        <C_S.Image source={{ uri: market.image }} />
       </C_S.ImageContainer>
       <C_S.Content onPress={handlePress}>
         <C_S.Title>{market.name}</C_S.Title>

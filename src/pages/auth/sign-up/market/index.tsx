@@ -13,115 +13,7 @@ import * as C_S from '../common-styles';
 import { initialState, reducer } from './reducer';
 
 // TODO: remover dados mocados
-
-const _defaultImage =
-  'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
-
-const markets: MarketState[] = [
-  {
-    id: 'id',
-    name: 'feira do zé',
-    imagePath: _defaultImage,
-    address: {
-      city: 'cidade',
-      complement: 'complement',
-      district: 'district',
-      number: '55',
-      state: 'state',
-      street: 'street',
-      zipCode: '49000-000',
-    },
-    wordDays: [
-      {
-        day: 'MONDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'TUESDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'WEDNESDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'THURSDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'FRIDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'SATURDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'SUNDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-    ],
-  },
-  {
-    id: 'id2',
-    name: 'feira do zé',
-    imagePath: _defaultImage,
-    address: {
-      city: 'cidade',
-      complement: 'complement',
-      district: 'district',
-      number: '55',
-      state: 'state',
-      street: 'street',
-      zipCode: '49000-000',
-    },
-    wordDays: [
-      {
-        day: 'MONDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'TUESDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'WEDNESDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'THURSDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'FRIDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'SATURDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-      {
-        day: 'SUNDAY',
-        close: '22:00',
-        open: '07:30',
-      },
-    ],
-  },
-];
-
+// TODO: buscar markets da api
 export const Market: FC = () => {
   const appDispatch = useAppDispatch();
   const { navigateTo, goBack } = useAppNavigation();
@@ -153,7 +45,7 @@ export const Market: FC = () => {
       <C_S.Container>
         <FlatList
           style={{ paddingVertical: 8, paddingHorizontal: 16 }}
-          data={markets}
+          data={[]}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <C.ListSignUpMarket

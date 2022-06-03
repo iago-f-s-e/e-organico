@@ -32,7 +32,7 @@ const producer: ProducerDetail = {
     {
       id: 'id',
       name: 'feira do zé',
-      imagePath,
+      image: imagePath,
       address: {
         city: 'cidade',
         complement: 'complement',
@@ -42,49 +42,13 @@ const producer: ProducerDetail = {
         street: 'street',
         zipCode: '49000-000',
       },
-      wordDays: [
-        {
-          day: 'MONDAY',
-          close: '22:00',
-          open: '07:30',
-        },
-        {
-          day: 'TUESDAY',
-          close: '22:00',
-          open: '07:30',
-        },
-        {
-          day: 'WEDNESDAY',
-          close: '22:00',
-          open: '07:30',
-        },
-        {
-          day: 'THURSDAY',
-          close: '22:00',
-          open: '07:30',
-        },
-        {
-          day: 'FRIDAY',
-          close: '22:00',
-          open: '07:30',
-        },
-        {
-          day: 'SATURDAY',
-          close: '22:00',
-          open: '07:30',
-        },
-        {
-          day: 'SUNDAY',
-          close: '22:00',
-          open: '07:30',
-        },
-      ],
+      workdays: [],
     },
 
     {
       id: 'id2',
       name: 'feira do zé',
-      imagePath,
+      image: imagePath,
       address: {
         city: 'cidade',
         complement: 'complement',
@@ -94,43 +58,7 @@ const producer: ProducerDetail = {
         street: 'street',
         zipCode: '49000-000',
       },
-      wordDays: [
-        {
-          day: 'MONDAY',
-          close: '22:00',
-          open: '07:30',
-        },
-        {
-          day: 'TUESDAY',
-          close: '22:00',
-          open: '07:30',
-        },
-        {
-          day: 'WEDNESDAY',
-          close: '22:00',
-          open: '07:30',
-        },
-        {
-          day: 'THURSDAY',
-          close: '22:00',
-          open: '07:30',
-        },
-        {
-          day: 'FRIDAY',
-          close: '22:00',
-          open: '07:30',
-        },
-        {
-          day: 'SATURDAY',
-          close: '22:00',
-          open: '07:30',
-        },
-        {
-          day: 'SUNDAY',
-          close: '22:00',
-          open: '07:30',
-        },
-      ],
+      workdays: [],
     },
   ],
   products: [

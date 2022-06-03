@@ -4,7 +4,7 @@ import { handleInputMask } from '@src/utils';
 import { Market } from '@src/store/slices/market/types';
 import { ScrollHorizontal } from '@src/components/business/scroll-horizontal';
 import { Map } from '@src/components/business';
-import { ListWorkDay } from '../../list/work-day';
+import { ListWorkday } from '../../list/work-day';
 
 import * as C_S from '../common-styles';
 
@@ -20,7 +20,7 @@ export const MarketDetailCard = ({ market }: Props): JSX.Element => {
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
         <C_S.InfoContainer>
           <C_S.ImageContainer>
-            <C_S.ImageContent source={{ uri: market.imagePath }} />
+            <C_S.ImageContent source={{ uri: market.image }} />
           </C_S.ImageContainer>
 
           <C_S.InfoContent>
@@ -82,8 +82,8 @@ export const MarketDetailCard = ({ market }: Props): JSX.Element => {
               <ScrollHorizontal
                 render={() => (
                   <Map
-                    data={market.wordDays}
-                    render={(item, index) => <ListWorkDay workDay={item} key={index.toString()} />}
+                    data={market.workdays}
+                    render={(item, index) => <ListWorkday workDay={item} key={index.toString()} />}
                   />
                 )}
               />

@@ -44,7 +44,7 @@ export const Identifiers: FC = () => {
   const handlePickerImage = useCallback(async () => {
     const result = (await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
-      base64: false,
+      base64: false, // TODO: pegar a base64
       quality: 1,
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],

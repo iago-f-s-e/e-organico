@@ -1,5 +1,5 @@
 import { Address } from '../address/types';
-import { Market, WorkDay } from '../market/types';
+import { Market, Workday } from '../market/types';
 import { PaymentMethod } from '../payment-method/types';
 import { ProductDetail } from '../product/types';
 import { User, UserDetail } from '../user/types';
@@ -25,7 +25,7 @@ export type TransactionProduct = {
 type PickTransaction = {
   type: 'pick';
   market: Market;
-  selectedDay: WorkDay;
+  selectedDay: Workday;
 };
 
 type DeliveryTransaction = {

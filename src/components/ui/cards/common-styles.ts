@@ -141,7 +141,7 @@ export const AddressData = styled.Text`
 export const WorkDaysSection = styled.View`
   flex: 1;
 
-  height: 100px;
+  height: 150px;
 `;
 
 export const WorkDaysTitle = styled.Text`

@@ -1,5 +1,5 @@
 import { If, Map } from '@src/components/business';
-import { Market, WorkDay } from '@src/store/slices/market/types';
+import { Market, Workday } from '@src/store/slices/market/types';
 import React from 'react';
 import { CartMarketDetailCard } from '../../cards';
 import { ListConsumerMarket } from '../../list';
@@ -12,11 +12,11 @@ type Props = {
   selected: {
     cartMarket: Market;
     market: Market;
-    day: WorkDay;
+    weekday: Workday;
   };
   actions: {
     selectMarket: (market: Market) => void;
-    selectDay: (day: WorkDay) => void;
+    selectDay: (weekday: Workday) => void;
     confirmChangeMarket: () => void;
     cancelChangeMarket: () => void;
   };
@@ -36,7 +36,7 @@ export const CartMarket = ({ markets, selected, actions, change }: Props): JSX.E
               <CartMarketDetailCard
                 change={change}
                 market={selected.market}
-                day={selected.day}
+                weekday={selected.weekday}
                 actions={{
                   selectDay: actions.selectDay,
                   cancelChange: actions.cancelChangeMarket,
