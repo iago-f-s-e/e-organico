@@ -1,20 +1,15 @@
 import React, { FC, useReducer, useEffect } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
-
-// TODO: navegar para produtos iniciais
-
 import * as C from '@src/components';
 import { Market as MarketState } from '@src/store/slices/market/types';
 import { useAppDispatch, useAppSelector } from '@src/store';
 import { addSignUpMarket, removeSignUpMarket } from '@src/store';
 import { useAppNavigation, useToast as _useToast } from '@src/hooks';
 import { useApi } from '@src/hooks/use-api';
-import { colors } from '@src/config/theme';
 import * as C_S from '../common-styles';
 
 import { initialState, reducer } from './reducer';
 
-// TODO: buscar markets da api
 export const Market: FC = () => {
   const appDispatch = useAppDispatch();
   const { navigateTo, goBack, onFocus } = useAppNavigation();
@@ -42,10 +37,10 @@ export const Market: FC = () => {
   const handleNext = () => {
     if (!signUpMarket.length) return useToast.error('Selecione pelo menos uma feira!');
 
-    return navigateTo<'auth'>('sign-up-initial-product'); // TODO: navegar para produtos iniciais
+    return navigateTo<'auth'>('sign-up-initial-product');
   };
 
-  const handleGetAllMarkets = async () => {
+  const handleGetAllMarkets = () => {
     onGetAllMarkets();
 
     getAllMarkets()
@@ -58,8 +53,6 @@ export const Market: FC = () => {
 
     return focus;
   }, []); // eslint-disable-line
-
-  console.log(state.markets);
 
   return (
     <C_S.Container>
