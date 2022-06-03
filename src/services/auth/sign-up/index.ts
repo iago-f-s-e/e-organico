@@ -1,4 +1,4 @@
-import { signUp } from '@src/constants/endpoints';
+import { endpoints } from '@src/constants/endpoints';
 import { CertificationType } from '@src/store/slices/producer/types';
 import { SignUpConsumer } from '@src/store/slices/sign-up-consumer/types';
 import { SignUpProducer } from '@src/store/slices/sign-up-producer/types';
@@ -19,21 +19,21 @@ export type RegisterProducerDTO = Omit<
 };
 
 export function reservePhone(phone: string, device: string): Promise<AxiosResponse> {
-  return httpClient.post(signUp.RESERVER_PHONE, { phone, device });
+  return httpClient.post(endpoints.signUp.RESERVER_PHONE, { phone, device });
 }
 
 export function reserveDocument(document: string, device: string): Promise<AxiosResponse> {
-  return httpClient.post(signUp.RESERVER_DOCUMENT, { document, device });
+  return httpClient.post(endpoints.signUp.RESERVER_DOCUMENT, { document, device });
 }
 
 export function reserveEmail(email: string, device: string): Promise<AxiosResponse> {
-  return httpClient.post(signUp.RESERVER_EMAIL, { email, device });
+  return httpClient.post(endpoints.signUp.RESERVER_EMAIL, { email, device });
 }
 
 export function registerConsumer(data: SignUpConsumer): Promise<AxiosResponse> {
-  return httpClient.post(signUp.REGISTER_CONSUMER, data);
+  return httpClient.post(endpoints.signUp.REGISTER_CONSUMER, data);
 }
 
 export function registerProducer(data: RegisterProducerDTO): Promise<AxiosResponse> {
-  return httpClient.post(signUp.REGISTER_PRODUCER, data);
+  return httpClient.post(endpoints.signUp.REGISTER_PRODUCER, data);
 }

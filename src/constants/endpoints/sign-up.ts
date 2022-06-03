@@ -1,4 +1,4 @@
-export const enum signUp {
+export enum signUp {
   'RESERVER_PHONE' = 'auth/sign-up/reserve-phone',
   'RESERVER_EMAIL' = 'auth/sign-up/reserve-email',
   'RESERVER_DOCUMENT' = 'auth/sign-up/reserve-document',

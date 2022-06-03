@@ -17,3 +17,6 @@ const _instance = axios.create({
 _instance.interceptors.response.use(responseSuccessInterceptor, responseErrorInterceptor);
 
 export const httpClient = _instance;
+
+export const httpClientGET = async <T>(url: string): Promise<T> =>
+  (await httpClient.get<T>(url)).data;

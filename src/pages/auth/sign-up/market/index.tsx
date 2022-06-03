@@ -1,5 +1,5 @@
-import React, { FC, useReducer } from 'react';
-import { FlatList } from 'react-native';
+import React, { FC, useReducer, useEffect } from 'react';
+import { FlatList, RefreshControl } from 'react-native';
 
 // TODO: navegar para produtos iniciais
 
@@ -8,22 +8,28 @@ import { Market as MarketState } from '@src/store/slices/market/types';
 import { useAppDispatch, useAppSelector } from '@src/store';
 import { addSignUpMarket, removeSignUpMarket } from '@src/store';
 import { useAppNavigation, useToast as _useToast } from '@src/hooks';
+import { useApi } from '@src/hooks/use-api';
+import { colors } from '@src/config/theme';
 import * as C_S from '../common-styles';
 
 import { initialState, reducer } from './reducer';
 
-// TODO: remover dados mocados
 // TODO: buscar markets da api
 export const Market: FC = () => {
   const appDispatch = useAppDispatch();
-  const { navigateTo, goBack } = useAppNavigation();
+  const { navigateTo, goBack, onFocus } = useAppNavigation();
   const { signUpMarket } = useAppSelector((state) => state);
 
+  const { getAllMarkets } = useApi();
   const useToast = _useToast();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const onOpenAnimation = () => dispatch({ type: 'onOpenAnimation' });
   const onCloseAnimation = () => dispatch({ type: 'onCloseAnimation' });
+  const onGetAllMarkets = () => dispatch({ type: 'changeLoading', payload: true });
+  const onConcludedGetAllMarkets = () => dispatch({ type: 'changeLoading', payload: false });
+  const onChangeMarkets = (markets: MarketState[]) =>
+    dispatch({ type: 'onChangeMarkets', payload: markets });
 
   const handleSelect = (market: MarketState) => {
     appDispatch(addSignUpMarket(market));
@@ -39,13 +45,32 @@ export const Market: FC = () => {
     return navigateTo<'auth'>('sign-up-initial-product'); // TODO: navegar para produtos iniciais
   };
 
+  const handleGetAllMarkets = async () => {
+    onGetAllMarkets();
+
+    getAllMarkets()
+      .then((markets) => onChangeMarkets(markets))
+      .finally(() => onConcludedGetAllMarkets());
+  };
+
+  useEffect(() => {
+    const focus = onFocus(handleGetAllMarkets);
+
+    return focus;
+  }, []); // eslint-disable-line
+
+  console.log(state.markets);
+
   return (
     <C_S.Container>
       <C.Header handle={goBack} title="Seleção de feiras" iconType="navigate-go-back" />
       <C_S.Container>
         <FlatList
           style={{ paddingVertical: 8, paddingHorizontal: 16 }}
-          data={[]}
+          refreshControl={
+            <RefreshControl onRefresh={handleGetAllMarkets} refreshing={state.loading} />
+          }
+          data={state.markets}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <C.ListSignUpMarket
