@@ -1,4 +1,4 @@
-import React, { FC, useReducer, useMemo } from 'react';
+import React, { FC, useReducer } from 'react';
 import { ActivityIndicator, Animated } from 'react-native';
 import { handleInputMask } from '@src/utils';
 
@@ -6,6 +6,7 @@ import { colors } from '@src/config/theme';
 import logo from '@src/assets/icons/logo.png';
 
 import { useAppNavigation } from '@src/hooks';
+import { IfElse } from '@src/components';
 import * as S from './styles';
 
 import { initialState, reducer } from './reducer';
@@ -18,13 +19,6 @@ export const Login: FC = () => {
 
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
-
-  // TODO: usar component IfElse
-  const labelOrLoading = useMemo(() => {
-    if (!state.loading) return <S.LabelSignIn>Entrar</S.LabelSignIn>;
-
-    return <ActivityIndicator color={colors.basic.white} size="large" />;
-  }, [state.loading]);
 
   const handleLogin = () => {
     return navigateTo<'auth'>('app');
@@ -71,7 +65,13 @@ export const Login: FC = () => {
           />
         </S.InputContainer>
         <S.SignIn disabled={state.loading} onPress={handleLogin}>
-          {labelOrLoading}
+          <IfElse
+            condition={state.loading}
+            render={{
+              toBeFalsy: () => <S.LabelSignIn>Entrar</S.LabelSignIn>,
+              toBeTruthy: () => <ActivityIndicator color={colors.basic.white} size="large" />,
+            }}
+          />
         </S.SignIn>
 
         <S.SignUp disabled={state.loading} onPress={() => navigateTo<'auth'>('terms')}>
