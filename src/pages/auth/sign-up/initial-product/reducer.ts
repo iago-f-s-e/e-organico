@@ -1,4 +1,5 @@
 import { Product } from '@src/store/slices/product/types';
+import { UnitMeasure } from '@src/store/slices/unit-measure/types';
 import { Animated } from 'react-native';
 
 type State = {
@@ -7,13 +8,19 @@ type State = {
   opacityButton: Animated.ValueXY;
   loading: boolean;
   products: Product[];
+  unitMeasures: UnitMeasure[];
 };
 
-type Actions = 'onOpenAnimation' | 'onCloseAnimation' | 'changeLoading' | 'onChangeProducts';
+type Actions =
+  | 'onOpenAnimation'
+  | 'onCloseAnimation'
+  | 'changeLoading'
+  | 'onChangeProducts'
+  | 'onChangeUnitMeasures';
 
 type Action = {
   type: Actions;
-  payload?: boolean | Product[];
+  payload?: boolean | Product[] | UnitMeasure[];
 };
 
 type Reducer = (state: State, action: Action) => State;
@@ -22,6 +29,11 @@ const reducers: { [key in Actions]: Reducer } = {
   changeLoading: (state, action): State => ({ ...state, loading: Boolean(action.payload) }),
 
   onChangeProducts: (state, action): State => ({ ...state, products: action.payload as Product[] }),
+
+  onChangeUnitMeasures: (state, action): State => ({
+    ...state,
+    unitMeasures: action.payload as UnitMeasure[],
+  }),
 
   onOpenAnimation: (state, _): State => {
     Animated.parallel([
@@ -84,6 +96,7 @@ export const initialState: State = {
   opacityButton: new Animated.ValueXY({ x: 1, y: 0 }),
   loading: false,
   products: [],
+  unitMeasures: [],
 };
 
 export const reducer: Reducer = (state, action) => reducers[action.type](state, action);

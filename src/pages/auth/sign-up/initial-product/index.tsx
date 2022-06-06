@@ -6,6 +6,7 @@ import * as C from '@src/components';
 import { addSignUpProduct, removeSignUpProduct, useAppDispatch, useAppSelector } from '@src/store';
 import { useAppNavigation, useStorage, useToast as _useToast } from '@src/hooks';
 import { useApi } from '@src/hooks/use-api';
+import { UnitMeasure } from '@src/store/slices/unit-measure/types';
 import * as C_S from '../common-styles';
 
 import { initialState, reducer } from './reducer';
@@ -16,7 +17,7 @@ export const InitialProduct: FC = () => {
   const { clearPersist } = useStorage();
   const { signUpProduct } = useAppSelector((state) => state);
 
-  const { getAllProducts } = useApi();
+  const { getAllProducts, getAllUnitMeasures } = useApi();
   const useToast = _useToast();
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -26,6 +27,8 @@ export const InitialProduct: FC = () => {
   const onConcludedGetAllProducts = () => dispatch({ type: 'changeLoading', payload: false });
   const onChangeProducts = (products: Product[]) =>
     dispatch({ type: 'onChangeProducts', payload: products });
+  const onChangeUnitMeasures = (unitMeasures: UnitMeasure[]) =>
+    dispatch({ type: 'onChangeUnitMeasures', payload: unitMeasures });
 
   const handleSelect = (payload: ProductDetail) => {
     appDispatch(addSignUpProduct(payload));
@@ -43,16 +46,19 @@ export const InitialProduct: FC = () => {
     return navigateTo<'auth'>('sign-up-finished');
   };
 
-  const handleGetAllProducts = () => {
+  const getAllData = async () => {
+    onChangeProducts(await getAllProducts());
+    onChangeUnitMeasures(await getAllUnitMeasures());
+  };
+
+  const handleGetAllData = () => {
     onGetAllProducts();
 
-    getAllProducts()
-      .then((products) => onChangeProducts(products))
-      .finally(() => onConcludedGetAllProducts());
+    getAllData().finally(() => onConcludedGetAllProducts());
   };
 
   useEffect(() => {
-    const focus = onFocus(handleGetAllProducts);
+    const focus = onFocus(handleGetAllData);
 
     return focus;
   }, []); // eslint-disable-line
@@ -64,13 +70,13 @@ export const InitialProduct: FC = () => {
         <FlatList
           style={{ paddingVertical: 8, paddingHorizontal: 16 }}
           refreshControl={
-            <RefreshControl onRefresh={handleGetAllProducts} refreshing={state.loading} />
+            <RefreshControl onRefresh={handleGetAllData} refreshing={state.loading} />
           }
           data={state.products}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <C.ListSignUpProduct
-              unitMeasures={[]} // TODO: buscar da api
+              unitMeasures={state.unitMeasures}
               product={item}
               actions={{
                 remove: handleRemove,

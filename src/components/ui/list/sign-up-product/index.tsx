@@ -26,6 +26,12 @@ type Props = {
   };
 };
 
+const defaultUnitMeasure = {
+  id: 'default_id',
+  abbreviation: 'un',
+  name: 'Unidade',
+};
+
 const initialState: ProductDetail = {
   id: '',
   product: {
@@ -37,7 +43,7 @@ const initialState: ProductDetail = {
   price: 'R$ 0,00',
   stock: '0',
   harvestDate: new Date(),
-  unitMeasure: null,
+  unitMeasure: defaultUnitMeasure,
 };
 
 // TODO: Mostrar detalhes no header
@@ -60,11 +66,9 @@ export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JS
       return found;
     }
 
-    const unitMeasure = unitMeasures[0] || {
-      id: 'default_id',
-      abbreviation: 'un',
-      name: 'Unidade',
-    };
+    const unitMeasure = unitMeasures.find(
+      (value) => value.name === 'Unidade' || value.abbreviation === 'un',
+    );
 
     setState((state) => ({ ...state, unitMeasure, product }));
     return found;
@@ -247,6 +251,7 @@ export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JS
                   <S.InputPrice
                     value={state.price}
                     onChangeText={(value) => handleInputPrice(value)}
+                    selectionColor={colors.basic.white}
                     keyboardType="number-pad"
                   />
                 </S.PriceContainer>

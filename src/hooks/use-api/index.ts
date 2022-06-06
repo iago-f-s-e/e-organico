@@ -1,12 +1,15 @@
 import { useToast as _useToast } from '@src/hooks/use-toast';
 import { Market } from '@src/store/slices/market/types';
 import { Product } from '@src/store/slices/product/types';
+import { UnitMeasure } from '@src/store/slices/unit-measure/types';
 import { handleMarket } from './market';
 import { handleProduct } from './product';
+import { handleUnitMeasure } from './unit-measure';
 
 type UseApi = {
   getAllProducts: () => Promise<Product[]>;
   getAllMarkets: () => Promise<Market[]>;
+  getAllUnitMeasures: () => Promise<UnitMeasure[]>;
 };
 
 export const useApi = (): UseApi => {
@@ -28,5 +31,13 @@ export const useApi = (): UseApi => {
     return [];
   };
 
-  return { getAllMarkets, getAllProducts };
+  const getAllUnitMeasures = async (): Promise<UnitMeasure[]> => {
+    const { data, error } = await handleUnitMeasure(useToast.error).getAll();
+
+    if (!error) return data;
+
+    return [];
+  };
+
+  return { getAllMarkets, getAllProducts, getAllUnitMeasures };
 };

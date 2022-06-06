@@ -1,7 +1,7 @@
 import { endpoints } from '@src/constants/endpoints';
-import { Product } from '@src/store/slices/product/types';
+import { UnitMeasure } from '@src/store/slices/unit-measure/types';
 import { httpClientGET } from '../../http-client';
 
-export function getAllProducts(): Promise<Product[]> {
-  return httpClientGET<Product[]>(endpoints.product.GET_ALL);
+export function getAllUnitMeasures(): Promise<UnitMeasure[]> {
+  return httpClientGET<UnitMeasure[]>(endpoints.unitMeasure.GET_ALL);
 }
