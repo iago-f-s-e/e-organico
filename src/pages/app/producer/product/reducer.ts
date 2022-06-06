@@ -1,8 +1,8 @@
-import { ProductDetail } from '@src/store/slices/product/types';
+import { ProducerProduct } from '@src/store/slices/product/types';
 import { Animated } from 'react-native';
 
 export type State = {
-  producerProduct: ProductDetail;
+  producerProduct: ProducerProduct;
   sizeButton: Animated.ValueXY;
   opacityButton: Animated.ValueXY;
 };

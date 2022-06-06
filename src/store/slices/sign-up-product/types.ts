@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { ProductDetail } from '../product/types';
+import { ProducerProduct } from '../product/types';
 
-export type SignUpProduct = ProductDetail[];
+export type SignUpProduct = ProducerProduct[];
 
-export type Payload = PayloadAction<ProductDetail>;
+export type Payload = PayloadAction<ProducerProduct>;

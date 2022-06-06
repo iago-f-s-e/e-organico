@@ -5,7 +5,7 @@ import { Feather } from '@expo/vector-icons';
 
 import { colors, font } from '@src/config/theme';
 import { useAppSelector } from '@src/store';
-import { Product, ProductDetail } from '@src/store/slices/product/types';
+import { Product, ProducerProduct } from '@src/store/slices/product/types';
 import { handleInputMask } from '@src/utils';
 
 import { translateDate } from '@src/utils';
@@ -19,20 +19,20 @@ type Props = {
   unitMeasures: UnitMeasure[];
   product: Product;
   actions: {
-    select: (state: ProductDetail) => void;
-    remove: (state: ProductDetail) => void;
+    select: (state: ProducerProduct) => void;
+    remove: (state: ProducerProduct) => void;
     onOpenAnimation: () => void;
     onCloseAnimation: () => void;
   };
 };
 
 const defaultUnitMeasure = {
-  id: 'default_id',
+  id: 'f6820857-afec-4cf1-a2c6-01fca0fb572c',
   abbreviation: 'un',
   name: 'Unidade',
 };
 
-const initialState: ProductDetail = {
+const initialState: ProducerProduct = {
   id: '',
   product: {
     id: '',
@@ -51,7 +51,7 @@ const initialState: ProductDetail = {
 export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JSX.Element => {
   const { signUpProduct } = useAppSelector((state) => state);
 
-  const [state, setState] = useState<ProductDetail>(initialState);
+  const [state, setState] = useState<ProducerProduct>(initialState);
   const [sizeContainer] = useState(new Animated.ValueXY({ x: 0, y: 50 }));
   const [opacityContent] = useState(new Animated.ValueXY({ x: 0, y: 0 }));
   const [opened, setOpened] = useState<boolean>(false);
@@ -203,13 +203,13 @@ export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JS
                   onValueChange={(value) => handleUnitPicker(value)}
                   selectedValue={state.unitMeasure}
                 >
-                  {unitMeasures.map(({ id, name }) => (
+                  {unitMeasures.map((item) => (
                     <Picker.Item
-                      key={id}
+                      key={item.id}
                       style={{ fontFamily: font.family.bold, fontSize: 14 }}
                       color={colors.main.secondary}
-                      label={name}
-                      value={id}
+                      label={item.name}
+                      value={item}
                     />
                   ))}
                 </Picker>

@@ -2,7 +2,7 @@ import React, { FC, useReducer, useCallback } from 'react';
 import { Picker } from '@react-native-picker/picker';
 
 import { changeSignUpProducer, useAppDispatch, useAppSelector } from '@src/store';
-import { useAppNavigation, useSignUp, useToast as _useToast } from '@src/hooks';
+import { useAppNavigation, useToast as _useToast } from '@src/hooks';
 
 import * as C from '@src/components';
 import * as C_S from '../common-styles';
@@ -16,7 +16,6 @@ export const SelectTypes: FC = () => {
   const appDispatch = useAppDispatch();
   const { signUpProducer } = useAppSelector((state) => state);
   const { navigateTo, goBack } = useAppNavigation();
-  const { registerProducer } = useSignUp();
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     certification: signUpProducer.certification,
@@ -29,14 +28,6 @@ export const SelectTypes: FC = () => {
   const handleNext = useCallback(async () => {
     const { certification, delivery: makeDelivery } = state;
 
-    dispatch({ type: 'changeLoading', payload: true });
-
-    const { error } = await registerProducer({ ...signUpProducer, makeDelivery, certification });
-
-    dispatch({ type: 'changeLoading', payload: false });
-
-    if (error) return;
-
     appDispatch(
       changeSignUpProducer({
         ...signUpProducer,
@@ -46,7 +37,7 @@ export const SelectTypes: FC = () => {
     );
 
     return navigateTo<'auth'>('sign-up-market');
-  }, [state, navigateTo, signUpProducer, registerProducer, appDispatch]);
+  }, [state, navigateTo, signUpProducer, appDispatch]);
 
   return (
     <C_S.Container>

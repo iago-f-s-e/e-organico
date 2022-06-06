@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { handleInputMask } from '@src/utils';
-import { ProductDetail } from '@src/store/slices/product/types';
+import { ProducerProduct } from '@src/store/slices/product/types';
 import { useAppNavigation } from '@src/hooks';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
 type Props = {
-  data: ProductDetail;
+  data: ProducerProduct;
 };
 
 export const ListProducerProduct = ({ data }: Props): JSX.Element => {

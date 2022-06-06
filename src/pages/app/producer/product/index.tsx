@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useReducer, useMemo, useState } from 'react';
 import { Animated } from 'react-native';
-import { ProductDetail } from '@src/store/slices/product/types';
+import { ProducerProduct } from '@src/store/slices/product/types';
 import { Feather } from '@expo/vector-icons';
 
 import { useAppNavigation } from '@src/hooks';
@@ -15,7 +15,7 @@ import * as S from './styles';
 import { initialState, reducer } from './reducer';
 
 // TODO: buscar da api
-const producerProduct: ProductDetail = null;
+const producerProduct: ProducerProduct = null;
 
 export const Product: FC = () => {
   const appDispatch = useAppDispatch();

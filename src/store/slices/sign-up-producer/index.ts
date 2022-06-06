@@ -30,6 +30,8 @@ const initialState: SignUpProducer = {
       uri: '',
     },
   ],
+  markets: [],
+  products: [],
 };
 
 export const signUpProducerSlice = createSlice({

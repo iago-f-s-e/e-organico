@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProductDetail } from '@src/store/slices/product/types';
+import { ProducerProduct } from '@src/store/slices/product/types';
 
 import { useAppNavigation } from '@src/hooks';
 
@@ -8,7 +8,7 @@ import * as C_S from '../common-styles';
 import * as S from './styles';
 
 type Props = {
-  data: ProductDetail;
+  data: ProducerProduct;
 };
 
 export const ListConsumerProduct = ({ data }: Props): JSX.Element => {

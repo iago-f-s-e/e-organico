@@ -31,9 +31,9 @@ export function reserveEmail(email: string, device: string): Promise<AxiosRespon
 }
 
 export function registerConsumer(data: SignUpConsumer): Promise<AxiosResponse> {
-  return httpClient.post(endpoints.signUp.REGISTER_CONSUMER, data);
+  return httpClient.post(endpoints.signUp.REGISTER_CONSUMER, { ...data, type: 'consumer' });
 }
 
 export function registerProducer(data: RegisterProducerDTO): Promise<AxiosResponse> {
-  return httpClient.post(endpoints.signUp.REGISTER_PRODUCER, data);
+  return httpClient.post(endpoints.signUp.REGISTER_PRODUCER, { ...data, type: 'producer' });
 }

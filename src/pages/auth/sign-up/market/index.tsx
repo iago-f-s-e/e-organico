@@ -2,7 +2,7 @@ import React, { FC, useReducer, useEffect } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import * as C from '@src/components';
 import { Market as MarketState } from '@src/store/slices/market/types';
-import { useAppDispatch, useAppSelector } from '@src/store';
+import { changeSignUpProducer, useAppDispatch, useAppSelector } from '@src/store';
 import { addSignUpMarket, removeSignUpMarket } from '@src/store';
 import { useAppNavigation, useToast as _useToast } from '@src/hooks';
 import { useApi } from '@src/hooks/use-api';
@@ -13,7 +13,7 @@ import { initialState, reducer } from './reducer';
 export const Market: FC = () => {
   const appDispatch = useAppDispatch();
   const { navigateTo, goBack, onFocus } = useAppNavigation();
-  const { signUpMarket } = useAppSelector((state) => state);
+  const { signUpMarket, signUpProducer } = useAppSelector((state) => state);
 
   const { getAllMarkets } = useApi();
   const useToast = _useToast();
@@ -36,6 +36,13 @@ export const Market: FC = () => {
 
   const handleNext = () => {
     if (!signUpMarket.length) return useToast.error('Selecione pelo menos uma feira!');
+
+    appDispatch(
+      changeSignUpProducer({
+        ...signUpProducer,
+        markets: signUpMarket,
+      }),
+    );
 
     return navigateTo<'auth'>('sign-up-initial-product');
   };

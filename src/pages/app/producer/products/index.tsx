@@ -1,11 +1,11 @@
-import { ProductDetail } from '@src/store/slices/product/types';
+import { ProducerProduct } from '@src/store/slices/product/types';
 import React, { FC } from 'react';
 
 import * as C from '@src/components';
 import * as C_S from '../../common-styles';
 
 // TODO: buscar da api
-const products: ProductDetail[] = [];
+const products: ProducerProduct[] = [];
 
 export const Products: FC = () => {
   return (

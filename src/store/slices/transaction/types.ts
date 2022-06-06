@@ -1,7 +1,7 @@
 import { Address } from '../address/types';
 import { Market, Workday } from '../market/types';
 import { PaymentMethod } from '../payment-method/types';
-import { ProductDetail } from '../product/types';
+import { ProducerProduct } from '../product/types';
 import { User, UserDetail } from '../user/types';
 
 export type TransactionStatus =
@@ -17,7 +17,7 @@ export type TransactionStatus =
   | 'waiting-for-confirmation-from-the-producer';
 
 export type TransactionProduct = {
-  producerProduct: ProductDetail;
+  producerProduct: ProducerProduct;
   quantity: string;
   total: string;
 };

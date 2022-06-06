@@ -1,10 +1,16 @@
 import React, { FC, useEffect, useReducer } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
-import { Product, ProductDetail } from '@src/store/slices/product/types';
+import { Product, ProducerProduct } from '@src/store/slices/product/types';
 
 import * as C from '@src/components';
-import { addSignUpProduct, removeSignUpProduct, useAppDispatch, useAppSelector } from '@src/store';
-import { useAppNavigation, useStorage, useToast as _useToast } from '@src/hooks';
+import {
+  addSignUpProduct,
+  changeSignUpProducer,
+  removeSignUpProduct,
+  useAppDispatch,
+  useAppSelector,
+} from '@src/store';
+import { useAppNavigation, useSignUp, useStorage, useToast as _useToast } from '@src/hooks';
 import { useApi } from '@src/hooks/use-api';
 import { UnitMeasure } from '@src/store/slices/unit-measure/types';
 import * as C_S from '../common-styles';
@@ -13,37 +19,56 @@ import { initialState, reducer } from './reducer';
 
 export const InitialProduct: FC = () => {
   const appDispatch = useAppDispatch();
-  const { navigateTo, goBack, onFocus } = useAppNavigation();
+  const { goBack, onFocus } = useAppNavigation();
+  const { signUpProduct, signUpProducer } = useAppSelector((state) => state);
+  const { navigateTo } = useAppNavigation();
   const { clearPersist } = useStorage();
-  const { signUpProduct } = useAppSelector((state) => state);
-
+  const { registerProducer } = useSignUp();
   const { getAllProducts, getAllUnitMeasures } = useApi();
   const useToast = _useToast();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const onOpenAnimation = () => dispatch({ type: 'onOpenAnimation' });
   const onCloseAnimation = () => dispatch({ type: 'onCloseAnimation' });
-  const onGetAllProducts = () => dispatch({ type: 'changeLoading', payload: true });
-  const onConcludedGetAllProducts = () => dispatch({ type: 'changeLoading', payload: false });
+  const onOpenRequest = () => dispatch({ type: 'changeLoading', payload: true });
+  const onCloseRequest = () => dispatch({ type: 'changeLoading', payload: false });
   const onChangeProducts = (products: Product[]) =>
     dispatch({ type: 'onChangeProducts', payload: products });
   const onChangeUnitMeasures = (unitMeasures: UnitMeasure[]) =>
     dispatch({ type: 'onChangeUnitMeasures', payload: unitMeasures });
 
-  const handleSelect = (payload: ProductDetail) => {
+  const handleSelect = (payload: ProducerProduct) => {
     appDispatch(addSignUpProduct(payload));
   };
 
-  const handleRemove = (payload: ProductDetail) => {
+  const handleRemove = (payload: ProducerProduct) => {
     appDispatch(removeSignUpProduct(payload));
   };
 
   const handleNext = () => {
     if (!signUpProduct.length) return useToast.error('Selecione pelo menos uma feira!');
 
-    clearPersist();
+    appDispatch(
+      changeSignUpProducer({
+        ...signUpProducer,
+        products: signUpProduct,
+      }),
+    );
 
-    return navigateTo<'auth'>('sign-up-finished');
+    onOpenRequest();
+
+    registerProducer({
+      ...signUpProducer,
+      products: signUpProduct,
+    })
+      .then(({ error }) => {
+        if (!error) return clearPersist();
+      })
+      .finally(() => {
+        onCloseRequest();
+
+        return navigateTo<'auth'>('sign-up-finished');
+      });
   };
 
   const getAllData = async () => {
@@ -52,9 +77,9 @@ export const InitialProduct: FC = () => {
   };
 
   const handleGetAllData = () => {
-    onGetAllProducts();
+    onOpenRequest();
 
-    getAllData().finally(() => onConcludedGetAllProducts());
+    getAllData().finally(() => onCloseRequest());
   };
 
   useEffect(() => {

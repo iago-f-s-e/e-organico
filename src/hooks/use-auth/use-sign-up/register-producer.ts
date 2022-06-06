@@ -13,6 +13,10 @@ export const handleRegisterProducer: ReservePhone = async (props, onError) => {
   const phone = handleRemoveMask(props.phone, 'phone');
   const zipCode = handleRemoveMask(props.address.zipCode, 'zipCode');
   const address = { ...props.address, zipCode };
+  const products = props.products.map((product) => ({
+    ...product,
+    price: handleRemoveMask(product.price, 'money', { withComma: false }),
+  }));
 
   const {
     image: _image,
@@ -26,7 +30,7 @@ export const handleRegisterProducer: ReservePhone = async (props, onError) => {
 
   const producer = { certificationType, makeDelivery };
 
-  const data = { ..._producer, document, phone, address, producer };
+  const data = { ..._producer, document, phone, address, producer, products };
   try {
     await registerProducer(data);
 

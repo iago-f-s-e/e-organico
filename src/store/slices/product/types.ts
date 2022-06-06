@@ -9,7 +9,7 @@ export type Product = {
   image: string;
 };
 
-export type ProductDetail = {
+export type ProducerProduct = {
   id: string;
   product: Product;
   price: string;
@@ -18,6 +18,6 @@ export type ProductDetail = {
   harvestDate: Date;
 };
 
-export type ProductWithTransactions = ProductDetail & {
+export type ProductWithTransactions = ProducerProduct & {
   lastTransactions: Transaction[];
 };
