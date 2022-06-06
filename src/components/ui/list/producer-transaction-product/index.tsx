@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { handleInputMask, translateUnitMeasure } from '@src/utils';
+import { handleInputMask } from '@src/utils';
 import { TransactionProduct } from '@src/store/slices/transaction/types';
 import * as C_S from '../common-styles';
 import * as S from './styles';
@@ -17,8 +17,9 @@ export const ListProducerTransactionProduct = ({ transactionProduct }: Props): J
   const total = handleInputMask(transactionProduct.total, 'money', {
     onlyComma: true,
   });
-  const translated = translateUnitMeasure(transactionProduct.producerProduct.unitMeasure);
-  const unitMeasure = Number(transactionProduct.quantity) > 1 ? `${translated}s` : translated;
+  const { name } = transactionProduct.producerProduct.unitMeasure;
+
+  const unitMeasure = Number(transactionProduct.quantity) > 1 ? `${name}s` : name;
 
   const quantity = `x ${transactionProduct.quantity} ${unitMeasure}`;
 

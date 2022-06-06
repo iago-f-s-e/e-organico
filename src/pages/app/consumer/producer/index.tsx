@@ -69,7 +69,7 @@ const producer: ProducerDetail = {
       price: '5',
       product: null,
       stock: '5',
-      unitMeasure: 'un',
+      unitMeasure: null,
     },
     {
       id: 'producer_product_id2',
@@ -77,7 +77,7 @@ const producer: ProducerDetail = {
       price: '7.55',
       product: null,
       stock: '7.55',
-      unitMeasure: 'un',
+      unitMeasure: null,
     },
   ],
   propertyImages: [{ imagePath }, { imagePath }, { imagePath }, { imagePath }],

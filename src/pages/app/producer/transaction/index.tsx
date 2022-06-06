@@ -2,9 +2,9 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import { hideBottomTab, useAppDispatch } from '@src/store';
 import { useAppNavigation } from '@src/hooks';
 
-import { TransactionDetail } from '@src/store/slices/transaction/types';
 import * as C from '@src/components';
 import { getWaitingTime, handleInputMask, toPTDay } from '@src/utils';
+import { TransactionDetail } from '@src/store/slices/transaction/types';
 import * as C_S from '../../common-styles';
 import * as S from './styles';
 
@@ -73,7 +73,7 @@ const transaction: TransactionDetail = {
           type: 'fruta',
         },
         stock: '5.00',
-        unitMeasure: 'kg',
+        unitMeasure: null,
       },
       quantity: '5',
       total: '25.00',

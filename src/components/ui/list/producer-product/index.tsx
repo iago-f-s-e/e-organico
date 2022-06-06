@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { handleInputMask, translateUnitMeasure } from '@src/utils';
+import { handleInputMask } from '@src/utils';
 import { ProductDetail } from '@src/store/slices/product/types';
 import { useAppNavigation } from '@src/hooks';
 import * as C_S from '../common-styles';
@@ -17,8 +17,8 @@ export const ListProducerProduct = ({ data }: Props): JSX.Element => {
     onlyComma: true,
   });
 
-  const translated = translateUnitMeasure(data.unitMeasure);
-  const unitMeasure = Number(data.stock) > 1 ? `${translated}s` : translated;
+  const { name } = data.unitMeasure;
+  const unitMeasure = Number(data.stock) > 1 ? `${name}s` : name;
 
   const stock = `${data.stock} ${unitMeasure}`;
 

@@ -1,10 +1,5 @@
 import { Transaction } from '../transaction/types';
-
-export type UnitMeasureTypes = 'un' | 'kg' | 'L' | 'mg' | 'g' | 'duzia' | 'penca';
-
-export type UnitMeasure = {
-  name: UnitMeasureTypes;
-};
+import { UnitMeasure } from '../unit-measure/types';
 
 // TODO: criar propriedade de imagem
 export type Product = {
@@ -19,7 +14,7 @@ export type ProductDetail = {
   product: Product;
   price: string;
   stock: string;
-  unitMeasure: UnitMeasureTypes;
+  unitMeasure: UnitMeasure;
   harvestDate: Date;
 };
 

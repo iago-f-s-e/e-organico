@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProductCartPayload } from '@src/store/slices/cart/types';
 
-import { handleInputMask, translateUnitMeasure } from '@src/utils';
+import { handleInputMask } from '@src/utils';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
@@ -11,8 +11,8 @@ type Props = {
 
 export const ListConsumerProductCart = ({ productCart }: Props): JSX.Element => {
   const price = handleInputMask(productCart.producerProduct.price, 'money', { onlyComma: true });
-  const translated = translateUnitMeasure(productCart.producerProduct.unitMeasure);
-  const unitMeasure = Number(productCart.quantity) > 1 ? `${translated}s` : translated;
+  const { name } = productCart.producerProduct.unitMeasure;
+  const unitMeasure = Number(productCart.quantity) > 1 ? `${name}s` : name;
 
   const quantity = `x ${productCart.quantity} ${unitMeasure}`;
 

@@ -5,17 +5,18 @@ import { Feather } from '@expo/vector-icons';
 
 import { colors, font } from '@src/config/theme';
 import { useAppSelector } from '@src/store';
-import { Product, ProductDetail, UnitMeasureTypes } from '@src/store/slices/product/types';
+import { Product, ProductDetail } from '@src/store/slices/product/types';
 import { handleInputMask } from '@src/utils';
 
-import { translateUnitMeasure, translateDate } from '@src/utils';
+import { translateDate } from '@src/utils';
+import { UnitMeasure } from '@src/store/slices/unit-measure/types';
 import * as S from './styles';
 
 import { getIcon } from './util';
 import { DatePicker } from '../../date-picker';
 
 type Props = {
-  unitMeasures: any[];
+  unitMeasures: UnitMeasure[];
   product: Product;
   actions: {
     select: (state: ProductDetail) => void;
@@ -36,7 +37,7 @@ const initialState: ProductDetail = {
   price: 'R$ 0,00',
   stock: '0',
   harvestDate: new Date(),
-  unitMeasure: 'un',
+  unitMeasure: null,
 };
 
 // TODO: Mostrar detalhes no header
@@ -59,7 +60,11 @@ export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JS
       return found;
     }
 
-    const unitMeasure = unitMeasures[0]?.name || 'un';
+    const unitMeasure = unitMeasures[0] || {
+      id: 'default_id',
+      abbreviation: 'un',
+      name: 'Unidade',
+    };
 
     setState((state) => ({ ...state, unitMeasure, product }));
     return found;
@@ -154,7 +159,7 @@ export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JS
     setState((state) => ({ ...state, harvestDate }));
   };
 
-  const handleUnitPicker = (unitMeasure: UnitMeasureTypes) => {
+  const handleUnitPicker = (unitMeasure: UnitMeasure) => {
     setState((state) => ({ ...state, unitMeasure }));
   };
 
@@ -194,13 +199,13 @@ export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JS
                   onValueChange={(value) => handleUnitPicker(value)}
                   selectedValue={state.unitMeasure}
                 >
-                  {unitMeasures.map(({ name }) => (
+                  {unitMeasures.map(({ id, name }) => (
                     <Picker.Item
-                      key={name}
+                      key={id}
                       style={{ fontFamily: font.family.bold, fontSize: 14 }}
                       color={colors.main.secondary}
-                      label={translateUnitMeasure(name)}
-                      value={name}
+                      label={name}
+                      value={id}
                     />
                   ))}
                 </Picker>

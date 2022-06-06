@@ -87,7 +87,7 @@ export const initialState: State = {
       type: '',
     },
     stock: '0',
-    unitMeasure: 'L',
+    unitMeasure: null,
   },
   sizeButton: new Animated.ValueXY({ x: 0, y: 0 }),
   opacityButton: new Animated.ValueXY({ x: 0, y: 0 }),

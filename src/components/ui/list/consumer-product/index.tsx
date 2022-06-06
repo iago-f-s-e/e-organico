@@ -3,7 +3,7 @@ import { ProductDetail } from '@src/store/slices/product/types';
 
 import { useAppNavigation } from '@src/hooks';
 
-import { handleInputMask, translateUnitMeasure } from '@src/utils';
+import { handleInputMask } from '@src/utils';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
@@ -14,7 +14,7 @@ type Props = {
 export const ListConsumerProduct = ({ data }: Props): JSX.Element => {
   const { product } = data;
   const price = handleInputMask(data.price, 'money', { onlyComma: true });
-  const unitMeasure = `p/${translateUnitMeasure(data.unitMeasure)}`;
+  const unitMeasure = `p/${data.unitMeasure.name}`;
 
   const { navigateTo } = useAppNavigation();
 
