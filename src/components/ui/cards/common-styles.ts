@@ -141,7 +141,7 @@ export const AddressData = styled.Text`
 export const WorkDaysSection = styled.View`
   flex: 1;
 
-  height: 150px;
+  height: 100px; /*  TODO: verificar todos os cards pra saber se precisa voltar pra 150 ou mudar a logica  */
 `;
 
 export const WorkDaysTitle = styled.Text`

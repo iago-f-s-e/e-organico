@@ -9,6 +9,8 @@ import * as C_S from '../../common-styles';
 
 import { initialState, reducer } from './reducer';
 
+// TODO: implementar o ver mais em todas as telas
+
 export const Markets: FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { onFocus } = useAppNavigation();
@@ -41,7 +43,7 @@ export const Markets: FC = () => {
           <C_S.ShowMore>ver mais</C_S.ShowMore>
         </C_S.TitleContainer>
         <FlatList
-          data={state.markets}
+          data={state.lastMarkets}
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ item }) => <C.ListConsumerMarket market={item} />}
           horizontal
@@ -55,7 +57,7 @@ export const Markets: FC = () => {
         </C_S.TitleContainer>
 
         <FlatList
-          data={state.markets}
+          data={state.topTransactions}
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ item }) => <C.ListConsumerMarket market={item} />}
           horizontal

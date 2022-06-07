@@ -34,7 +34,7 @@ export const ListConsumerMarket = ({ market, onSelect, current, selected }: Prop
 
     dispatch(updateMarketSection(market));
 
-    return navigateTo<'consumer'>('consumer-market');
+    return navigateTo<'consumer'>('consumer-market', { id: market.id });
   };
 
   return (

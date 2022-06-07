@@ -1,5 +1,5 @@
 import { Address } from '../address/types';
-import { User } from '../user/types';
+import { MinimalProducer } from '../producer/types';
 
 export type EUDay =
   | 'MONDAY'
@@ -36,6 +36,6 @@ export type Market = {
 };
 
 export type MarketDetail = Market & {
-  producers: User[];
+  producers: MinimalProducer[];
   isOpen: boolean;
 };

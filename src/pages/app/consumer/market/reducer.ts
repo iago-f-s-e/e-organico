@@ -1,17 +1,17 @@
-import { Market } from '@src/store/slices/market/types';
+import { defaultMarketDetail } from '@src/constants/default-entities';
+import { MarketDetail } from '@src/store/slices/market/types';
 
 type State = {
   loading: boolean;
-  markets: Market[];
-  lastMarkets: Market[];
-  topTransactions: Market[];
+  idParam: string;
+  market: MarketDetail;
 };
 
-type Actions = 'changeLoading' | 'onChangeMarkets';
+type Actions = 'changeLoading' | 'onChangeMarket';
 
 type Action = {
   type: Actions;
-  payload?: boolean | Market[];
+  payload?: boolean | MarketDetail;
 };
 
 type Reducer = (state: State, action: Action) => State;
@@ -19,14 +19,13 @@ type Reducer = (state: State, action: Action) => State;
 const reducers: { [key in Actions]: Reducer } = {
   changeLoading: (state, action): State => ({ ...state, loading: Boolean(action.payload) }),
 
-  onChangeMarkets: (state, action): State => ({ ...state, markets: action.payload as Market[] }),
+  onChangeMarket: (state, action): State => ({ ...state, market: action.payload as MarketDetail }),
 };
 
 export const initialState: State = {
   loading: true,
-  markets: [],
-  lastMarkets: [],
-  topTransactions: [],
+  market: defaultMarketDetail,
+  idParam: '',
 };
 
 export const reducer: Reducer = (state, action) => reducers[action.type](state, action);

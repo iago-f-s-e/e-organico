@@ -1,5 +1,6 @@
+import { defaultMarketDetail } from '@src/constants/default-entities';
 import { useToast as _useToast } from '@src/hooks/use-toast';
-import { Market } from '@src/store/slices/market/types';
+import { Market, MarketDetail } from '@src/store/slices/market/types';
 import { MinimalProducer } from '@src/store/slices/producer/types';
 import { Product } from '@src/store/slices/product/types';
 import { UnitMeasure } from '@src/store/slices/unit-measure/types';
@@ -13,6 +14,8 @@ type UseApi = {
   getAllProducers: () => Promise<MinimalProducer[]>;
   getAllMarkets: () => Promise<Market[]>;
   getAllUnitMeasures: () => Promise<UnitMeasure[]>;
+
+  getMarketById: (id: string) => Promise<MarketDetail>;
 };
 
 export const useApi = (): UseApi => {
@@ -50,5 +53,13 @@ export const useApi = (): UseApi => {
     return [];
   };
 
-  return { getAllMarkets, getAllProducts, getAllUnitMeasures, getAllProducers };
+  const getMarketById = async (id: string): Promise<MarketDetail> => {
+    const { data, error } = await handleMarket(useToast.error).getById(id);
+
+    if (!error) return data;
+
+    return defaultMarketDetail;
+  };
+
+  return { getAllMarkets, getAllProducts, getAllUnitMeasures, getAllProducers, getMarketById };
 };
