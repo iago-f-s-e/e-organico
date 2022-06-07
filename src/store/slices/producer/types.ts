@@ -12,3 +12,13 @@ export type ProducerDetail = UserDetail & {
   products: ProducerProduct[];
   propertyImages: PropertyImage[];
 };
+
+export type MinimalProducer = {
+  id: string;
+  name: string;
+  image: string;
+  score: {
+    transactions: number;
+    rating: number;
+  };
+};

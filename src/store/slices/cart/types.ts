@@ -1,14 +1,14 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { PaymentMethod } from '../payment-method/types';
+import { MinimalProducer } from '../producer/types';
 import { PickOrDelivery, TransactionProduct } from '../transaction/types';
-import { User } from '../user/types';
 
 export type ProductCartPayload = TransactionProduct & {
   key: string;
 };
 
 export type CartPayload = {
-  producer: User;
+  producer: MinimalProducer;
   total: string;
   productQuantity: string;
   pickOrDelivery: PickOrDelivery;
@@ -17,7 +17,7 @@ export type CartPayload = {
 };
 
 type SetupCart = {
-  producer: User;
+  producer: MinimalProducer;
   product: Omit<ProductCartPayload, 'key'>;
 };
 

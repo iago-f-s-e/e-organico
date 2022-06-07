@@ -1,12 +1,12 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { Market } from '../market/types';
-import { User } from '../user/types';
+import { MinimalProducer } from '../producer/types';
 
 export type Section = {
   market: Market;
-  producer: User;
+  producer: MinimalProducer;
 };
 
 export type UpdateMarketSectionPayload = PayloadAction<Market>;
 
-export type UpdateProducerSectionPayload = PayloadAction<User>;
+export type UpdateProducerSectionPayload = PayloadAction<MinimalProducer>;

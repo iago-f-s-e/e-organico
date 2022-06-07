@@ -1,97 +1,38 @@
-import React, { FC } from 'react';
+import React, { FC, useReducer, useEffect } from 'react';
 import { FlatList } from 'react-native';
 
-import { User } from '@src/store/slices/user/types';
 import * as C from '@src/components';
+
+import { useAppNavigation } from '@src/hooks';
+import { useApi } from '@src/hooks/use-api';
+import { MinimalProducer } from '@src/store/slices/producer/types';
+import { initialState, reducer } from './reducer';
 import * as C_S from '../../common-styles';
 
-const defaultImage =
-  'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
-
-const producers: User[] = [
-  {
-    id: 'id1',
-    imagePath: defaultImage,
-    name: 'zé',
-    phone: '99999999999',
-    score: {
-      rating: 0,
-      transactions: 0,
-    },
-  },
-  {
-    id: 'id2',
-    imagePath: defaultImage,
-    name: 'zé',
-    phone: '99999999999',
-    score: {
-      rating: 0,
-      transactions: 0,
-    },
-  },
-  {
-    id: 'id3',
-    imagePath: defaultImage,
-    name: 'zé',
-    phone: '99999999999',
-    score: {
-      rating: 0,
-      transactions: 0,
-    },
-  },
-  {
-    id: 'id4',
-    imagePath: defaultImage,
-    name: 'zé',
-    phone: '99999999999',
-    score: {
-      rating: 0,
-      transactions: 0,
-    },
-  },
-  {
-    id: 'id5',
-    imagePath: defaultImage,
-    name: 'zé',
-    phone: '99999999999',
-    score: {
-      rating: 0,
-      transactions: 0,
-    },
-  },
-  {
-    id: 'id6',
-    imagePath: defaultImage,
-    name: 'zé',
-    phone: '99999999999',
-    score: {
-      rating: 0,
-      transactions: 0,
-    },
-  },
-  {
-    id: 'id7',
-    imagePath: defaultImage,
-    name: 'zé',
-    phone: '99999999999',
-    score: {
-      rating: 0,
-      transactions: 0,
-    },
-  },
-  {
-    id: 'id8',
-    imagePath: defaultImage,
-    name: 'zé',
-    phone: '99999999999',
-    score: {
-      rating: 0,
-      transactions: 0,
-    },
-  },
-];
-
 export const Producers: FC = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { onFocus } = useAppNavigation();
+  const { getAllProducers } = useApi();
+
+  const onOpenRequisition = () => dispatch({ type: 'changeLoading', payload: true });
+  const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
+  const onChangeProducers = (producers: MinimalProducer[]) =>
+    dispatch({ type: 'onChangeProducers', payload: producers });
+
+  const handleOpenRequisition = () => {
+    onOpenRequisition();
+
+    getAllProducers()
+      .then((producers) => onChangeProducers(producers))
+      .finally(() => onCloseRequisition());
+  };
+
+  useEffect(() => {
+    const focus = onFocus(handleOpenRequisition);
+
+    return focus;
+  }, []); // eslint-disable-line
+
   return (
     <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
       <C_S.Content>
@@ -100,7 +41,7 @@ export const Producers: FC = () => {
           <C_S.ShowMore>ver mais</C_S.ShowMore>
         </C_S.TitleContainer>
         <FlatList
-          data={producers}
+          data={state.lastProducers}
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ item }) => <C.ListConsumerProducer producer={item} />}
           horizontal
@@ -115,7 +56,7 @@ export const Producers: FC = () => {
         </C_S.TitleContainer>
 
         <C.Map
-          data={producers}
+          data={state.producers}
           render={(value, index) => (
             <C.ListConsumerProducer key={index.toString()} producer={value} />
           )}

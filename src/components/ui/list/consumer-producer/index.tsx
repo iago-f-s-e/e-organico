@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react';
 
-import { User } from '@src/store/slices/user/types';
 import { useAppNavigation } from '@src/hooks';
 import { canChangeCart, updateProducerSection, useAppDispatch, useAppSelector } from '@src/store';
 
+import { MinimalProducer } from '@src/store/slices/producer/types';
 import * as S from './styles';
 import * as C_S from '../common-styles';
 
 type Props = {
-  producer: User;
+  producer: MinimalProducer;
 };
 
 export const ListConsumerProducer = ({ producer }: Props): JSX.Element => {
@@ -39,7 +39,7 @@ export const ListConsumerProducer = ({ producer }: Props): JSX.Element => {
   return (
     <S.Container>
       <C_S.ImageContainer>
-        <C_S.Image source={{ uri: producer.imagePath }} />
+        <C_S.Image source={{ uri: producer.image }} />
       </C_S.ImageContainer>
 
       <S.Content onPress={handleNavigate}>

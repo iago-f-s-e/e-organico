@@ -1,5 +1,4 @@
 import React, { FC, useEffect } from 'react';
-import { MarketDetail } from '@src/store/slices/market/types';
 
 import { hideBottomTab, useAppDispatch } from '@src/store';
 import { useAppNavigation } from '@src/hooks';
@@ -10,7 +9,7 @@ import * as C_S from '../../common-styles';
 const _defaultImage =
   'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
 
-const market: MarketDetail = {
+const market: any = {
   id: 'id',
   address: {
     city: 'city',
@@ -27,7 +26,7 @@ const market: MarketDetail = {
   producers: [
     {
       id: 'id',
-      imagePath: _defaultImage,
+      image: _defaultImage,
       name: 'zé',
       phone: '99999999999',
       score: {
@@ -38,7 +37,7 @@ const market: MarketDetail = {
 
     {
       id: 'id2',
-      imagePath: _defaultImage,
+      image: _defaultImage,
       name: 'zé',
       phone: '99999999999',
       score: {
@@ -60,6 +59,7 @@ const market: MarketDetail = {
 // TODO: adicionar filtro de feirantes
 // TODO: adicionar produtos mais vendidos
 
+// TODO: remover tipo any
 export const Market: FC = () => {
   const appDispatch = useAppDispatch();
   const { onFocus } = useAppNavigation();
@@ -90,7 +90,7 @@ export const Market: FC = () => {
           <C.Map
             data={market.producers}
             render={(value, index) => (
-              <C.ListConsumerProducer key={index.toString()} producer={value} />
+              <C.ListConsumerProducer key={index.toString()} producer={value as any} />
             )}
           />
         </C_S.Content>

@@ -9,7 +9,7 @@ import { Props } from './types';
 
 // TODO: bloquear o botão e mostrar que está em loading
 
-export const NextButton = ({ handle, loading, animated }: Props): JSX.Element => {
+export const NextButton = ({ handle, loading, animated, label }: Props): JSX.Element => {
   const opacity = useMemo(() => {
     if (loading) return { opacity: 0.5 };
 
@@ -17,6 +17,8 @@ export const NextButton = ({ handle, loading, animated }: Props): JSX.Element =>
   }, [loading]);
 
   const disabled = useMemo(() => loading, [loading]);
+
+  const showLabel = label || 'Próximo';
 
   return (
     <Animated.View
@@ -33,7 +35,7 @@ export const NextButton = ({ handle, loading, animated }: Props): JSX.Element =>
           condition={loading}
           render={{
             toBeTruthy: () => <Loading color={colors.basic.white} sizeType="large" />,
-            toBeFalsy: () => <S.Label>Próximo</S.Label>,
+            toBeFalsy: () => <S.Label>{showLabel}</S.Label>,
           }}
         />
       </S.Container>

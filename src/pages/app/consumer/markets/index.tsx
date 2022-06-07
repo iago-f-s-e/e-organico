@@ -3,8 +3,8 @@ import { FlatList } from 'react-native';
 
 import { Market } from '@src/store/slices/market/types';
 import { useApi } from '@src/hooks/use-api';
-import * as C from '@src/components';
 import { useAppNavigation } from '@src/hooks';
+import * as C from '@src/components';
 import * as C_S from '../../common-styles';
 
 import { initialState, reducer } from './reducer';

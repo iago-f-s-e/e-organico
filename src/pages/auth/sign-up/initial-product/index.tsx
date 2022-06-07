@@ -118,6 +118,7 @@ export const InitialProduct: FC = () => {
           handle={handleNext}
           animated={{ height: state.sizeButton.y, opacity: state.opacityButton.x }}
           loading={state.loading}
+          label="Finalizar"
         />
       </C_S.Container>
     </C_S.Container>
