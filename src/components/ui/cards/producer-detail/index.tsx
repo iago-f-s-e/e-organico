@@ -21,7 +21,7 @@ export const ProducerDetailCard = ({ producer }: Props): JSX.Element => {
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
         <C_S.InfoContainer>
           <C_S.ImageContainer>
-            <C_S.ImageContent source={{ uri: producer.imagePath }} />
+            <C_S.ImageContent source={{ uri: producer.image }} />
           </C_S.ImageContainer>
 
           <C_S.InfoContent>
@@ -80,9 +80,9 @@ export const ProducerDetailCard = ({ producer }: Props): JSX.Element => {
           </C_S.AddressSection>
 
           <FlatList
-            data={producer.propertyImages}
+            data={producer.property.images}
             keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item }) => <ListPropertyImage propertyImage={item} />}
+            renderItem={({ item }) => <ListPropertyImage imageDetail={item} />}
             horizontal
             showsHorizontalScrollIndicator={false}
           />

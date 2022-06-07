@@ -5,8 +5,8 @@ import { useAppNavigation } from '@src/hooks';
 
 import { MarketDetail } from '@src/store/slices/market/types';
 import { useApi } from '@src/hooks/use-api';
-import * as C from '@src/components';
 import { colors } from '@src/config/theme';
+import * as C from '@src/components';
 import * as C_S from '../../common-styles';
 
 // TODO: adicionar filtro de feirantes

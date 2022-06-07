@@ -9,6 +9,14 @@ export type Product = {
   image: string;
 };
 
+export type MinimalProducerProduct = {
+  id: string;
+  image: string;
+  name: string;
+  price: string;
+  unitMeasure: UnitMeasure;
+};
+
 export type ProducerProduct = {
   id: string;
   product: Product;

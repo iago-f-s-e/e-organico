@@ -1,17 +1,11 @@
-import { PropertyImage } from '../image/types';
+import { Address } from '../address/types';
 import { Market } from '../market/types';
-import { ProducerProduct } from '../product/types';
-import { UserDetail } from '../user/types';
+import { MinimalProducerProduct } from '../product/types';
+import { MinimalProperty } from '../property/types';
 
 export type CertificationType = 'IN CONVERSION' | 'AUDIT' | 'OCS' | 'SPG';
 
 export type ProducerType = 'producer';
-
-export type ProducerDetail = UserDetail & {
-  markets: Market[];
-  products: ProducerProduct[];
-  propertyImages: PropertyImage[];
-};
 
 export type MinimalProducer = {
   id: string;
@@ -21,4 +15,11 @@ export type MinimalProducer = {
     transactions: number;
     rating: number;
   };
+};
+
+export type ProducerDetail = MinimalProducer & {
+  address: Address;
+  markets: Market[];
+  products: MinimalProducerProduct[];
+  property: MinimalProperty;
 };

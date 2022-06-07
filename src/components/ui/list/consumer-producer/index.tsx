@@ -33,7 +33,7 @@ export const ListConsumerProducer = ({ producer }: Props): JSX.Element => {
     dispatch(updateProducerSection(producer));
     dispatch(canChangeCart(changeCart));
 
-    return navigateTo<'consumer'>('consumer-producer');
+    return navigateTo<'consumer'>('consumer-producer', { id: producer.id });
   };
 
   return (

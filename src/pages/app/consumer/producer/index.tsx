@@ -1,94 +1,43 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useReducer } from 'react';
 import { FlatList } from 'react-native';
 
-import { ProducerDetail } from '@src/store/slices/producer/types';
-import * as C from '@src/components';
 import { hideBottomTab, useAppDispatch } from '@src/store';
 import { useAppNavigation } from '@src/hooks';
+import { useApi } from '@src/hooks/use-api';
+import { ProducerDetail } from '@src/store/slices/producer/types';
+import { colors } from '@src/config/theme';
+import * as C from '@src/components';
 import * as C_S from '../../common-styles';
 
-const imagePath =
-  'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
-
-// TODO: buscar da api
-const producer: ProducerDetail = {
-  address: {
-    city: 'city',
-    complement: 'complement',
-    district: 'district',
-    number: 'number',
-    state: 'state',
-    street: 'street',
-    zipCode: '99999999',
-  },
-  id: 'id',
-  imagePath,
-  name: 'zé',
-  phone: '99999999999',
-  score: {
-    rating: 55151,
-    transactions: 551,
-  },
-  markets: [
-    {
-      id: 'id',
-      name: 'feira do zé',
-      image: imagePath,
-      address: {
-        city: 'cidade',
-        complement: 'complement',
-        district: 'district',
-        number: '55',
-        state: 'state',
-        street: 'street',
-        zipCode: '49000-000',
-      },
-      workdays: [],
-    },
-
-    {
-      id: 'id2',
-      name: 'feira do zé',
-      image: imagePath,
-      address: {
-        city: 'cidade',
-        complement: 'complement',
-        district: 'district',
-        number: '55',
-        state: 'state',
-        street: 'street',
-        zipCode: '49000-000',
-      },
-      workdays: [],
-    },
-  ],
-  products: [
-    {
-      id: 'producer_product_id',
-      harvestDate: new Date(),
-      price: '5',
-      product: null,
-      stock: '5',
-      unitMeasure: null,
-    },
-    {
-      id: 'producer_product_id2',
-      harvestDate: new Date(),
-      price: '7.55',
-      product: null,
-      stock: '7.55',
-      unitMeasure: null,
-    },
-  ],
-  propertyImages: [{ imagePath }, { imagePath }, { imagePath }, { imagePath }],
-};
+import { initialState, reducer } from './reducer';
 
 export const Producer: FC = () => {
   const appDispatch = useAppDispatch();
-  const { onFocus } = useAppNavigation();
+  const { onFocus, getIdParams } = useAppNavigation();
+  const { getProducerById } = useApi();
+
+  const [state, dispatch] = useReducer(reducer, { ...initialState, idParam: getIdParams() });
+
+  const onOpenRequisition = () => dispatch({ type: 'changeLoading', payload: true });
+  const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
+  const onChangeProducer = (producer: ProducerDetail) =>
+    dispatch({ type: 'onChangeProducer', payload: producer });
+
+  const handleOpenRequisition = () => {
+    onOpenRequisition();
+
+    getProducerById(state.idParam)
+      .then((producer) => onChangeProducer(producer))
+      .finally(() => onCloseRequisition());
+  };
+
+  const handleOnFocus = () => {
+    appDispatch(hideBottomTab());
+    handleOpenRequisition();
+  };
 
   useEffect(() => {
-    const focus = onFocus(() => appDispatch(hideBottomTab()));
+    const focus = onFocus(handleOnFocus);
 
     return focus;
   }, []); // eslint-disable-line
@@ -96,36 +45,46 @@ export const Producer: FC = () => {
   return (
     <C_S.Container>
       <C.Header title="Vendedor" />
-      <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
-        <C_S.Content>
-          <C.ProducerDetailCard producer={producer} />
-        </C_S.Content>
+      <C.IfElse
+        condition={state.loading}
+        render={{
+          toBeTruthy: () => <C.Loading color={colors.main.primary} sizeType="large" />,
+          toBeFalsy: () => (
+            <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
+              <C_S.Content>
+                <C.ProducerDetailCard producer={state.producer} />
+              </C_S.Content>
 
-        <C_S.Content>
-          <C_S.TitleContainer>
-            <C_S.Title>Feiras</C_S.Title>
-          </C_S.TitleContainer>
+              <C_S.Content>
+                <C_S.TitleContainer>
+                  <C_S.Title>Feiras</C_S.Title>
+                </C_S.TitleContainer>
 
-          <FlatList
-            data={producer.markets}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item }) => <C.ListConsumerMarket market={item} />}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
-        </C_S.Content>
-        <C_S.Content>
-          <C_S.TitleContainer>
-            <C_S.Title>Produtos</C_S.Title>
-            <C_S.ShowMore>ver mais</C_S.ShowMore>
-          </C_S.TitleContainer>
+                <FlatList
+                  data={state.producer.markets}
+                  keyExtractor={(_, index) => index.toString()}
+                  renderItem={({ item }) => <C.ListConsumerMarket market={item} />}
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                />
+              </C_S.Content>
+              <C_S.Content>
+                <C_S.TitleContainer>
+                  <C_S.Title>Produtos</C_S.Title>
+                  <C_S.ShowMore>ver mais</C_S.ShowMore>
+                </C_S.TitleContainer>
 
-          <C.Map
-            data={producer.products}
-            render={(value, index) => <C.ListConsumerProduct key={index.toString()} data={value} />}
-          />
-        </C_S.Content>
-      </C_S.ScrollContainer>
+                <C.Map
+                  data={state.producer.products}
+                  render={(value, index) => (
+                    <C.ListConsumerProduct key={index.toString()} data={value} />
+                  )}
+                />
+              </C_S.Content>
+            </C_S.ScrollContainer>
+          ),
+        }}
+      />
     </C_S.Container>
   );
 };

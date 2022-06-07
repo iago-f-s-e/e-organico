@@ -3,6 +3,6 @@ export type Image = {
   base64: string;
 };
 
-export type PropertyImage = {
-  imagePath: string;
+export type ImageDetail = {
+  image: string;
 };
