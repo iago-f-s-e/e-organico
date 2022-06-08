@@ -2,8 +2,7 @@ import React, { FC, useReducer, useEffect } from 'react';
 import { FlatList } from 'react-native';
 
 import { Market } from '@src/store/slices/market/types';
-import { useApi } from '@src/hooks/use-api';
-import { useAppNavigation } from '@src/hooks';
+import { useAppNavigation, useApi } from '@src/hooks';
 import * as C from '@src/components';
 import * as C_S from '../../common-styles';
 

@@ -1,5 +1,6 @@
 import { UnitMeasure } from '@src/store/slices/unit-measure/types';
 import { getAllUnitMeasures } from '@src/services/app';
+import { translateGetError } from '@src/utils';
 import { OnError, Response } from './types';
 
 type HandleProduct = (onError: OnError) => {
@@ -14,7 +15,7 @@ export const handleUnitMeasure: HandleProduct = (onError) => {
 
         return { data: unitMeasures, error: null };
       } catch (error) {
-        onError(error.message);
+        onError(translateGetError(error));
 
         return { data: null, error: error.message };
       }

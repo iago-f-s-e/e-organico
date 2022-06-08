@@ -1,10 +1,9 @@
 import React, { FC, useEffect, useReducer } from 'react';
 
 import { hideBottomTab, useAppDispatch } from '@src/store';
-import { useAppNavigation } from '@src/hooks';
+import { useAppNavigation, useApi } from '@src/hooks';
 
 import { MarketDetail } from '@src/store/slices/market/types';
-import { useApi } from '@src/hooks/use-api';
 import { colors } from '@src/config/theme';
 import * as C from '@src/components';
 import * as C_S from '../../common-styles';
@@ -21,14 +20,11 @@ export const Market: FC = () => {
 
   const { getMarketById } = useApi();
 
-  const onOpenRequisition = () => dispatch({ type: 'changeLoading', payload: true });
   const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
   const onChangeMarket = (market: MarketDetail) =>
     dispatch({ type: 'onChangeMarket', payload: market });
 
   const handleOpenRequisition = () => {
-    onOpenRequisition();
-
     getMarketById(state.idParam)
       .then((market) => onChangeMarket(market))
       .finally(() => onCloseRequisition());

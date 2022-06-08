@@ -2,8 +2,7 @@ import React, { FC, useEffect, useReducer } from 'react';
 import { FlatList } from 'react-native';
 
 import { hideBottomTab, useAppDispatch } from '@src/store';
-import { useAppNavigation } from '@src/hooks';
-import { useApi } from '@src/hooks/use-api';
+import { useAppNavigation, useApi } from '@src/hooks';
 import { ProducerDetail } from '@src/store/slices/producer/types';
 import { colors } from '@src/config/theme';
 import * as C from '@src/components';
@@ -18,14 +17,11 @@ export const Producer: FC = () => {
 
   const [state, dispatch] = useReducer(reducer, { ...initialState, idParam: getIdParams() });
 
-  const onOpenRequisition = () => dispatch({ type: 'changeLoading', payload: true });
   const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
   const onChangeProducer = (producer: ProducerDetail) =>
     dispatch({ type: 'onChangeProducer', payload: producer });
 
   const handleOpenRequisition = () => {
-    onOpenRequisition();
-
     getProducerById(state.idParam)
       .then((producer) => onChangeProducer(producer))
       .finally(() => onCloseRequisition());

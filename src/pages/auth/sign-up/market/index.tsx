@@ -4,8 +4,7 @@ import * as C from '@src/components';
 import { Market as MarketState } from '@src/store/slices/market/types';
 import { changeSignUpProducer, useAppDispatch, useAppSelector } from '@src/store';
 import { addSignUpMarket, removeSignUpMarket } from '@src/store';
-import { useAppNavigation, useToast as _useToast } from '@src/hooks';
-import { useApi } from '@src/hooks/use-api';
+import { useAppNavigation, useToast as _useToast, useApi } from '@src/hooks';
 import * as C_S from '../common-styles';
 
 import { initialState, reducer } from './reducer';

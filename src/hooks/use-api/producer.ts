@@ -5,6 +5,7 @@ import {
 } from '@src/services/app/producer';
 import { ProducerProductDetail } from '@src/store/slices/producer-product/type';
 import { MinimalProducer, ProducerDetail } from '@src/store/slices/producer/types';
+import { translateGetError } from '@src/utils';
 import { OnError, Response } from './types';
 
 type HandleProducer = (onError: OnError) => {
@@ -21,7 +22,7 @@ export const handleProducer: HandleProducer = (onError) => {
 
         return { data, error: null };
       } catch (error) {
-        onError(error.message);
+        onError(translateGetError(error));
 
         return { data: null, error: error.message };
       }
@@ -32,7 +33,7 @@ export const handleProducer: HandleProducer = (onError) => {
 
         return { data, error: null };
       } catch (error) {
-        onError(error.message);
+        onError(translateGetError(error));
 
         return { data: null, error: error.message };
       }
@@ -43,7 +44,7 @@ export const handleProducer: HandleProducer = (onError) => {
 
         return { data, error: null };
       } catch (error) {
-        onError(error.message);
+        onError(translateGetError(error));
 
         return { data: null, error: error.message };
       }

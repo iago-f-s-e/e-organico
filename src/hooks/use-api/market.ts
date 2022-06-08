@@ -1,5 +1,6 @@
 import { Market, MarketDetail } from '@src/store/slices/market/types';
 import { getAllMarkets, getMarketById } from '@src/services/app';
+import { translateGetError } from '@src/utils';
 import { OnError, Response } from './types';
 
 type HandleMarket = (onError: OnError) => {
@@ -15,7 +16,7 @@ export const handleMarket: HandleMarket = (onError) => {
 
         return { data: markets, error: null };
       } catch (error) {
-        onError(error.message);
+        onError(translateGetError(error));
 
         return { data: null, error: error.message };
       }
@@ -26,7 +27,7 @@ export const handleMarket: HandleMarket = (onError) => {
 
         return { data: market, error: null };
       } catch (error) {
-        onError(error.message);
+        onError(translateGetError(error));
 
         return { data: null, error: error.message };
       }

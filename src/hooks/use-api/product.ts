@@ -1,5 +1,6 @@
 import { Product } from '@src/store/slices/product/types';
 import { getAllProducts } from '@src/services/app';
+import { translateGetError } from '@src/utils';
 import { OnError, Response } from './types';
 
 type HandleProduct = (onError: OnError) => {
@@ -14,7 +15,7 @@ export const handleProduct: HandleProduct = (onError) => {
 
         return { data: products, error: null };
       } catch (error) {
-        onError(error.message);
+        onError(translateGetError(error));
 
         return { data: null, error: error.message };
       }

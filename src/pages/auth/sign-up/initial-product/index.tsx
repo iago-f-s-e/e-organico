@@ -9,8 +9,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '@src/store';
-import { useAppNavigation, useSignUp, useStorage, useToast as _useToast } from '@src/hooks';
-import { useApi } from '@src/hooks/use-api';
+import { useAppNavigation, useSignUp, useStorage, useToast as _useToast, useApi } from '@src/hooks';
 import { UnitMeasure } from '@src/store/slices/unit-measure/types';
 import { ProducerProduct } from '@src/store/slices/producer-product/type';
 import { Product } from '@src/store/slices/product/types';
