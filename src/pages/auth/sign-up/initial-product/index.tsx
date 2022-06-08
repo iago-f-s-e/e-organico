@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useReducer } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
-import { Product, ProducerProduct } from '@src/store/slices/product/types';
 
 import * as C from '@src/components';
 import {
@@ -13,6 +12,8 @@ import {
 import { useAppNavigation, useSignUp, useStorage, useToast as _useToast } from '@src/hooks';
 import { useApi } from '@src/hooks/use-api';
 import { UnitMeasure } from '@src/store/slices/unit-measure/types';
+import { ProducerProduct } from '@src/store/slices/producer-product/type';
+import { Product } from '@src/store/slices/product/types';
 import * as C_S from '../common-styles';
 
 import { initialState, reducer } from './reducer';

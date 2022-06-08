@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useReducer, useMemo } from 'react';
 
 import * as C from '@src/components';
-import { ProducerProduct } from '@src/store/slices/product/types';
+import { ProducerProductDetail } from '@src/store/slices/producer-product/type';
 import {
   addProductToCart,
   hideBottomTab,
@@ -23,7 +23,7 @@ const _defaultImage =
 
 // TODO: adicionar relacionados
 // TODO: buscar da api
-const product: ProducerProduct = null;
+const product: ProducerProductDetail = null;
 
 // TODO: criar grupo para trazer produtos relacionados
 // TODO: renderizar e atualizar state do reducer apenas dps de carregar os dados
@@ -99,7 +99,7 @@ export const Product: FC = () => {
             <S.ImageContent source={{ uri: _defaultImage }} />
           </S.ImageContainer>
 
-          <S.Title>{product.product.name}</S.Title>
+          <S.Title>{product.name}</S.Title>
 
           <S.InfoContent>
             <S.InfoSection>

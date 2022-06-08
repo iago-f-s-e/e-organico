@@ -1,6 +1,11 @@
-import { defaultMarketDetail, defaultProducerDetail } from '@src/constants/default-entities';
+import {
+  defaultMarketDetail,
+  defaultProducerDetail,
+  defaultProducerProduct,
+} from '@src/constants/default-entities';
 import { useToast as _useToast } from '@src/hooks/use-toast';
 import { Market, MarketDetail } from '@src/store/slices/market/types';
+import { ProducerProductDetail } from '@src/store/slices/producer-product/type';
 import { MinimalProducer, ProducerDetail } from '@src/store/slices/producer/types';
 import { Product } from '@src/store/slices/product/types';
 import { UnitMeasure } from '@src/store/slices/unit-measure/types';
@@ -17,6 +22,7 @@ type UseApi = {
 
   getMarketById: (id: string) => Promise<MarketDetail>;
   getProducerById: (id: string) => Promise<ProducerDetail>;
+  getProducerProductById: (id: string, producerId: string) => Promise<ProducerProductDetail>;
 };
 
 export const useApi = (): UseApi => {
@@ -70,6 +76,17 @@ export const useApi = (): UseApi => {
     return defaultProducerDetail;
   };
 
+  const getProducerProductById = async (
+    id: string,
+    producerId: string,
+  ): Promise<ProducerProductDetail> => {
+    const { data, error } = await handleProducer(useToast.error).getProductById(id, producerId);
+
+    if (!error) return data;
+
+    return defaultProducerProduct;
+  };
+
   return {
     getAllMarkets,
     getAllProducts,
@@ -77,5 +94,6 @@ export const useApi = (): UseApi => {
     getAllProducers,
     getMarketById,
     getProducerById,
+    getProducerProductById,
   };
 };

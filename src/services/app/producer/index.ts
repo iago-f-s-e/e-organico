@@ -1,4 +1,5 @@
 import { endpoints } from '@src/constants/endpoints';
+import { ProducerProductDetail } from '@src/store/slices/producer-product/type';
 import { MinimalProducer, ProducerDetail } from '@src/store/slices/producer/types';
 import { httpClientGET } from '../../http-client';
 
@@ -8,4 +9,13 @@ export function getAllProducers(): Promise<MinimalProducer[]> {
 
 export function getProducerById(id: string): Promise<ProducerDetail> {
   return httpClientGET<ProducerDetail>(`${endpoints.producer.GET_BY_ID}${id}`);
+}
+
+export function getProducerProductById(
+  id: string,
+  producerId: string,
+): Promise<ProducerProductDetail> {
+  return httpClientGET<ProducerProductDetail>(
+    `${endpoints.producer.GET_BY_ID}${producerId}/product/${id}`,
+  );
 }

@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { ProducerProduct } from '../product/types';
+import { ProducerProduct } from '../producer-product/type';
 
 export type SignUpProduct = ProducerProduct[];
 

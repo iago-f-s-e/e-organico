@@ -2,7 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { Image } from '../image/types';
 import { Market } from '../market/types';
 import { CertificationType } from '../producer/types';
-import { ProducerProduct } from '../product/types';
+import { ProducerProduct } from '../producer-product/type';
 import { SignUpPayload } from '../sign-up/types';
 
 type ProducerPayload = {

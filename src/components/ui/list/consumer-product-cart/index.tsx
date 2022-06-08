@@ -20,7 +20,7 @@ export const ListConsumerProductCart = ({ productCart }: Props): JSX.Element => 
     <C_S.Container>
       <C_S.ImageContainer />
       <C_S.Content onPress={() => {}}>
-        <C_S.Title>{productCart.producerProduct.product.name}</C_S.Title>
+        <C_S.Title>{productCart.producerProduct.name}</C_S.Title>
         <S.ValuesContent>
           <S.ValuesContent>
             <S.Price>{price}</S.Price>

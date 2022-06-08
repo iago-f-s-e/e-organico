@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { handleInputMask } from '@src/utils';
-import { ProducerProduct } from '@src/store/slices/product/types';
+import { ProducerProduct } from '@src/store/slices/producer-product/type';
 import { useAppNavigation } from '@src/hooks';
 import * as C_S from '../common-styles';
 import * as S from './styles';

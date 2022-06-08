@@ -26,10 +26,10 @@ export const ListProducerTransactionProduct = ({ transactionProduct }: Props): J
   return (
     <S.Container>
       <C_S.ImageContainer>
-        <C_S.Image source={{ uri: transactionProduct.producerProduct.product.image }} />
+        <C_S.Image source={{ uri: transactionProduct.producerProduct.image }} />
       </C_S.ImageContainer>
       <C_S.Content onPress={() => {}}>
-        <C_S.Title>{transactionProduct.producerProduct.product.name}</C_S.Title>
+        <C_S.Title>{transactionProduct.producerProduct.name}</C_S.Title>
         <S.ValuesContent>
           <S.ValuesContent>
             <S.Price>{price}</S.Price>

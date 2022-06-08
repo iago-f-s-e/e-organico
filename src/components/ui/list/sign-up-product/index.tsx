@@ -5,11 +5,12 @@ import { Feather } from '@expo/vector-icons';
 
 import { colors, font } from '@src/config/theme';
 import { useAppSelector } from '@src/store';
-import { Product, ProducerProduct } from '@src/store/slices/product/types';
 import { handleInputMask } from '@src/utils';
 
 import { translateDate } from '@src/utils';
 import { UnitMeasure } from '@src/store/slices/unit-measure/types';
+import { ProducerProduct } from '@src/store/slices/producer-product/type';
+import { Product } from '@src/store/slices/product/types';
 import * as S from './styles';
 
 import { getIcon } from './util';

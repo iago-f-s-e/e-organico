@@ -1,5 +1,5 @@
 import React from 'react';
-import { MinimalProducerProduct } from '@src/store/slices/product/types';
+import { MinimalProducerProduct } from '@src/store/slices/producer-product/type';
 
 import { useAppNavigation } from '@src/hooks';
 

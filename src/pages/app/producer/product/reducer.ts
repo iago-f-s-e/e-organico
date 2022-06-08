@@ -1,4 +1,4 @@
-import { ProducerProduct } from '@src/store/slices/product/types';
+import { ProducerProduct } from '@src/store/slices/producer-product/type';
 import { Animated } from 'react-native';
 
 export type State = {

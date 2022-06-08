@@ -1,6 +1,6 @@
 import { Address } from '../address/types';
 import { Market } from '../market/types';
-import { MinimalProducerProduct } from '../product/types';
+import { MinimalProducerProduct } from '../producer-product/type';
 import { MinimalProperty } from '../property/types';
 
 export type CertificationType = 'IN CONVERSION' | 'AUDIT' | 'OCS' | 'SPG';
