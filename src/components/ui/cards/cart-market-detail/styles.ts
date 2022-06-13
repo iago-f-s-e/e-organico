@@ -22,3 +22,9 @@ export const ButtonLabel = styled.Text`
   font-size: ${font.size.medium};
   color: ${colors.basic.white};
 `;
+
+export const WorkDaysSection = styled.View`
+  flex: 1;
+
+  height: 150px;
+`;

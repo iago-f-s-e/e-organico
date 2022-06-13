@@ -128,7 +128,7 @@ export const CartMarketDetailCard = ({ market, actions, weekday, change }: Props
             </C_S.AddressContent>
           </C_S.AddressSection>
 
-          <C_S.WorkDaysSection>
+          <S.WorkDaysSection>
             <C_S.WorkDaysTitle>Escolha o dia</C_S.WorkDaysTitle>
             <C_S.WorkDaysContainer>
               <ScrollHorizontal
@@ -147,7 +147,7 @@ export const CartMarketDetailCard = ({ market, actions, weekday, change }: Props
                 )}
               />
             </C_S.WorkDaysContainer>
-          </C_S.WorkDaysSection>
+          </S.WorkDaysSection>
         </C_S.AddressContainer>
       </C_S.ScrollContainer>
 

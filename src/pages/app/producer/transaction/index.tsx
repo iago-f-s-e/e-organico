@@ -71,11 +71,12 @@ const transaction: TransactionDetail = {
         stock: '5.00',
         unitMeasure: null,
       },
+      id: 'state.producerProduct.id',
       quantity: '5',
       total: '25.00',
     },
   ],
-  paymentMethod: {
+  payment: {
     id: 'payment-id',
     name: 'PIX',
     type: 'in-person',
@@ -182,7 +183,7 @@ export const Transaction: FC = () => {
 
             <S.Section>
               <S.Label>Forma de pagamento:</S.Label>
-              <S.Data>{transaction.paymentMethod.name}</S.Data>
+              <S.Data>{transaction.payment.name}</S.Data>
             </S.Section>
 
             <S.Section>

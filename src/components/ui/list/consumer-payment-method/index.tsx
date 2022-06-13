@@ -3,28 +3,28 @@ import React from 'react';
 import { useAppNavigation } from '@src/hooks';
 import { If } from '@src/components/business';
 import { colors } from '@src/config/theme';
-import { PaymentMethod } from '@src/store/slices/payment-method/types';
+import { Payment } from '@src/store/slices/payment-method/types';
 import * as C_S from '../common-styles';
 import { Selected } from '../../selected';
 
 type Props = {
-  paymentMethod: PaymentMethod;
-  current: PaymentMethod;
-  selected: PaymentMethod;
-  onSelect: (paymentMethod: PaymentMethod) => void;
+  payment: Payment;
+  current: Payment;
+  selected: Payment;
+  onSelect: (payment: Payment) => void;
 };
 
 export const ListConsumerPaymentMethod = ({
-  paymentMethod,
+  payment,
   onSelect,
   current,
   selected,
 }: Props): JSX.Element => {
   const { goBack } = useAppNavigation();
 
-  const isSelected = selected && selected.id === paymentMethod.id;
+  const isSelected = selected && selected.id === payment.id;
 
-  const isCurrent = current && current.id === paymentMethod.id;
+  const isCurrent = current && current.id === payment.id;
 
   const borderCurrent = {
     borderWidth: 1,
@@ -33,7 +33,7 @@ export const ListConsumerPaymentMethod = ({
   };
 
   const handlePress = () => {
-    if (onSelect) return onSelect(paymentMethod);
+    if (onSelect) return onSelect(payment);
 
     return goBack();
   };
@@ -41,7 +41,7 @@ export const ListConsumerPaymentMethod = ({
   return (
     <C_S.ShadowContainer style={isCurrent ? borderCurrent : undefined}>
       <C_S.Content onPress={handlePress}>
-        <C_S.Title>{paymentMethod.name}</C_S.Title>
+        <C_S.Title>{payment.name}</C_S.Title>
 
         <If condition={isSelected} render={() => <Selected />} />
       </C_S.Content>

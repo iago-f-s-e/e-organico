@@ -1,6 +1,6 @@
 import { Address } from '../address/types';
 import { Market, Workday } from '../market/types';
-import { PaymentMethod } from '../payment-method/types';
+import { Payment } from '../payment-method/types';
 import { ProducerProductDetail } from '../producer-product/type';
 import { User, UserDetail } from '../user/types';
 
@@ -17,9 +17,10 @@ export type TransactionStatus =
   | 'waiting-for-confirmation-from-the-producer';
 
 export type TransactionProduct = {
-  producerProduct: ProducerProductDetail;
-  quantity: string;
+  id: string;
   total: string;
+  quantity: string;
+  producerProduct: ProducerProductDetail;
 };
 
 type PickTransaction = {
@@ -49,5 +50,5 @@ export type Transaction = PickOrDelivery & {
 
 export type TransactionDetail = Transaction & {
   products: TransactionProduct[];
-  paymentMethod: PaymentMethod;
+  payment: Payment;
 };

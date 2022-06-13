@@ -61,6 +61,7 @@ export const Product: FC = () => {
       setupCart({
         producer: section.producer,
         product: {
+          id: state.producerProduct.id,
           producerProduct: state.producerProduct,
           quantity: state.quantity,
           total: state.total,
@@ -70,6 +71,7 @@ export const Product: FC = () => {
   const handleAddToCart = () =>
     appDispatch(
       addProductToCart({
+        id: state.producerProduct.id,
         producerProduct: state.producerProduct,
         quantity: state.quantity,
         total: state.total,

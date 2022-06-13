@@ -1,6 +1,6 @@
 type PaymentMethodType = 'online' | 'in-person';
 
-export type PaymentMethod = {
+export type Payment = {
   id: string;
   type: PaymentMethodType;
   name: string;

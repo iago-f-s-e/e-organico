@@ -1,6 +1,6 @@
 import React, { FC, useReducer, useMemo, useCallback, useEffect } from 'react';
 
-import { PaymentMethod } from '@src/store/slices/payment-method/types';
+import { Payment } from '@src/store/slices/payment-method/types';
 import { setCartPayment, useAppDispatch, useAppSelector } from '@src/store';
 import { useAppNavigation, useToast as _useToast } from '@src/hooks';
 import * as C from '@src/components';
@@ -9,7 +9,7 @@ import * as C_S from '../../common-styles';
 import { initialState, reducer } from './reducer';
 import { validateState } from './validate-state';
 
-const payments: PaymentMethod[] = [
+const payments: Payment[] = [
   {
     id: 'id',
     name: 'Dinheiro',
@@ -45,14 +45,14 @@ export const PaymentMethods: FC = () => {
 
     if (!hasCartPayment) return 'Selecionar';
 
-    const match = state.paymentMethod?.id === cart.current?.payment.id;
+    const match = state.payment?.id === cart.current?.payment.id;
 
     if (match) return 'Voltar';
 
     return 'Trocar';
   }, [cart, state]);
 
-  const dispatchChangePaymentMethod = (payload: PaymentMethod) =>
+  const dispatchChangePaymentMethod = (payload: Payment) =>
     dispatch({ type: 'onPaymentMethod', payload });
 
   const handleConfirm = useCallback(() => {
@@ -62,7 +62,7 @@ export const PaymentMethods: FC = () => {
 
     if (response.type === 'error') return useToast.error(response.message);
 
-    appDispatch(setCartPayment(response.paymentMethod));
+    appDispatch(setCartPayment(response.payment));
 
     return goBack();
   }, [label, goBack, useToast, state, appDispatch]);
@@ -89,8 +89,8 @@ export const PaymentMethods: FC = () => {
             render={(value, index) => (
               <C.ListConsumerPaymentMethod
                 key={index.toString()}
-                paymentMethod={value}
-                current={state.paymentMethod}
+                payment={value}
+                current={state.payment}
                 onSelect={(value) => dispatchChangePaymentMethod(value)}
                 selected={cart.current?.payment}
               />

@@ -7,13 +7,20 @@ export type State = {
   toChangeMarket: boolean;
   market: Market;
   weekday: Workday;
+  markets: Market[];
 };
 
-type Actions = 'openButton' | 'closeButton' | 'onChangeMarket' | 'onChangeDay' | 'onToChangeMarket';
+type Actions =
+  | 'openButton'
+  | 'closeButton'
+  | 'onChangeMarket'
+  | 'onChangeDay'
+  | 'onToChangeMarket'
+  | 'onToChangeMarkets';
 
 type Action = {
   type: Actions;
-  payload?: Market | Workday | boolean;
+  payload?: Market | Market[] | Workday | boolean;
 };
 
 type Reducer = (state: State, action: Action) => State;
@@ -22,6 +29,8 @@ const reducers: { [key in Actions]: Reducer } = {
   onChangeMarket: (state, { payload }): State => ({ ...state, market: payload as Market }),
 
   onToChangeMarket: (state, { payload }): State => ({ ...state, toChangeMarket: Boolean(payload) }),
+
+  onToChangeMarkets: (state, action): State => ({ ...state, markets: action.payload as Market[] }),
 
   onChangeDay: (state, { payload }): State => ({ ...state, weekday: payload as Workday }),
 
@@ -66,6 +75,7 @@ export const initialState: State = {
   toChangeMarket: false,
   market: null,
   weekday: null,
+  markets: [],
 };
 
 export const reducer: Reducer = (state, action) => reducers[action.type](state, action);

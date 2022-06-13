@@ -1,4 +1,4 @@
-import { PaymentMethod } from '@src/store/slices/payment-method/types';
+import { Payment } from '@src/store/slices/payment-method/types';
 import { State } from './reducer';
 
 type Error = {
@@ -8,7 +8,7 @@ type Error = {
 
 type Success = {
   type: 'success';
-  paymentMethod: PaymentMethod;
+  payment: Payment;
 };
 
 type Response = Error | Success;
@@ -16,9 +16,9 @@ type Response = Error | Success;
 type ValidateState = (state: State) => Response;
 
 export const validateState: ValidateState = (state: State) => {
-  if (!state.paymentMethod) {
+  if (!state.payment) {
     return { type: 'error', message: 'Selecione uma forma de pagamento!' };
   }
 
-  return { type: 'success', paymentMethod: state.paymentMethod };
+  return { type: 'success', payment: state.payment };
 };

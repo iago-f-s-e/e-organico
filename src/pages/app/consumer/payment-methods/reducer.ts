@@ -1,24 +1,24 @@
-import { PaymentMethod } from '@src/store/slices/payment-method/types';
+import { Payment } from '@src/store/slices/payment-method/types';
 
 export type State = {
-  paymentMethod: PaymentMethod;
+  payment: Payment;
 };
 
 type Actions = 'onPaymentMethod';
 
 type Action = {
   type: Actions;
-  payload: PaymentMethod;
+  payload: Payment;
 };
 
 type Reducer = (state: State, action: Action) => State;
 
 const reducers: { [key in Actions]: Reducer } = {
-  onPaymentMethod: (state, { payload }): State => ({ ...state, paymentMethod: payload }),
+  onPaymentMethod: (state, { payload }): State => ({ ...state, payment: payload }),
 };
 
 export const initialState: State = {
-  paymentMethod: null,
+  payment: null,
 };
 
 export const reducer: Reducer = (state, action) => reducers[action.type](state, action);

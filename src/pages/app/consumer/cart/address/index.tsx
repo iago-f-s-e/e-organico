@@ -9,7 +9,7 @@ import {
   useAppSelector,
 } from '@src/store';
 
-import { useAppNavigation, useToast as _useToast } from '@src/hooks';
+import { useApi, useAppNavigation, useToast as _useToast } from '@src/hooks';
 import { Market, Workday } from '@src/store/slices/market/types';
 import * as C from '@src/components';
 import * as C_S from '../../../common-styles';
@@ -17,11 +17,10 @@ import * as C_S from '../../../common-styles';
 import { initialState, reducer } from './reducer';
 import { validateMarketState } from './validate-state';
 
-const markets: Market[] = [];
-
 export const Address: FC = () => {
   const { ui, section, cart } = useAppSelector((state) => state);
-  const { navigateTo } = useAppNavigation();
+  const { navigateTo, onFocus } = useAppNavigation();
+  const { getAllMarkets } = useApi();
   const appDispatch = useAppDispatch();
   const useToast = _useToast();
 
@@ -35,6 +34,7 @@ export const Address: FC = () => {
     return cart.current?.pickOrDelivery?.market;
   }, [cart]);
 
+  const onChangeMarkets = (payload: Market[]) => dispatch({ type: 'onToChangeMarkets', payload });
   const dispatchCancel = () => appDispatch(confirmOrCancelCartAddress(false));
   const dispatchOpenButton = () => dispatch({ type: 'openButton' });
   const dispatchCloseButton = () => dispatch({ type: 'closeButton' });
@@ -42,6 +42,10 @@ export const Address: FC = () => {
   const dispatchChangeMarket = (payload: Market) => dispatch({ type: 'onChangeMarket', payload });
   const dispatchToChangeMarket = (payload: boolean) =>
     dispatch({ type: 'onToChangeMarket', payload });
+
+  const handleOpenRequisition = () => {
+    getAllMarkets().then((markets) => onChangeMarkets(markets));
+  };
 
   const handleOpenOrCloseButton = useCallback(() => {
     if (ui.cartToTab.confirmedProducts) return dispatchOpenButton();
@@ -155,6 +159,13 @@ export const Address: FC = () => {
     dispatchChangeMarket(cart.current?.pickOrDelivery?.market);
   }, [cart, section.market]);
 
+  useEffect(() => {
+    const focus = onFocus(handleOpenRequisition);
+
+    return focus;
+  }, []); // eslint-disable-line
+
+  // TODO: IfElse alternar entre retirar na feira e fazer entrega
   return (
     <C_S.Container>
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
@@ -163,7 +174,7 @@ export const Address: FC = () => {
           render={{
             toBeFalsy: () => (
               <C.CartMarket
-                markets={markets}
+                markets={state.markets}
                 change={state.toChangeMarket}
                 selected={{ market: state.market, weekday: state.weekday, cartMarket }}
                 actions={{
@@ -176,7 +187,7 @@ export const Address: FC = () => {
             ),
             toBeTruthy: () => (
               <C.CartMarket
-                markets={markets}
+                markets={state.markets}
                 change={state.toChangeMarket}
                 selected={{ market: state.market, weekday: state.weekday, cartMarket }}
                 actions={{
