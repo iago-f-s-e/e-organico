@@ -7,6 +7,7 @@ import { SignUpProduct } from '../slices/sign-up-product/types';
 import { SignUpUserType } from '../slices/sign-up-user-type/types';
 import { Toast } from '../slices/toast/types';
 import { Ui } from '../slices/ui/types';
+import { LoggedUser } from '../slices/user/types';
 
 export type State = {
   cart: Cart;
@@ -18,4 +19,5 @@ export type State = {
   signUpUserType: SignUpUserType;
   toast: Toast;
   ui: Ui;
+  user: LoggedUser;
 };

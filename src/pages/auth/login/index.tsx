@@ -5,23 +5,33 @@ import { handleInputMask } from '@src/utils';
 import { colors } from '@src/config/theme';
 import logo from '@src/assets/icons/logo.png';
 
-import { useAppNavigation } from '@src/hooks';
+import { useAppNavigation, useSignIn } from '@src/hooks';
 import { IfElse } from '@src/components';
 import * as S from './styles';
 
 import { initialState, reducer } from './reducer';
 
-// TODO: implementar handleSignIn
 export const Login: FC = () => {
   const { navigateTo } = useAppNavigation();
+  const { signIn } = useSignIn();
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
   const onCloseInput = () => dispatch({ type: 'onCloseInput' });
+  const onOpenRequisition = () => dispatch({ type: 'changeLoading', payload: true });
+  const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
 
-  const handleLogin = () => {
-    return navigateTo<'auth'>('app');
+  const handleSignIn = async () => {
+    onOpenRequisition();
+
+    signIn(state.phone, state.password)
+      .then((res) => {
+        if (res.error) return;
+
+        return navigateTo<'auth'>('app');
+      })
+      .finally(() => onCloseRequisition());
   };
 
   return (
@@ -64,7 +74,7 @@ export const Login: FC = () => {
             placeholder="*********"
           />
         </S.InputContainer>
-        <S.SignIn disabled={state.loading} onPress={handleLogin}>
+        <S.SignIn disabled={state.loading} onPress={handleSignIn}>
           <IfElse
             condition={state.loading}
             render={{

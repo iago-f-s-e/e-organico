@@ -20,3 +20,10 @@ export const httpClient = _instance;
 
 export const httpClientGET = async <T>(url: string): Promise<T> =>
   (await httpClient.get<T>(url)).data;
+
+export const httpClientPOST = async <Req, Res = Req>(
+  url: string,
+  data: Req,
+  token?: string,
+): Promise<Res> =>
+  (await httpClient.post<Res>(url, data, { headers: { authorization: `Bearer ${token}` } })).data;

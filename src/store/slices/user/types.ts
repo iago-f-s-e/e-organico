@@ -1,3 +1,4 @@
+import { PayloadAction } from '@reduxjs/toolkit';
 import { Address } from '../address/types';
 import { ConsumerType } from '../consumer/types';
 import { ProducerType } from '../producer/types';
@@ -25,3 +26,21 @@ export type AuthenticatedUser = UserDetail & {
   document: string;
   email: string;
 };
+
+export type LoggedUser = {
+  token: string;
+  user: {
+    id: string;
+    userType: 'consumer' | 'producer';
+    name: string;
+    phone: string;
+    email: string;
+    image: string;
+    address?: Address;
+    producer?: {
+      makeDelivery: boolean;
+    };
+  };
+};
+
+export type LoggedUserPayload = PayloadAction<LoggedUser>;

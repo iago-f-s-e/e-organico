@@ -4,7 +4,7 @@ type HashMap<T> = {
   [key: string]: T;
 };
 
-const translateRequestGetError = (error: AxiosError): string => {
+const translateRequestError = (error: AxiosError): string => {
   const message = String(error.request._response);
 
   if (message.includes('Failed to connect to')) return 'Erro ao tentar conectar com o servidor!';
@@ -37,5 +37,5 @@ export const translateSignUpError = (error: AxiosError): string => {
 export const translateGetError = (error: AxiosError): string => {
   if (error.response) return translateResponseGetError(error);
 
-  return translateRequestGetError(error);
+  return translateRequestError(error);
 };
