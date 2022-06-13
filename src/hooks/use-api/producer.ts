@@ -10,8 +10,12 @@ import { OnError, Response } from './types';
 
 type HandleProducer = (onError: OnError) => {
   getAll: () => Promise<Response<MinimalProducer[]>>;
-  getById: (id: string) => Promise<Response<ProducerDetail>>;
-  getProductById: (id: string, producerId: string) => Promise<Response<ProducerProductDetail>>;
+  getById: (id: string, token: string) => Promise<Response<ProducerDetail>>;
+  getProductById: (
+    id: string,
+    producerId: string,
+    token: string,
+  ) => Promise<Response<ProducerProductDetail>>;
 };
 
 export const handleProducer: HandleProducer = (onError) => {
@@ -27,9 +31,9 @@ export const handleProducer: HandleProducer = (onError) => {
         return { data: null, error: error.message };
       }
     },
-    getById: async (id) => {
+    getById: async (id, token) => {
       try {
-        const data = await getProducerById(id);
+        const data = await getProducerById(id, token);
 
         return { data, error: null };
       } catch (error) {
@@ -38,9 +42,9 @@ export const handleProducer: HandleProducer = (onError) => {
         return { data: null, error: error.message };
       }
     },
-    getProductById: async (id, producerId) => {
+    getProductById: async (id, producerId, token) => {
       try {
-        const data = await getProducerProductById(id, producerId);
+        const data = await getProducerProductById(id, producerId, token);
 
         return { data, error: null };
       } catch (error) {

@@ -7,15 +7,17 @@ export function getAllProducers(): Promise<MinimalProducer[]> {
   return httpClientGET<MinimalProducer[]>(endpoints.producer.GET_ALL);
 }
 
-export function getProducerById(id: string): Promise<ProducerDetail> {
-  return httpClientGET<ProducerDetail>(`${endpoints.producer.GET_BY_ID}${id}`);
+export function getProducerById(id: string, token: string): Promise<ProducerDetail> {
+  return httpClientGET<ProducerDetail>(`${endpoints.producer.GET_BY_ID}${id}`, token);
 }
 
 export function getProducerProductById(
   id: string,
   producerId: string,
+  token: string,
 ): Promise<ProducerProductDetail> {
   return httpClientGET<ProducerProductDetail>(
     `${endpoints.producer.GET_BY_ID}${producerId}/product/${id}`,
+    token,
   );
 }
