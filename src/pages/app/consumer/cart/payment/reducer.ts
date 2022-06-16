@@ -1,6 +1,7 @@
 import { Animated } from 'react-native';
 
 export type State = {
+  loading: boolean;
   sizeButton: Animated.ValueXY;
   opacityButton: Animated.ValueXY;
 };
@@ -50,6 +51,7 @@ const reducers: { [key in Actions]: Reducer } = {
 };
 
 export const initialState: State = {
+  loading: false,
   sizeButton: new Animated.ValueXY({ x: 0, y: 40 }),
   opacityButton: new Animated.ValueXY({ x: 1, y: 0 }),
 };

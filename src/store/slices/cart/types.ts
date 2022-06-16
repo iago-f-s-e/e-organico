@@ -8,12 +8,12 @@ export type ProductCartPayload = TransactionProduct & {
 };
 
 export type CartPayload = {
-  producer: MinimalProducer;
   total: string;
   productQuantity: string;
-  pickOrDelivery: PickOrDelivery;
+  producer: MinimalProducer;
   payment: Payment;
   products: ProductCartPayload[];
+  information: PickOrDelivery;
 };
 
 type SetupCart = {

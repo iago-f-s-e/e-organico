@@ -26,12 +26,12 @@ export const Address: FC = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const pickOrder = useMemo(() => cart.current?.pickOrDelivery.type === 'pick', [cart]);
+  const pickOrder = useMemo(() => cart.current?.information.type === 'pick', [cart]);
 
   const cartMarket = useMemo(() => {
-    if (cart.current?.pickOrDelivery?.type !== 'pick') return null;
+    if (cart.current?.information?.type !== 'pick') return null;
 
-    return cart.current?.pickOrDelivery?.market;
+    return cart.current?.information?.market;
   }, [cart]);
 
   const onChangeMarkets = (payload: Market[]) => dispatch({ type: 'onToChangeMarkets', payload });
@@ -87,9 +87,9 @@ export const Address: FC = () => {
   }, [useToast, state, appDispatch]);
 
   const handleConfirm = useCallback(() => {
-    const pickOrDelivery = cart.current?.pickOrDelivery.type;
+    const information = cart.current?.information.type;
 
-    if (pickOrDelivery === 'pick') return handleConfirmMarket();
+    if (information === 'pick') return handleConfirmMarket();
 
     return handleConfirmAddress();
   }, [cart, handleConfirmMarket, handleConfirmAddress]);
@@ -103,15 +103,15 @@ export const Address: FC = () => {
   const handleSelectMarket = (payload: Market) => {
     let weekday = null;
 
-    if (cart.current?.pickOrDelivery?.type === 'pick') {
-      const hasCurrentMarket = !!cart.current?.pickOrDelivery?.market;
-      const matchIds = payload.id === cart.current?.pickOrDelivery?.market?.id;
+    if (cart.current?.information?.type === 'pick') {
+      const hasCurrentMarket = !!cart.current?.information?.market;
+      const matchIds = payload.id === cart.current?.information?.market?.id;
 
       const changeMarket = hasCurrentMarket && !matchIds;
 
       dispatchToChangeMarket(changeMarket);
 
-      weekday = changeMarket ? null : cart.current?.pickOrDelivery?.selectedDay;
+      weekday = changeMarket ? null : cart.current?.information?.selectedDay;
     }
 
     dispatchChangeDay(weekday);
@@ -125,11 +125,11 @@ export const Address: FC = () => {
   };
 
   const handleCancelChange = () => {
-    if (cart.current?.pickOrDelivery?.type !== 'pick') return;
+    if (cart.current?.information?.type !== 'pick') return;
 
     dispatchToChangeMarket(false);
-    dispatchChangeDay(cart.current?.pickOrDelivery?.selectedDay);
-    dispatchChangeMarket(cart.current?.pickOrDelivery?.market);
+    dispatchChangeDay(cart.current?.information?.selectedDay);
+    dispatchChangeMarket(cart.current?.information?.market);
   };
 
   const handleConfirmAndNavigate = () => {
@@ -145,9 +145,9 @@ export const Address: FC = () => {
   }, [handleOpenOrCloseButton]);
 
   useEffect(() => {
-    if (cart.current?.pickOrDelivery.type !== 'pick') return; // TODO: adicionar toggle para type
+    if (cart.current?.information.type !== 'pick') return; // TODO: adicionar toggle para type
 
-    const hasMarket = !!cart.current?.pickOrDelivery?.market;
+    const hasMarket = !!cart.current?.information?.market;
 
     if (!hasMarket) {
       dispatchChangeDay(null);
@@ -155,8 +155,8 @@ export const Address: FC = () => {
       return;
     }
 
-    dispatchChangeDay(cart.current?.pickOrDelivery?.selectedDay);
-    dispatchChangeMarket(cart.current?.pickOrDelivery?.market);
+    dispatchChangeDay(cart.current?.information?.selectedDay);
+    dispatchChangeMarket(cart.current?.information?.market);
   }, [cart, section.market]);
 
   useEffect(() => {

@@ -2,43 +2,24 @@ import React, { FC, useReducer, useMemo, useCallback, useEffect } from 'react';
 
 import { Payment } from '@src/store/slices/payment-method/types';
 import { setCartPayment, useAppDispatch, useAppSelector } from '@src/store';
-import { useAppNavigation, useToast as _useToast } from '@src/hooks';
+import { useApi, useAppNavigation, useToast as _useToast } from '@src/hooks';
 import * as C from '@src/components';
 import * as C_S from '../../common-styles';
 
 import { initialState, reducer } from './reducer';
 import { validateState } from './validate-state';
 
-const payments: Payment[] = [
-  {
-    id: 'id',
-    name: 'Dinheiro',
-    type: 'in-person',
-  },
-  {
-    id: 'id2',
-    name: 'Pix',
-    type: 'in-person',
-  },
-  {
-    id: 'id3',
-    name: 'Cartão crédito',
-    type: 'in-person',
-  },
-  {
-    id: 'id4',
-    name: 'Cartão débito',
-    type: 'in-person',
-  },
-];
-
 export const PaymentMethods: FC = () => {
   const appDispatch = useAppDispatch();
   const useToast = _useToast();
   const { cart } = useAppSelector((state) => state);
-  const { goBack } = useAppNavigation();
+  const { goBack, onFocus } = useAppNavigation();
+  const { getAllPayments } = useApi();
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
+  const onChangePayments = (payload: Payment[]) => dispatch({ type: 'onChangePayments', payload });
 
   const label = useMemo(() => {
     const hasCartPayment = !!cart.current?.payment;
@@ -54,6 +35,12 @@ export const PaymentMethods: FC = () => {
 
   const dispatchChangePaymentMethod = (payload: Payment) =>
     dispatch({ type: 'onPaymentMethod', payload });
+
+  const handleOpenRequisition = () => {
+    getAllPayments()
+      .then((payments) => onChangePayments(payments))
+      .finally(() => onCloseRequisition());
+  };
 
   const handleConfirm = useCallback(() => {
     if (label === 'Voltar') return goBack();
@@ -75,6 +62,12 @@ export const PaymentMethods: FC = () => {
     }
   }, [cart]);
 
+  useEffect(() => {
+    const focus = onFocus(handleOpenRequisition);
+
+    return focus;
+  }, []); // eslint-disable-line
+
   return (
     <C_S.Container>
       <C.Header title="Formas de pagamento" />
@@ -85,7 +78,7 @@ export const PaymentMethods: FC = () => {
           </C_S.TitleContainer>
 
           <C.Map
-            data={payments}
+            data={state.payments}
             render={(value, index) => (
               <C.ListConsumerPaymentMethod
                 key={index.toString()}

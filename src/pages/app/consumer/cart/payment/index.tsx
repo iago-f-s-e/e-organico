@@ -7,9 +7,10 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '@src/store';
-import { useAppNavigation, useToast as _useToast } from '@src/hooks';
+import { useApi, useAppNavigation, useToast as _useToast } from '@src/hooks';
 
 import * as C from '@src/components';
+import { colors } from '@src/config/theme';
 import * as C_S from '../../../common-styles';
 import * as S from './styles';
 
@@ -22,6 +23,7 @@ export const Payment: FC = () => {
   const { navigateTo } = useAppNavigation();
   const useToast = _useToast();
   const appDispatch = useAppDispatch();
+  const { postTransaction } = useApi();
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -46,8 +48,12 @@ export const Payment: FC = () => {
     return dispatchCloseButton();
   }, [ui.cartToTab.confirmedProducts, ui.cartToTab.confirmedAddress]);
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
     if (!hasCartPayment) return useToast.error('Selecione uma forma de pagamento!');
+
+    const { error } = await postTransaction(cart.current);
+
+    if (error) return null;
 
     dispatchConfirm();
     appDispatch(concludedCart());
@@ -106,8 +112,14 @@ export const Payment: FC = () => {
           opacity: state.opacityButton.x,
         }}
       >
-        <C_S.ButtonConfirm onPress={handleFinish}>
-          <C_S.ButtonLabel>Finalizar</C_S.ButtonLabel>
+        <C_S.ButtonConfirm onPress={handleFinish} disabled={state.loading}>
+          <C.IfElse
+            condition={state.loading}
+            render={{
+              toBeTruthy: () => <C.Loading color={colors.basic.white} sizeType="large" />,
+              toBeFalsy: () => <C_S.ButtonLabel>Finalizar</C_S.ButtonLabel>,
+            }}
+          />
         </C_S.ButtonConfirm>
       </Animated.View>
     </C_S.Container>

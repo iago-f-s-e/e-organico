@@ -5,14 +5,19 @@ import {
 } from '@src/constants/default-entities';
 import { useToast as _useToast } from '@src/hooks/use-toast';
 import { useAppSelector } from '@src/store';
+import { CartPayload } from '@src/store/slices/cart/types';
 import { Market, MarketDetail } from '@src/store/slices/market/types';
+import { Payment } from '@src/store/slices/payment-method/types';
 import { ProducerProductDetail } from '@src/store/slices/producer-product/type';
 import { MinimalProducer, ProducerDetail } from '@src/store/slices/producer/types';
 import { Product } from '@src/store/slices/product/types';
 import { UnitMeasure } from '@src/store/slices/unit-measure/types';
 import { handleMarket } from './market';
+import { handlePayment } from './payment';
 import { handleProducer } from './producer';
 import { handleProduct } from './product';
+import { handleTransaction } from './transaction';
+import { Response } from './types';
 import { handleUnitMeasure } from './unit-measure';
 
 type UseApi = {
@@ -20,10 +25,13 @@ type UseApi = {
   getAllProducers: () => Promise<MinimalProducer[]>;
   getAllMarkets: () => Promise<Market[]>;
   getAllUnitMeasures: () => Promise<UnitMeasure[]>;
+  getAllPayments: () => Promise<Payment[]>;
 
   getMarketById: (id: string) => Promise<MarketDetail>;
   getProducerById: (id: string) => Promise<ProducerDetail>;
   getProducerProductById: (id: string, producerId: string) => Promise<ProducerProductDetail>;
+
+  postTransaction: (payload: CartPayload) => Promise<Response<CartPayload>>;
 };
 
 export const useApi = (): UseApi => {
@@ -62,6 +70,14 @@ export const useApi = (): UseApi => {
     return [];
   };
 
+  const getAllPayments = async (): Promise<Payment[]> => {
+    const { data, error } = await handlePayment(useToast.error).getAll(user.token);
+
+    if (!error) return data;
+
+    return [];
+  };
+
   const getMarketById = async (id: string): Promise<MarketDetail> => {
     const { data, error } = await handleMarket(useToast.error).getById(id);
 
@@ -93,13 +109,18 @@ export const useApi = (): UseApi => {
     return defaultProducerProduct;
   };
 
+  const postTransaction = (payload: CartPayload) =>
+    handleTransaction(useToast.error).postTransaction(payload, user.token);
+
   return {
     getAllMarkets,
     getAllProducts,
     getAllUnitMeasures,
     getAllProducers,
+    getAllPayments,
     getMarketById,
     getProducerById,
     getProducerProductById,
+    postTransaction,
   };
 };
