@@ -71,6 +71,26 @@ export type MinimalTransaction = {
   };
 };
 
+export type MinimalConsumerTransaction = {
+  id: string;
+  total: string;
+  productQuantity: string;
+  status: TransactionStatus;
+  type: 'pick' | 'delivery';
+  market: {
+    id: string;
+    name: string;
+  };
+  producer: {
+    id: string;
+    name: string;
+  };
+  payment: {
+    id: string;
+    name: string;
+  };
+};
+
 // TODO: TROCAR TRANSACTION POR MINIMAL_TRANSACTION
 
 export type TransactionDetail = Transaction & {

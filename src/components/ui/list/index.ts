@@ -6,6 +6,7 @@ export * from './consumer-producer';
 export * from './consumer-product';
 export * from './consumer-product-cart';
 export * from './consumer-payment-method';
+export * from './consumer-transaction';
 
 export * from './property-image';
 
