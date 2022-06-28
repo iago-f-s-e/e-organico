@@ -2,6 +2,7 @@ import { Address } from '../address/types';
 import { Market, Workday } from '../market/types';
 import { Payment } from '../payment-method/types';
 import { ProducerProductDetail } from '../producer-product/type';
+import { MinimalProducer } from '../producer/types';
 import { User, UserDetail } from '../user/types';
 
 export type TransactionStatus =
@@ -47,6 +48,30 @@ export type Transaction = PickOrDelivery & {
   createdAt: string;
   productQuantity: number;
 };
+
+export type MinimalTransaction = {
+  id: string;
+  producer: MinimalProducer;
+  consumer: {
+    id: string;
+    name: string;
+  };
+  total: number;
+  productQuantity: number;
+  payment: {
+    id: string;
+    name: string;
+    type: string;
+  };
+  information: {
+    type: 'pick' | 'delivery';
+    market?: Market;
+    selectedDay?: Workday;
+    address?: Address;
+  };
+};
+
+// TODO: TROCAR TRANSACTION POR MINIMAL_TRANSACTION
 
 export type TransactionDetail = Transaction & {
   products: TransactionProduct[];

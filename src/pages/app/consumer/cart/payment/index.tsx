@@ -1,13 +1,8 @@
 import React, { FC, useEffect, useCallback, useReducer, useMemo } from 'react';
 import { Animated } from 'react-native';
 
-import {
-  concludedCart,
-  confirmOrCancelCartProducts,
-  useAppDispatch,
-  useAppSelector,
-} from '@src/store';
-import { useApi, useAppNavigation, useToast as _useToast } from '@src/hooks';
+import { confirmOrCancelCartProducts, useAppDispatch, useAppSelector } from '@src/store';
+import { useApi, useAppNavigation, useStorage, useToast as _useToast } from '@src/hooks';
 
 import * as C from '@src/components';
 import { colors } from '@src/config/theme';
@@ -24,6 +19,7 @@ export const Payment: FC = () => {
   const useToast = _useToast();
   const appDispatch = useAppDispatch();
   const { postTransaction } = useApi();
+  const { clearCart } = useStorage();
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -37,6 +33,8 @@ export const Payment: FC = () => {
 
   const hasCartPayment = useMemo(() => !!cart.current?.payment, [cart]);
 
+  const onOpenRequisition = () => dispatch({ type: 'changeLoading', payload: true });
+  const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
   const dispatchConfirm = () => appDispatch(confirmOrCancelCartProducts(true));
   const dispatchOpenButton = () => dispatch({ type: 'openButton' });
   const dispatchCloseButton = () => dispatch({ type: 'closeButton' });
@@ -51,14 +49,18 @@ export const Payment: FC = () => {
   const handleFinish = async () => {
     if (!hasCartPayment) return useToast.error('Selecione uma forma de pagamento!');
 
-    const { error } = await postTransaction(cart.current);
+    onOpenRequisition();
 
-    if (error) return null;
+    postTransaction(cart.current)
+      .then((res) => {
+        if (res.error) return null;
 
-    dispatchConfirm();
-    appDispatch(concludedCart());
+        dispatchConfirm();
+        clearCart();
 
-    return navigateTo<'consumer'>('transactions', null, { popNavigationToTop: true });
+        return navigateTo<'consumer'>('transactions', null, { popNavigationToTop: true });
+      })
+      .finally(() => onCloseRequisition());
   };
 
   useEffect(() => {

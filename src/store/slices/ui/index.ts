@@ -32,5 +32,14 @@ export const uiSlice = createSlice({
       ...state,
       cartToTab: { ...state.cartToTab, confirmedPayment: payload },
     }),
+
+    clearCartUi: (state): Ui => ({
+      ...state,
+      cartToTab: {
+        confirmedAddress: false,
+        confirmedPayment: false,
+        confirmedProducts: false,
+      },
+    }),
   },
 });

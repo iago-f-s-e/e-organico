@@ -1,13 +1,14 @@
 import uuid from 'react-native-uuid';
 import { createSlice } from '@reduxjs/toolkit';
 import { handleRemoveMask, handleInputMask } from '@src/utils';
+import { defaultCart } from '@src/constants/default-entities';
 import * as T from './types';
 
 const initialState: T.Cart = {
   canChange: true,
   concluded: false,
   hasCurrent: false,
-  current: null,
+  current: defaultCart,
 };
 
 const keyGenerator = () => uuid.v4() as string;

@@ -6,4 +6,5 @@ export const {
   confirmOrCancelCartAddress,
   confirmOrCancelCartPayment,
   confirmOrCancelCartProducts,
+  clearCartUi,
 } = uiSlice.actions;

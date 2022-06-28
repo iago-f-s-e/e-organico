@@ -6,15 +6,18 @@ export type State = {
   opacityButton: Animated.ValueXY;
 };
 
-type Actions = 'openButton' | 'closeButton';
+type Actions = 'changeLoading' | 'openButton' | 'closeButton';
 
 type Action = {
   type: Actions;
+  payload?: boolean;
 };
 
 type Reducer = (state: State, action: Action) => State;
 
 const reducers: { [key in Actions]: Reducer } = {
+  changeLoading: (state, action): State => ({ ...state, loading: Boolean(action.payload) }),
+
   openButton: (state, _): State => {
     Animated.parallel([
       Animated.timing(state.opacityButton.x, {

@@ -2,6 +2,7 @@ import * as store from '@src/store';
 
 type UseStorage = {
   clearPersist: () => void;
+  clearCart: () => void;
 };
 
 export const useStorage = (): UseStorage => {
@@ -15,7 +16,14 @@ export const useStorage = (): UseStorage => {
     appDispatch(store.clearSignUpProduct());
     appDispatch(store.clearCart());
     appDispatch(store.clearSection());
+    appDispatch(store.clearCartUi());
   };
 
-  return { clearPersist };
+  const clearCart = () => {
+    appDispatch(store.clearCart());
+    appDispatch(store.clearSection());
+    appDispatch(store.clearCartUi());
+  };
+
+  return { clearPersist, clearCart };
 };

@@ -11,7 +11,7 @@ export const Transactions: FC = () => {
   const { onFocus } = useAppNavigation();
   const appDispatch = useAppDispatch();
 
-  const hasCurrentCart = useMemo(() => cart.hasCurrent && cart.concluded, [cart]); // TODO: usar !cart.concluded
+  const hasCurrentCart = useMemo(() => cart.hasCurrent, [cart]);
 
   useEffect(() => {
     const focus = onFocus(() => appDispatch(showBottomTab()));
@@ -26,13 +26,20 @@ export const Transactions: FC = () => {
       <C.If
         condition={hasCurrentCart}
         render={() => (
-          <S.CardContainer>
-            <C.CartDetailCard cart={cart} />
-          </S.CardContainer>
+          <C_S.TitleContainer>
+            <C_S.Title>Montando pedido</C_S.Title>
+          </C_S.TitleContainer>
         )}
       />
 
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
+        <C_S.Content>
+          <C_S.TitleContainer>
+            <C_S.Title>Pedidos em andamento</C_S.Title>
+            <C_S.ShowMore>ver mais</C_S.ShowMore>
+          </C_S.TitleContainer>
+        </C_S.Content>
+
         <C_S.Content>
           <C_S.TitleContainer>
             <C_S.Title>Pedidos já enviados</C_S.Title>

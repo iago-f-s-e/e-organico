@@ -8,9 +8,9 @@ import { payment } from './payment';
 import { transaction } from './transaction';
 
 // 192.168.100.80
-// 192.168.0.102
+// 172.16.10.32
 
-export const BASE_URL = 'http://192.168.0.234:8080';
+export const BASE_URL = 'http://172.16.10.32:8080';
 export const endpoints = {
   signUp,
   signIn,
