@@ -13,7 +13,7 @@ export const Products: FC = () => {
 
   const { navigateTo } = useAppNavigation();
 
-  const quantity = useMemo(() => cart.current.products.length, [cart]);
+  const quantity = useMemo(() => cart.current.productQuantity, [cart]);
 
   const dispatchConfirm = () => appDispatch(confirmOrCancelCartProducts(true));
   const dispatchCancel = () => appDispatch(confirmOrCancelCartProducts(false));

@@ -25,6 +25,14 @@ const getTotal = (products: T.ProductCartPayload[]): string => {
   return handleInputMask(total, 'money', { onlyComma: true });
 };
 
+const getProductQuantity = (products: T.ProductCartPayload[]): string => {
+  return products
+    .reduce((acc, curr) => {
+      return +curr.quantity + acc;
+    }, 0)
+    .toString();
+};
+
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -41,7 +49,7 @@ export const cartSlice = createSlice({
 
       const current: T.CartPayload = {
         producer,
-        productQuantity: '1',
+        productQuantity: getProductQuantity(products),
         products,
         payment: null,
         information: {
@@ -86,7 +94,7 @@ export const cartSlice = createSlice({
 
       const products: T.ProductCartPayload[] = [...state.current.products, product];
 
-      const productQuantity = products.length.toString();
+      const productQuantity = getProductQuantity(products);
       const total = getTotal(products);
 
       const current: T.CartPayload = { ...state.current, products, total, productQuantity };
