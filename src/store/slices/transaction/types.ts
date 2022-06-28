@@ -1,8 +1,7 @@
 import { Address } from '../address/types';
-import { Market, Workday } from '../market/types';
+import { EUDay, Market, Workday } from '../market/types';
 import { Payment } from '../payment-method/types';
 import { ProducerProductDetail } from '../producer-product/type';
-import { MinimalProducer } from '../producer/types';
 import { User, UserDetail } from '../user/types';
 
 export type TransactionStatus =
@@ -49,43 +48,37 @@ export type Transaction = PickOrDelivery & {
   productQuantity: number;
 };
 
-export type MinimalTransaction = {
-  id: string;
-  producer: MinimalProducer;
-  consumer: {
-    id: string;
-    name: string;
-  };
-  total: number;
-  productQuantity: number;
-  payment: {
-    id: string;
-    name: string;
-    type: string;
-  };
-  information: {
-    type: 'pick' | 'delivery';
-    market?: Market;
-    selectedDay?: Workday;
-    address?: Address;
-  };
-};
-
-export type MinimalConsumerTransaction = {
+type MinimalTransaction = {
   id: string;
   total: string;
-  productQuantity: string;
+  productQuantity: String;
   status: TransactionStatus;
   type: 'pick' | 'delivery';
   market: {
     id: string;
     name: string;
   };
+  payment: {
+    id: string;
+    name: string;
+  };
+};
+
+export type MinimalConsumerTransaction = MinimalTransaction & {
   producer: {
     id: string;
     name: string;
   };
-  payment: {
+};
+
+export type MinimalProducerTransaction = MinimalTransaction & {
+  number: number;
+  createdAt: string;
+  selectedDay: {
+    id: string;
+    weekday: EUDay;
+  };
+  consumer: {
     id: string;
     name: string;
   };

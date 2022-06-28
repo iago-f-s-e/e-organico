@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect, useState } from 'react';
-import { Transaction } from '@src/store/slices/transaction/types';
+import { MinimalProducerTransaction } from '@src/store/slices/transaction/types';
 
 import { getWaitingTime, toPTDay, translateTransactionStatus, handleInputMask } from '@src/utils';
 import { If } from '@src/components/business';
@@ -7,7 +7,7 @@ import { useAppNavigation } from '@src/hooks';
 import * as S from './styles';
 
 type Props = {
-  transaction: Transaction;
+  transaction: MinimalProducerTransaction;
   showWaitingTime?: boolean;
 };
 

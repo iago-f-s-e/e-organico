@@ -131,7 +131,7 @@ export const Status = styled.Text`
 
 export const TransactionNumber = styled(Status)``;
 
-export const ConsumerName = styled.Text`
+export const ProducerName = styled.Text`
   font-family: ${font.family.semiBold};
   font-size: ${font.size.betweenMediumAndLarge};
   color: ${colors.basic.grey};

@@ -4,84 +4,10 @@ import { useAppNavigation } from '@src/hooks';
 
 import * as C from '@src/components';
 import { getWaitingTime, handleInputMask, toPTDay } from '@src/utils';
-import { TransactionDetail } from '@src/store/slices/transaction/types';
 import * as C_S from '../../common-styles';
 import * as S from './styles';
 
-const imagePath =
-  'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
-
-const transaction: TransactionDetail = {
-  id: 'id',
-  type: 'pick',
-  producer: null,
-  createdAt: '2022-05-02T19:33:17.552Z',
-  market: {
-    id: 'market-id',
-    image: imagePath,
-    name: 'feira',
-    workdays: [],
-    address: {
-      city: 'cidade',
-      complement: 'complemento',
-      district: 'bairro',
-      number: '22',
-      state: 'Bahia',
-      street: 'rua',
-      zipCode: '49100000',
-    },
-  },
-  number: 1,
-  productQuantity: 1,
-  selectedDay: {
-    id: '',
-    weekday: 'FRIDAY',
-    closing: null,
-    opening: null,
-  },
-  status: 'waiting-for-confirmation-from-the-producer',
-  total: '58.00',
-  consumer: {
-    id: 'consumer-id',
-    address: {
-      city: 'cidade',
-      complement: 'complemento',
-      district: 'bairro',
-      number: '22',
-      state: 'Bahia',
-      street: 'rua',
-      zipCode: '49100000',
-    },
-    imagePath,
-    name: 'nome',
-    phone: '99999999999',
-    score: {
-      rating: 5,
-      transactions: 525,
-    },
-  },
-  products: [
-    {
-      producerProduct: {
-        harvestDate: new Date(),
-        id: 'producer-product-id',
-        price: '5.00',
-        image: imagePath,
-        name: 'banana frita',
-        stock: '5.00',
-        unitMeasure: null,
-      },
-      id: 'state.producerProduct.id',
-      quantity: '5',
-      total: '25.00',
-    },
-  ],
-  payment: {
-    id: 'payment-id',
-    name: 'PIX',
-    type: 'in-person',
-  },
-};
+const transaction: any = null;
 
 // TODO: integrar com backend
 
@@ -202,7 +128,10 @@ export const Transaction: FC = () => {
           <C.Map
             data={transaction.products}
             render={(value, index) => (
-              <C.ListProducerTransactionProduct key={index.toString()} transactionProduct={value} />
+              <C.ListProducerTransactionProduct
+                key={index.toString()}
+                transactionProduct={value as any}
+              />
             )}
           />
         </C_S.Content>

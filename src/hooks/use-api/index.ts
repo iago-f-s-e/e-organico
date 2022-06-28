@@ -11,7 +11,10 @@ import { Payment } from '@src/store/slices/payment-method/types';
 import { ProducerProductDetail } from '@src/store/slices/producer-product/type';
 import { MinimalProducer, ProducerDetail } from '@src/store/slices/producer/types';
 import { Product } from '@src/store/slices/product/types';
-import { MinimalConsumerTransaction } from '@src/store/slices/transaction/types';
+import {
+  MinimalConsumerTransaction,
+  MinimalProducerTransaction,
+} from '@src/store/slices/transaction/types';
 import { UnitMeasure } from '@src/store/slices/unit-measure/types';
 import { handleMarket } from './market';
 import { handlePayment } from './payment';
@@ -33,6 +36,7 @@ type UseApi = {
   getProducerProductById: (id: string, producerId: string) => Promise<ProducerProductDetail>;
 
   postTransaction: (payload: CartPayload) => Promise<Response<CartPayload>>;
+  getProducerTransactionInProgress: () => Promise<MinimalProducerTransaction[]>;
   getConsumerTransactionInProgress: () => Promise<MinimalConsumerTransaction[]>;
 };
 
@@ -121,6 +125,16 @@ export const useApi = (): UseApi => {
     return [];
   };
 
+  const getProducerTransactionInProgress = async () => {
+    const { data, error } = await handleTransaction(
+      useToast.error,
+    ).getTransactionInProgress<MinimalProducerTransaction>(user.token);
+
+    if (!error) return data;
+
+    return [];
+  };
+
   const postTransaction = (payload: CartPayload) =>
     handleTransaction(useToast.error).postTransaction(payload, user.token);
 
@@ -134,6 +148,7 @@ export const useApi = (): UseApi => {
     getProducerById,
     getProducerProductById,
     getConsumerTransactionInProgress,
+    getProducerTransactionInProgress,
     postTransaction,
   };
 };

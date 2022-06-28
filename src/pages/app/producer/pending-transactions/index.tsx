@@ -1,51 +1,14 @@
-import { Transaction } from '@src/store/slices/transaction/types';
-import React, { FC } from 'react';
+import React, { FC, useReducer } from 'react';
 
 import * as C from '@src/components';
 import * as C_S from '../../common-styles';
 
-const imagePath =
-  'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
-
-const transactions: Transaction[] = [
-  {
-    id: 'transaction-id',
-    number: 1,
-    producer: null,
-    type: 'pick',
-    status: 'waiting-for-confirmation-from-the-producer',
-    total: '5.00',
-    createdAt: '2022-04-29T20:14:12.021Z',
-    productQuantity: 1,
-    market: {
-      id: 'market-id',
-      name: 'feira-name',
-      image: imagePath,
-      workdays: [],
-      address: null,
-    },
-    selectedDay: {
-      id: '',
-      closing: null,
-      opening: null,
-      weekday: 'MONDAY',
-    },
-    consumer: {
-      id: 'consumer-id',
-      imagePath,
-      name: 'consumer-name',
-      phone: '99999999999',
-      address: null,
-      score: {
-        rating: 5,
-        transactions: 0,
-      },
-    },
-  },
-];
+import { initialState, reducer } from './reducer';
 
 // TODO: renderizar empty component
 export const PendingTransactions: FC = () => {
+  const [state] = useReducer(reducer, initialState);
+
   return (
     <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
       <C_S.Content>
@@ -53,7 +16,7 @@ export const PendingTransactions: FC = () => {
           <C_S.Title>Buscar</C_S.Title>
         </C_S.TitleContainer>
         <C.Map
-          data={transactions}
+          data={state.transactions}
           render={(value, index) => (
             <C.ListProducerTransaction showWaitingTime transaction={value} key={index.toString()} />
           )}

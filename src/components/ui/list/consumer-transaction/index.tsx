@@ -35,7 +35,7 @@ export const ListConsumerTransaction = ({ transaction }: Props): JSX.Element => 
       </S.Header>
       <S.Content>
         <S.InfoContainer>
-          <S.Data>{transaction.producer.name}</S.Data>
+          <S.ProducerName>{transaction.producer.name}</S.ProducerName>
           <S.Money>{total}</S.Money>
         </S.InfoContainer>
 

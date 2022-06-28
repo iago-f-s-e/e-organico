@@ -34,6 +34,6 @@ export type ProducerStack = {
   'producer-product': undefined;
 };
 
-export type TransactionsConsumerStack = {
-  'transactions-consumer': undefined;
+export type TransactionsStack = {
+  transactions: undefined;
 };

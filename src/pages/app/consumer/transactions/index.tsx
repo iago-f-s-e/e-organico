@@ -5,6 +5,7 @@ import * as C from '@src/components';
 import { showBottomTab, useAppDispatch } from '@src/store';
 import { useApi, useAppNavigation } from '@src/hooks';
 import { MinimalConsumerTransaction } from '@src/store/slices/transaction/types';
+
 import { initialState, reducer } from './reducer';
 
 import * as C_S from '../../common-styles';
