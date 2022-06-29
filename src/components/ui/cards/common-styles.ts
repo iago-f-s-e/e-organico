@@ -92,7 +92,7 @@ export const ImageContent = styled.Image`
 export const Name = styled.Text`
   font-family: ${font.family.semiBold};
   font-size: ${font.size.large};
-  color: ${colors.basic.black};
+  color: ${colors.basic.grey};
 `;
 
 export const Info = styled.Text`

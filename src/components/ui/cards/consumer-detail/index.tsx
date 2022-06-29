@@ -12,13 +12,15 @@ export const ConsumerDetailCard = ({ consumer }: Props): JSX.Element => {
   const rating = `Avaliação: ${consumer.score.rating}`;
   const sales = `Compras: ${consumer.score.transactions}`;
   const zipCode = handleInputMask(consumer.address.zipCode, 'zipCode');
+  const image =
+    'https://www.amigodoclima.com.br/wp-content/themes/amigodoclima/img/not-available.png';
 
   return (
     <C_S.Container>
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
         <C_S.InfoContainer>
           <C_S.ImageContainer>
-            <C_S.ImageContent source={{ uri: consumer.imagePath }} />
+            <C_S.ImageContent source={{ uri: image }} />
           </C_S.ImageContainer>
 
           <C_S.InfoContent>

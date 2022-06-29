@@ -1,5 +1,4 @@
 import { Product } from '../product/types';
-import { Transaction } from '../transaction/types';
 import { UnitMeasure } from '../unit-measure/types';
 
 export type MinimalProducerProduct = {
@@ -23,8 +22,4 @@ export type ProducerProductDetail = MinimalProducerProduct & {
   stock: string;
   unitMeasure: UnitMeasure;
   harvestDate: Date;
-};
-
-export type ProductWithTransactions = ProducerProduct & {
-  lastTransactions: Transaction[];
 };

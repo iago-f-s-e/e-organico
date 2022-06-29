@@ -9,3 +9,7 @@ export function postTransaction(data: CartPayload, token: string): Promise<CartP
 export function getTransactionInProgress<T>(token: string): Promise<T[]> {
   return httpClientGET<T[]>(endpoints.transaction.GET_IN_PROGRESS, token);
 }
+
+export function getTransactionById<T>(id: string, token: string): Promise<T> {
+  return httpClientGET<T>(`${endpoints.transaction.GET_BY_ID}/${id}`, token);
+}

@@ -2,7 +2,7 @@ import { Address } from '../address/types';
 import { EUDay, Market, Workday } from '../market/types';
 import { Payment } from '../payment-method/types';
 import { ProducerProductDetail } from '../producer-product/type';
-import { User, UserDetail } from '../user/types';
+import { UserDetail } from '../user/types';
 
 export type TransactionStatus =
   | 'delivered'
@@ -36,18 +36,6 @@ type DeliveryTransaction = {
 
 export type PickOrDelivery = PickTransaction | DeliveryTransaction;
 
-export type Transaction = PickOrDelivery & {
-  id: string;
-  number: number;
-  type: 'pick' | 'delivery';
-  status: TransactionStatus;
-  consumer: UserDetail;
-  producer: User;
-  total: string;
-  createdAt: string;
-  productQuantity: number;
-};
-
 type MinimalTransaction = {
   id: string;
   total: string;
@@ -78,15 +66,11 @@ export type MinimalProducerTransaction = MinimalTransaction & {
     id: string;
     weekday: EUDay;
   };
-  consumer: {
-    id: string;
-    name: string;
-  };
+  consumer: Pick<UserDetail, 'id' | 'name'>;
 };
 
-// TODO: TROCAR TRANSACTION POR MINIMAL_TRANSACTION
-
-export type TransactionDetail = Transaction & {
+export type ProducerTransactionDetail = Omit<MinimalProducerTransaction, 'consumer'> & {
+  consumer: UserDetail;
   products: TransactionProduct[];
   payment: Payment;
 };

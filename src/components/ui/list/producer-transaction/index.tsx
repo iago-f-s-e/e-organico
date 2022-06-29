@@ -29,6 +29,9 @@ export const ListProducerTransaction = ({ transaction, showWaitingTime }: Props)
 
   const total = handleInputMask(transaction.total, 'money', { onlyComma: true });
 
+  const handleNavigate = () =>
+    navigateTo<'producer'>('producer-transaction', { id: transaction.id });
+
   useEffect(() => {
     const interval = setInterval(() => setWaitingTime(getWaitingTime(transaction.createdAt)), 1000);
 
@@ -94,7 +97,7 @@ export const ListProducerTransaction = ({ transaction, showWaitingTime }: Props)
             <S.ConfirmTransactionLabel>Aceitar</S.ConfirmTransactionLabel>
           </S.ConfirmTransactionButton>
 
-          <S.OpenTransactionButton onPress={() => navigateTo<'producer'>('producer-transaction')}>
+          <S.OpenTransactionButton onPress={handleNavigate}>
             <S.OpenTransactionLabel>Visualizar</S.OpenTransactionLabel>
           </S.OpenTransactionButton>
         </S.ButtonsContainer>
