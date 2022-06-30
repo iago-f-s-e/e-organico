@@ -1,11 +1,13 @@
 import { ProducerTransactionDetail, TransactionStatus } from '@src/store/slices/transaction/types';
-import { getWaitingTime, handleInputMask, toPTDay } from '@src/utils';
+import { getWaitingTime, handleInputMask, toPTDay, translateTransactionStatus } from '@src/utils';
 
 type State = {
   loading: boolean;
   confirming: boolean;
   canceling: boolean;
+  hideConfirm: boolean;
   idParam: string;
+  status: string;
   waitingTime: string;
   transaction: ProducerTransactionDetail;
   transactionType: string;
@@ -32,9 +34,24 @@ const getLabel = (status: TransactionStatus): string => {
     case 'in-separation':
       return 'Separar';
 
+    case 'waiting-for-consumer-to-withdraw':
+      return 'Entregar';
+
     default:
       return 'Confirmar';
   }
+};
+
+const getHideConfirm = (status: TransactionStatus): boolean => {
+  const conditionsToBeHidden = [
+    'canceled-by-consumer',
+    'canceled-by-producer',
+    'confirmed-by-producer',
+    'confirmed-by-consumer',
+    'delivered',
+  ];
+
+  return conditionsToBeHidden.includes(status);
 };
 
 const reducers: { [key in Actions]: Reducer } = {
@@ -49,8 +66,11 @@ const reducers: { [key in Actions]: Reducer } = {
 
     transaction.total = handleInputMask(transaction.total, 'money', { onlyComma: true });
 
+    const hideConfirm = getHideConfirm(transaction.status);
     const label = getLabel(transaction.status);
     const waitingTime = getWaitingTime(transaction.createdAt);
+    const status = translateTransactionStatus(transaction.status, 'producer');
+
     const transactionType = transaction.type === 'pick' ? 'Retirar na feira' : 'Realizar entrega';
     const showWaitingTime = transaction.status === 'waiting-for-confirmation-from-the-producer';
     const market =
@@ -66,7 +86,17 @@ const reducers: { [key in Actions]: Reducer } = {
             weekday: '',
           };
 
-    return { ...state, transaction, transactionType, showWaitingTime, market, waitingTime, label };
+    return {
+      ...state,
+      transaction,
+      transactionType,
+      showWaitingTime,
+      market,
+      waitingTime,
+      label,
+      hideConfirm,
+      status,
+    };
   },
 };
 
@@ -74,7 +104,9 @@ export const initialState: State = {
   loading: true,
   confirming: false,
   canceling: false,
+  hideConfirm: false,
   idParam: '',
+  status: '',
   waitingTime: '',
   transaction: null,
   transactionType: 'Retirar na feira',

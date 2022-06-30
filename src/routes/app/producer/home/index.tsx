@@ -12,7 +12,7 @@ import * as C_S from '../../common-styles';
 
 const Tab = createMaterialTopTabNavigator<ProducerTopTab>();
 
-export type ProducerTabScreens = 'producer-pending-transactions' | 'producer-products';
+export type ProducerTabScreens = 'producer-stall' | 'producer-products';
 
 export const ProducerHome: FC = () => {
   const appDispatch = useAppDispatch();
@@ -38,7 +38,7 @@ export const ProducerHome: FC = () => {
         }}
       >
         <Tab.Screen name="producer-products" component={Producer.Products} />
-        <Tab.Screen name="producer-pending-transactions" component={Producer.PendingTransactions} />
+        <Tab.Screen name="producer-stall" component={Producer.Products} />
       </Tab.Navigator>
     </C_S.Container>
   );

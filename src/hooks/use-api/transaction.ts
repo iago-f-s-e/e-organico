@@ -11,10 +11,12 @@ type HandleTransaction = (
   confirmTransaction: (id: string, token: string, message: string) => Promise<Response<void>>;
   cancelTransaction: (id: string, token: string, message: string) => Promise<Response<void>>;
   separateTransaction: (id: string, token: string, message: string) => Promise<Response<void>>;
-  getTransactionInProgress: <T>(token: string) => Promise<Response<T[]>>;
-  getTransactionInSeparation: <T>(token: string) => Promise<Response<T[]>>;
-  getTransactionPending: <T>(token: string) => Promise<Response<T[]>>;
-  getTransactionById: <T>(id: string, token: string) => Promise<Response<T>>;
+  deliverTransaction: (id: string, token: string, message: string) => Promise<Response<void>>;
+  getInProgress: <T>(token: string) => Promise<Response<T[]>>;
+  getInSeparation: <T>(token: string) => Promise<Response<T[]>>;
+  getPending: <T>(token: string) => Promise<Response<T[]>>;
+  getConcluded: <T>(token: string) => Promise<Response<T[]>>;
+  getById: <T>(id: string, token: string) => Promise<Response<T>>;
 };
 
 export const handleTransaction: HandleTransaction = (onError, onSuccess) => {
@@ -79,7 +81,21 @@ export const handleTransaction: HandleTransaction = (onError, onSuccess) => {
       }
     },
 
-    getTransactionInProgress: async <T>(token: string) => {
+    deliverTransaction: async (id, token: string, message: string) => {
+      try {
+        const data = await service.deliverTransaction(id, token);
+
+        onSuccess(message);
+
+        return { data, error: null };
+      } catch (error) {
+        onError(error.message);
+
+        return { data: null, error: error.message };
+      }
+    },
+
+    getInProgress: async <T>(token: string) => {
       try {
         const data = await service.getTransactionInProgress<T>(token);
 
@@ -91,7 +107,7 @@ export const handleTransaction: HandleTransaction = (onError, onSuccess) => {
       }
     },
 
-    getTransactionInSeparation: async <T>(token: string) => {
+    getInSeparation: async <T>(token: string) => {
       try {
         const data = await service.getTransactionInSeparation<T>(token);
 
@@ -103,7 +119,7 @@ export const handleTransaction: HandleTransaction = (onError, onSuccess) => {
       }
     },
 
-    getTransactionPending: async <T>(token: string) => {
+    getPending: async <T>(token: string) => {
       try {
         const data = await service.getTransactionPending<T>(token);
 
@@ -115,7 +131,19 @@ export const handleTransaction: HandleTransaction = (onError, onSuccess) => {
       }
     },
 
-    getTransactionById: async <T>(id: string, token: string) => {
+    getConcluded: async <T>(token: string) => {
+      try {
+        const data = await service.getTransactionConcluded<T>(token);
+
+        return { data, error: null };
+      } catch (error) {
+        onError(error.message);
+
+        return { data: null, error: error.message };
+      }
+    },
+
+    getById: async <T>(id: string, token: string) => {
       try {
         const data = await service.getTransactionById<T>(id, token);
 

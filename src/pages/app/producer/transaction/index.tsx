@@ -14,7 +14,7 @@ import { initialState, reducer } from './reducer';
 export const Transaction: FC = () => {
   const appDispatch = useAppDispatch();
   const { onFocus, goBack, navigateTo, getIdParams } = useAppNavigation();
-  const { getProducerTransactionById, confirmTransaction, separateTransaction } = useApi();
+  const api = useApi();
 
   const [state, dispatch] = useReducer(reducer, { ...initialState, idParam: getIdParams() });
 
@@ -27,7 +27,8 @@ export const Transaction: FC = () => {
     dispatch({ type: 'onChangeTransaction', payload });
 
   const handleOpenRequisition = () => {
-    getProducerTransactionById(state.idParam)
+    api
+      .getProducerTransactionById(state.idParam)
       .then((transaction) => onChangeTransaction(transaction))
       .finally(() => onCloseRequisition());
   };
@@ -35,12 +36,17 @@ export const Transaction: FC = () => {
   const handleRequestConfirm = async () => {
     switch (state.transaction.status) {
       case 'in-separation':
-        return separateTransaction(state.idParam).then(() =>
-          navigateTo<'producer'>('transactions', null, { popNavigationToTop: true }),
-        );
+        return api
+          .separateTransaction(state.idParam)
+          .then(() => navigateTo<'producer'>('transactions', null, { popNavigationToTop: true }));
+
+      case 'waiting-for-consumer-to-withdraw':
+        return api
+          .deliverTransaction(state.idParam)
+          .then(() => navigateTo<'producer'>('transactions', null, { popNavigationToTop: true }));
 
       default:
-        return confirmTransaction(state.idParam).then(() => goBack());
+        return api.confirmTransaction(state.idParam).then(() => goBack());
     }
   };
 
@@ -53,7 +59,8 @@ export const Transaction: FC = () => {
   const handleCancel = () => {
     onOpenCancel();
 
-    confirmTransaction(state.idParam)
+    api
+      .confirmTransaction(state.idParam)
       .then(() => goBack())
       .finally(() => onCloseCancel());
   };
@@ -71,7 +78,7 @@ export const Transaction: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header title="Pedido" />
+      <C.Header title="Pedido" subTitle={state.status} />
 
       <C.IfElse
         condition={state.loading}
@@ -161,20 +168,28 @@ export const Transaction: FC = () => {
                 </C_S.Content>
               </C_S.ScrollContainer>
               <S.Buttons>
-                <S.Button>
-                  <C_S.ButtonConfirm
-                    disabled={state.confirming || state.canceling}
-                    onPress={handleConfirm}
-                  >
-                    <C.IfElse
-                      condition={state.confirming}
-                      render={{
-                        toBeFalsy: () => <C_S.ButtonLabel>{state.label}</C_S.ButtonLabel>,
-                        toBeTruthy: () => <C.Loading color={colors.basic.white} sizeType="large" />,
-                      }}
-                    />
-                  </C_S.ButtonConfirm>
-                </S.Button>
+                <C.If
+                  condition={!state.hideConfirm}
+                  render={() => (
+                    <S.Button>
+                      <C_S.ButtonConfirm
+                        disabled={state.confirming || state.canceling}
+                        onPress={handleConfirm}
+                      >
+                        <C.IfElse
+                          condition={state.confirming}
+                          render={{
+                            toBeFalsy: () => <C_S.ButtonLabel>{state.label}</C_S.ButtonLabel>,
+                            toBeTruthy: () => (
+                              <C.Loading color={colors.basic.white} sizeType="large" />
+                            ),
+                          }}
+                        />
+                      </C_S.ButtonConfirm>
+                    </S.Button>
+                  )}
+                />
+
                 <S.Button>
                   <C_S.ButtonCancel
                     disabled={state.confirming || state.canceling}

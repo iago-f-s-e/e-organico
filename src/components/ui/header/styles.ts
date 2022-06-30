@@ -26,10 +26,22 @@ export const BackButton = styled(Button)`
   justify-content: center;
 `;
 
-export const Label = styled.Text``;
+export const Info = styled.View`
+  align-items: center;
+  width: 100%;
+  height: 50px;
+
+  padding-top: 5px;
+`;
 
 export const Title = styled.Text`
   font-size: ${font.size.large};
+  font-family: ${font.family.semiBold};
+  color: ${colors.basic.white};
+`;
+
+export const SubTitle = styled.Text`
+  font-size: ${font.size.medium};
   font-family: ${font.family.semiBold};
   color: ${colors.basic.white};
 `;

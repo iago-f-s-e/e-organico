@@ -95,7 +95,7 @@ export const useApi = (): UseApi => {
   const getConsumerTransactionInProgress = async () => {
     const { data, error } = await handleTransaction(
       useToast.error,
-    ).getTransactionInProgress<MinimalConsumerTransaction>(curr.token);
+    ).getInProgress<MinimalConsumerTransaction>(curr.token);
 
     if (!error) return data;
 
@@ -105,7 +105,7 @@ export const useApi = (): UseApi => {
   const getProducerTransactionInProgress = async () => {
     const { data, error } = await handleTransaction(
       useToast.error,
-    ).getTransactionInProgress<MinimalProducerTransaction>(curr.token);
+    ).getInProgress<MinimalProducerTransaction>(curr.token);
 
     if (!error) return data;
 
@@ -115,7 +115,7 @@ export const useApi = (): UseApi => {
   const getProducerTransactionInSeparation = async () => {
     const { data, error } = await handleTransaction(
       useToast.error,
-    ).getTransactionInSeparation<MinimalProducerTransaction>(curr.token);
+    ).getInSeparation<MinimalProducerTransaction>(curr.token);
 
     if (!error) return data;
 
@@ -125,7 +125,17 @@ export const useApi = (): UseApi => {
   const getProducerTransactionPending = async () => {
     const { data, error } = await handleTransaction(
       useToast.error,
-    ).getTransactionPending<MinimalProducerTransaction>(curr.token);
+    ).getPending<MinimalProducerTransaction>(curr.token);
+
+    if (!error) return data;
+
+    return [];
+  };
+
+  const getProducerTransactionConcluded = async () => {
+    const { data, error } = await handleTransaction(
+      useToast.error,
+    ).getConcluded<MinimalProducerTransaction>(curr.token);
 
     if (!error) return data;
 
@@ -135,7 +145,7 @@ export const useApi = (): UseApi => {
   const getProducerTransactionById = async (id: string) => {
     const { data, error } = await handleTransaction(
       useToast.error,
-    ).getTransactionById<ProducerTransactionDetail>(id, curr.token);
+    ).getById<ProducerTransactionDetail>(id, curr.token);
 
     if (!error) return data;
 
@@ -158,8 +168,21 @@ export const useApi = (): UseApi => {
     );
   };
 
+  const deliverTransaction = (id: string) => {
+    const message =
+      curr.user.userType === 'consumer'
+        ? 'Pedido recebido com sucesso!'
+        : 'Pedido entregue com sucesso!';
+
+    return handleTransaction(useToast.error, useToast.success).deliverTransaction(
+      id,
+      curr.token,
+      message,
+    );
+  };
+
   const cancelTransaction = (id: string) =>
-    handleTransaction(useToast.error, useToast.success).confirmTransaction(
+    handleTransaction(useToast.error, useToast.success).cancelTransaction(
       id,
       curr.token,
       'Pedido cancelado com sucesso!',
@@ -185,10 +208,12 @@ export const useApi = (): UseApi => {
     getProducerTransactionInProgress,
     getProducerTransactionInSeparation,
     getProducerTransactionPending,
+    getProducerTransactionConcluded,
     getProducerTransactionById,
     postTransaction,
     confirmTransaction,
     cancelTransaction,
     separateTransaction,
+    deliverTransaction,
   };
 };

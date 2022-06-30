@@ -9,8 +9,9 @@ import * as S from './styles';
 type Props = {
   transaction: MinimalProducerTransaction;
   showWaitingTime?: boolean;
-  inRequisition: boolean;
-  onRequest: (id: string) => void;
+  hideRequest?: boolean;
+  inRequisition?: boolean;
+  onRequest?: (id: string) => void;
 };
 
 export const ListProducerTransaction = ({
@@ -18,6 +19,7 @@ export const ListProducerTransaction = ({
   showWaitingTime,
   inRequisition,
   onRequest,
+  hideRequest,
 }: Props): JSX.Element => {
   const { navigateTo } = useAppNavigation();
 
@@ -34,8 +36,8 @@ export const ListProducerTransaction = ({
 
   const label = useMemo(() => {
     switch (transaction.status) {
-      case 'waiting-for-confirmation-from-the-producer':
-        return 'Aceitar';
+      case 'waiting-for-consumer-to-withdraw':
+        return 'Entregar';
 
       case 'in-separation':
         return 'Confirmar';
@@ -113,12 +115,17 @@ export const ListProducerTransaction = ({
         </S.Section>
 
         <S.ButtonsContainer>
-          <S.ConfirmTransactionButton
-            disabled={inRequisition}
-            onPress={() => onRequest(transaction.id)}
-          >
-            <S.ConfirmTransactionLabel>{label}</S.ConfirmTransactionLabel>
-          </S.ConfirmTransactionButton>
+          <If
+            condition={!hideRequest}
+            render={() => (
+              <S.ConfirmTransactionButton
+                disabled={inRequisition}
+                onPress={() => onRequest?.(transaction.id)}
+              >
+                <S.ConfirmTransactionLabel>{label}</S.ConfirmTransactionLabel>
+              </S.ConfirmTransactionButton>
+            )}
+          />
 
           <S.OpenTransactionButton onPress={handleNavigate}>
             <S.OpenTransactionLabel>Visualizar</S.OpenTransactionLabel>

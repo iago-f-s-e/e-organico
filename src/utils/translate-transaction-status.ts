@@ -5,7 +5,7 @@ const producerStatus: { [key in TransactionStatus]: string } = {
   'canceled-by-consumer': 'cancelado pelo cliente',
   'canceled-by-producer': 'cancelado',
   'confirmed-by-consumer': 'confirmado pelo cliente',
-  'confirmed-by-producer': 'confirmado',
+  'confirmed-by-producer': 'esperando a confirmação do cliente',
   'en-route': 'em rota de entrega',
   'paid-online': 'pago online',
   'waiting-for-confirmation-from-the-producer': 'aguardando a confirmação',

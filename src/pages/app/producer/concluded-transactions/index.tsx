@@ -10,37 +10,26 @@ import * as C_S from '../../common-styles';
 
 import { initialState, reducer } from './reducer';
 
-// TODO: renderizar empty component
-export const PendingTransactions: FC = () => {
+export const ConcludedTransactions: FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const appDispatch = useAppDispatch();
   const { onFocus } = useAppNavigation();
-  const { getProducerTransactionPending, confirmTransaction } = useApi();
+  const { getProducerTransactionConcluded } = useApi();
 
-  const onOpenConfirm = () => dispatch({ type: 'changeConfirm', payload: false });
-  const onCloseConfirm = () => dispatch({ type: 'changeConfirm', payload: false });
   const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
   const onChangeInProgress = (payload: MinimalProducerTransaction[]) =>
     dispatch({ type: 'onChangeTransactions', payload });
 
   const handleOpenRequisition = () => {
-    getProducerTransactionPending()
-      .then((pending) => onChangeInProgress(pending))
+    getProducerTransactionConcluded()
+      .then((concluded) => onChangeInProgress(concluded))
       .finally(() => onCloseRequisition());
   };
 
   const handleOnFocus = () => {
     appDispatch(showBottomTab());
     handleOpenRequisition();
-  };
-
-  const handleConfirm = (id: string) => {
-    onOpenConfirm();
-
-    confirmTransaction(id)
-      .then(() => handleOpenRequisition())
-      .finally(() => onCloseConfirm());
   };
 
   useEffect(() => {
@@ -60,9 +49,8 @@ export const PendingTransactions: FC = () => {
           render={(value, index) => (
             <C.ListProducerTransaction
               showWaitingTime
-              onRequest={handleConfirm}
-              inRequisition={state.confirming}
               transaction={value}
+              hideRequest
               key={index.toString()}
             />
           )}

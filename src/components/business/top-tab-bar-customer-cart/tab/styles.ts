@@ -11,6 +11,7 @@ export const Container = styled.TouchableOpacity`
 
   border-bottom-width: 1px;
   border-color: ${colors.basic.grey};
+  background-color: ${colors.basic.white};
 `;
 
 export const Label = styled.Text`

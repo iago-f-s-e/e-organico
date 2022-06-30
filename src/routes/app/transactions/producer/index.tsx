@@ -11,29 +11,36 @@ import * as C_S from '../../common-styles';
 const Tab = createMaterialTopTabNavigator<ProducerTransactionTopTab>();
 
 export type ProducerTransactionTabScreens =
+  | 'producer-transaction-pending'
   | 'producer-transaction-separate'
-  | 'producer-transaction-in-progress';
+  | 'producer-transaction-in-progress'
+  | 'producer-transaction-concluded';
 
 export const ProducerTransactionsRoutes: FC = () => {
   return (
     <C_S.Container>
-      <C.Header title="Carrinho de compras" />
+      <C.Header title="Pedidos" />
 
       <Tab.Navigator
-        tabBar={(props) => <C.TopTabBar {...props} />}
+        tabBar={(props) => <C.TopTabBarScroll {...props} />}
         screenOptions={{
           tabBarActiveTintColor: colors.main.secondary,
           tabBarLabelStyle: { fontSize: 12 },
           tabBarIndicatorStyle: { backgroundColor: colors.main.primary },
         }}
       >
+        <Tab.Screen name="producer-transaction-pending" component={Producer.PendingTransactions} />
         <Tab.Screen
           name="producer-transaction-separate"
           component={Producer.TransactionsSeparation}
         />
         <Tab.Screen
           name="producer-transaction-in-progress"
-          component={Producer.TransactionsSeparation}
+          component={Producer.TransactionsInProgress}
+        />
+        <Tab.Screen
+          name="producer-transaction-concluded"
+          component={Producer.ConcludedTransactions}
         />
       </Tab.Navigator>
     </C_S.Container>

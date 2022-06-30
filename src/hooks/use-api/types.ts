@@ -31,9 +31,11 @@ export type UseApi = {
   confirmTransaction: (id: string) => Promise<Response<void>>;
   cancelTransaction: (id: string) => Promise<Response<void>>;
   separateTransaction: (id: string) => Promise<Response<void>>;
+  deliverTransaction: (id: string) => Promise<Response<void>>;
   getProducerTransactionInProgress: () => Promise<MinimalProducerTransaction[]>;
   getConsumerTransactionInProgress: () => Promise<MinimalConsumerTransaction[]>;
   getProducerTransactionInSeparation: () => Promise<MinimalProducerTransaction[]>;
   getProducerTransactionPending: () => Promise<MinimalProducerTransaction[]>;
+  getProducerTransactionConcluded: () => Promise<MinimalProducerTransaction[]>;
   getProducerTransactionById: (id: string) => Promise<ProducerTransactionDetail>;
 };
