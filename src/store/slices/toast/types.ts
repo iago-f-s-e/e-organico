@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 
-export type ToastType = 'error' | 'info';
+export type ToastType = 'error' | 'info' | 'success';
 
 type ToastPayload = {
   type: ToastType;

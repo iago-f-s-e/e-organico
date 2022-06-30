@@ -7,47 +7,24 @@ import {
 import { useToast as _useToast } from '@src/hooks/use-toast';
 import { useAppSelector } from '@src/store';
 import { CartPayload } from '@src/store/slices/cart/types';
-import { Market, MarketDetail } from '@src/store/slices/market/types';
-import { Payment } from '@src/store/slices/payment-method/types';
-import { ProducerProductDetail } from '@src/store/slices/producer-product/type';
-import { MinimalProducer, ProducerDetail } from '@src/store/slices/producer/types';
-import { Product } from '@src/store/slices/product/types';
 import {
   MinimalConsumerTransaction,
   MinimalProducerTransaction,
   ProducerTransactionDetail,
 } from '@src/store/slices/transaction/types';
-import { UnitMeasure } from '@src/store/slices/unit-measure/types';
 import { handleMarket } from './market';
 import { handlePayment } from './payment';
 import { handleProducer } from './producer';
 import { handleProduct } from './product';
 import { handleTransaction } from './transaction';
-import { Response } from './types';
+import { UseApi } from './types';
 import { handleUnitMeasure } from './unit-measure';
 
-type UseApi = {
-  getAllProducts: () => Promise<Product[]>;
-  getAllProducers: () => Promise<MinimalProducer[]>;
-  getAllMarkets: () => Promise<Market[]>;
-  getAllUnitMeasures: () => Promise<UnitMeasure[]>;
-  getAllPayments: () => Promise<Payment[]>;
-
-  getMarketById: (id: string) => Promise<MarketDetail>;
-  getProducerById: (id: string) => Promise<ProducerDetail>;
-  getProducerProductById: (id: string, producerId: string) => Promise<ProducerProductDetail>;
-
-  postTransaction: (payload: CartPayload) => Promise<Response<CartPayload>>;
-  getProducerTransactionInProgress: () => Promise<MinimalProducerTransaction[]>;
-  getConsumerTransactionInProgress: () => Promise<MinimalConsumerTransaction[]>;
-  getProducerTransactionById: (id: string) => Promise<ProducerTransactionDetail>;
-};
-
 export const useApi = (): UseApi => {
-  const { user } = useAppSelector((state) => state);
+  const { user: curr } = useAppSelector((state) => state);
   const useToast = _useToast();
 
-  const getAllMarkets = async (): Promise<Market[]> => {
+  const getAllMarkets = async () => {
     const { data, error } = await handleMarket(useToast.error).getAll();
 
     if (!error) return data;
@@ -55,7 +32,7 @@ export const useApi = (): UseApi => {
     return [];
   };
 
-  const getAllProducers = async (): Promise<MinimalProducer[]> => {
+  const getAllProducers = async () => {
     const { data, error } = await handleProducer(useToast.error).getAll();
 
     if (!error) return data;
@@ -63,7 +40,7 @@ export const useApi = (): UseApi => {
     return [];
   };
 
-  const getAllProducts = async (): Promise<Product[]> => {
+  const getAllProducts = async () => {
     const { data, error } = await handleProduct(useToast.error).getAll();
 
     if (!error) return data;
@@ -71,7 +48,7 @@ export const useApi = (): UseApi => {
     return [];
   };
 
-  const getAllUnitMeasures = async (): Promise<UnitMeasure[]> => {
+  const getAllUnitMeasures = async () => {
     const { data, error } = await handleUnitMeasure(useToast.error).getAll();
 
     if (!error) return data;
@@ -79,15 +56,15 @@ export const useApi = (): UseApi => {
     return [];
   };
 
-  const getAllPayments = async (): Promise<Payment[]> => {
-    const { data, error } = await handlePayment(useToast.error).getAll(user.token);
+  const getAllPayments = async () => {
+    const { data, error } = await handlePayment(useToast.error).getAll(curr.token);
 
     if (!error) return data;
 
     return [];
   };
 
-  const getMarketById = async (id: string): Promise<MarketDetail> => {
+  const getMarketById = async (id: string) => {
     const { data, error } = await handleMarket(useToast.error).getById(id);
 
     if (!error) return data;
@@ -95,22 +72,19 @@ export const useApi = (): UseApi => {
     return defaultMarketDetail;
   };
 
-  const getProducerById = async (id: string): Promise<ProducerDetail> => {
-    const { data, error } = await handleProducer(useToast.error).getById(id, user.token);
+  const getProducerById = async (id: string) => {
+    const { data, error } = await handleProducer(useToast.error).getById(id, curr.token);
 
     if (!error) return data;
 
     return defaultProducerDetail;
   };
 
-  const getProducerProductById = async (
-    id: string,
-    producerId: string,
-  ): Promise<ProducerProductDetail> => {
+  const getProducerProductById = async (id: string, producerId: string) => {
     const { data, error } = await handleProducer(useToast.error).getProductById(
       id,
       producerId,
-      user.token,
+      curr.token,
     );
 
     if (!error) return data;
@@ -121,7 +95,7 @@ export const useApi = (): UseApi => {
   const getConsumerTransactionInProgress = async () => {
     const { data, error } = await handleTransaction(
       useToast.error,
-    ).getTransactionInProgress<MinimalConsumerTransaction>(user.token);
+    ).getTransactionInProgress<MinimalConsumerTransaction>(curr.token);
 
     if (!error) return data;
 
@@ -131,17 +105,27 @@ export const useApi = (): UseApi => {
   const getProducerTransactionInProgress = async () => {
     const { data, error } = await handleTransaction(
       useToast.error,
-    ).getTransactionInProgress<MinimalProducerTransaction>(user.token);
+    ).getTransactionInProgress<MinimalProducerTransaction>(curr.token);
 
     if (!error) return data;
 
     return [];
   };
 
-  const getProducerTransactionById = async (id: string): Promise<ProducerTransactionDetail> => {
+  const getProducerTransactionPending = async () => {
     const { data, error } = await handleTransaction(
       useToast.error,
-    ).getTransactionById<ProducerTransactionDetail>(id, user.token);
+    ).getTransactionPending<MinimalProducerTransaction>(curr.token);
+
+    if (!error) return data;
+
+    return [];
+  };
+
+  const getProducerTransactionById = async (id: string) => {
+    const { data, error } = await handleTransaction(
+      useToast.error,
+    ).getTransactionById<ProducerTransactionDetail>(id, curr.token);
 
     if (!error) return data;
 
@@ -149,7 +133,27 @@ export const useApi = (): UseApi => {
   };
 
   const postTransaction = (payload: CartPayload) =>
-    handleTransaction(useToast.error).postTransaction(payload, user.token);
+    handleTransaction(useToast.error).postTransaction(payload, curr.token);
+
+  const confirmTransaction = (id: string) => {
+    const message =
+      curr.user.userType === 'consumer'
+        ? 'Pedido concluído com sucesso!'
+        : 'Pedido confirmado com sucesso! Por favor, separe os itens do pedido. ';
+
+    return handleTransaction(useToast.error, useToast.success).confirmTransaction(
+      id,
+      curr.token,
+      message,
+    );
+  };
+
+  const cancelTransaction = (id: string) =>
+    handleTransaction(useToast.error, useToast.success).confirmTransaction(
+      id,
+      curr.token,
+      'Pedido cancelado com sucesso!',
+    );
 
   return {
     getAllMarkets,
@@ -162,7 +166,10 @@ export const useApi = (): UseApi => {
     getProducerProductById,
     getConsumerTransactionInProgress,
     getProducerTransactionInProgress,
+    getProducerTransactionPending,
     getProducerTransactionById,
     postTransaction,
+    confirmTransaction,
+    cancelTransaction,
   };
 };

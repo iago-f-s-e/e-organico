@@ -1,6 +1,6 @@
 import { endpoints } from '@src/constants/endpoints';
 import { LoggedUser } from '@src/store/slices/user/types';
-import { httpClientPOST } from '../../http-client';
+import { httpPOST } from '../../http-client';
 
 export type Credentials = {
   phone: string;
@@ -8,5 +8,5 @@ export type Credentials = {
 };
 
 export function signIn(data: Credentials): Promise<LoggedUser> {
-  return httpClientPOST<Credentials, LoggedUser>(endpoints.signIn.SIGN_IN, data);
+  return httpPOST<Credentials, LoggedUser>(endpoints.signIn.SIGN_IN, data);
 }

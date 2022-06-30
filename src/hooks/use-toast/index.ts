@@ -3,6 +3,7 @@ import { showToast, useAppDispatch } from '@src/store';
 type UseToast = {
   error: (message: string) => void;
   info: (message: string) => void;
+  success: (message: string) => void;
 };
 
 export const useToast = (): UseToast => {
@@ -16,5 +17,9 @@ export const useToast = (): UseToast => {
     appDispatch(showToast({ message, type: 'info' }));
   };
 
-  return { error, info };
+  const success = (message: string) => {
+    appDispatch(showToast({ message, type: 'success' }));
+  };
+
+  return { error, info, success };
 };

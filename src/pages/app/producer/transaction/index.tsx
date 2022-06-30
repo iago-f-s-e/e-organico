@@ -13,11 +13,15 @@ import { initialState, reducer } from './reducer';
 
 export const Transaction: FC = () => {
   const appDispatch = useAppDispatch();
-  const { onFocus, getIdParams } = useAppNavigation();
-  const { getProducerTransactionById } = useApi();
+  const { onFocus, goBack, getIdParams } = useAppNavigation();
+  const { getProducerTransactionById, confirmTransaction } = useApi();
 
   const [state, dispatch] = useReducer(reducer, { ...initialState, idParam: getIdParams() });
 
+  const onOpenConfirm = () => dispatch({ type: 'changeConfirm', payload: false });
+  const onCloseConfirm = () => dispatch({ type: 'changeConfirm', payload: false });
+  const onOpenCancel = () => dispatch({ type: 'changeCancel', payload: false });
+  const onCloseCancel = () => dispatch({ type: 'changeCancel', payload: false });
   const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
   const onChangeTransaction = (payload: ProducerTransactionDetail) =>
     dispatch({ type: 'onChangeTransaction', payload });
@@ -26,6 +30,22 @@ export const Transaction: FC = () => {
     getProducerTransactionById(state.idParam)
       .then((transaction) => onChangeTransaction(transaction))
       .finally(() => onCloseRequisition());
+  };
+
+  const handleConfirm = () => {
+    onOpenConfirm();
+
+    confirmTransaction(state.idParam)
+      .then(() => goBack())
+      .finally(() => onCloseConfirm());
+  };
+
+  const handleCancel = () => {
+    onOpenCancel();
+
+    confirmTransaction(state.idParam)
+      .then(() => goBack())
+      .finally(() => onCloseCancel());
   };
 
   const handleOnFocus = () => {
@@ -132,13 +152,31 @@ export const Transaction: FC = () => {
               </C_S.ScrollContainer>
               <S.Buttons>
                 <S.Button>
-                  <C_S.ButtonConfirm onPress={() => {}}>
-                    <C_S.ButtonLabel>Confirmar</C_S.ButtonLabel>
+                  <C_S.ButtonConfirm
+                    disabled={state.confirming || state.canceling}
+                    onPress={handleConfirm}
+                  >
+                    <C.IfElse
+                      condition={state.confirming}
+                      render={{
+                        toBeFalsy: () => <C_S.ButtonLabel>Confirmar</C_S.ButtonLabel>,
+                        toBeTruthy: () => <C.Loading color={colors.basic.white} sizeType="large" />,
+                      }}
+                    />
                   </C_S.ButtonConfirm>
                 </S.Button>
                 <S.Button>
-                  <C_S.ButtonCancel onPress={() => {}}>
-                    <C_S.ButtonLabel>Cancelar</C_S.ButtonLabel>
+                  <C_S.ButtonCancel
+                    disabled={state.confirming || state.canceling}
+                    onPress={handleCancel}
+                  >
+                    <C.IfElse
+                      condition={state.canceling}
+                      render={{
+                        toBeFalsy: () => <C_S.ButtonLabel>Cancelar</C_S.ButtonLabel>,
+                        toBeTruthy: () => <C.Loading color={colors.basic.white} sizeType="large" />,
+                      }}
+                    />
                   </C_S.ButtonCancel>
                 </S.Button>
               </S.Buttons>

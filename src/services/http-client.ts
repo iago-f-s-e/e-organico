@@ -18,12 +18,19 @@ _instance.interceptors.response.use(responseSuccessInterceptor, responseErrorInt
 
 export const httpClient = _instance;
 
-export const httpClientGET = async <T>(url: string, token?: string): Promise<T> =>
+export const httpGET = async <T>(url: string, token?: string): Promise<T> =>
   (await httpClient.get<T>(url, { headers: { authorization: `Bearer ${token}` } })).data;
 
-export const httpClientPOST = async <Req, Res = Req>(
+export const httpPOST = async <Req, Res = Req>(
   url: string,
   data: Req,
   token?: string,
 ): Promise<Res> =>
   (await httpClient.post<Res>(url, data, { headers: { authorization: `Bearer ${token}` } })).data;
+
+export const httpPATCH = async <Req, Res = Req>(
+  url: string,
+  token?: string,
+  data?: Req,
+): Promise<Res> =>
+  (await httpClient.patch<Res>(url, data, { headers: { authorization: `Bearer ${token}` } })).data;

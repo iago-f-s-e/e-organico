@@ -33,6 +33,7 @@ type Actions = {
   clear: string;
   error: string;
   info: string;
+  success: string;
   danger: string;
   selectedOptionBackground: string;
 };
@@ -96,6 +97,7 @@ const actions: Actions = {
   clear: 'rgba(0,0,0,0)',
   error: '#e74c3c',
   info: '#f1c40f',
+  success: '#1abc9c',
   danger: '#e74c3c',
   selectedOptionBackground: 'rgba(123, 237, 141, 0.3)',
 };

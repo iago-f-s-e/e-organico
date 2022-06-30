@@ -3,6 +3,8 @@ import { getWaitingTime, handleInputMask, toPTDay } from '@src/utils';
 
 type State = {
   loading: boolean;
+  confirming: boolean;
+  canceling: boolean;
   idParam: string;
   waitingTime: string;
   transaction: ProducerTransactionDetail;
@@ -15,7 +17,7 @@ type State = {
   };
 };
 
-type Actions = 'changeLoading' | 'onChangeTransaction';
+type Actions = 'changeLoading' | 'changeConfirm' | 'changeCancel' | 'onChangeTransaction';
 
 type Action = {
   type: Actions;
@@ -26,6 +28,10 @@ type Reducer = (state: State, action: Action) => State;
 
 const reducers: { [key in Actions]: Reducer } = {
   changeLoading: (state, action): State => ({ ...state, loading: Boolean(action.payload) }),
+
+  changeConfirm: (state, action): State => ({ ...state, confirming: Boolean(action.payload) }),
+
+  changeCancel: (state, action): State => ({ ...state, canceling: Boolean(action.payload) }),
 
   onChangeTransaction: (state, action): State => {
     const transaction = action.payload as ProducerTransactionDetail;
@@ -54,6 +60,8 @@ const reducers: { [key in Actions]: Reducer } = {
 
 export const initialState: State = {
   loading: true,
+  confirming: false,
+  canceling: false,
   idParam: '',
   waitingTime: '',
   transaction: null,

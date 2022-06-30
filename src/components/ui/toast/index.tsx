@@ -23,7 +23,7 @@ export const Toast = (): JSX.Element => {
       }),
     ]).start();
 
-    setTimeout(handleHideToast, 3000);
+    setTimeout(handleHideToast, 4000);
   };
 
   const handleOnClose = () => {
@@ -48,6 +48,8 @@ export const Toast = (): JSX.Element => {
 
   const color = useMemo(() => {
     if (toast.type === 'error') return colors.actions.error;
+
+    if (toast.type === 'success') return colors.actions.success;
 
     return colors.actions.info;
   }, [toast.type]);

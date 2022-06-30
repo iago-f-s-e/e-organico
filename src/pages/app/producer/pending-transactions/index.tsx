@@ -16,14 +16,14 @@ export const PendingTransactions: FC = () => {
 
   const appDispatch = useAppDispatch();
   const { onFocus } = useAppNavigation();
-  const { getProducerTransactionInProgress } = useApi();
+  const { getProducerTransactionPending } = useApi();
 
   const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
   const onChangeInProgress = (payload: MinimalProducerTransaction[]) =>
     dispatch({ type: 'onChangeTransactions', payload });
 
   const handleOpenRequisition = () => {
-    getProducerTransactionInProgress()
+    getProducerTransactionPending()
       .then((inProgress) => onChangeInProgress(inProgress))
       .finally(() => onCloseRequisition());
   };

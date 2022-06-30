@@ -7,6 +7,7 @@ import { colors } from '@src/config/theme';
 const icons: { [key in ToastType]: JSX.Element } = {
   error: <Feather name="x-octagon" size={24} color={colors.basic.white} />,
   info: <Feather name="info" size={24} color={colors.basic.white} />,
+  success: <Feather name="check" size={24} color={colors.basic.white} />,
 };
 
 type GetIcon = (type: ToastType) => JSX.Element;
