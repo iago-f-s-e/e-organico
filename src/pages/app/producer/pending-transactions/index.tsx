@@ -16,8 +16,10 @@ export const PendingTransactions: FC = () => {
 
   const appDispatch = useAppDispatch();
   const { onFocus } = useAppNavigation();
-  const { getProducerTransactionPending } = useApi();
+  const { getProducerTransactionPending, confirmTransaction } = useApi();
 
+  const onOpenConfirm = () => dispatch({ type: 'changeConfirm', payload: false });
+  const onCloseConfirm = () => dispatch({ type: 'changeConfirm', payload: false });
   const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
   const onChangeInProgress = (payload: MinimalProducerTransaction[]) =>
     dispatch({ type: 'onChangeTransactions', payload });
@@ -31,6 +33,14 @@ export const PendingTransactions: FC = () => {
   const handleOnFocus = () => {
     appDispatch(showBottomTab());
     handleOpenRequisition();
+  };
+
+  const handleConfirm = (id: string) => {
+    onOpenConfirm();
+
+    confirmTransaction(id)
+      .then(() => handleOpenRequisition())
+      .finally(() => onCloseConfirm());
   };
 
   useEffect(() => {
@@ -48,7 +58,13 @@ export const PendingTransactions: FC = () => {
         <C.Map
           data={state.transactions}
           render={(value, index) => (
-            <C.ListProducerTransaction showWaitingTime transaction={value} key={index.toString()} />
+            <C.ListProducerTransaction
+              showWaitingTime
+              confirm={handleConfirm}
+              confirming={state.confirming}
+              transaction={value}
+              key={index.toString()}
+            />
           )}
         />
       </C_S.Content>

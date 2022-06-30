@@ -9,9 +9,16 @@ import * as S from './styles';
 type Props = {
   transaction: MinimalProducerTransaction;
   showWaitingTime?: boolean;
+  confirming: boolean;
+  confirm: (id: string) => void;
 };
 
-export const ListProducerTransaction = ({ transaction, showWaitingTime }: Props): JSX.Element => {
+export const ListProducerTransaction = ({
+  transaction,
+  showWaitingTime,
+  confirm,
+  confirming,
+}: Props): JSX.Element => {
   const { navigateTo } = useAppNavigation();
 
   const [waitingTime, setWaitingTime] = useState<string>('');
@@ -93,7 +100,7 @@ export const ListProducerTransaction = ({ transaction, showWaitingTime }: Props)
         </S.Section>
 
         <S.ButtonsContainer>
-          <S.ConfirmTransactionButton>
+          <S.ConfirmTransactionButton disabled={confirming} onPress={() => confirm(transaction.id)}>
             <S.ConfirmTransactionLabel>Aceitar</S.ConfirmTransactionLabel>
           </S.ConfirmTransactionButton>
 
