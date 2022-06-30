@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { handleInputMask } from '@src/utils';
-import { ProducerProduct } from '@src/store/slices/producer-product/type';
+import { MinimalProducerProduct } from '@src/store/slices/producer-product/type';
 import { useAppNavigation } from '@src/hooks';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 
 type Props = {
-  data: ProducerProduct;
+  data: MinimalProducerProduct;
 };
 
 export const ListProducerProduct = ({ data }: Props): JSX.Element => {
@@ -25,10 +25,10 @@ export const ListProducerProduct = ({ data }: Props): JSX.Element => {
   return (
     <C_S.Container>
       <C_S.ImageContainer>
-        <C_S.Image source={{ uri: data.product.image }} />
+        <C_S.Image source={{ uri: data.image }} />
       </C_S.ImageContainer>
       <C_S.Content onPress={() => navigateTo<'producer'>('producer-product')}>
-        <C_S.Title>{data.product.name}</C_S.Title>
+        <C_S.Title>{data.name}</C_S.Title>
         <S.ValuesContent>
           <S.ValuesContent>
             <S.Stock>{stock}</S.Stock>

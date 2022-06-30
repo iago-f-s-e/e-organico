@@ -6,6 +6,7 @@ import { unitMeasure } from './unit-measure';
 import { producer } from './producer';
 import { payment } from './payment';
 import { transaction } from './transaction';
+import { producerProduct } from './producer-product';
 
 // 192.168.100.80
 // 172.16.10.13
@@ -18,6 +19,7 @@ export const endpoints = {
   product,
   unitMeasure,
   producer,
+  producerProduct,
   payment,
   transaction,
 };

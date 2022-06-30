@@ -6,6 +6,7 @@ export type MinimalProducerProduct = {
   image: string;
   name: string;
   price: string;
+  stock: string;
   unitMeasure: UnitMeasure;
 };
 

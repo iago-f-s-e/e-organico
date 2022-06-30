@@ -2,7 +2,10 @@ import { useToast as _useToast } from '@src/hooks/use-toast';
 import { CartPayload } from '@src/store/slices/cart/types';
 import { Market, MarketDetail } from '@src/store/slices/market/types';
 import { Payment } from '@src/store/slices/payment-method/types';
-import { ProducerProductDetail } from '@src/store/slices/producer-product/type';
+import {
+  MinimalProducerProduct,
+  ProducerProductDetail,
+} from '@src/store/slices/producer-product/type';
 import { MinimalProducer, ProducerDetail } from '@src/store/slices/producer/types';
 import { Product } from '@src/store/slices/product/types';
 import {
@@ -25,7 +28,8 @@ export type UseApi = {
 
   getMarketById: (id: string) => Promise<MarketDetail>;
   getProducerById: (id: string) => Promise<ProducerDetail>;
-  getProducerProductById: (id: string, producerId: string) => Promise<ProducerProductDetail>;
+  getOwnProducerProducts: () => Promise<MinimalProducerProduct[]>;
+  getProducerProductById: (id: string) => Promise<ProducerProductDetail>;
 
   postTransaction: (payload: CartPayload) => Promise<Response<CartPayload>>;
   confirmTransaction: (id: string) => Promise<Response<void>>;

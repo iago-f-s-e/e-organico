@@ -80,16 +80,20 @@ export const useApi = (): UseApi => {
     return defaultProducerDetail;
   };
 
-  const getProducerProductById = async (id: string, producerId: string) => {
-    const { data, error } = await handleProducer(useToast.error).getProductById(
-      id,
-      producerId,
-      curr.token,
-    );
+  const getProducerProductById = async (id: string) => {
+    const { data, error } = await handleProducer(useToast.error).getProductById(id, curr.token);
 
     if (!error) return data;
 
     return defaultProducerProduct;
+  };
+
+  const getOwnProducerProducts = async () => {
+    const { data, error } = await handleProducer(useToast.error).getOwnProducts(curr.token);
+
+    if (!error) return data;
+
+    return [];
   };
 
   const getConsumerTransactionInProgress = async () => {
@@ -204,6 +208,7 @@ export const useApi = (): UseApi => {
     getMarketById,
     getProducerById,
     getProducerProductById,
+    getOwnProducerProducts,
     getConsumerTransactionInProgress,
     getProducerTransactionInProgress,
     getProducerTransactionInSeparation,

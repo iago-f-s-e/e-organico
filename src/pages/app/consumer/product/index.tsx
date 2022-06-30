@@ -42,7 +42,7 @@ export const Product: FC = () => {
   );
 
   const handleOpenRequisition = () => {
-    getProducerProductById(state.idParam, section.producer.id)
+    getProducerProductById(state.idParam)
       .then((producerProduct) => onChangeProducerProduct(producerProduct))
       .finally(() => onCloseRequisition());
   };
