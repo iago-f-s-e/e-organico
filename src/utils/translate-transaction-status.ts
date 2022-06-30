@@ -11,6 +11,7 @@ const producerStatus: { [key in TransactionStatus]: string } = {
   'waiting-for-confirmation-from-the-producer': 'aguardando a confirmação',
   'waiting-for-consumer-to-withdraw': 'aguardando o cliente retirar',
   'waiting-for-payment': 'aguardando o pagamento',
+  'in-separation': 'aguardando separação dos produtos',
   delivered: 'entregue',
 };
 
@@ -24,6 +25,7 @@ const consumerStatus: { [key in TransactionStatus]: string } = {
   'waiting-for-confirmation-from-the-producer': 'aguardando a confirmação do feirante',
   'waiting-for-consumer-to-withdraw': 'aguardando a retirada',
   'waiting-for-payment': 'aguardando o pagamento',
+  'in-separation': 'aguardando o feirante separar os produtos',
   delivered: 'entregue',
 };
 

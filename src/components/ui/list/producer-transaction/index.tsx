@@ -9,15 +9,15 @@ import * as S from './styles';
 type Props = {
   transaction: MinimalProducerTransaction;
   showWaitingTime?: boolean;
-  confirming: boolean;
-  confirm: (id: string) => void;
+  inRequisition: boolean;
+  onRequest: (id: string) => void;
 };
 
 export const ListProducerTransaction = ({
   transaction,
   showWaitingTime,
-  confirm,
-  confirming,
+  inRequisition,
+  onRequest,
 }: Props): JSX.Element => {
   const { navigateTo } = useAppNavigation();
 
@@ -31,6 +31,19 @@ export const ListProducerTransaction = ({
 
     return { has: true, name, weekday };
   }, [transaction]);
+
+  const label = useMemo(() => {
+    switch (transaction.status) {
+      case 'waiting-for-confirmation-from-the-producer':
+        return 'Aceitar';
+
+      case 'in-separation':
+        return 'Confirmar';
+
+      default:
+        return 'Aceitar';
+    }
+  }, [transaction.status]);
 
   const status = translateTransactionStatus(transaction.status, 'producer'); // TODO: usar userType dinâmico
 
@@ -100,8 +113,11 @@ export const ListProducerTransaction = ({
         </S.Section>
 
         <S.ButtonsContainer>
-          <S.ConfirmTransactionButton disabled={confirming} onPress={() => confirm(transaction.id)}>
-            <S.ConfirmTransactionLabel>Aceitar</S.ConfirmTransactionLabel>
+          <S.ConfirmTransactionButton
+            disabled={inRequisition}
+            onPress={() => onRequest(transaction.id)}
+          >
+            <S.ConfirmTransactionLabel>{label}</S.ConfirmTransactionLabel>
           </S.ConfirmTransactionButton>
 
           <S.OpenTransactionButton onPress={handleNavigate}>

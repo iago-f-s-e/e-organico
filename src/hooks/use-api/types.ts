@@ -30,8 +30,10 @@ export type UseApi = {
   postTransaction: (payload: CartPayload) => Promise<Response<CartPayload>>;
   confirmTransaction: (id: string) => Promise<Response<void>>;
   cancelTransaction: (id: string) => Promise<Response<void>>;
+  separateTransaction: (id: string) => Promise<Response<void>>;
   getProducerTransactionInProgress: () => Promise<MinimalProducerTransaction[]>;
   getConsumerTransactionInProgress: () => Promise<MinimalConsumerTransaction[]>;
+  getProducerTransactionInSeparation: () => Promise<MinimalProducerTransaction[]>;
   getProducerTransactionPending: () => Promise<MinimalProducerTransaction[]>;
   getProducerTransactionById: (id: string) => Promise<ProducerTransactionDetail>;
 };

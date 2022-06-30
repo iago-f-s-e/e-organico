@@ -10,7 +10,9 @@ type HandleTransaction = (
   postTransaction: (payload: CartPayload, token: string) => Promise<Response<CartPayload>>;
   confirmTransaction: (id: string, token: string, message: string) => Promise<Response<void>>;
   cancelTransaction: (id: string, token: string, message: string) => Promise<Response<void>>;
+  separateTransaction: (id: string, token: string, message: string) => Promise<Response<void>>;
   getTransactionInProgress: <T>(token: string) => Promise<Response<T[]>>;
+  getTransactionInSeparation: <T>(token: string) => Promise<Response<T[]>>;
   getTransactionPending: <T>(token: string) => Promise<Response<T[]>>;
   getTransactionById: <T>(id: string, token: string) => Promise<Response<T>>;
 };
@@ -63,9 +65,35 @@ export const handleTransaction: HandleTransaction = (onError, onSuccess) => {
       }
     },
 
+    separateTransaction: async (id, token: string, message: string) => {
+      try {
+        const data = await service.separateTransaction(id, token);
+
+        onSuccess(message);
+
+        return { data, error: null };
+      } catch (error) {
+        onError(error.message);
+
+        return { data: null, error: error.message };
+      }
+    },
+
     getTransactionInProgress: async <T>(token: string) => {
       try {
         const data = await service.getTransactionInProgress<T>(token);
+
+        return { data, error: null };
+      } catch (error) {
+        onError(error.message);
+
+        return { data: null, error: error.message };
+      }
+    },
+
+    getTransactionInSeparation: async <T>(token: string) => {
+      try {
+        const data = await service.getTransactionInSeparation<T>(token);
 
         return { data, error: null };
       } catch (error) {

@@ -112,6 +112,16 @@ export const useApi = (): UseApi => {
     return [];
   };
 
+  const getProducerTransactionInSeparation = async () => {
+    const { data, error } = await handleTransaction(
+      useToast.error,
+    ).getTransactionInSeparation<MinimalProducerTransaction>(curr.token);
+
+    if (!error) return data;
+
+    return [];
+  };
+
   const getProducerTransactionPending = async () => {
     const { data, error } = await handleTransaction(
       useToast.error,
@@ -155,6 +165,13 @@ export const useApi = (): UseApi => {
       'Pedido cancelado com sucesso!',
     );
 
+  const separateTransaction = (id: string) =>
+    handleTransaction(useToast.error, useToast.success).separateTransaction(
+      id,
+      curr.token,
+      'Pedido separado com sucesso!',
+    );
+
   return {
     getAllMarkets,
     getAllProducts,
@@ -166,10 +183,12 @@ export const useApi = (): UseApi => {
     getProducerProductById,
     getConsumerTransactionInProgress,
     getProducerTransactionInProgress,
+    getProducerTransactionInSeparation,
     getProducerTransactionPending,
     getProducerTransactionById,
     postTransaction,
     confirmTransaction,
     cancelTransaction,
+    separateTransaction,
   };
 };

@@ -3,6 +3,11 @@ export type ProducerTopTab = {
   'producer-pending-transactions': undefined;
 };
 
+export type ProducerTransactionTopTab = {
+  'producer-transaction-separate': undefined;
+  'producer-transaction-in-progress': undefined;
+};
+
 export type ConsumerTopTab = {
   'consumer-markets': undefined;
   'consumer-producers': undefined;

@@ -13,8 +13,8 @@ import { initialState, reducer } from './reducer';
 
 export const Transaction: FC = () => {
   const appDispatch = useAppDispatch();
-  const { onFocus, goBack, getIdParams } = useAppNavigation();
-  const { getProducerTransactionById, confirmTransaction } = useApi();
+  const { onFocus, goBack, navigateTo, getIdParams } = useAppNavigation();
+  const { getProducerTransactionById, confirmTransaction, separateTransaction } = useApi();
 
   const [state, dispatch] = useReducer(reducer, { ...initialState, idParam: getIdParams() });
 
@@ -32,12 +32,22 @@ export const Transaction: FC = () => {
       .finally(() => onCloseRequisition());
   };
 
+  const handleRequestConfirm = async () => {
+    switch (state.transaction.status) {
+      case 'in-separation':
+        return separateTransaction(state.idParam).then(() =>
+          navigateTo<'producer'>('transactions', null, { popNavigationToTop: true }),
+        );
+
+      default:
+        return confirmTransaction(state.idParam).then(() => goBack());
+    }
+  };
+
   const handleConfirm = () => {
     onOpenConfirm();
 
-    confirmTransaction(state.idParam)
-      .then(() => goBack())
-      .finally(() => onCloseConfirm());
+    handleRequestConfirm().finally(() => onCloseConfirm());
   };
 
   const handleCancel = () => {
@@ -159,7 +169,7 @@ export const Transaction: FC = () => {
                     <C.IfElse
                       condition={state.confirming}
                       render={{
-                        toBeFalsy: () => <C_S.ButtonLabel>Confirmar</C_S.ButtonLabel>,
+                        toBeFalsy: () => <C_S.ButtonLabel>{state.label}</C_S.ButtonLabel>,
                         toBeTruthy: () => <C.Loading color={colors.basic.white} sizeType="large" />,
                       }}
                     />

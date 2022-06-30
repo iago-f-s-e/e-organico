@@ -3,3 +3,4 @@ export * from './product';
 export * from './products';
 export * from './transaction';
 export * from './transactions';
+export * from './transactions-separation';

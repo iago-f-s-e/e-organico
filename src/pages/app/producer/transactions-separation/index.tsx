@@ -10,23 +10,22 @@ import * as C_S from '../../common-styles';
 
 import { initialState, reducer } from './reducer';
 
-// TODO: renderizar empty component
-export const PendingTransactions: FC = () => {
+export const TransactionsSeparation: FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const appDispatch = useAppDispatch();
   const { onFocus } = useAppNavigation();
-  const { getProducerTransactionPending, confirmTransaction } = useApi();
+  const { getProducerTransactionInSeparation, separateTransaction } = useApi();
 
-  const onOpenConfirm = () => dispatch({ type: 'changeConfirm', payload: false });
-  const onCloseConfirm = () => dispatch({ type: 'changeConfirm', payload: false });
+  const onOpenAccept = () => dispatch({ type: 'changeAccept', payload: false });
+  const onCloseAccept = () => dispatch({ type: 'changeAccept', payload: false });
   const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
   const onChangeInProgress = (payload: MinimalProducerTransaction[]) =>
     dispatch({ type: 'onChangeTransactions', payload });
 
   const handleOpenRequisition = () => {
-    getProducerTransactionPending()
-      .then((inProgress) => onChangeInProgress(inProgress))
+    getProducerTransactionInSeparation()
+      .then((inSeparation) => onChangeInProgress(inSeparation))
       .finally(() => onCloseRequisition());
   };
 
@@ -35,12 +34,12 @@ export const PendingTransactions: FC = () => {
     handleOpenRequisition();
   };
 
-  const handleConfirm = (id: string) => {
-    onOpenConfirm();
+  const handleAccept = (id: string) => {
+    onOpenAccept();
 
-    confirmTransaction(id)
+    separateTransaction(id)
       .then(() => handleOpenRequisition())
-      .finally(() => onCloseConfirm());
+      .finally(() => onCloseAccept());
   };
 
   useEffect(() => {
@@ -60,8 +59,8 @@ export const PendingTransactions: FC = () => {
           render={(value, index) => (
             <C.ListProducerTransaction
               showWaitingTime
-              onRequest={handleConfirm}
-              inRequisition={state.confirming}
+              onRequest={handleAccept}
+              inRequisition={state.accepting}
               transaction={value}
               key={index.toString()}
             />

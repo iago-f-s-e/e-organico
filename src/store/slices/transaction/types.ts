@@ -14,7 +14,8 @@ export type TransactionStatus =
   | 'confirmed-by-consumer'
   | 'waiting-for-payment'
   | 'waiting-for-consumer-to-withdraw'
-  | 'waiting-for-confirmation-from-the-producer';
+  | 'waiting-for-confirmation-from-the-producer'
+  | 'in-separation';
 
 export type TransactionProduct = {
   id: string;
