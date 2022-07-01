@@ -1,8 +1,12 @@
 {
   "expo": {
-    "name": "refac-e-organico",
-    "slug": "refac-e-organico",
-    "version": "1.0.0",
+    "name": "É Orgânico",
+    "slug": "e-organico",
+    "version": "0.0.1",
+    "platforms": [
+      "android"
+    ],
+    "privacy": "public",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "plugins": [
@@ -10,7 +14,7 @@
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos to validate that you are human."
-        } 
+        }
       ]
     ],
     "splash": {
@@ -24,17 +28,21 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.iagofse.eorganico"
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "extra": {
+      "year": "2022"
     }
   }
 }
