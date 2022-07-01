@@ -1,5 +1,4 @@
 export type AuthStack = {
-  app: undefined;
   login: undefined;
   terms: undefined;
   'sign-up-user-type': undefined;
@@ -17,7 +16,6 @@ export type AppStack = {
   home: undefined;
 };
 
-// TODO: passar id pelo params
 export type ConsumerStack = {
   home: undefined;
   'consumer-transaction': undefined;
@@ -28,7 +26,6 @@ export type ConsumerStack = {
   'consumer-payment-methods': undefined;
 };
 
-// TODO: passar id pelo params
 export type ProducerStack = {
   home: undefined;
   'producer-transaction': undefined;

@@ -12,11 +12,10 @@ import * as S from './styles';
 // TODO: definir as actions e header dinâmico por page
 export const Header = ({ title, subTitle, hideBackButton, showLogout }: Props): JSX.Element => {
   const { cart } = useAppSelector((state) => state);
-  const { goBack, replaceStack, navigateTo } = useAppNavigation();
+  const { goBack, navigateTo } = useAppNavigation();
   const { clearUser } = useStorage();
 
   const handleLogout = () => {
-    replaceStack<'auth'>('login');
     clearUser();
   };
 

@@ -32,7 +32,7 @@ export const Products: FC = () => {
   return (
     <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
       <C.If
-        condition={!!state.topTransactions.length}
+        condition={!state.topTransactions.length}
         render={() => (
           <C_S.Content>
             <C_S.TitleContainer>
@@ -76,7 +76,7 @@ export const Products: FC = () => {
       />
 
       <C.If
-        condition={!!state.lowStock.length}
+        condition={!state.lowStock.length}
         render={() => (
           <C_S.Content>
             <C_S.TitleContainer>

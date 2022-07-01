@@ -3,4 +3,5 @@ export type AppBottomTab = {
   search: undefined;
   transactions: undefined;
   options: undefined;
+  auth: undefined;
 };

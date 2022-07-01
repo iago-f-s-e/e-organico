@@ -38,7 +38,7 @@ export const ProducerHome: FC = () => {
         }}
       >
         <Tab.Screen name="producer-products" component={Producer.Products} />
-        <Tab.Screen name="producer-stall" component={Producer.Products} />
+        <Tab.Screen name="producer-stall" component={Producer.Stall} />
       </Tab.Navigator>
     </C_S.Container>
   );

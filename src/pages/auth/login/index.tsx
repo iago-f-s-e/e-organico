@@ -13,7 +13,7 @@ import * as S from './styles';
 import { initialState, reducer } from './reducer';
 
 export const Login: FC = () => {
-  const { replaceStack, navigateTo } = useAppNavigation();
+  const { navigateTo } = useAppNavigation();
   const { signIn } = useSignIn();
   const appDispatch = useAppDispatch();
 
@@ -32,8 +32,8 @@ export const Login: FC = () => {
         if (!data) return;
 
         appDispatch(setLoggedUser(data));
-        return replaceStack<'auth'>('app');
       })
+      .catch(() => onCloseRequisition())
       .finally(() => onCloseRequisition());
   };
 
