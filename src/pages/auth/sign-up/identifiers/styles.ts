@@ -12,4 +12,5 @@ export const ImageContainer = styled.View`
 export const IdentifiersContainer = styled(Container)`
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
 `;

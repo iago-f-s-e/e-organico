@@ -10,13 +10,13 @@ const top = dimensions.screen.height * 0.45;
 const left = dimensions.screen.width * 0.45;
 
 export const Terms: FC = () => {
-  const { navigateTo, goBack } = useAppNavigation();
+  const { navigateTo } = useAppNavigation();
 
   const [loaded, setLoaded] = useState<boolean>(false);
 
   return (
     <S.Container>
-      <C.Header handle={goBack} iconType="navigate-go-back" />
+      <C.Header title="Termo de uso" iconType="navigate-go-back" />
       <WebView
         onLoad={() => setLoaded(true)}
         source={{ uri: 'https://eorganico-termo-de-uso.vercel.app/' }}

@@ -29,7 +29,7 @@ export const Identifiers: FC = () => {
   const consumer = useAppSelector((state) => state.signUpConsumer);
   const useToast = _useToast();
   const { reservePhone } = useSignUp();
-  const { navigateTo, goBack } = useAppNavigation();
+  const { navigateTo } = useAppNavigation();
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
@@ -81,51 +81,53 @@ export const Identifiers: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header handle={goBack} iconType="navigate-go-back" />
+      <C.Header title="Identificação" iconType="navigate-go-back" />
       <C_S.Container>
-        <S.ImageContainer>
-          <Animated.View
-            style={{
-              alignSelf: 'center',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: state.sizeImage.y,
-              width: state.sizeImage.x,
-            }}
-          >
-            <C.Avatar uri={state.image.uri} />
-          </Animated.View>
-          <C.SelectImage onSelect={handlePickerImage} />
-        </S.ImageContainer>
-        <S.IdentifiersContainer>
-          <C_S.InputContainer>
-            <C_S.Label>Nome:</C_S.Label>
-            <C_S.Input
-              onFocus={onOpenInput}
-              onBlur={onCloseInput}
-              value={state.name}
-              onChangeText={(payload) => dispatch({ type: 'changeName', payload })}
-              placeholder="Nome completo"
-            />
-          </C_S.InputContainer>
-
-          <C_S.InputContainer>
-            <C_S.Label>Telefone:</C_S.Label>
-            <C_S.Input
-              onFocus={onOpenInput}
-              onBlur={onCloseInput}
-              value={state.phone}
-              onChangeText={(payload) => {
-                dispatch({ type: 'changePhone', payload: handleInputMask(payload, 'phone') });
+        <C_S.ScrollContainer showsVerticalScrollIndicator={false}>
+          <S.ImageContainer>
+            <Animated.View
+              style={{
+                alignSelf: 'center',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: state.sizeImage.y,
+                width: state.sizeImage.x,
               }}
-              maxLength={16}
-              keyboardType="number-pad"
-              placeholder="(99) 9 9999-9999"
-            />
-          </C_S.InputContainer>
-        </S.IdentifiersContainer>
+            >
+              <C.Avatar uri={state.image.uri} />
+            </Animated.View>
+            <C.SelectImage onSelect={handlePickerImage} />
+          </S.ImageContainer>
+          <S.IdentifiersContainer>
+            <C_S.InputContainer>
+              <C_S.Label>Nome:</C_S.Label>
+              <C_S.Input
+                onFocus={onOpenInput}
+                onBlur={onCloseInput}
+                value={state.name}
+                onChangeText={(payload) => dispatch({ type: 'changeName', payload })}
+                placeholder="Nome completo"
+              />
+            </C_S.InputContainer>
 
-        <C.NextButton
+            <C_S.InputContainer>
+              <C_S.Label>Telefone:</C_S.Label>
+              <C_S.Input
+                onFocus={onOpenInput}
+                onBlur={onCloseInput}
+                value={state.phone}
+                onChangeText={(payload) => {
+                  dispatch({ type: 'changePhone', payload: handleInputMask(payload, 'phone') });
+                }}
+                maxLength={16}
+                keyboardType="number-pad"
+                placeholder="(99) 9 9999-9999"
+              />
+            </C_S.InputContainer>
+          </S.IdentifiersContainer>
+        </C_S.ScrollContainer>
+
+        <C.AnimatedButton
           handle={handleNext}
           animated={{ height: state.sizeButton.y, opacity: state.opacityButton.x }}
           loading={state.loading}

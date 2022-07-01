@@ -9,7 +9,7 @@ import { Props } from './types';
 
 // TODO: bloquear o botão e mostrar que está em loading
 
-export const NextButton = ({ handle, loading, animated, label }: Props): JSX.Element => {
+export const AnimatedButton = ({ handle, loading, animated, label }: Props): JSX.Element => {
   const opacity = useMemo(() => {
     if (loading) return { opacity: 0.5 };
 

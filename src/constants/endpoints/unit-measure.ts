@@ -1,3 +1,3 @@
 export enum unitMeasure {
-  'GET_ALL' = 'app/unit-measure',
+  'GET_ALL' = 'api/unit-measure',
 }

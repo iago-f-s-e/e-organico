@@ -7,7 +7,12 @@ import { ProducerHome } from './home';
 
 const Stack = createStackNavigator<ProducerStack>();
 
-export type ProducerScreens = 'home' | 'producer-transaction' | 'producer-product';
+export type ProducerScreens =
+  | 'home'
+  | 'producer-transaction'
+  | 'producer-product'
+  | 'producer-management-products'
+  | 'producer-management-markets';
 
 export const ProducerRoutes: FC = () => {
   return (
@@ -20,6 +25,8 @@ export const ProducerRoutes: FC = () => {
       <Stack.Screen name="home" component={ProducerHome} />
       <Stack.Screen name="producer-transaction" component={Producer.Transaction} />
       <Stack.Screen name="producer-product" component={Producer.Product} />
+      <Stack.Screen name="producer-management-markets" component={Producer.ManagementMarkets} />
+      <Stack.Screen name="producer-management-products" component={Producer.ManagementProducts} />
     </Stack.Navigator>
   );
 };

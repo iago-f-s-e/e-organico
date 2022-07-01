@@ -5,6 +5,11 @@ export const Container = styled.View`
   flex: 1;
 `;
 
+export const ScrollContainer = styled.ScrollView`
+  flex: 1;
+  background-color: ${colors.basic.white};
+`;
+
 export const InputContainer = styled.View`
   justify-content: center;
 

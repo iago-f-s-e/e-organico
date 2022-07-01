@@ -17,14 +17,14 @@ export const Address: FC = () => {
   const useToast = _useToast();
   const { registerConsumer } = useSignUp();
   const { clearPersist } = useStorage();
-  const { navigateTo, goBack } = useAppNavigation();
+  const { navigateTo } = useAppNavigation();
 
   const [state, dispatch] = useReducer(reducer, { ...initialState, ...signUpConsumer.address });
 
   const placeholderComplement = useMemo(() => {
-    if (signUpUserType.type === 'consumer') return 'Bloco 99 Apto 99 (opcional)';
+    if (signUpUserType.type === 'consumer') return 'Apto99 Bloco... (opcional)';
 
-    return 'Fazenda Nova Esperança (opcional)';
+    return 'Fazenda Nova... (opcional)';
   }, [signUpUserType.type]);
 
   const onOpenInput = () => dispatch({ type: 'onOpenInput' });
@@ -62,7 +62,7 @@ export const Address: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header handle={goBack} iconType="navigate-go-back" title="Cadastre seu endereço" />
+      <C.Header iconType="navigate-go-back" title="Cadastre seu endereço" />
       <C_S.Container>
         <S.Scroll showsVerticalScrollIndicator={false}>
           <S.CustomerContainer>
@@ -157,7 +157,7 @@ export const Address: FC = () => {
           </S.CustomerContainer>
         </S.Scroll>
 
-        <C.NextButton
+        <C.AnimatedButton
           handle={handleNext}
           animated={{ height: state.sizeButton.y, opacity: state.opacityButton.x }}
           loading={state.loading}

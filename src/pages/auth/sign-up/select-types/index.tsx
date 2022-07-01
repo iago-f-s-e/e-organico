@@ -15,7 +15,7 @@ import { initialState, reducer } from './reducer';
 export const SelectTypes: FC = () => {
   const appDispatch = useAppDispatch();
   const { signUpProducer } = useAppSelector((state) => state);
-  const { navigateTo, goBack } = useAppNavigation();
+  const { navigateTo } = useAppNavigation();
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     certification: signUpProducer.certification,
@@ -41,7 +41,7 @@ export const SelectTypes: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header handle={goBack} iconType="navigate-go-back" />
+      <C.Header title="Complemento" iconType="navigate-go-back" />
       <C_S.Container>
         <S.Container>
           <S.Title>Tipo de certificado</S.Title>
@@ -73,7 +73,7 @@ export const SelectTypes: FC = () => {
           </S.SelectContainer>
         </S.Container>
 
-        <C.NextButton
+        <C.AnimatedButton
           handle={handleNext}
           animated={{ height: state.sizeButton.y, opacity: state.opacityButton.x }}
           loading={state.loading}

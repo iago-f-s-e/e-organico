@@ -30,6 +30,8 @@ export type ProducerStack = {
   home: undefined;
   'producer-transaction': undefined;
   'producer-product': undefined;
+  'producer-management-products': undefined;
+  'producer-management-markets': undefined;
 };
 
 export type TransactionsStack = {

@@ -4,6 +4,7 @@ import { Market, MarketDetail } from '@src/store/slices/market/types';
 import { Payment } from '@src/store/slices/payment-method/types';
 import {
   MinimalProducerProduct,
+  ProducerProduct,
   ProducerProductDetail,
 } from '@src/store/slices/producer-product/type';
 import { MinimalProducer, ProducerDetail } from '@src/store/slices/producer/types';
@@ -27,12 +28,17 @@ export type UseApi = {
   getAllUnitMeasures: () => Promise<UnitMeasure[]>;
   getAllPayments: () => Promise<Payment[]>;
 
+  getProductsWithoutProducerProduct: () => Promise<Product[]>;
+  getMarketsWithoutProducerMarket: () => Promise<Market[]>;
+
   getMarketById: (id: string) => Promise<MarketDetail>;
   getProducerById: (id: string) => Promise<ProducerDetail>;
   getOwnProducerProducts: () => Promise<MinimalProducerProduct[]>;
   getProducerProductById: (id: string) => Promise<ProducerProductDetail>;
   inactiveProducerProduct: (id: string) => Promise<Response<void>>;
   updateProducerProduct: (product: ProducerProductDetail) => Promise<Response<void>>;
+  postProducerProducts: (product: ProducerProduct[]) => Promise<Response<void>>;
+  postProducerMarkets: (markets: Market[]) => Promise<Response<void>>;
 
   postTransaction: (payload: CartPayload) => Promise<Response<CartPayload>>;
   confirmTransaction: (id: string) => Promise<Response<void>>;

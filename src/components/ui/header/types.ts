@@ -6,5 +6,4 @@ export type Props = {
   iconType?: IconType;
   title?: string;
   subTitle?: string;
-  handle?: () => void;
 };

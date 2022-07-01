@@ -1,6 +1,8 @@
 import { endpoints } from '@src/constants/endpoints';
+import { Market } from '@src/store/slices/market/types';
 import {
   MinimalProducerProduct,
+  ProducerProduct,
   ProducerProductDetail,
 } from '@src/store/slices/producer-product/type';
 import { MinimalProducer, ProducerDetail } from '@src/store/slices/producer/types';
@@ -28,6 +30,14 @@ export function updateProductProduct(
   token: string,
 ): Promise<void> {
   return client.httpPUT(`${endpoints.producerProduct.DEFAULT}/${id}`, data, token);
+}
+
+export function postProducerProducts(data: ProducerProduct[], token: string): Promise<void> {
+  return client.httpPOST(endpoints.producerProduct.DEFAULT, data, token);
+}
+
+export function postProducerMarkets(data: Market[], token: string): Promise<void> {
+  return client.httpPOST(endpoints.producerMarket.DEFAULT, data, token);
 }
 
 export function inactiveProductProduct(id: string, token: string): Promise<void> {

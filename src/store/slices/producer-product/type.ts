@@ -1,26 +1,23 @@
 import { Product } from '../product/types';
 import { UnitMeasure } from '../unit-measure/types';
 
-export type MinimalProducerProduct = {
+type MutualProps = {
   id: string;
-  image: string;
-  name: string;
   price: string;
   stock: string;
   unitMeasure: UnitMeasure;
 };
 
-export type ProducerProduct = {
-  id: string;
+export type MinimalProducerProduct = MutualProps & {
+  image: string;
+  name: string;
+};
+
+export type ProducerProduct = MutualProps & {
   product: Product;
-  price: string;
-  stock: string;
-  unitMeasure: UnitMeasure;
   harvestDate: Date;
 };
 
 export type ProducerProductDetail = MinimalProducerProduct & {
-  stock: string;
-  unitMeasure: UnitMeasure;
   harvestDate: Date;
 };

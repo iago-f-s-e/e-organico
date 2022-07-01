@@ -1,3 +1,3 @@
 export enum producerProduct {
-  'DEFAULT' = 'app/producer-product',
+  'DEFAULT' = 'api/producer-product',
 }

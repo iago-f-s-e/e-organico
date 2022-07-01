@@ -1,3 +1,3 @@
 export enum payment {
-  'GET_ALL' = 'app/payment',
+  'GET_ALL' = 'api/payment',
 }
