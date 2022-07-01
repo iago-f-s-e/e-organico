@@ -4,6 +4,7 @@ import { MinimalConsumerTransaction } from '@src/store/slices/transaction/types'
 import { translateTransactionStatus, handleInputMask } from '@src/utils';
 import { If } from '@src/components/business';
 import { useAppNavigation } from '@src/hooks';
+import { colors } from '@src/config/theme';
 import * as S from './styles';
 
 type Props = {
@@ -27,6 +28,11 @@ export const ListConsumerTransaction = ({ transaction }: Props): JSX.Element => 
 
   const total = handleInputMask(transaction.total, 'money', { onlyComma: true });
 
+  const color =
+    transaction.status === 'canceled-by-consumer' || transaction.status === 'canceled-by-producer'
+      ? colors.actions.danger
+      : colors.main.primary;
+
   const handleNavigate = () =>
     navigateTo<'consumer'>('consumer-transaction', { id: transaction.id });
 
@@ -34,7 +40,7 @@ export const ListConsumerTransaction = ({ transaction }: Props): JSX.Element => 
     <S.Container>
       <S.Header>
         <S.StatusContainer>
-          <S.StatusContent>
+          <S.StatusContent style={{ backgroundColor: color }}>
             <S.Status>{status}</S.Status>
           </S.StatusContent>
         </S.StatusContainer>

@@ -44,6 +44,7 @@ export type UseApi = {
   getProducerTransactionInSeparation: () => Promise<MinimalProducerTransaction[]>;
   getProducerTransactionPending: () => Promise<MinimalProducerTransaction[]>;
   getProducerTransactionConcluded: () => Promise<MinimalProducerTransaction[]>;
+  getConsumerTransactionConcluded: () => Promise<MinimalConsumerTransaction[]>;
   getProducerTransactionById: (id: string) => Promise<ProducerTransactionDetail>;
   getConsumerTransactionById: (id: string) => Promise<ConsumerTransactionDetail>;
 };

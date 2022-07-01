@@ -6,6 +6,7 @@ type State = {
   confirming: boolean;
   canceling: boolean;
   hideConfirm: boolean;
+  hideCancel: boolean;
   idParam: string;
   status: string;
   waitingTime: string;
@@ -54,6 +55,12 @@ const getHideConfirm = (status: TransactionStatus): boolean => {
   return conditionsToBeHidden.includes(status);
 };
 
+const getHideCancel = (status: TransactionStatus): boolean => {
+  const conditionsToBeHidden = ['canceled-by-consumer', 'canceled-by-producer', 'concluded'];
+
+  return conditionsToBeHidden.includes(status);
+};
+
 const reducers: { [key in Actions]: Reducer } = {
   changeLoading: (state, action): State => ({ ...state, loading: Boolean(action.payload) }),
 
@@ -67,6 +74,7 @@ const reducers: { [key in Actions]: Reducer } = {
     transaction.total = handleInputMask(transaction.total, 'money', { onlyComma: true });
 
     const hideConfirm = getHideConfirm(transaction.status);
+    const hideCancel = getHideCancel(transaction.status);
     const label = getLabel(transaction.status);
     const waitingTime = getWaitingTime(transaction.createdAt);
     const status = translateTransactionStatus(transaction.status, 'producer');
@@ -95,6 +103,7 @@ const reducers: { [key in Actions]: Reducer } = {
       waitingTime,
       label,
       hideConfirm,
+      hideCancel,
       status,
     };
   },
@@ -105,6 +114,7 @@ export const initialState: State = {
   confirming: false,
   canceling: false,
   hideConfirm: false,
+  hideCancel: false,
   idParam: '',
   status: '',
   waitingTime: '',

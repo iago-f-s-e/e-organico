@@ -167,44 +167,57 @@ export const Transaction: FC = () => {
                   />
                 </C_S.Content>
               </C_S.ScrollContainer>
-              <S.Buttons>
-                <C.If
-                  condition={!state.hideConfirm}
-                  render={() => (
-                    <S.Button>
-                      <C_S.ButtonConfirm
-                        disabled={state.confirming || state.canceling}
-                        onPress={handleConfirm}
-                      >
-                        <C.IfElse
-                          condition={state.confirming}
-                          render={{
-                            toBeFalsy: () => <C_S.ButtonLabel>{state.label}</C_S.ButtonLabel>,
-                            toBeTruthy: () => (
-                              <C.Loading color={colors.basic.white} sizeType="large" />
-                            ),
-                          }}
-                        />
-                      </C_S.ButtonConfirm>
-                    </S.Button>
-                  )}
-                />
 
-                <S.Button>
-                  <C_S.ButtonCancel
-                    disabled={state.confirming || state.canceling}
-                    onPress={handleCancel}
-                  >
-                    <C.IfElse
-                      condition={state.canceling}
-                      render={{
-                        toBeFalsy: () => <C_S.ButtonLabel>Cancelar</C_S.ButtonLabel>,
-                        toBeTruthy: () => <C.Loading color={colors.basic.white} sizeType="large" />,
-                      }}
+              <C.If
+                condition={!state.hideCancel || !state.hideConfirm}
+                render={() => (
+                  <S.Buttons>
+                    <C.If
+                      condition={!state.hideConfirm}
+                      render={() => (
+                        <S.Button>
+                          <C_S.ButtonConfirm
+                            disabled={state.confirming || state.canceling}
+                            onPress={handleConfirm}
+                          >
+                            <C.IfElse
+                              condition={state.confirming}
+                              render={{
+                                toBeFalsy: () => <C_S.ButtonLabel>{state.label}</C_S.ButtonLabel>,
+                                toBeTruthy: () => (
+                                  <C.Loading color={colors.basic.white} sizeType="large" />
+                                ),
+                              }}
+                            />
+                          </C_S.ButtonConfirm>
+                        </S.Button>
+                      )}
                     />
-                  </C_S.ButtonCancel>
-                </S.Button>
-              </S.Buttons>
+
+                    <C.If
+                      condition={!state.hideCancel}
+                      render={() => (
+                        <S.Button>
+                          <C_S.ButtonCancel
+                            disabled={state.confirming || state.canceling}
+                            onPress={handleCancel}
+                          >
+                            <C.IfElse
+                              condition={state.canceling}
+                              render={{
+                                toBeFalsy: () => <C_S.ButtonLabel>Cancelar</C_S.ButtonLabel>,
+                                toBeTruthy: () => (
+                                  <C.Loading color={colors.basic.white} sizeType="large" />
+                                ),
+                              }}
+                            />
+                          </C_S.ButtonCancel>
+                        </S.Button>
+                      )}
+                    />
+                  </S.Buttons>
+                )}
+              />
             </>
           ),
         }}

@@ -5,5 +5,6 @@ export * from './producer';
 export * from './producers';
 export * from './product';
 export * from './payment-methods';
-export * from './transactions';
+export * from './transactions-in-progress';
+export * from './concluded-transactions';
 export * from './transaction';

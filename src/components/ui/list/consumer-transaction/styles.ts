@@ -34,7 +34,6 @@ export const StatusContent = styled.View.attrs(shadow)`
 
   padding: 0 5px;
 
-  background-color: ${colors.main.primary};
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 `;

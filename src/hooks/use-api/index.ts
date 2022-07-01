@@ -149,6 +149,16 @@ export const useApi = (): UseApi => {
     return [];
   };
 
+  const getConsumerTransactionConcluded = async () => {
+    const { data, error } = await handleTransaction(
+      useToast.error,
+    ).getConcluded<MinimalConsumerTransaction>(current.token);
+
+    if (!error) return data;
+
+    return [];
+  };
+
   const getProducerTransactionById = async (id: string) => {
     const { data, error } = await handleTransaction(
       useToast.error,
@@ -241,6 +251,7 @@ export const useApi = (): UseApi => {
     getProducerTransactionInSeparation,
     getProducerTransactionPending,
     getProducerTransactionConcluded,
+    getConsumerTransactionConcluded,
     getProducerTransactionById,
     getConsumerTransactionById,
     inactiveProducerProduct,

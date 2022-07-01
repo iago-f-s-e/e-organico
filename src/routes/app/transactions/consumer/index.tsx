@@ -26,8 +26,14 @@ export const ConsumerTransactionsRoutes: FC = () => {
           tabBarIndicatorStyle: { backgroundColor: colors.main.primary },
         }}
       >
-        <Tab.Screen name="consumer-transaction-in-progress" component={Consumer.Transactions} />
-        <Tab.Screen name="consumer-transaction-concluded" component={Consumer.Transactions} />
+        <Tab.Screen
+          name="consumer-transaction-in-progress"
+          component={Consumer.TransactionsInProgress}
+        />
+        <Tab.Screen
+          name="consumer-transaction-concluded"
+          component={Consumer.TransactionsConcluded}
+        />
       </Tab.Navigator>
     </C_S.Container>
   );
