@@ -12,7 +12,7 @@ import * as S from './styles';
 // TODO: definir as actions e header dinâmico por page
 export const Header = ({ title, subTitle, hideBackButton, showLogout }: Props): JSX.Element => {
   const { cart } = useAppSelector((state) => state);
-  const { goBack, replaceStack } = useAppNavigation();
+  const { goBack, replaceStack, navigateTo } = useAppNavigation();
   const { clearUser } = useStorage();
 
   const handleLogout = () => {
@@ -51,7 +51,7 @@ export const Header = ({ title, subTitle, hideBackButton, showLogout }: Props): 
             <If
               condition={cart.hasCurrent}
               render={() => (
-                <S.LogoutButton>
+                <S.LogoutButton onPress={() => navigateTo<'consumer'>('consumer-cart')}>
                   <FontAwesome5 name="shopping-basket" size={20} color={colors.basic.white} />
                 </S.LogoutButton>
               )}

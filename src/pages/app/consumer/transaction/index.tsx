@@ -5,7 +5,6 @@ import { useApi, useAppNavigation } from '@src/hooks';
 import * as C from '@src/components';
 
 import { colors } from '@src/config/theme';
-import { ProducerTransactionDetail } from '@src/store/slices/transaction/types';
 import * as C_S from '../../common-styles';
 import * as S from './styles';
 
@@ -13,7 +12,7 @@ import { initialState, reducer } from './reducer';
 
 export const Transaction: FC = () => {
   const appDispatch = useAppDispatch();
-  const { onFocus, goBack, navigateTo, getIdParams } = useAppNavigation();
+  const { onFocus, goBack, getIdParams } = useAppNavigation();
   const api = useApi();
 
   const [state, dispatch] = useReducer(reducer, { ...initialState, idParam: getIdParams() });
@@ -23,8 +22,7 @@ export const Transaction: FC = () => {
   const onOpenCancel = () => dispatch({ type: 'changeCancel', payload: true });
   const onCloseCancel = () => dispatch({ type: 'changeCancel', payload: false });
   const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
-  const onChangeTransaction = (payload: ProducerTransactionDetail) =>
-    dispatch({ type: 'onChangeTransaction', payload });
+  const onChangeTransaction = (payload) => dispatch({ type: 'onChangeTransaction', payload });
 
   const handleOpenRequisition = () => {
     api
@@ -33,27 +31,10 @@ export const Transaction: FC = () => {
       .finally(() => onCloseRequisition());
   };
 
-  const handleRequestConfirm = async () => {
-    switch (state.transaction.status) {
-      case 'in-separation':
-        return api
-          .separateTransaction(state.idParam)
-          .then(() => navigateTo<'producer'>('transactions', null, { popNavigationToTop: true }));
-
-      case 'waiting-for-consumer-to-withdraw':
-        return api
-          .deliverTransaction(state.idParam)
-          .then(() => navigateTo<'producer'>('transactions', null, { popNavigationToTop: true }));
-
-      default:
-        return api.confirmTransaction(state.idParam).then(() => goBack());
-    }
-  };
-
   const handleConfirm = () => {
     onOpenConfirm();
 
-    handleRequestConfirm().finally(() => onCloseConfirm());
+    onCloseConfirm();
   };
 
   const handleCancel = () => {
@@ -89,10 +70,10 @@ export const Transaction: FC = () => {
               <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
                 <C_S.Content>
                   <C_S.TitleContainer>
-                    <C_S.Title>Informações do consumidor</C_S.Title>
+                    <C_S.Title>Informações do feirante</C_S.Title>
                   </C_S.TitleContainer>
 
-                  <C.ConsumerDetailCard consumer={state.transaction.consumer} />
+                  <C.ProducerDetailCard producer={state.transaction.producer} />
                 </C_S.Content>
 
                 <C_S.Content>
@@ -105,21 +86,6 @@ export const Transaction: FC = () => {
                       <S.Label>Numero do pedido:</S.Label>
                       <S.Data>{`Nº ${state.transaction.number}`}</S.Data>
                     </S.Section>
-
-                    <S.Section>
-                      <S.Label>Tipo do pedido:</S.Label>
-                      <S.Data>{state.transactionType}</S.Data>
-                    </S.Section>
-
-                    <C.If
-                      condition={state.showWaitingTime}
-                      render={() => (
-                        <S.Section>
-                          <S.Label>Tempo em espera:</S.Label>
-                          <S.Data>{state.waitingTime}</S.Data>
-                        </S.Section>
-                      )}
-                    />
 
                     <C.If
                       condition={state.market.has}
@@ -179,7 +145,7 @@ export const Transaction: FC = () => {
                         <C.IfElse
                           condition={state.confirming}
                           render={{
-                            toBeFalsy: () => <C_S.ButtonLabel>{state.label}</C_S.ButtonLabel>,
+                            toBeFalsy: () => <C_S.ButtonLabel>Recebido</C_S.ButtonLabel>,
                             toBeTruthy: () => (
                               <C.Loading color={colors.basic.white} sizeType="large" />
                             ),

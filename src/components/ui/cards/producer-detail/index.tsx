@@ -2,13 +2,13 @@ import React from 'react';
 import { FlatList } from 'react-native';
 
 import { handleInputMask } from '@src/utils';
-import { ProducerDetail } from '@src/store/slices/producer/types';
+import { ProducerWithAddressAndProperty } from '@src/store/slices/producer/types';
 import * as C_S from '../common-styles';
 import * as S from './styles';
 import { ListPropertyImage } from '../../list';
 
 type Props = {
-  producer: ProducerDetail;
+  producer: ProducerWithAddressAndProperty;
 };
 
 export const ProducerDetailCard = ({ producer }: Props): JSX.Element => {

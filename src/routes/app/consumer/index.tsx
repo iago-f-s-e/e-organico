@@ -15,6 +15,7 @@ export type ConsumerScreens =
   | 'consumer-product'
   | 'consumer-cart'
   | 'consumer-payment-methods'
+  | 'consumer-transaction'
   | ConsumerCartTabScreens;
 
 export const ConsumerRoutes: FC = () => {
@@ -31,6 +32,7 @@ export const ConsumerRoutes: FC = () => {
       <Stack.Screen name="consumer-product" component={Consumer.Product} />
       <Stack.Screen name="consumer-payment-methods" component={Consumer.PaymentMethods} />
       <Stack.Screen name="consumer-cart" component={ConsumerCart} />
+      <Stack.Screen name="consumer-transaction" component={Consumer.Transaction} />
     </Stack.Navigator>
   );
 };

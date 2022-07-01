@@ -1,20 +1,34 @@
 import React, { FC } from 'react';
-import { TransactionsStack } from '@src/@types/routes';
-import { createStackNavigator } from '@react-navigation/stack';
+import { ConsumerTransactionTopTab } from '@src/@types/routes';
 
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import * as Consumer from '@src/pages/app/consumer';
+import * as C from '@src/components';
+import { colors } from '@src/config/theme';
+import * as C_S from '../../common-styles';
 
-const Stack = createStackNavigator<TransactionsStack>();
+const Tab = createMaterialTopTabNavigator<ConsumerTransactionTopTab>();
+
+export type ConsumerTransactionTabScreens =
+  | 'consumer-transaction-in-progress'
+  | 'consumer-transaction-concluded';
 
 export const ConsumerTransactionsRoutes: FC = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-        cardStyle: { backgroundColor: '#fefffe' },
-      }}
-    >
-      <Stack.Screen name="transactions" component={Consumer.Transactions} />
-    </Stack.Navigator>
+    <C_S.Container>
+      <C.Header title="Pedidos" hideBackButton />
+
+      <Tab.Navigator
+        tabBar={(props) => <C.TopTabBar {...props} />}
+        screenOptions={{
+          tabBarActiveTintColor: colors.main.secondary,
+          tabBarLabelStyle: { fontSize: 12 },
+          tabBarIndicatorStyle: { backgroundColor: colors.main.primary },
+        }}
+      >
+        <Tab.Screen name="consumer-transaction-in-progress" component={Consumer.Transactions} />
+        <Tab.Screen name="consumer-transaction-concluded" component={Consumer.Transactions} />
+      </Tab.Navigator>
+    </C_S.Container>
   );
 };

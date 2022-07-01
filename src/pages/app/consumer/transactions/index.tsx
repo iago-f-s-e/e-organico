@@ -44,8 +44,6 @@ export const Transactions: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header title="Pedidos" />
-
       <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
         <C.If
           condition={!!state.inProgress.length}

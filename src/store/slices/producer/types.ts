@@ -17,9 +17,12 @@ export type MinimalProducer = {
   };
 };
 
-export type ProducerDetail = MinimalProducer & {
+export type ProducerWithAddressAndProperty = MinimalProducer & {
   address: Address;
+  property: MinimalProperty;
+};
+
+export type ProducerDetail = ProducerWithAddressAndProperty & {
   markets: Market[];
   products: MinimalProducerProduct[];
-  property: MinimalProperty;
 };

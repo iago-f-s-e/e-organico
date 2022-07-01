@@ -8,6 +8,7 @@ import { ConsumerRoutes, ConsumerScreens } from './consumer';
 import { ProducerRoutes, ProducerScreens } from './producer';
 import { TransactionsRoutes } from './transactions';
 import { ProducerTransactionTabScreens } from './transactions/producer';
+import { ConsumerTransactionTabScreens } from './transactions/consumer';
 
 export type AppTabScreens = 'main' | 'transactions';
 
@@ -15,7 +16,11 @@ const Tab = createBottomTabNavigator<AppBottomTab>();
 
 export type AppConsumerScreens = AppTabScreens | ConsumerScreens;
 
-export type AppProducerScreens = AppTabScreens | ProducerScreens | ProducerTransactionTabScreens;
+export type AppProducerScreens =
+  | AppTabScreens
+  | ProducerScreens
+  | ProducerTransactionTabScreens
+  | ConsumerTransactionTabScreens;
 
 // TODO: criar bottom tab navigation
 export const AppRoutes: FC = () => {

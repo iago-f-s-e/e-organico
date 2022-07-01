@@ -15,6 +15,13 @@ export type ConsumerTopTab = {
   'consumer-producers': undefined;
 };
 
+export type ConsumerTransactionTopTab = {
+  'consumer-transaction-pending': undefined;
+  'consumer-transaction-separate': undefined;
+  'consumer-transaction-in-progress': undefined;
+  'consumer-transaction-concluded': undefined;
+};
+
 export type ConsumerCartTopTab = {
   'consumer-cart-products': undefined;
   'consumer-cart-address': undefined;

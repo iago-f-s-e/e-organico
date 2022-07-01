@@ -24,7 +24,7 @@ import { initialState, reducer } from './reducer';
 export const Product: FC = () => {
   const appDispatch = useAppDispatch();
   const { cart, section } = useAppSelector((state) => state);
-  const { navigateTo, onFocus, getIdParams } = useAppNavigation();
+  const { goBack, onFocus, getIdParams } = useAppNavigation();
   const { getProducerProductById } = useApi();
 
   const [state, dispatch] = useReducer(reducer, { ...initialState, idParam: getIdParams() });
@@ -91,7 +91,7 @@ export const Product: FC = () => {
 
     handleSetupOrAdd();
 
-    return navigateTo<'consumer'>('consumer-cart', null, { popNavigation: true });
+    return goBack(); // navigateTo<'consumer'>('consumer-cart', null, { popNavigation: true });
   };
 
   const handleOnFocus = () => {
@@ -107,7 +107,7 @@ export const Product: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header />
+      <C.Header title="Produto" />
       <C.IfElse
         condition={state.loading}
         render={{

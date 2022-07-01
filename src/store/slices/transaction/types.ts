@@ -3,6 +3,7 @@ import { EUDay, Market, Workday } from '../market/types';
 import { Payment } from '../payment-method/types';
 import { ProducerProductDetail } from '../producer-product/type';
 import { UserDetail } from '../current/types';
+import { ProducerWithAddressAndProperty } from '../producer/types';
 
 export type TransactionStatus =
   | 'delivered'
@@ -54,6 +55,7 @@ type MinimalTransaction = {
 };
 
 export type MinimalConsumerTransaction = MinimalTransaction & {
+  number: number;
   producer: {
     id: string;
     name: string;
@@ -74,4 +76,14 @@ export type ProducerTransactionDetail = Omit<MinimalProducerTransaction, 'consum
   consumer: UserDetail;
   products: TransactionProduct[];
   payment: Payment;
+};
+
+export type ConsumerTransactionDetail = Omit<MinimalConsumerTransaction, 'producer'> & {
+  producer: ProducerWithAddressAndProperty;
+  products: TransactionProduct[];
+  payment: Payment;
+  selectedDay: {
+    id: string;
+    weekday: EUDay;
+  };
 };
