@@ -11,7 +11,7 @@ import { producerProduct } from './producer-product';
 // 192.168.100.80
 // 172.16.10.13
 
-export const BASE_URL = 'http://192.168.100.80:8080';
+export const BASE_URL = 'http://172.16.10.13:8080';
 export const endpoints = {
   signUp,
   signIn,

@@ -22,7 +22,7 @@ import { UseApi } from './types';
 import { handleUnitMeasure } from './unit-measure';
 
 export const useApi = (): UseApi => {
-  const { user: curr } = useAppSelector((state) => state);
+  const { current } = useAppSelector((state) => state);
   const useToast = _useToast();
 
   const getAllMarkets = async () => {
@@ -58,7 +58,7 @@ export const useApi = (): UseApi => {
   };
 
   const getAllPayments = async () => {
-    const { data, error } = await handlePayment(useToast.error).getAll(curr.token);
+    const { data, error } = await handlePayment(useToast.error).getAll(current.token);
 
     if (!error) return data;
 
@@ -74,7 +74,7 @@ export const useApi = (): UseApi => {
   };
 
   const getProducerById = async (id: string) => {
-    const { data, error } = await handleProducer(useToast.error).getById(id, curr.token);
+    const { data, error } = await handleProducer(useToast.error).getById(id, current.token);
 
     if (!error) return data;
 
@@ -82,7 +82,7 @@ export const useApi = (): UseApi => {
   };
 
   const getProducerProductById = async (id: string) => {
-    const { data, error } = await handleProducer(useToast.error).getProductById(id, curr.token);
+    const { data, error } = await handleProducer(useToast.error).getProductById(id, current.token);
 
     if (!error) return data;
 
@@ -90,7 +90,7 @@ export const useApi = (): UseApi => {
   };
 
   const getOwnProducerProducts = async () => {
-    const { data, error } = await handleProducer(useToast.error).getOwnProducts(curr.token);
+    const { data, error } = await handleProducer(useToast.error).getOwnProducts(current.token);
 
     if (!error) return data;
 
@@ -100,7 +100,7 @@ export const useApi = (): UseApi => {
   const getConsumerTransactionInProgress = async () => {
     const { data, error } = await handleTransaction(
       useToast.error,
-    ).getInProgress<MinimalConsumerTransaction>(curr.token);
+    ).getInProgress<MinimalConsumerTransaction>(current.token);
 
     if (!error) return data;
 
@@ -110,7 +110,7 @@ export const useApi = (): UseApi => {
   const getProducerTransactionInProgress = async () => {
     const { data, error } = await handleTransaction(
       useToast.error,
-    ).getInProgress<MinimalProducerTransaction>(curr.token);
+    ).getInProgress<MinimalProducerTransaction>(current.token);
 
     if (!error) return data;
 
@@ -120,7 +120,7 @@ export const useApi = (): UseApi => {
   const getProducerTransactionInSeparation = async () => {
     const { data, error } = await handleTransaction(
       useToast.error,
-    ).getInSeparation<MinimalProducerTransaction>(curr.token);
+    ).getInSeparation<MinimalProducerTransaction>(current.token);
 
     if (!error) return data;
 
@@ -130,7 +130,7 @@ export const useApi = (): UseApi => {
   const getProducerTransactionPending = async () => {
     const { data, error } = await handleTransaction(
       useToast.error,
-    ).getPending<MinimalProducerTransaction>(curr.token);
+    ).getPending<MinimalProducerTransaction>(current.token);
 
     if (!error) return data;
 
@@ -140,7 +140,7 @@ export const useApi = (): UseApi => {
   const getProducerTransactionConcluded = async () => {
     const { data, error } = await handleTransaction(
       useToast.error,
-    ).getConcluded<MinimalProducerTransaction>(curr.token);
+    ).getConcluded<MinimalProducerTransaction>(current.token);
 
     if (!error) return data;
 
@@ -150,7 +150,7 @@ export const useApi = (): UseApi => {
   const getProducerTransactionById = async (id: string) => {
     const { data, error } = await handleTransaction(
       useToast.error,
-    ).getById<ProducerTransactionDetail>(id, curr.token);
+    ).getById<ProducerTransactionDetail>(id, current.token);
 
     if (!error) return data;
 
@@ -158,44 +158,44 @@ export const useApi = (): UseApi => {
   };
 
   const postTransaction = (payload: CartPayload) =>
-    handleTransaction(useToast.error).postTransaction(payload, curr.token);
+    handleTransaction(useToast.error).postTransaction(payload, current.token);
 
   const updateProducerProduct = (product: ProducerProductDetail) =>
     handleProducer(useToast.error, useToast.success).updateProduct(
       product,
-      curr.token,
+      current.token,
       'Produto atualizado com sucesso!',
     );
 
   const inactiveProducerProduct = (id: string) =>
     handleProducer(useToast.error, useToast.success).inactiveProduct(
       id,
-      curr.token,
+      current.token,
       'Produto excluído com sucesso!',
     );
 
   const confirmTransaction = (id: string) => {
     const message =
-      curr.user.userType === 'consumer'
+      current.user.userType === 'consumer'
         ? 'Pedido concluído com sucesso!'
         : 'Pedido confirmado com sucesso! Por favor, separe os itens do pedido. ';
 
     return handleTransaction(useToast.error, useToast.success).confirmTransaction(
       id,
-      curr.token,
+      current.token,
       message,
     );
   };
 
   const deliverTransaction = (id: string) => {
     const message =
-      curr.user.userType === 'consumer'
+      current.user.userType === 'consumer'
         ? 'Pedido recebido com sucesso!'
         : 'Pedido entregue com sucesso!';
 
     return handleTransaction(useToast.error, useToast.success).deliverTransaction(
       id,
-      curr.token,
+      current.token,
       message,
     );
   };
@@ -203,14 +203,14 @@ export const useApi = (): UseApi => {
   const cancelTransaction = (id: string) =>
     handleTransaction(useToast.error, useToast.success).cancelTransaction(
       id,
-      curr.token,
+      current.token,
       'Pedido cancelado com sucesso!',
     );
 
   const separateTransaction = (id: string) =>
     handleTransaction(useToast.error, useToast.success).separateTransaction(
       id,
-      curr.token,
+      current.token,
       'Pedido separado com sucesso!',
     );
 

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, KeyboardAvoidingView, SafeAreaView } from 'react-native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -8,7 +8,7 @@ import { useFonts } from 'expo-font';
 import * as Work from '@expo-google-fonts/work-sans';
 
 import { Toast } from '@src/components';
-import { KeyboardAvoidingView } from 'react-native';
+import { colors } from '@src/config/theme';
 import { store, persistor } from './src/store';
 import { EntryPoint } from './src';
 
@@ -28,11 +28,17 @@ const App: FC = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
-          <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
-          <KeyboardAvoidingView style={{ flex: 1 }}>
-            <Toast />
-            <EntryPoint />
-          </KeyboardAvoidingView>
+          <StatusBar
+            barStyle="light-content"
+            translucent
+            backgroundColor={colors.others._20WindowTint}
+          />
+          <SafeAreaView style={{ flex: 1 }}>
+            <KeyboardAvoidingView style={{ flex: 1 }}>
+              <Toast />
+              <EntryPoint />
+            </KeyboardAvoidingView>
+          </SafeAreaView>
         </NavigationContainer>
       </PersistGate>
     </Provider>

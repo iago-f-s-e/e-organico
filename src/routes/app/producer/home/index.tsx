@@ -27,7 +27,7 @@ export const ProducerHome: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header title="Inicio" />
+      <C.Header title="Inicio" hideBackButton showLogout />
 
       <Tab.Navigator
         tabBar={(props) => <C.TopTabBar {...props} />}

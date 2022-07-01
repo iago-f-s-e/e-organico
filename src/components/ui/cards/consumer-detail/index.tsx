@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { handleInputMask } from '@src/utils';
-import { UserDetail } from '@src/store/slices/user/types';
+import { UserDetail } from '@src/store/slices/current/types';
 import * as C_S from '../common-styles';
 
 type Props = {

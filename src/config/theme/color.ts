@@ -43,7 +43,7 @@ type Others = {
   ricePaper: string;
   frost: string;
   cloud: string;
-  windowTint: string;
+  _20WindowTint: string;
   panther: string;
   charcoal: string;
   coal: string;
@@ -107,7 +107,7 @@ const others: Others = {
   ricePaper: 'rgba(255,255,255, 0.75)',
   frost: '#D8D8D8',
   cloud: 'rgba(200,200,200, 0.35)',
-  windowTint: 'rgba(0, 0, 0, 0.4)',
+  _20WindowTint: 'rgba(0, 0, 0, 0.2)',
   panther: '#161616',
   charcoal: '#595959',
   coal: '#2d2d2d',

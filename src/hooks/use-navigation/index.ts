@@ -37,11 +37,12 @@ type UseNavigate = {
     params?: Params | null,
     options?: Options,
   ) => void;
+  replaceStack: <Type extends NavigationType>(path: Paths<Type>) => void;
   goBack: () => void;
 };
 
 export const useAppNavigation = (): UseNavigate => {
-  const { navigate, addListener, goBack, pop, popToTop } = useNavigation<StackNavigationProp<any>>(); // eslint-disable-line
+  const { navigate, addListener, goBack, pop, popToTop, replace, reset } = useNavigation<StackNavigationProp<any>>(); // eslint-disable-line
 
   const navigateTo = <Type extends NavigationType>(
     path: Paths<Type>,
@@ -55,6 +56,8 @@ export const useAppNavigation = (): UseNavigate => {
     return navigate(path, params);
   };
 
+  const replaceStack = <Type extends NavigationType>(path: Paths<Type>) => replace(path);
+
   const onFocus = (call: CallOnFocus) => addListener('focus', call);
 
   const getParams = <T extends object>(): Readonly<T> => {
@@ -65,5 +68,5 @@ export const useAppNavigation = (): UseNavigate => {
     return getParams<{ id: string }>().id;
   };
 
-  return { navigateTo, onFocus, getParams, goBack, getIdParams };
+  return { navigateTo, onFocus, getParams, goBack, getIdParams, replaceStack };
 };

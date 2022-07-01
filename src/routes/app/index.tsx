@@ -19,7 +19,7 @@ export type AppProducerScreens = AppTabScreens | ProducerScreens | ProducerTrans
 
 // TODO: criar bottom tab navigation
 export const AppRoutes: FC = () => {
-  const { user } = useAppSelector((state) => state);
+  const { current } = useAppSelector((state) => state);
 
   return (
     <Tab.Navigator
@@ -28,7 +28,7 @@ export const AppRoutes: FC = () => {
     >
       <Tab.Screen
         name="main"
-        component={user.user.userType === 'consumer' ? ConsumerRoutes : ProducerRoutes}
+        component={current.user.userType === 'consumer' ? ConsumerRoutes : ProducerRoutes}
       />
       <Tab.Screen name="transactions" component={TransactionsRoutes} />
     </Tab.Navigator>

@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { defaultCurrentUser } from '@src/constants/endpoints/current';
 import { LoggedUser, LoggedUserPayload } from './types';
 
-const initialState: LoggedUser = {
-  token: null,
-  user: null,
-};
+const initialState: LoggedUser = defaultCurrentUser;
 
 export const userSlice = createSlice({
   name: 'ui',

@@ -2,7 +2,7 @@ import { Address } from '../address/types';
 import { EUDay, Market, Workday } from '../market/types';
 import { Payment } from '../payment-method/types';
 import { ProducerProductDetail } from '../producer-product/type';
-import { UserDetail } from '../user/types';
+import { UserDetail } from '../current/types';
 
 export type TransactionStatus =
   | 'delivered'

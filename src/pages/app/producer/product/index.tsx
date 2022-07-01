@@ -5,7 +5,7 @@ import { Feather } from '@expo/vector-icons';
 import { useApi, useAppNavigation } from '@src/hooks';
 import { hideBottomTab, useAppDispatch } from '@src/store';
 import { handleInputMask, translateDate } from '@src/utils';
-import { colors } from '@src/config/theme';
+import { colors, shadow } from '@src/config/theme';
 
 import * as C from '@src/components';
 import { ProducerProductDetail } from '@src/store/slices/producer-product/type';
@@ -28,7 +28,7 @@ export const Product: FC = () => {
     dispatch({ type: 'onChangeShowDatePick', payload });
 
   const handleOnFocus = () => {
-    dispatch({ type: 'onInputFocusCancelButton' });
+    dispatch({ type: 'onInputFocus' });
 
     if (!state.isDifferent) return;
 
@@ -36,7 +36,7 @@ export const Product: FC = () => {
   };
 
   const handleOnBlur = () => {
-    dispatch({ type: 'onInputBlurCancelButton' });
+    dispatch({ type: 'onInputBlur' });
 
     if (!state.isDifferent) return;
 
@@ -134,9 +134,18 @@ export const Product: FC = () => {
             <>
               <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
                 <C_S.Content>
-                  <S.ImageContainer>
+                  <Animated.View
+                    style={{
+                      ...shadow,
+                      width: state.imageSize.x,
+                      height: state.imageSize.y,
+                      overflow: 'hidden',
+                      borderRadius: 5,
+                      backgroundColor: colors.basic.white,
+                    }}
+                  >
                     <S.Image source={{ uri: state.producerProduct.image }} />
-                  </S.ImageContainer>
+                  </Animated.View>
                 </C_S.Content>
 
                 <C_S.Content>

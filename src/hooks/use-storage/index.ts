@@ -3,6 +3,7 @@ import * as store from '@src/store';
 type UseStorage = {
   clearPersist: () => void;
   clearCart: () => void;
+  clearUser: () => void;
 };
 
 export const useStorage = (): UseStorage => {
@@ -25,5 +26,10 @@ export const useStorage = (): UseStorage => {
     appDispatch(store.clearCartUi());
   };
 
-  return { clearPersist, clearCart };
+  const clearUser = () => {
+    clearPersist();
+    appDispatch(store.clearUser());
+  };
+
+  return { clearPersist, clearCart, clearUser };
 };

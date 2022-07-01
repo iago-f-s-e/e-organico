@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { UserType } from '../user/types';
+import { UserType } from '../current/types';
 
 export type SignUpUserType = {
   type: UserType;

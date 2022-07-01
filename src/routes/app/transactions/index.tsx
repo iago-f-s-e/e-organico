@@ -6,9 +6,9 @@ import { ConsumerTransactionsRoutes } from './consumer';
 import { ProducerTransactionsRoutes } from './producer';
 
 export const TransactionsRoutes: FC = () => {
-  const { user } = useAppSelector((state) => state.user);
+  const { current } = useAppSelector((state) => state);
 
-  return user.userType === 'consumer' ? (
+  return current.user.userType === 'consumer' ? (
     <ConsumerTransactionsRoutes />
   ) : (
     <ProducerTransactionsRoutes />

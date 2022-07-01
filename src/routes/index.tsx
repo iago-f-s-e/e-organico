@@ -6,8 +6,8 @@ import { AppRoutes } from './app';
 import { AuthRoutes } from './auth';
 
 export const Routes: FC = () => {
-  const { user } = useAppSelector((state) => state);
-  const [isLogged] = useState<boolean>(!!user.token);
+  const { current } = useAppSelector((state) => state);
+  const [isLogged] = useState<boolean>(!!current.token);
 
   return (
     <IfElse

@@ -19,7 +19,7 @@ export type ProducerTransactionTabScreens =
 export const ProducerTransactionsRoutes: FC = () => {
   return (
     <C_S.Container>
-      <C.Header title="Pedidos" />
+      <C.Header title="Pedidos" hideBackButton />
 
       <Tab.Navigator
         tabBar={(props) => <C.TopTabBarScroll {...props} />}

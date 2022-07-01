@@ -1,4 +1,16 @@
-export const shadow = {
+type Shadow = {
+  shadowColor: string;
+  shadowOffset: {
+    width: number;
+    height: number;
+  };
+  shadowOpacity: number;
+  shadowRadius: number;
+
+  elevation: number;
+};
+
+export const shadow: Shadow = {
   shadowColor: '#000',
   shadowOffset: {
     width: 0,

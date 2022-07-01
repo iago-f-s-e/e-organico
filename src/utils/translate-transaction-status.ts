@@ -1,5 +1,5 @@
 import { TransactionStatus } from '@src/store/slices/transaction/types';
-import { UserType } from '@src/store/slices/user/types';
+import { UserType } from '@src/store/slices/current/types';
 
 const producerStatus: { [key in TransactionStatus]: string } = {
   'canceled-by-consumer': 'cancelado pelo cliente',

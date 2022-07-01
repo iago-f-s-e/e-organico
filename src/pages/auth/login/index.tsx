@@ -7,13 +7,15 @@ import logo from '@src/assets/icons/logo.png';
 
 import { useAppNavigation, useSignIn } from '@src/hooks';
 import { IfElse } from '@src/components';
+import { setLoggedUser, useAppDispatch } from '@src/store';
 import * as S from './styles';
 
 import { initialState, reducer } from './reducer';
 
 export const Login: FC = () => {
-  const { navigateTo } = useAppNavigation();
+  const { replaceStack, navigateTo } = useAppNavigation();
   const { signIn } = useSignIn();
+  const appDispatch = useAppDispatch();
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -26,10 +28,11 @@ export const Login: FC = () => {
     onOpenRequisition();
 
     signIn(state.phone, state.password)
-      .then((res) => {
-        if (res.error) return;
+      .then(({ data }) => {
+        if (!data) return;
 
-        return navigateTo<'auth'>('app');
+        appDispatch(setLoggedUser(data));
+        return replaceStack<'auth'>('app');
       })
       .finally(() => onCloseRequisition());
   };

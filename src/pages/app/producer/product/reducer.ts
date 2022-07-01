@@ -15,6 +15,7 @@ export type State = {
   showDatePicker: boolean;
   harvestDate: Date;
   producerProduct: ProducerProductDetail;
+  imageSize: Animated.ValueXY;
   sizeConfirmButton: Animated.ValueXY;
   sizeCancelButton: Animated.ValueXY;
   opacityButton: Animated.ValueXY;
@@ -26,8 +27,8 @@ type Actions =
   | 'changeInactive'
   | 'openButton'
   | 'closeButton'
-  | 'onInputFocusCancelButton'
-  | 'onInputBlurCancelButton'
+  | 'onInputFocus'
+  | 'onInputBlur'
   | 'onChangeHarvestDate'
   | 'onChangeStock'
   | 'onChangePrice'
@@ -41,7 +42,9 @@ type Action = {
 
 type Reducer = (state: State, action: Action) => State;
 
+const _32PerCent = dimensions.screen.width * 0.32;
 const _50PerCent = dimensions.screen.width * 0.5;
+const _65PerCent = dimensions.screen.width * 0.65;
 const _100PerCent = dimensions.screen.width;
 
 const getIsDifferent = (state: State): boolean => {
@@ -163,7 +166,7 @@ const reducers: { [key in Actions]: Reducer } = {
     return state;
   },
 
-  onInputFocusCancelButton: (state, _): State => {
+  onInputFocus: (state, _): State => {
     Animated.parallel([
       Animated.timing(state.opacityButton.y, {
         toValue: 0,
@@ -175,12 +178,22 @@ const reducers: { [key in Actions]: Reducer } = {
         duration: 400,
         useNativeDriver: false,
       }),
+      Animated.timing(state.imageSize.x, {
+        toValue: _32PerCent,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+      Animated.timing(state.imageSize.y, {
+        toValue: _32PerCent,
+        duration: 300,
+        useNativeDriver: false,
+      }),
     ]).start();
 
     return state;
   },
 
-  onInputBlurCancelButton: (state, _): State => {
+  onInputBlur: (state, _): State => {
     Animated.parallel([
       Animated.timing(state.opacityButton.y, {
         toValue: 1,
@@ -189,6 +202,16 @@ const reducers: { [key in Actions]: Reducer } = {
       }),
       Animated.timing(state.sizeCancelButton.y, {
         toValue: 40,
+        duration: 400,
+        useNativeDriver: false,
+      }),
+      Animated.timing(state.imageSize.x, {
+        toValue: _65PerCent,
+        duration: 400,
+        useNativeDriver: false,
+      }),
+      Animated.timing(state.imageSize.y, {
+        toValue: _65PerCent,
         duration: 400,
         useNativeDriver: false,
       }),
@@ -209,6 +232,7 @@ export const initialState: State = {
   price: 'R$ 0,00',
   stock: '0',
   producerProduct: defaultProducerProduct,
+  imageSize: new Animated.ValueXY({ x: _65PerCent, y: _65PerCent }),
   sizeConfirmButton: new Animated.ValueXY({ x: 0, y: 1 }),
   sizeCancelButton: new Animated.ValueXY({ x: _100PerCent, y: 40 }),
   opacityButton: new Animated.ValueXY({ x: 0, y: 1 }),
