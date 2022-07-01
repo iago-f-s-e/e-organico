@@ -28,6 +28,13 @@ export const httpPOST = async <Req, Res = Req>(
 ): Promise<Res> =>
   (await httpClient.post<Res>(url, data, { headers: { authorization: `Bearer ${token}` } })).data;
 
+export const httpPUT = async <Req, Res = Req>(
+  url: string,
+  data: Req,
+  token?: string,
+): Promise<Res> =>
+  (await httpClient.put<Res>(url, data, { headers: { authorization: `Bearer ${token}` } })).data;
+
 export const httpPATCH = async <Req, Res = Req>(
   url: string,
   token?: string,

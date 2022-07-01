@@ -4,20 +4,32 @@ import {
   ProducerProductDetail,
 } from '@src/store/slices/producer-product/type';
 import { MinimalProducer, ProducerDetail } from '@src/store/slices/producer/types';
-import { httpGET } from '../../http-client';
+import * as client from '../../http-client';
 
 export function getAllProducers(): Promise<MinimalProducer[]> {
-  return httpGET<MinimalProducer[]>(endpoints.producer.DEFAULT);
+  return client.httpGET<MinimalProducer[]>(endpoints.producer.DEFAULT);
 }
 
 export function getProducerById(id: string, token: string): Promise<ProducerDetail> {
-  return httpGET<ProducerDetail>(`${endpoints.producer.DEFAULT}/${id}`, token);
+  return client.httpGET<ProducerDetail>(`${endpoints.producer.DEFAULT}/${id}`, token);
 }
 
 export function getProducerProductById(id: string, token: string): Promise<ProducerProductDetail> {
-  return httpGET<ProducerProductDetail>(`${endpoints.producerProduct.DEFAULT}/${id}`, token);
+  return client.httpGET<ProducerProductDetail>(`${endpoints.producerProduct.DEFAULT}/${id}`, token);
 }
 
 export function getOwnProducerProduct(token: string): Promise<MinimalProducerProduct[]> {
-  return httpGET<MinimalProducerProduct[]>(endpoints.producerProduct.DEFAULT, token);
+  return client.httpGET<MinimalProducerProduct[]>(endpoints.producerProduct.DEFAULT, token);
+}
+
+export function updateProductProduct(
+  id: string,
+  data: ProducerProductDetail,
+  token: string,
+): Promise<void> {
+  return client.httpPUT(`${endpoints.producerProduct.DEFAULT}/${id}`, data, token);
+}
+
+export function inactiveProductProduct(id: string, token: string): Promise<void> {
+  return client.httpPATCH(`${endpoints.producerProduct.DEFAULT}/${id}/inactive`, token);
 }

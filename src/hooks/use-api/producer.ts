@@ -4,18 +4,59 @@ import {
   ProducerProductDetail,
 } from '@src/store/slices/producer-product/type';
 import { MinimalProducer, ProducerDetail } from '@src/store/slices/producer/types';
-import { translateGetError } from '@src/utils';
-import { OnError, Response } from './types';
+import { handleRemoveMask, translateGetError } from '@src/utils';
+import { OnError, OnSuccess, Response } from './types';
 
-type HandleProducer = (onError: OnError) => {
+type HandleProducer = (
+  onError: OnError,
+  onSuccess?: OnSuccess,
+) => {
   getAll: () => Promise<Response<MinimalProducer[]>>;
   getById: (id: string, token: string) => Promise<Response<ProducerDetail>>;
   getProductById: (id: string, token: string) => Promise<Response<ProducerProductDetail>>;
+  updateProduct: (
+    product: ProducerProductDetail,
+    token: string,
+    message: string,
+  ) => Promise<Response<void>>;
+  inactiveProduct: (id: string, token: string, message: string) => Promise<Response<void>>;
   getOwnProducts: (token: string) => Promise<Response<MinimalProducerProduct[]>>;
 };
 
-export const handleProducer: HandleProducer = (onError) => {
+export const handleProducer: HandleProducer = (onError, onSuccess) => {
   return {
+    updateProduct: async (_product, token, message) => {
+      try {
+        const product = {
+          ..._product,
+          price: handleRemoveMask(_product.price, 'money', { withComma: false }),
+        };
+        const data = await service.updateProductProduct(product.id, product, token);
+
+        onSuccess(message);
+
+        return { data, error: null };
+      } catch (error) {
+        onError(translateGetError(error));
+
+        return { data: null, error: error.message };
+      }
+    },
+
+    inactiveProduct: async (id, token, message) => {
+      try {
+        const data = await service.inactiveProductProduct(id, token);
+
+        onSuccess(message);
+
+        return { data, error: null };
+      } catch (error) {
+        onError(translateGetError(error));
+
+        return { data: null, error: error.message };
+      }
+    },
+
     getAll: async () => {
       try {
         const data = await service.getAllProducers();

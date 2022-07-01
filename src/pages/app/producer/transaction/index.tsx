@@ -18,9 +18,9 @@ export const Transaction: FC = () => {
 
   const [state, dispatch] = useReducer(reducer, { ...initialState, idParam: getIdParams() });
 
-  const onOpenConfirm = () => dispatch({ type: 'changeConfirm', payload: false });
+  const onOpenConfirm = () => dispatch({ type: 'changeConfirm', payload: true });
   const onCloseConfirm = () => dispatch({ type: 'changeConfirm', payload: false });
-  const onOpenCancel = () => dispatch({ type: 'changeCancel', payload: false });
+  const onOpenCancel = () => dispatch({ type: 'changeCancel', payload: true });
   const onCloseCancel = () => dispatch({ type: 'changeCancel', payload: false });
   const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
   const onChangeTransaction = (payload: ProducerTransactionDetail) =>

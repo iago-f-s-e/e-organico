@@ -21,9 +21,9 @@ export const DatePicker = ({ hide, show, value, select }: Props): JSX.Element =>
   const handleCancel = () => hide();
 
   const handleSelect = (newDate: number) => {
-    select(new Date(newDate));
+    hide();
 
-    return hide();
+    return select(new Date(newDate));
   };
 
   const handleOnChange = (data: any) => { // eslint-disable-line

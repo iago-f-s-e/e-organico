@@ -30,6 +30,8 @@ export type UseApi = {
   getProducerById: (id: string) => Promise<ProducerDetail>;
   getOwnProducerProducts: () => Promise<MinimalProducerProduct[]>;
   getProducerProductById: (id: string) => Promise<ProducerProductDetail>;
+  inactiveProducerProduct: (id: string) => Promise<Response<void>>;
+  updateProducerProduct: (product: ProducerProductDetail) => Promise<Response<void>>;
 
   postTransaction: (payload: CartPayload) => Promise<Response<CartPayload>>;
   confirmTransaction: (id: string) => Promise<Response<void>>;

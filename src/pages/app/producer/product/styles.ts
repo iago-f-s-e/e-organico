@@ -125,3 +125,12 @@ export const Name = styled.Text`
   font-size: ${font.size.large};
   color: ${colors.main.primary};
 `;
+
+export const Buttons = styled.View`
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+`;

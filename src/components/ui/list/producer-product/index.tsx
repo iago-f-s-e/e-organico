@@ -27,7 +27,7 @@ export const ListProducerProduct = ({ data }: Props): JSX.Element => {
       <C_S.ImageContainer>
         <C_S.Image source={{ uri: data.image }} />
       </C_S.ImageContainer>
-      <C_S.Content onPress={() => navigateTo<'producer'>('producer-product')}>
+      <C_S.Content onPress={() => navigateTo<'producer'>('producer-product', { id: data.id })}>
         <C_S.Title>{data.name}</C_S.Title>
         <S.ValuesContent>
           <S.ValuesContent>

@@ -1,81 +1,70 @@
-import React, { FC, useEffect, useReducer, useMemo, useState } from 'react';
+import React, { FC, useEffect, useReducer } from 'react';
 import { Animated } from 'react-native';
-import { ProducerProduct } from '@src/store/slices/producer-product/type';
 import { Feather } from '@expo/vector-icons';
 
-import { useAppNavigation } from '@src/hooks';
+import { useApi, useAppNavigation } from '@src/hooks';
 import { hideBottomTab, useAppDispatch } from '@src/store';
-import { handleInputMask, handleRemoveMask, translateDate } from '@src/utils';
+import { handleInputMask, translateDate } from '@src/utils';
 import { colors } from '@src/config/theme';
 
 import * as C from '@src/components';
+import { ProducerProductDetail } from '@src/store/slices/producer-product/type';
 import * as C_S from '../../common-styles';
 import * as S from './styles';
 
 import { initialState, reducer } from './reducer';
 
-// TODO: buscar da api
-const producerProduct: ProducerProduct = null;
-
 export const Product: FC = () => {
   const appDispatch = useAppDispatch();
-  const { onFocus } = useAppNavigation();
+  const { onFocus, goBack, getIdParams } = useAppNavigation();
+  const { getProducerProductById, updateProducerProduct, inactiveProducerProduct } = useApi();
 
-  // TODO: atualizar pela requisição
-  const [state, dispatch] = useReducer(reducer, { ...initialState, producerProduct });
+  const [state, dispatch] = useReducer(reducer, { ...initialState, idParam: getIdParams() });
 
-  const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
-
-  const dispatchOpenButton = () => dispatch({ type: 'openButton' });
-  const dispatchCloseButton = () => dispatch({ type: 'closeButton' });
-  const dispatchStock = (payload: string) => dispatch({ type: 'onChangeStock', payload });
-  const dispatchPrice = (payload: string) => dispatch({ type: 'onChangePrice', payload });
-  const dispatchHarvestDate = (payload: Date) => dispatch({ type: 'onChangeHarvestDate', payload });
-
-  const isDifferent = useMemo(() => {
-    const stockIsDifferent = producerProduct.stock !== state.producerProduct.stock;
-
-    const priceIsDifferent =
-      producerProduct.price !== handleRemoveMask(state.producerProduct.price, 'money');
-
-    const originalDate = translateDate(producerProduct.harvestDate);
-    const stateDate = translateDate(state.producerProduct.harvestDate);
-
-    const dateIsDifferent = originalDate !== stateDate;
-
-    return stockIsDifferent || priceIsDifferent || dateIsDifferent;
-  }, [state.producerProduct.stock, state.producerProduct.price, state.producerProduct.harvestDate]);
+  const onCloseButton = () => dispatch({ type: 'closeButton' });
+  const onChangeProducerProduct = (payload: ProducerProductDetail) =>
+    dispatch({ type: 'onChangeProducerProduct', payload });
+  const onChangeShowDatePick = (payload: boolean) =>
+    dispatch({ type: 'onChangeShowDatePick', payload });
 
   const handleOnFocus = () => {
-    if (!isDifferent) return;
+    dispatch({ type: 'onInputFocusCancelButton' });
 
-    dispatchCloseButton();
+    if (!state.isDifferent) return;
+
+    onCloseButton();
   };
 
   const handleOnBlur = () => {
-    if (!isDifferent) return;
+    dispatch({ type: 'onInputBlurCancelButton' });
 
-    dispatchOpenButton();
+    if (!state.isDifferent) return;
+
+    dispatch({ type: 'openButton' });
   };
 
   const openOrCloseButtonOnDatePicker = (date: Date) => {
-    const originalDate = translateDate(producerProduct.harvestDate);
+    const originalDate = translateDate(state.producerProduct.harvestDate);
     const toChange = translateDate(date);
 
     const dateIsDifferent = originalDate !== toChange;
 
-    if (dateIsDifferent) return dispatchOpenButton();
+    if (dateIsDifferent) return dispatch({ type: 'openButton' });
 
-    return dispatchCloseButton();
+    return dispatch({ type: 'closeButton' });
   };
 
   const handleInputPrice = (price: string) => {
-    dispatchPrice(handleInputMask(price, 'money', { withComma: true }));
+    dispatch({
+      type: 'onChangePrice',
+      payload: handleInputMask(price, 'money', { withComma: true }),
+    });
   };
 
   const handlePickDate = (date: Date) => {
     openOrCloseButtonOnDatePicker(date);
-    dispatchHarvestDate(date);
+
+    dispatch({ type: 'onChangeHarvestDate', payload: date });
   };
 
   const handleInputStock = (stock: string) => {
@@ -84,11 +73,51 @@ export const Product: FC = () => {
 
     if (isInvalid) return;
 
-    dispatchStock(stock);
+    dispatch({ type: 'onChangeStock', payload: stock });
+  };
+
+  const handleOpenRequisition = () => {
+    getProducerProductById(state.idParam)
+      .then((producerProduct) => onChangeProducerProduct(producerProduct))
+      .finally(() => dispatch({ type: 'changeLoading', payload: false }));
+  };
+
+  const handleUpdate = () => {
+    dispatch({ type: 'changeUpdate', payload: true });
+
+    updateProducerProduct({
+      ...state.producerProduct,
+      harvestDate: state.harvestDate,
+      price: state.price,
+      stock: state.stock,
+    })
+      .then(() => {
+        onCloseButton();
+        setTimeout(() => goBack(), 300);
+      })
+      .finally(() => dispatch({ type: 'changeUpdate', payload: false }));
+  };
+
+  const handleCancel = () => {
+    onChangeProducerProduct(state.producerProduct);
+    onCloseButton();
+  };
+
+  const handleInactive = () => {
+    dispatch({ type: 'changeInactive', payload: true });
+
+    inactiveProducerProduct(state.idParam)
+      .then(() => goBack())
+      .finally(() => dispatch({ type: 'changeInactive', payload: false }));
+  };
+
+  const handleOnMount = () => {
+    appDispatch(hideBottomTab());
+    handleOpenRequisition();
   };
 
   useEffect(() => {
-    const focus = onFocus(() => appDispatch(hideBottomTab()));
+    const focus = onFocus(handleOnMount);
 
     return focus;
   }, []); // eslint-disable-line
@@ -97,76 +126,126 @@ export const Product: FC = () => {
     <C_S.Container>
       <C.Header title="Produto" />
 
-      <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
-        <C_S.Content>
-          <S.ImageContainer>
-            <S.Image source={{ uri: state.producerProduct.product.image }} />
-          </S.ImageContainer>
-        </C_S.Content>
+      <C.IfElse
+        condition={state.loading}
+        render={{
+          toBeTruthy: () => <C.Loading color={colors.main.primary} sizeType="large" />,
+          toBeFalsy: () => (
+            <>
+              <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
+                <C_S.Content>
+                  <S.ImageContainer>
+                    <S.Image source={{ uri: state.producerProduct.image }} />
+                  </S.ImageContainer>
+                </C_S.Content>
 
-        <C_S.Content>
-          <S.Name>{state.producerProduct.product.name}</S.Name>
-          <S.Content>
-            <S.PickerContainer>
-              <S.Label>Data de colheita: </S.Label>
-              <S.DatePickerContent onPress={() => setShowDatePicker(true)}>
-                <C.DatePicker
-                  show={showDatePicker}
-                  hide={() => setShowDatePicker(false)}
-                  value={state.producerProduct.harvestDate}
-                  select={(value) => handlePickDate(value)}
-                />
-                <Feather name="edit" size={15} color={colors.main.primary} />
-                <S.LabelDate>{translateDate(state.producerProduct.harvestDate)}</S.LabelDate>
-              </S.DatePickerContent>
-            </S.PickerContainer>
+                <C_S.Content>
+                  <S.Name>{state.producerProduct.name}</S.Name>
+                  <S.Content>
+                    <S.PickerContainer>
+                      <S.Label>Data de colheita: </S.Label>
+                      <S.DatePickerContent onPress={() => onChangeShowDatePick(true)}>
+                        <C.DatePicker
+                          show={state.showDatePicker}
+                          hide={() => onChangeShowDatePick(false)}
+                          value={state.harvestDate}
+                          select={(value) => handlePickDate(value)}
+                        />
+                        <Feather name="edit" size={15} color={colors.main.primary} />
+                        <S.LabelDate>{translateDate(state.harvestDate)}</S.LabelDate>
+                      </S.DatePickerContent>
+                    </S.PickerContainer>
 
-            <S.StockAndPrice>
-              <S.InputContainer>
-                <S.Label>Estoque:</S.Label>
+                    <S.StockAndPrice>
+                      <S.InputContainer>
+                        <S.Label>{`Estoque: (${state.producerProduct.unitMeasure.name})`}</S.Label>
 
-                <S.StockContainer>
-                  <S.InputStock
-                    value={state.producerProduct.stock}
-                    onChangeText={(value) => handleInputStock(value)}
-                    onBlur={handleOnBlur}
-                    onFocus={handleOnFocus}
-                    keyboardType="number-pad"
+                        <S.StockContainer>
+                          <S.InputStock
+                            value={state.stock}
+                            onChangeText={(value) => handleInputStock(value)}
+                            onBlur={handleOnBlur}
+                            onFocus={handleOnFocus}
+                            keyboardType="number-pad"
+                          />
+                        </S.StockContainer>
+                      </S.InputContainer>
+
+                      <S.InputContainer>
+                        <S.Label>Preço:</S.Label>
+
+                        <S.PriceContainer>
+                          <Feather name="edit" size={15} color={colors.basic.white} />
+                          <S.InputPrice
+                            value={state.price}
+                            onChangeText={(value) => handleInputPrice(value)}
+                            selectionColor={colors.basic.white}
+                            onBlur={handleOnBlur}
+                            onFocus={handleOnFocus}
+                            keyboardType="number-pad"
+                          />
+                        </S.PriceContainer>
+                      </S.InputContainer>
+                    </S.StockAndPrice>
+                  </S.Content>
+                </C_S.Content>
+              </C_S.ScrollContainer>
+
+              <S.Buttons>
+                <Animated.View
+                  style={{
+                    width: state.sizeConfirmButton.x,
+                    height: state.sizeConfirmButton.y,
+                    opacity: state.opacityButton.x,
+                  }}
+                >
+                  <C_S.ButtonConfirm disabled={state.updating} onPress={handleUpdate}>
+                    <C.IfElse
+                      condition={state.updating}
+                      render={{
+                        toBeFalsy: () => <C_S.ButtonLabel>Atualizar</C_S.ButtonLabel>,
+                        toBeTruthy: () => <C.Loading color={colors.basic.white} sizeType="large" />,
+                      }}
+                    />
+                  </C_S.ButtonConfirm>
+                </Animated.View>
+
+                <Animated.View
+                  style={{
+                    width: state.sizeCancelButton.x,
+                    height: state.sizeCancelButton.y,
+                    opacity: state.opacityButton.y,
+                  }}
+                >
+                  <C.IfElse
+                    condition={state.isDifferent}
+                    render={{
+                      toBeFalsy: () => (
+                        <C_S.ButtonCancel disabled={state.inactivating} onPress={handleInactive}>
+                          <C.IfElse
+                            condition={state.inactivating}
+                            render={{
+                              toBeFalsy: () => <C_S.ButtonLabel>Excluir</C_S.ButtonLabel>,
+                              toBeTruthy: () => (
+                                <C.Loading color={colors.basic.white} sizeType="large" />
+                              ),
+                            }}
+                          />
+                        </C_S.ButtonCancel>
+                      ),
+                      toBeTruthy: () => (
+                        <C_S.ButtonCancel disabled={state.updating} onPress={handleCancel}>
+                          <C_S.ButtonLabel>Cancelar</C_S.ButtonLabel>
+                        </C_S.ButtonCancel>
+                      ),
+                    }}
                   />
-                </S.StockContainer>
-              </S.InputContainer>
-
-              <S.InputContainer>
-                <S.Label>Preço:</S.Label>
-
-                <S.PriceContainer>
-                  <Feather name="edit" size={15} color={colors.basic.white} />
-                  <S.InputPrice
-                    value={state.producerProduct.price}
-                    onChangeText={(value) => handleInputPrice(value)}
-                    selectionColor={colors.basic.white}
-                    onBlur={handleOnBlur}
-                    onFocus={handleOnFocus}
-                    keyboardType="number-pad"
-                  />
-                </S.PriceContainer>
-              </S.InputContainer>
-            </S.StockAndPrice>
-          </S.Content>
-        </C_S.Content>
-      </C_S.ScrollContainer>
-
-      <Animated.View
-        style={{
-          width: '100%',
-          height: state.sizeButton.y,
-          opacity: state.opacityButton.x,
+                </Animated.View>
+              </S.Buttons>
+            </>
+          ),
         }}
-      >
-        <C_S.ButtonConfirm onPress={() => {}}>
-          <C_S.ButtonLabel>Atualizar</C_S.ButtonLabel>
-        </C_S.ButtonConfirm>
-      </Animated.View>
+      />
     </C_S.Container>
   );
 };
