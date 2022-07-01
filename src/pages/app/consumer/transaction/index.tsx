@@ -17,33 +17,29 @@ export const Transaction: FC = () => {
 
   const [state, dispatch] = useReducer(reducer, { ...initialState, idParam: getIdParams() });
 
-  const onOpenConfirm = () => dispatch({ type: 'changeConfirm', payload: true });
-  const onCloseConfirm = () => dispatch({ type: 'changeConfirm', payload: false });
-  const onOpenCancel = () => dispatch({ type: 'changeCancel', payload: true });
-  const onCloseCancel = () => dispatch({ type: 'changeCancel', payload: false });
-  const onCloseRequisition = () => dispatch({ type: 'changeLoading', payload: false });
-  const onChangeTransaction = (payload) => dispatch({ type: 'onChangeTransaction', payload });
-
   const handleOpenRequisition = () => {
     api
-      .getProducerTransactionById(state.idParam)
-      .then((transaction) => onChangeTransaction(transaction))
-      .finally(() => onCloseRequisition());
+      .getConsumerTransactionById(state.idParam)
+      .then((payload) => dispatch({ type: 'onChangeTransaction', payload }))
+      .finally(() => dispatch({ type: 'changeLoading', payload: false }));
   };
 
   const handleConfirm = () => {
-    onOpenConfirm();
+    dispatch({ type: 'changeConfirm', payload: true });
 
-    onCloseConfirm();
+    api
+      .confirmTransaction(state.idParam)
+      .then(() => goBack())
+      .finally(() => dispatch({ type: 'changeConfirm', payload: false }));
   };
 
   const handleCancel = () => {
-    onOpenCancel();
+    dispatch({ type: 'changeCancel', payload: true });
 
     api
       .cancelTransaction(state.idParam)
       .then(() => goBack())
-      .finally(() => onCloseCancel());
+      .finally(() => dispatch({ type: 'changeCancel', payload: false }));
   };
 
   const handleOnFocus = () => {

@@ -6,7 +6,7 @@ import { UserDetail } from '../current/types';
 import { ProducerWithAddressAndProperty } from '../producer/types';
 
 export type TransactionStatus =
-  | 'delivered'
+  | 'concluded'
   | 'en-route'
   | 'paid-online'
   | 'canceled-by-producer'

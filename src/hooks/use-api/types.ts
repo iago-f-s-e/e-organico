@@ -9,6 +9,7 @@ import {
 import { MinimalProducer, ProducerDetail } from '@src/store/slices/producer/types';
 import { Product } from '@src/store/slices/product/types';
 import {
+  ConsumerTransactionDetail,
   MinimalConsumerTransaction,
   MinimalProducerTransaction,
   ProducerTransactionDetail,
@@ -44,4 +45,5 @@ export type UseApi = {
   getProducerTransactionPending: () => Promise<MinimalProducerTransaction[]>;
   getProducerTransactionConcluded: () => Promise<MinimalProducerTransaction[]>;
   getProducerTransactionById: (id: string) => Promise<ProducerTransactionDetail>;
+  getConsumerTransactionById: (id: string) => Promise<ConsumerTransactionDetail>;
 };

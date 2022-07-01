@@ -48,7 +48,7 @@ const getHideConfirm = (status: TransactionStatus): boolean => {
     'canceled-by-producer',
     'confirmed-by-producer',
     'confirmed-by-consumer',
-    'delivered',
+    'concluded',
   ];
 
   return conditionsToBeHidden.includes(status);

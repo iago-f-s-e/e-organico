@@ -17,7 +17,7 @@ export const Toast = (): JSX.Element => {
   const handleOnOpen = () => {
     Animated.parallel([
       Animated.timing(translate.y, {
-        toValue: 30,
+        toValue: 50,
         duration: 300,
         useNativeDriver: false,
       }),

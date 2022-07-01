@@ -12,7 +12,7 @@ const producerStatus: { [key in TransactionStatus]: string } = {
   'waiting-for-consumer-to-withdraw': 'aguardando o cliente retirar',
   'waiting-for-payment': 'aguardando o pagamento',
   'in-separation': 'aguardando separação dos produtos',
-  delivered: 'entregue',
+  concluded: 'concluído',
 };
 
 const consumerStatus: { [key in TransactionStatus]: string } = {
@@ -26,7 +26,7 @@ const consumerStatus: { [key in TransactionStatus]: string } = {
   'waiting-for-consumer-to-withdraw': 'aguardando a retirada',
   'waiting-for-payment': 'aguardando o pagamento',
   'in-separation': 'aguardando o feirante separar os produtos',
-  delivered: 'entregue',
+  concluded: 'concluído',
 };
 
 export const translateTransactionStatus = (type: string, userType: UserType): string =>

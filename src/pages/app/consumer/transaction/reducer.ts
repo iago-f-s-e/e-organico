@@ -27,7 +27,7 @@ type Reducer = (state: State, action: Action) => State;
 
 const getHideConfirm = (status: TransactionStatus): boolean => {
   const conditionsToBeHidden = [
-    'delivered',
+    'concluded',
     'canceled-by-producer',
     'canceled-by-consumer',
     'confirmed-by-consumer',

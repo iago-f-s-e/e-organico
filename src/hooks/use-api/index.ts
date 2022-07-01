@@ -1,4 +1,5 @@
 import {
+  defaultConsumerTransaction,
   defaultMarketDetail,
   defaultProducerDetail,
   defaultProducerProduct,
@@ -9,6 +10,7 @@ import { useAppSelector } from '@src/store';
 import { CartPayload } from '@src/store/slices/cart/types';
 import { ProducerProductDetail } from '@src/store/slices/producer-product/type';
 import {
+  ConsumerTransactionDetail,
   MinimalConsumerTransaction,
   MinimalProducerTransaction,
   ProducerTransactionDetail,
@@ -157,6 +159,16 @@ export const useApi = (): UseApi => {
     return defaultProducerTransaction;
   };
 
+  const getConsumerTransactionById = async (id: string) => {
+    const { data, error } = await handleTransaction(
+      useToast.error,
+    ).getById<ConsumerTransactionDetail>(id, current.token);
+
+    if (!error) return data;
+
+    return defaultConsumerTransaction;
+  };
+
   const postTransaction = (payload: CartPayload) =>
     handleTransaction(useToast.error).postTransaction(payload, current.token);
 
@@ -230,6 +242,7 @@ export const useApi = (): UseApi => {
     getProducerTransactionPending,
     getProducerTransactionConcluded,
     getProducerTransactionById,
+    getConsumerTransactionById,
     inactiveProducerProduct,
     updateProducerProduct,
     postTransaction,
