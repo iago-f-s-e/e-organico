@@ -12,7 +12,7 @@ import { producerProduct } from './producer-product';
 // http://172.16.10.13
 // https://api-eorganico.herokuapp.com
 
-export const BASE_URL = 'http://172.16.10.13:8080';
+export const BASE_URL = 'https://api-eorganico.herokuapp.com';
 export const endpoints = {
   signUp,
   signIn,
