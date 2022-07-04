@@ -8,7 +8,7 @@ import * as S from './styles';
 
 export const UserType: FC = () => {
   const dispatch = useAppDispatch();
-  const { navigateTo, goBack } = useAppNavigation();
+  const { navigateTo } = useAppNavigation();
 
   const handleNavigate = (type: 'consumer' | 'producer') => {
     dispatch(changeSignUpUserType({ type }));
@@ -18,7 +18,7 @@ export const UserType: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header handle={goBack} iconType="navigate-go-back" />
+      <C.Header title="Tipo de usuário" iconType="navigate-go-back" />
       <C_S.Container>
         <S.UserTypeContainer>
           <S.Title>Você é</S.Title>

@@ -17,7 +17,7 @@ export const Credentials: FC = () => {
   const consumer = useAppSelector((state) => state.signUpConsumer);
   const useToast = _useToast();
   const { reserveCredentials } = useSignUp();
-  const { navigateTo, goBack } = useAppNavigation();
+  const { navigateTo } = useAppNavigation();
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
@@ -54,7 +54,7 @@ export const Credentials: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header handle={goBack} iconType="navigate-go-back" />
+      <C.Header title="Credenciais" iconType="navigate-go-back" />
       <C_S.Container>
         <S.CredentialsContainer>
           <C_S.InputContainer>

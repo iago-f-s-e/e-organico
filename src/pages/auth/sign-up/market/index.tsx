@@ -11,7 +11,7 @@ import { initialState, reducer } from './reducer';
 
 export const Market: FC = () => {
   const appDispatch = useAppDispatch();
-  const { navigateTo, goBack, onFocus } = useAppNavigation();
+  const { navigateTo, onFocus } = useAppNavigation();
   const { signUpMarket, signUpProducer } = useAppSelector((state) => state);
 
   const { getAllMarkets } = useApi();
@@ -62,7 +62,7 @@ export const Market: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header handle={goBack} title="Seleção de feiras" iconType="navigate-go-back" />
+      <C.Header title="Seleção de feiras" iconType="navigate-go-back" />
       <C_S.Container>
         <FlatList
           style={{ paddingVertical: 8, paddingHorizontal: 16 }}

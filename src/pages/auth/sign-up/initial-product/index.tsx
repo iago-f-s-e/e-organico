@@ -19,7 +19,7 @@ import { initialState, reducer } from './reducer';
 
 export const InitialProduct: FC = () => {
   const appDispatch = useAppDispatch();
-  const { goBack, onFocus } = useAppNavigation();
+  const { onFocus } = useAppNavigation();
   const { signUpProduct, signUpProducer } = useAppSelector((state) => state);
   const { navigateTo } = useAppNavigation();
   const { clearPersist } = useStorage();
@@ -90,10 +90,10 @@ export const InitialProduct: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header handle={goBack} title="Seleção de produtos" iconType="navigate-go-back" />
+      <C.Header title="Seleção de produtos" iconType="navigate-go-back" />
       <C_S.Container>
         <FlatList
-          style={{ paddingVertical: 8, paddingHorizontal: 16 }}
+          style={{ paddingVertical: 8, paddingHorizontal: 16, marginBottom: 5 }}
           refreshControl={
             <RefreshControl onRefresh={handleGetAllData} refreshing={state.loading} />
           }

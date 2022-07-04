@@ -24,7 +24,7 @@ export const PropertyImages: FC = () => {
   const appDispatch = useAppDispatch();
   const { signUpConsumer, signUpProducer } = useAppSelector((state) => state);
   const useToast = _useToast();
-  const { navigateTo, goBack } = useAppNavigation();
+  const { navigateTo } = useAppNavigation();
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
@@ -80,7 +80,7 @@ export const PropertyImages: FC = () => {
 
   return (
     <C_S.Container>
-      <C.Header handle={goBack} iconType="navigate-go-back" />
+      <C.Header title="Propriedade" iconType="navigate-go-back" />
       <C_S.Container>
         <S.PropertyImagesContainer>
           <S.Title>Envie fotos da sua propriedade</S.Title>
