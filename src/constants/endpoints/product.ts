@@ -1,3 +1,3 @@
 export enum product {
-  'GET_ALL' = 'app/product',
+  'GET_ALL' = 'api/product',
 }

@@ -1,4 +1,4 @@
 export enum market {
-  'GET_ALL' = 'app/market',
-  'GET_BY_ID' = 'app/market/',
+  'GET_ALL' = 'api/market',
+  'GET_BY_ID' = 'api/market/',
 }

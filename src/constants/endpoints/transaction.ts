@@ -1,7 +1,7 @@
 export enum transaction {
-  'DEFAULT' = 'app/transaction',
-  'GET_IN_PROGRESS' = 'app/transaction/in-progress',
-  'GET_IN_SEPARATION' = 'app/transaction/in-separation',
-  'GET_PENDING' = 'app/transaction/pending',
-  'GET_CONCLUDED' = 'app/transaction/concluded',
+  'DEFAULT' = 'api/transaction',
+  'GET_IN_PROGRESS' = 'api/transaction/in-progress',
+  'GET_IN_SEPARATION' = 'api/transaction/in-separation',
+  'GET_PENDING' = 'api/transaction/pending',
+  'GET_CONCLUDED' = 'api/transaction/concluded',
 }
