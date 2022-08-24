@@ -73,7 +73,7 @@ export const SelectTypes: FC = () => {
           </S.SelectContainer>
         </S.Container>
 
-        <C.NextButton
+        <C.AnimatedButton
           handle={handleNext}
           animated={{ height: state.sizeButton.y, opacity: state.opacityButton.x }}
           loading={state.loading}

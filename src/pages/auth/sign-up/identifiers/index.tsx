@@ -127,7 +127,7 @@ export const Identifiers: FC = () => {
           </S.IdentifiersContainer>
         </C_S.ScrollContainer>
 
-        <C.NextButton
+        <C.AnimatedButton
           handle={handleNext}
           animated={{ height: state.sizeButton.y, opacity: state.opacityButton.x }}
           loading={state.loading}

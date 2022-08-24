@@ -113,7 +113,7 @@ export const PropertyImages: FC = () => {
           </S.ImagesContainer>
         </S.PropertyImagesContainer>
 
-        <C.NextButton
+        <C.AnimatedButton
           handle={handleNext}
           animated={{ height: state.sizeButton.y, opacity: state.opacityButton.x }}
           loading={state.loading}

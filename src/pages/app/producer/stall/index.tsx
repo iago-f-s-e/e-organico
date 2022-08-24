@@ -33,12 +33,6 @@ export const Stall: FC = () => {
         title="Feiras"
         description="Entre em novas feiras"
       />
-      <C.ContentOption
-        isToggleable
-        toggleValue
-        onClick={() => console.log('produto')}
-        title="Faz entrega"
-      />
     </C_S.ScrollContainer>
   );
 };

@@ -157,7 +157,7 @@ export const Address: FC = () => {
           </S.CustomerContainer>
         </S.Scroll>
 
-        <C.NextButton
+        <C.AnimatedButton
           handle={handleNext}
           animated={{ height: state.sizeButton.y, opacity: state.opacityButton.x }}
           loading={state.loading}

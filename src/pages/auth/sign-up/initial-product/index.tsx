@@ -114,7 +114,7 @@ export const InitialProduct: FC = () => {
           keyExtractor={(_, index) => index.toString()}
         />
 
-        <C.NextButton
+        <C.AnimatedButton
           handle={handleNext}
           animated={{ height: state.sizeButton.y, opacity: state.opacityButton.x }}
           loading={state.loading}
