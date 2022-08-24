@@ -22,8 +22,8 @@ type Props = {
   actions: {
     select: (state: ProducerProduct) => void;
     remove: (state: ProducerProduct) => void;
-    onOpenAnimation: () => void;
-    onCloseAnimation: () => void;
+    onOpenAnimation?: () => void;
+    onCloseAnimation?: () => void;
   };
 };
 
@@ -85,7 +85,7 @@ export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JS
   }, [selected]);
 
   const handleOpenAnimation = () => {
-    actions.onOpenAnimation();
+    actions.onOpenAnimation?.();
 
     Animated.parallel([
       Animated.timing(sizeContainer.y, {
@@ -104,7 +104,7 @@ export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JS
   };
 
   const handleCloseAnimation = () => {
-    actions.onCloseAnimation();
+    actions.onCloseAnimation?.();
 
     Animated.parallel([
       Animated.timing(sizeContainer.y, {
