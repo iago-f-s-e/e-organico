@@ -27,6 +27,8 @@ export type UseApi = {
   getAllUnitMeasures: () => Promise<UnitMeasure[]>;
   getAllPayments: () => Promise<Payment[]>;
 
+  getProductsWithoutProducerProduct: () => Promise<Product[]>;
+
   getMarketById: (id: string) => Promise<MarketDetail>;
   getProducerById: (id: string) => Promise<ProducerDetail>;
   getOwnProducerProducts: () => Promise<MinimalProducerProduct[]>;

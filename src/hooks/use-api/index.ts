@@ -67,6 +67,16 @@ export const useApi = (): UseApi => {
     return [];
   };
 
+  const getProductsWithoutProducerProduct = async () => {
+    const { data, error } = await handleProduct(useToast.error).getProductsWithoutProducerProduct(
+      current.token,
+    );
+
+    if (!error) return data;
+
+    return [];
+  };
+
   const getMarketById = async (id: string) => {
     const { data, error } = await handleMarket(useToast.error).getById(id);
 
@@ -261,5 +271,6 @@ export const useApi = (): UseApi => {
     cancelTransaction,
     separateTransaction,
     deliverTransaction,
+    getProductsWithoutProducerProduct,
   };
 };

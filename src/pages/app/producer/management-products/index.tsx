@@ -27,7 +27,7 @@ export const ManagementProducts: FC = () => {
   const { navigateTo } = useAppNavigation();
   const { clearPersist } = useStorage();
   const { registerProducer } = useSignUp();
-  const { getAllProducts, getAllUnitMeasures } = useApi();
+  const { getProductsWithoutProducerProduct, getAllUnitMeasures } = useApi();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const onOpenButton = () => dispatch({ type: 'onOpenButton' });
@@ -78,13 +78,7 @@ export const ManagementProducts: FC = () => {
   };
 
   const getAllData = async () => {
-    onChangeProducts(await getAllProducts());
-    onChangeUnitMeasures(await getAllUnitMeasures());
-  };
-
-  const handleOnMount = async () => {
-    appDispatch(hideBottomTab());
-    onChangeProducts(await getAllProducts());
+    onChangeProducts(await getProductsWithoutProducerProduct());
     onChangeUnitMeasures(await getAllUnitMeasures());
   };
 
@@ -92,6 +86,11 @@ export const ManagementProducts: FC = () => {
     onOpenRequest();
 
     getAllData().finally(() => onCloseRequest());
+  };
+
+  const handleOnMount = async () => {
+    appDispatch(hideBottomTab());
+    handleGetAllData();
   };
 
   useEffect(() => {
