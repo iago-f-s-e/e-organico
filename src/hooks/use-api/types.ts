@@ -4,6 +4,7 @@ import { Market, MarketDetail } from '@src/store/slices/market/types';
 import { Payment } from '@src/store/slices/payment-method/types';
 import {
   MinimalProducerProduct,
+  ProducerProduct,
   ProducerProductDetail,
 } from '@src/store/slices/producer-product/type';
 import { MinimalProducer, ProducerDetail } from '@src/store/slices/producer/types';
@@ -35,6 +36,7 @@ export type UseApi = {
   getProducerProductById: (id: string) => Promise<ProducerProductDetail>;
   inactiveProducerProduct: (id: string) => Promise<Response<void>>;
   updateProducerProduct: (product: ProducerProductDetail) => Promise<Response<void>>;
+  postProducerProducts: (product: ProducerProduct[]) => Promise<Response<void>>;
 
   postTransaction: (payload: CartPayload) => Promise<Response<CartPayload>>;
   confirmTransaction: (id: string) => Promise<Response<void>>;

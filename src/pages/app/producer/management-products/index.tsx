@@ -4,14 +4,13 @@ import { FlatList, RefreshControl, Animated } from 'react-native';
 import * as C from '@src/components';
 import {
   addSignUpProduct,
-  changeSignUpProducer,
   clearSignUpProduct,
   hideBottomTab,
   removeSignUpProduct,
   useAppDispatch,
   useAppSelector,
 } from '@src/store';
-import { useAppNavigation, useSignUp, useStorage, useToast as _useToast, useApi } from '@src/hooks';
+import { useAppNavigation, useToast as _useToast, useApi } from '@src/hooks';
 import { UnitMeasure } from '@src/store/slices/unit-measure/types';
 import { ProducerProduct } from '@src/store/slices/producer-product/type';
 import { Product } from '@src/store/slices/product/types';
@@ -23,11 +22,8 @@ import { initialState, reducer } from './reducer';
 export const ManagementProducts: FC = () => {
   const appDispatch = useAppDispatch();
   const { onFocus, goBack } = useAppNavigation();
-  const { signUpProduct, signUpProducer } = useAppSelector((state) => state);
-  const { navigateTo } = useAppNavigation();
-  const { clearPersist } = useStorage();
-  const { registerProducer } = useSignUp();
-  const { getProductsWithoutProducerProduct, getAllUnitMeasures } = useApi();
+  const { signUpProduct } = useAppSelector((state) => state);
+  const { getProductsWithoutProducerProduct, getAllUnitMeasures, postProducerProducts } = useApi();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const onOpenButton = () => dispatch({ type: 'onOpenButton' });
@@ -47,36 +43,6 @@ export const ManagementProducts: FC = () => {
     appDispatch(removeSignUpProduct(payload));
   };
 
-  const handleConfirm = () => {
-    appDispatch(
-      changeSignUpProducer({
-        ...signUpProducer,
-        products: signUpProduct,
-      }),
-    );
-
-    onOpenRequest();
-
-    registerProducer({
-      ...signUpProducer,
-      products: signUpProduct,
-    })
-      .then(({ error }) => {
-        if (!error) return clearPersist();
-      })
-      .finally(() => {
-        onCloseRequest();
-
-        return navigateTo<'auth'>('sign-up-finished');
-      });
-  };
-
-  const handleCancel = () => {
-    appDispatch(clearSignUpProduct());
-
-    return goBack();
-  };
-
   const getAllData = async () => {
     onChangeProducts(await getProductsWithoutProducerProduct());
     onChangeUnitMeasures(await getAllUnitMeasures());
@@ -91,6 +57,22 @@ export const ManagementProducts: FC = () => {
   const handleOnMount = async () => {
     appDispatch(hideBottomTab());
     handleGetAllData();
+  };
+
+  const handleConfirm = () => {
+    onOpenRequest();
+
+    postProducerProducts(signUpProduct)
+      .then(({ error }) => {
+        if (!error) return appDispatch(clearSignUpProduct());
+      })
+      .finally(() => handleGetAllData());
+  };
+
+  const handleCancel = () => {
+    appDispatch(clearSignUpProduct());
+
+    return goBack();
   };
 
   useEffect(() => {
@@ -129,7 +111,7 @@ export const ManagementProducts: FC = () => {
               }}
             />
           )}
-          keyExtractor={(_, index) => index.toString()}
+          keyExtractor={(item, index) => item?.id ?? index.toString()}
         />
 
         <Animated.View

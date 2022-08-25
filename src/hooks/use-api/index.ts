@@ -8,7 +8,7 @@ import {
 import { useToast as _useToast } from '@src/hooks/use-toast';
 import { useAppSelector } from '@src/store';
 import { CartPayload } from '@src/store/slices/cart/types';
-import { ProducerProductDetail } from '@src/store/slices/producer-product/type';
+import { ProducerProduct, ProducerProductDetail } from '@src/store/slices/producer-product/type';
 import {
   ConsumerTransactionDetail,
   MinimalConsumerTransaction,
@@ -199,6 +199,13 @@ export const useApi = (): UseApi => {
       'Produto atualizado com sucesso!',
     );
 
+  const postProducerProducts = (products: ProducerProduct[]) =>
+    handleProducer(useToast.error, useToast.success).postProducts(
+      products,
+      current.token,
+      'Produtos adicionados com sucesso!',
+    );
+
   const inactiveProducerProduct = (id: string) =>
     handleProducer(useToast.error, useToast.success).inactiveProduct(
       id,
@@ -266,6 +273,7 @@ export const useApi = (): UseApi => {
     getConsumerTransactionById,
     inactiveProducerProduct,
     updateProducerProduct,
+    postProducerProducts,
     postTransaction,
     confirmTransaction,
     cancelTransaction,
