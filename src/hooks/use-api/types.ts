@@ -29,6 +29,7 @@ export type UseApi = {
   getAllPayments: () => Promise<Payment[]>;
 
   getProductsWithoutProducerProduct: () => Promise<Product[]>;
+  getMarketsWithoutProducerMarket: () => Promise<Market[]>;
 
   getMarketById: (id: string) => Promise<MarketDetail>;
   getProducerById: (id: string) => Promise<ProducerDetail>;
@@ -37,6 +38,7 @@ export type UseApi = {
   inactiveProducerProduct: (id: string) => Promise<Response<void>>;
   updateProducerProduct: (product: ProducerProductDetail) => Promise<Response<void>>;
   postProducerProducts: (product: ProducerProduct[]) => Promise<Response<void>>;
+  postProducerMarkets: (markets: Market[]) => Promise<Response<void>>;
 
   postTransaction: (payload: CartPayload) => Promise<Response<CartPayload>>;
   confirmTransaction: (id: string) => Promise<Response<void>>;

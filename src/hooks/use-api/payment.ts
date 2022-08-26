@@ -1,6 +1,6 @@
 import { translateGetError } from '@src/utils';
 import { Payment } from '@src/store/slices/payment-method/types';
-import { getAllPayments } from '@src/services/app/payment';
+import * as services from '@src/services/app/payment';
 import { OnError, Response } from './types';
 
 type HandlePayment = (onError: OnError) => {
@@ -11,7 +11,7 @@ export const handlePayment: HandlePayment = (onError) => {
   return {
     getAll: async (token) => {
       try {
-        const markets = await getAllPayments(token);
+        const markets = await services.getAllPayments(token);
 
         return { data: markets, error: null };
       } catch (error) {

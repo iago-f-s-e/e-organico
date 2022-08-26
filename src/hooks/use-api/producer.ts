@@ -1,4 +1,5 @@
 import * as service from '@src/services/app/producer';
+import { Market } from '@src/store/slices/market/types';
 import {
   MinimalProducerProduct,
   ProducerProduct,
@@ -25,6 +26,7 @@ type HandleProducer = (
     token: string,
     message: string,
   ) => Promise<Response<void>>;
+  postMarkets: (markets: Market[], token: string, message: string) => Promise<Response<void>>;
   inactiveProduct: (id: string, token: string, message: string) => Promise<Response<void>>;
   getOwnProducts: (token: string) => Promise<Response<MinimalProducerProduct[]>>;
 };
@@ -57,6 +59,20 @@ export const handleProducer: HandleProducer = (onError, onSuccess) => {
         }));
 
         const data = await service.postProducerProducts(products, token);
+
+        onSuccess(message);
+
+        return { data, error: null };
+      } catch (error) {
+        onError(translateGetError(error));
+
+        return { data: null, error: error.message };
+      }
+    },
+
+    postMarkets: async (markets, token, message) => {
+      try {
+        const data = await service.postProducerMarkets(markets, token);
 
         onSuccess(message);
 

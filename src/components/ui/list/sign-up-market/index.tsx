@@ -14,8 +14,8 @@ type Props = {
   actions: {
     select: (market: Market) => void;
     remove: (market: Market) => void;
-    onOpenAnimation: () => void;
-    onCloseAnimation: () => void;
+    onOpenAnimation?: () => void;
+    onCloseAnimation?: () => void;
   };
 };
 
@@ -39,7 +39,7 @@ export const ListSignUpMarket = ({ market, actions }: Props): JSX.Element => {
   }, [selected]);
 
   const handleOpenAnimation = () => {
-    actions.onOpenAnimation();
+    actions.onOpenAnimation?.();
 
     Animated.parallel([
       Animated.timing(sizeContainer.y, {
@@ -58,7 +58,7 @@ export const ListSignUpMarket = ({ market, actions }: Props): JSX.Element => {
   };
 
   const handleCloseAnimation = () => {
-    actions.onCloseAnimation();
+    actions.onCloseAnimation?.();
 
     Animated.parallel([
       Animated.timing(sizeContainer.y, {

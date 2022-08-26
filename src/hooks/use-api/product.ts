@@ -1,5 +1,5 @@
 import { Product } from '@src/store/slices/product/types';
-import { getAllProducts, getProductsWithoutProducerProduct } from '@src/services/app';
+import * as services from '@src/services/app/product';
 import { translateGetError } from '@src/utils';
 import { OnError, Response } from './types';
 
@@ -12,7 +12,7 @@ export const handleProduct: HandleProduct = (onError) => {
   return {
     getAll: async () => {
       try {
-        const products = await getAllProducts();
+        const products = await services.getAllProducts();
 
         return { data: products, error: null };
       } catch (error) {
@@ -24,7 +24,7 @@ export const handleProduct: HandleProduct = (onError) => {
 
     getProductsWithoutProducerProduct: async (token) => {
       try {
-        const products = await getProductsWithoutProducerProduct(token);
+        const products = await services.getProductsWithoutProducerProduct(token);
 
         return { data: products, error: null };
       } catch (error) {

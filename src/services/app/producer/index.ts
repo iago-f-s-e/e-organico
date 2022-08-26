@@ -1,4 +1,5 @@
 import { endpoints } from '@src/constants/endpoints';
+import { Market } from '@src/store/slices/market/types';
 import {
   MinimalProducerProduct,
   ProducerProduct,
@@ -33,6 +34,10 @@ export function updateProductProduct(
 
 export function postProducerProducts(data: ProducerProduct[], token: string): Promise<void> {
   return client.httpPOST(endpoints.producerProduct.DEFAULT, data, token);
+}
+
+export function postProducerMarkets(data: Market[], token: string): Promise<void> {
+  return client.httpPOST(endpoints.producerMarket.DEFAULT, data, token);
 }
 
 export function inactiveProductProduct(id: string, token: string): Promise<void> {
