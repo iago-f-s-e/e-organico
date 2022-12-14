@@ -1,2 +1,2 @@
-export * from './footer';
-export * from './animated';
+export { FooterButton } from './footer';
+export { AnimatedButton } from './animated';

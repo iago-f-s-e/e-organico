@@ -1,5 +1,5 @@
-export * from './cart-market-detail';
-export * from './producer-detail';
-export * from './consumer-detail';
-export * from './payment-method';
-export * from './market-detail';
+export { CartMarketDetailCard } from './cart-market-detail';
+export { ProducerDetailCard } from './producer-detail';
+export { ConsumerDetailCard } from './consumer-detail';
+export { PaymentMethodCard } from './payment-method';
+export { MarketDetailCard } from './market-detail';
