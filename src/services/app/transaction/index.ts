@@ -1,4 +1,4 @@
-import { endpoints } from '@src/constants/endpoints';
+import { endpoints } from '@src/services/config/endpoints';
 import { CartPayload } from '@src/store/slices/cart/types';
 import { httpGET, httpPATCH, httpPOST } from '../../http-client';
 

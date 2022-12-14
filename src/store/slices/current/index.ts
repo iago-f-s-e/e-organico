@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { defaultCurrentUser } from '@src/constants/endpoints/current';
+import { defaultCurrentUser } from '@src/constants/default-entities';
 import { LoggedUser, LoggedUserPayload } from './types';
 
 const initialState: LoggedUser = defaultCurrentUser;

@@ -1,5 +1,5 @@
 import { LoggedUser } from '@src/store/slices/current/types';
-import { defaultImage } from '../default-entities/image';
+import { defaultImage } from './image';
 
 export const defaultCurrentUser: LoggedUser = {
   token: null,

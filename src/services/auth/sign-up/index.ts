@@ -1,4 +1,4 @@
-import { endpoints } from '@src/constants/endpoints';
+import { endpoints } from '@src/services/config/endpoints';
 import { CertificationType } from '@src/store/slices/producer/types';
 import { SignUpConsumer } from '@src/store/slices/sign-up-consumer/types';
 import { SignUpProducer } from '@src/store/slices/sign-up-producer/types';
