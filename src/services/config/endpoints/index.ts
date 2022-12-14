@@ -9,7 +9,6 @@ import { transaction } from './transaction';
 import { producerProduct } from './producer-product';
 import { producerMarket } from './producer-market';
 
-export const BASE_URL = __DEV__ ? 'http://192.168.0.1:3030' : 'http://143.244.164.32:3030';
 export const endpoints = {
   signUp,
   signIn,
@@ -21,4 +20,4 @@ export const endpoints = {
   payment,
   transaction,
   producerMarket,
-};
+} as const;

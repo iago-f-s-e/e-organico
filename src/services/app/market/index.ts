@@ -1,4 +1,4 @@
-import { endpoints } from '@src/constants/endpoints';
+import { endpoints } from '@src/services/config/endpoints';
 import { Market, MarketDetail } from '@src/store/slices/market/types';
 import { httpGET } from '../../http-client';
 

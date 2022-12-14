@@ -1,5 +1,6 @@
-import { BASE_URL } from '@src/constants/endpoints';
 import axios, { AxiosError, AxiosResponse } from 'axios';
+
+export const BASE_URL = __DEV__ ? 'http://192.168.0.102:3030' : 'http://192.168.0.102:3030';
 
 function responseSuccessInterceptor(response: AxiosResponse) {
   return response;

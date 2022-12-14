@@ -10,7 +10,7 @@ enum ToPTDay {
   SUNDAY = 'domingo',
 }
 
-enum ToEuDay {
+enum ToUSDay {
   'terça-feira' = 'TUESDAY',
   'quarta-feira' = 'WEDNESDAY',
   'quinta-feira' = 'THURSDAY',
@@ -21,4 +21,4 @@ enum ToEuDay {
 
 export const toPTDay = (weekday: EUDay): PTDay => ToPTDay[weekday];
 
-export const toEUDay = (weekday: PTDay): EUDay => ToEuDay[weekday];
+export const toEUDay = (weekday: PTDay): EUDay => ToUSDay[weekday];

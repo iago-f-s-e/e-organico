@@ -1,4 +1,4 @@
-import { endpoints } from '@src/constants/endpoints';
+import { endpoints } from '@src/services/config/endpoints';
 import { Payment } from '@src/store/slices/payment-method/types';
 import { httpGET } from '../../http-client';
 
