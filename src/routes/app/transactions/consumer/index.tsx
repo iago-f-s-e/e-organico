@@ -32,7 +32,7 @@ export const ConsumerTransactionsRoutes: FC = () => {
         />
         <Tab.Screen
           name="consumer-transaction-concluded"
-          component={Consumer.TransactionsConcluded}
+          component={Consumer.ConcludedTransactions}
         />
       </Tab.Navigator>
     </C_S.Container>
