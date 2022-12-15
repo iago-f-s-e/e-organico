@@ -1,7 +1,7 @@
 import * as service from '@src/services/app/transaction';
 import { CartPayload } from '@src/store/slices/cart/types';
 import { handleRemoveMask } from '@src/utils';
-import { OnError, OnSuccess, Response } from './types';
+import { OnError, OnSuccess, Response } from '../types';
 
 type HandleTransaction = (
   onError: OnError,

@@ -1,7 +1,7 @@
 import { translateGetError } from '@src/utils';
 import { Payment } from '@src/store/slices/payment-method/types';
 import * as services from '@src/services/app/payment';
-import { OnError, Response } from './types';
+import { OnError, Response } from '../types';
 
 type HandlePayment = (onError: OnError) => {
   getAll: (token: string) => Promise<Response<Payment[]>>;

@@ -1,2 +1,2 @@
-export * from './use-sign-up';
-export * from './use-sign-in';
+export { useSignUp } from './use-sign-up';
+export { useSignIn } from './use-sign-in';

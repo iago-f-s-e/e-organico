@@ -1,7 +1,7 @@
 import { Market, MarketDetail } from '@src/store/slices/market/types';
 import * as services from '@src/services/app/market';
 import { translateGetError } from '@src/utils';
-import { OnError, Response } from './types';
+import { OnError, Response } from '../types';
 
 type HandleMarket = (onError: OnError) => {
   getAll: () => Promise<Response<Market[]>>;
