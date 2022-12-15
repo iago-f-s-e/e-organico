@@ -1,16 +1,3 @@
-import React, { FC } from 'react';
-
-import { useAppSelector } from '@src/store';
-
-import { ConsumerTransactionsRoutes } from './consumer';
-import { ProducerTransactionsRoutes } from './producer';
-
-export const TransactionsRoutes: FC = () => {
-  const { current } = useAppSelector((state) => state);
-
-  return current.user.userType === 'consumer' ? (
-    <ConsumerTransactionsRoutes />
-  ) : (
-    <ProducerTransactionsRoutes />
-  );
-};
+export { TransactionsRoutes } from './transactions';
+export type { ProducerTransactionTabScreens } from './producer';
+export type { ConsumerTransactionTabScreens } from './consumer';
