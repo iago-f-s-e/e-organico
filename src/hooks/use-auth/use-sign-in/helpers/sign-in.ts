@@ -1,6 +1,6 @@
 import { Credentials, signIn } from '@src/services/auth';
 import { handleRemoveMask } from '@src/utils';
-import { OnError, Response } from './types';
+import { OnError, Response } from '../types';
 
 export type SignIn = (data: Credentials, onError: OnError) => Promise<Response>;
 

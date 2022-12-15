@@ -1,7 +1,7 @@
 import { Product } from '@src/store/slices/product/types';
 import * as services from '@src/services/app/product';
 import { translateGetError } from '@src/utils';
-import { OnError, Response } from './types';
+import { OnError, Response } from '../types';
 
 type HandleProduct = (onError: OnError) => {
   getAll: () => Promise<Response<Product[]>>;

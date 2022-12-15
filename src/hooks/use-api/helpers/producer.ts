@@ -7,7 +7,7 @@ import {
 } from '@src/store/slices/producer-product/type';
 import { MinimalProducer, ProducerDetail } from '@src/store/slices/producer/types';
 import { handleRemoveMask, translateGetError } from '@src/utils';
-import { OnError, OnSuccess, Response } from './types';
+import { OnError, OnSuccess, Response } from '../types';
 
 type HandleProducer = (
   onError: OnError,
