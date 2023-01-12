@@ -1,12 +1,3 @@
-import { endpoints } from '@src/services/config/endpoints';
-import { LoggedUser } from '@src/store/slices/current/types';
-import { httpPOST } from '../../http-client';
+export { signIn } from './sign-in';
 
-export type Credentials = {
-  phone: string;
-  password: string;
-};
-
-export function signIn(data: Credentials): Promise<LoggedUser> {
-  return httpPOST<Credentials, LoggedUser>(endpoints.signIn.SIGN_IN, data);
-}
+export type { Credentials } from './sign-in';
