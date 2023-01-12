@@ -1,1 +1,1 @@
-export { getAllUnitMeasures } from './unit-measure';
+export { getAllUnitMeasures } from './unit-measure.get';

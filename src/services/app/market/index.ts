@@ -1,1 +1,1 @@
-export { getAllMarkets, getMarketById, getMarketsWithoutProducerMarket } from './market';
+export { getAllMarkets, getMarketById, getMarketsWithoutProducerMarket } from './market.get';
