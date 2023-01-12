@@ -3,8 +3,10 @@ export {
   getOwnProducerProduct,
   getProducerById,
   getProducerProductById,
-  inactiveProductProduct,
-  postProducerMarkets,
-  postProducerProducts,
-  updateProductProduct,
-} from './producer';
+} from './producer.get';
+
+export { inactiveProductProduct } from './producer.patch';
+
+export { postProducerMarkets, postProducerProducts } from './producer.post';
+
+export { updateProductProduct } from './producer.put';

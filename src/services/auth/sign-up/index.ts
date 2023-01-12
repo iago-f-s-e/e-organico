@@ -4,6 +4,6 @@ export {
   reserveDocument,
   reserveEmail,
   reservePhone,
-} from './sign-up';
+} from './sign-up.post';
 
-export type { RegisterProducerDTO } from './sign-up';
+export type { RegisterProducerDTO } from './sign-up.post';

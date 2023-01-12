@@ -1,12 +1,16 @@
 export {
-  cancelTransaction,
-  confirmTransaction,
-  deliverTransaction,
   getTransactionById,
   getTransactionConcluded,
   getTransactionInProgress,
   getTransactionInSeparation,
   getTransactionPending,
-  postTransaction,
+} from './transaction.get';
+
+export {
+  cancelTransaction,
+  confirmTransaction,
+  deliverTransaction,
   separateTransaction,
-} from './transaction';
+} from './transaction.patch';
+
+export { postTransaction } from './transaction.post';

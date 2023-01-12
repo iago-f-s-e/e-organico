@@ -1,1 +1,1 @@
-export { getAllProducts, getProductsWithoutProducerProduct } from './product';
+export { getAllProducts, getProductsWithoutProducerProduct } from './product.get';

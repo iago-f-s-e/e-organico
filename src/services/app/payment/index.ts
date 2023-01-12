@@ -1,1 +1,1 @@
-export { getAllPayments } from './payment';
+export { getAllPayments } from './payment.get';

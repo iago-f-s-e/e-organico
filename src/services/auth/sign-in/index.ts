@@ -1,3 +1,2 @@
-export { signIn } from './sign-in';
-
-export type { Credentials } from './sign-in';
+export { signIn } from './sign-in.post';
+export type { Credentials } from './sign-in.post';
