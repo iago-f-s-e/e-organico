@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const GeneralInformation = styled.View`
@@ -9,7 +9,7 @@ export const GeneralInformation = styled.View`
   min-height: 50px;
 
   border-bottom-width: 1px;
-  border-color: ${colors.others.cloud};
+  border-color: ${colorSystem.others.cloud};
 `;
 
 export const Section = styled.View`
@@ -29,7 +29,7 @@ export const Buttons = styled.View`
   height: 65px;
 
   border-top-width: 1px;
-  border-color: ${colors.others.cloud};
+  border-color: ${colorSystem.others.cloud};
 `;
 
 export const Button = styled.View`
@@ -45,17 +45,17 @@ export const Button = styled.View`
 
 export const Data = styled.Text`
   margin-left: 5px;
-  font-family: ${font.family.medium};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.black};
+  font-family: ${fontSystem.family.medium};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.black};
 `;
 
 export const Label = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.grey};
 `;
 
 export const Money = styled(Data)`
-  color: ${colors.entity.money};
+  color: ${colorSystem.entity.money};
 `;

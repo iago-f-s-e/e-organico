@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -17,10 +17,10 @@ export const SelectContainer = styled.View`
 
   border-width: 1px;
   border-radius: 100px;
-  border-color: ${colors.main.primary};
+  border-color: ${colorSystem.main.primary};
 `;
 
 export const Title = styled.Text`
-  font-size: ${font.size.large};
-  font-family: ${font.family.medium};
+  font-size: ${fontSystem.size.large};
+  font-family: ${fontSystem.family.medium};
 `;

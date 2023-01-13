@@ -3,7 +3,7 @@ import { Animated } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Feather } from '@expo/vector-icons';
 
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import { useAppSelector } from '@src/store';
 import { handleInputMask } from '@src/utils';
 
@@ -176,8 +176,8 @@ export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JS
         marginVertical: 8,
         borderWidth: 1,
         borderRadius: 15,
-        borderColor: colors.main.primary,
-        backgroundColor: colors.basic.white,
+        borderColor: colorSystem.main.primary,
+        backgroundColor: colorSystem.basic.white,
         overflow: 'hidden',
       }}
     >
@@ -192,7 +192,7 @@ export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JS
             flex: 1,
             justifyContent: 'space-between',
             opacity: opacityContent.x,
-            backgroundColor: colors.basic.white,
+            backgroundColor: colorSystem.basic.white,
           }}
         >
           <S.Content>
@@ -200,15 +200,15 @@ export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JS
               <S.Label>Unidade de medida: </S.Label>
               <S.PickerContent>
                 <Picker
-                  dropdownIconColor={colors.main.secondary}
+                  dropdownIconColor={colorSystem.main.secondary}
                   onValueChange={(value) => handleUnitPicker(value)}
                   selectedValue={state.unitMeasure}
                 >
                   {unitMeasures.map((item) => (
                     <Picker.Item
                       key={item.id}
-                      style={{ fontFamily: font.family.bold, fontSize: 14 }}
-                      color={colors.main.secondary}
+                      style={{ fontFamily: fontSystem.family.bold, fontSize: 14 }}
+                      color={colorSystem.main.secondary}
                       label={item.name}
                       value={item}
                     />
@@ -226,7 +226,7 @@ export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JS
                   value={state.harvestDate}
                   select={(value) => handleDatePicker(value)}
                 />
-                <Feather name="edit" size={15} color={colors.main.primary} />
+                <Feather name="edit" size={15} color={colorSystem.main.primary} />
                 <S.LabelDate>{translateDate(state.harvestDate)}</S.LabelDate>
               </S.DatePickerContent>
             </S.PickerContainer>
@@ -248,11 +248,11 @@ export const ListSignUpProduct = ({ product, actions, unitMeasures }: Props): JS
                 <S.Label>Preço:</S.Label>
 
                 <S.PriceContainer>
-                  <Feather name="edit" size={15} color={colors.basic.white} />
+                  <Feather name="edit" size={15} color={colorSystem.basic.white} />
                   <S.InputPrice
                     value={state.price}
                     onChangeText={(value) => handleInputPrice(value)}
-                    selectionColor={colors.basic.white}
+                    selectionColor={colorSystem.basic.white}
                     keyboardType="number-pad"
                   />
                 </S.PriceContainer>

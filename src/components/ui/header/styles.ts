@@ -1,19 +1,19 @@
-import { colors, dimensions, font } from '@src/config/theme';
+import { colorSystem, dimensionSystem, fontSystem } from '@src/styles';
 
 import styled from 'styled-components/native';
 
 export const StatusBar = styled.View`
   width: 100%;
-  height: ${dimensions.statusBar.height}px;
+  height: ${dimensionSystem.statusBar.height}px;
 
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const Container = styled.View`
   width: 100%;
-  height: ${dimensions.components.header.height}px;
+  height: ${dimensionSystem.components.header.height}px;
 
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const Content = styled.View`
@@ -70,13 +70,13 @@ export const LogoutButton = styled.TouchableOpacity`
 `;
 
 export const Title = styled.Text`
-  font-size: ${font.size.large};
-  font-family: ${font.family.semiBold};
-  color: ${colors.basic.white};
+  font-size: ${fontSystem.size.large};
+  font-family: ${fontSystem.family.semiBold};
+  color: ${colorSystem.basic.white};
 `;
 
 export const SubTitle = styled.Text`
-  font-size: ${font.size.medium};
-  font-family: ${font.family.semiBold};
-  color: ${colors.basic.white};
+  font-size: ${fontSystem.size.medium};
+  font-family: ${fontSystem.family.semiBold};
+  color: ${colorSystem.basic.white};
 `;

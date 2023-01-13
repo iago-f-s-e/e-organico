@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Animated, FlatList } from 'react-native';
 import { Market } from '@src/store/slices/market/types';
 
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import { useAppSelector } from '@src/store';
 import * as S from './styles';
 
@@ -106,8 +106,8 @@ export const ListSignUpMarket = ({ market, actions }: Props): JSX.Element => {
         marginVertical: 8,
         borderWidth: 1,
         borderRadius: 15,
-        borderColor: colors.main.primary,
-        backgroundColor: colors.basic.white,
+        borderColor: colorSystem.main.primary,
+        backgroundColor: colorSystem.basic.white,
         overflow: 'hidden',
       }}
     >
@@ -122,7 +122,7 @@ export const ListSignUpMarket = ({ market, actions }: Props): JSX.Element => {
             flex: 1,
             justifyContent: 'space-between',
             opacity: opacityContent.x,
-            backgroundColor: colors.basic.white,
+            backgroundColor: colorSystem.basic.white,
           }}
         >
           <S.Section>

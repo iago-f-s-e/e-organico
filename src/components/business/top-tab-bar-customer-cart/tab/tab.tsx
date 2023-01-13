@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Animated } from 'react-native';
 import { useAppSelector } from '@src/store';
 import { AntDesign } from '@expo/vector-icons';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import { getLabel } from './utils';
 
 import * as S from './styles';
@@ -69,7 +69,7 @@ export const MyTab = ({
       <Animated.Text style={{ opacity, marginRight: 2 }}>
         <If
           condition={confirmed}
-          render={() => <AntDesign name="checkcircleo" size={15} color={colors.main.primary} />}
+          render={() => <AntDesign name="checkcircleo" size={15} color={colorSystem.main.primary} />}
         />
       </Animated.Text>
       <Animated.Text style={{ opacity }}>

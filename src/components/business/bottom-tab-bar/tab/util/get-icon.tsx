@@ -1,6 +1,6 @@
 import React from 'react';
 import { AntDesign, FontAwesome5 } from '@expo/vector-icons';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import { AppTabScreens } from '@src/routes/app';
 
 type GetIcon = (name: string, isFocused: boolean) => JSX.Element;
@@ -12,12 +12,12 @@ const icon: Icons = {
     <FontAwesome5
       name="shopping-basket"
       size={22}
-      color={isFocused ? colors.main.primary : colors.basic.grey}
+      color={isFocused ? colorSystem.main.primary : colorSystem.basic.grey}
     />
   ),
 
   main: (isFocused: boolean) => (
-    <AntDesign name="home" size={22} color={isFocused ? colors.main.primary : colors.basic.grey} />
+    <AntDesign name="home" size={22} color={isFocused ? colorSystem.main.primary : colorSystem.basic.grey} />
   ),
 };
 

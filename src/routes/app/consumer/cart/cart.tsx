@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { ConsumerCartTopTab } from '@src/@types/routes';
 
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 
 import * as Consumer from '@src/pages/app/consumer';
 import * as C from '@src/components';
@@ -35,9 +35,9 @@ export const ConsumerCart: FC = () => {
       <Tab.Navigator
         tabBar={(props) => <C.TopTabBarCustomerCart {...props} />}
         screenOptions={{
-          tabBarActiveTintColor: colors.main.secondary,
+          tabBarActiveTintColor: colorSystem.main.secondary,
           tabBarLabelStyle: { fontSize: 12 },
-          tabBarIndicatorStyle: { backgroundColor: colors.main.primary },
+          tabBarIndicatorStyle: { backgroundColor: colorSystem.main.primary },
         }}
       >
         <Tab.Screen name="consumer-cart-products" component={Consumer.Cart.Products} />

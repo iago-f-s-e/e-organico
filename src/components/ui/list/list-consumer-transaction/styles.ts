@@ -1,4 +1,4 @@
-import { colors, font, shadow } from '@src/config/theme';
+import { colorSystem, fontSystem, shadowSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -20,12 +20,12 @@ export const Header = styled.View`
   width: 100%;
   min-height: 20px;
 
-  background-color: ${colors.basic.transparent};
+  background-color: ${colorSystem.basic.transparent};
 `;
 
 export const StatusContainer = styled.View``;
 
-export const StatusContent = styled.View.attrs(shadow)`
+export const StatusContent = styled.View.attrs(shadowSystem)`
   justify-content: center;
   align-items: center;
 
@@ -42,14 +42,14 @@ export const TransactionNumberContainer = styled(StatusContent)`
   min-width: 10%;
   min-height: 20px;
 
-  background-color: ${colors.entity.heart};
+  background-color: ${colorSystem.entity.heart};
 `;
 
-export const Content = styled.View.attrs(shadow)`
+export const Content = styled.View.attrs(shadowSystem)`
   flex: 1;
   width: 100%;
 
-  background-color: ${colors.basic.white};
+  background-color: ${colorSystem.basic.white};
 
   overflow: hidden;
 
@@ -68,7 +68,7 @@ export const InfoContainer = styled.View`
   margin-bottom: 5px;
 
   border-bottom-width: 1px;
-  border-color: ${colors.others.cloud};
+  border-color: ${colorSystem.others.cloud};
 `;
 
 export const Section = styled.View`
@@ -90,7 +90,7 @@ export const ButtonsContainer = styled.View`
   margin-top: 10px;
 
   border-top-width: 1px;
-  border-color: ${colors.others.cloud};
+  border-color: ${colorSystem.others.cloud};
 `;
 
 export const OpenTransactionButton = styled.TouchableOpacity`
@@ -102,53 +102,53 @@ export const OpenTransactionButton = styled.TouchableOpacity`
 
   border-radius: 5px;
 
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const ConfirmTransactionButton = styled(OpenTransactionButton)`
-  background-color: ${colors.basic.white};
+  background-color: ${colorSystem.basic.white};
 
   border-width: 1px;
-  border-color: ${colors.main.primary};
+  border-color: ${colorSystem.main.primary};
 `;
 
 export const OpenTransactionLabel = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.white};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.white};
 `;
 
 export const ConfirmTransactionLabel = styled(OpenTransactionLabel)`
-  color: ${colors.main.primary};
+  color: ${colorSystem.main.primary};
 `;
 
 export const Status = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.small};
-  color: ${colors.basic.white};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.small};
+  color: ${colorSystem.basic.white};
 `;
 
 export const TransactionNumber = styled(Status)``;
 
 export const ProducerName = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.betweenMediumAndLarge};
-  color: ${colors.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.betweenMediumAndLarge};
+  color: ${colorSystem.basic.grey};
 `;
 
 export const Money = styled.Text`
-  font-family: ${font.family.bold};
-  font-size: ${font.size.medium};
-  color: ${colors.entity.money};
+  font-family: ${fontSystem.family.bold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.entity.money};
 `;
 
 export const Label = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.grey};
 `;
 
 export const Data = styled(Label)`
   margin-left: 5px;
-  color: ${colors.basic.black};
+  color: ${colorSystem.basic.black};
 `;

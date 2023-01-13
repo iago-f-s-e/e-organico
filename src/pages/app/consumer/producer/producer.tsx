@@ -4,7 +4,7 @@ import { FlatList } from 'react-native';
 import { hideBottomTab, useAppDispatch } from '@src/store';
 import { useAppNavigation, useApi } from '@src/hooks';
 import { ProducerDetail } from '@src/store/slices/producer/types';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import * as C from '@src/components';
 import * as C_S from '../../common-styles';
 
@@ -44,7 +44,7 @@ export const Producer: FC = () => {
       <C.IfElse
         condition={state.loading}
         render={{
-          toBeTruthy: () => <C.Loading color={colors.main.primary} sizeType="large" />,
+          toBeTruthy: () => <C.Loading color={colorSystem.main.primary} sizeType="large" />,
           toBeFalsy: () => (
             <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
               <C_S.Content>

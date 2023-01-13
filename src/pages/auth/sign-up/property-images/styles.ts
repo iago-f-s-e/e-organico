@@ -1,7 +1,7 @@
-import { colors, font, dimensions } from '@src/config/theme';
+import { colorSystem, fontSystem, dimensionSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
-const imageSize = `${dimensions.screen.width * 0.45}px`; // width 80%
+const imageSize = `${dimensionSystem.screen.width * 0.45}px`; // width 80%
 
 export const PropertyImagesContainer = styled.View`
   flex: 1;
@@ -30,7 +30,7 @@ export const ImageContent = styled.Image`
 export const Title = styled.Text`
   text-align: center;
 
-  font-size: ${font.size.large};
-  font-family: ${font.family.semiBold};
-  color: ${colors.main.primary};
+  font-size: ${fontSystem.size.large};
+  font-family: ${fontSystem.family.semiBold};
+  color: ${colorSystem.main.primary};
 `;

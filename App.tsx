@@ -8,7 +8,7 @@ import { useFonts } from 'expo-font';
 import * as Work from '@expo-google-fonts/work-sans';
 
 import { Toast } from '@src/components';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import { store, persistor } from './src/store';
 import { EntryPoint } from './src';
 
@@ -31,7 +31,7 @@ const App: FC = () => {
           <StatusBar
             barStyle="light-content"
             translucent
-            backgroundColor={colors.others._20WindowTint}
+            backgroundColor={colorSystem.others._20WindowTint}
           />
           <SafeAreaView style={{ flex: 1 }}>
             <KeyboardAvoidingView style={{ flex: 1 }}>

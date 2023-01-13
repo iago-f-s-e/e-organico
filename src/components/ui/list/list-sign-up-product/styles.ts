@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -27,7 +27,7 @@ export const DatePickerContent = styled.TouchableOpacity`
 
   border-width: 1px;
   border-radius: 5px;
-  border-color: ${colors.main.primary};
+  border-color: ${colorSystem.main.primary};
 `;
 
 export const PickerContent = styled.View`
@@ -37,7 +37,7 @@ export const PickerContent = styled.View`
 
   border-width: 1px;
   border-radius: 5px;
-  border-color: ${colors.main.primary};
+  border-color: ${colorSystem.main.primary};
 `;
 
 export const Header = styled.TouchableOpacity<{ selected: boolean }>`
@@ -48,7 +48,7 @@ export const Header = styled.TouchableOpacity<{ selected: boolean }>`
   align-items: center;
   justify-content: space-between;
 
-  background-color: ${({ selected }) => (selected ? colors.main.primary : colors.basic.white)};
+  background-color: ${({ selected }) => (selected ? colorSystem.main.primary : colorSystem.basic.white)};
 `;
 
 export const SelectOrRemove = styled.TouchableOpacity<{ selected: boolean }>`
@@ -64,19 +64,19 @@ export const SelectOrRemove = styled.TouchableOpacity<{ selected: boolean }>`
 
   border-radius: 8px;
 
-  background-color: ${({ selected }) => (selected ? colors.actions.danger : colors.main.primary)};
+  background-color: ${({ selected }) => (selected ? colorSystem.actions.danger : colorSystem.main.primary)};
 `;
 
 export const Name = styled.Text<{ selected: boolean }>`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.large};
-  color: ${({ selected }) => (selected ? colors.basic.white : colors.main.primary)};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.large};
+  color: ${({ selected }) => (selected ? colorSystem.basic.white : colorSystem.main.primary)};
 `;
 
 export const LabelSelectOrRemove = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.white};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.white};
 `;
 
 export const StockAndPrice = styled.View`
@@ -99,7 +99,7 @@ export const StockContainer = styled.View`
 
   border-width: 1px;
   border-radius: 5px;
-  border-color: ${colors.main.primary};
+  border-color: ${colorSystem.main.primary};
 `;
 
 export const PriceContainer = styled.View`
@@ -112,16 +112,16 @@ export const PriceContainer = styled.View`
   padding: 12px;
   border-radius: 3px;
 
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const InputStock = styled.TextInput`
   flex: 1;
 
   text-align: center;
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.main.primary};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.main.primary};
 `;
 
 export const InputPrice = styled.TextInput`
@@ -129,21 +129,21 @@ export const InputPrice = styled.TextInput`
   width: 100%;
 
   padding-left: 3px;
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.white};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.white};
 `;
 
 export const Label = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.small};
-  color: ${colors.main.primary};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.small};
+  color: ${colorSystem.main.primary};
 `;
 
 export const LabelDate = styled.Text`
   margin-left: 10px;
 
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.main.primary};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.main.primary};
 `;

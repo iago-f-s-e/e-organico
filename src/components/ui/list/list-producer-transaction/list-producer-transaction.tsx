@@ -4,7 +4,7 @@ import { MinimalProducerTransaction } from '@src/store/slices/transaction/types'
 import { getWaitingTime, toPTDay, translateTransactionStatus, handleInputMask } from '@src/utils';
 import { If } from '@src/components/business';
 import { useAppNavigation } from '@src/hooks';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import * as S from './styles';
 
 type Props = {
@@ -54,8 +54,8 @@ export const ListProducerTransaction = ({
 
   const color =
     transaction.status === 'canceled-by-consumer' || transaction.status === 'canceled-by-producer'
-      ? colors.actions.danger
-      : colors.main.primary;
+      ? colorSystem.actions.danger
+      : colorSystem.main.primary;
 
   const handleNavigate = () =>
     navigateTo<'producer'>('producer-transaction', { id: transaction.id });

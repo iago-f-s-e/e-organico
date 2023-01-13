@@ -10,7 +10,7 @@ import {
   useAppSelector,
 } from '@src/store';
 import { useAppNavigation, useApi } from '@src/hooks';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import { handleInputMask } from '@src/utils';
 import * as C from '@src/components';
 import * as C_S from '../../common-styles';
@@ -111,7 +111,7 @@ export const Product: FC = () => {
       <C.IfElse
         condition={state.loading}
         render={{
-          toBeTruthy: () => <C.Loading color={colors.main.primary} sizeType="large" />,
+          toBeTruthy: () => <C.Loading color={colorSystem.main.primary} sizeType="large" />,
           toBeFalsy: () => (
             <>
               <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>

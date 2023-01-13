@@ -2,7 +2,7 @@ import { PixelRatio } from 'react-native';
 
 const scaleFont = (size: number): number => size / PixelRatio.getFontScale();
 
-const size = {
+const fontSizeSystem = {
   extraLarge: `${scaleFont(26)}px`,
   betweenLargeAndExtraLarge: `${scaleFont(23)}px`,
   large: `${scaleFont(20)}px`,
@@ -11,11 +11,11 @@ const size = {
   small: `${scaleFont(12)}px`,
 };
 
-const family = {
+const fontFamilySystem = {
   light: 'WorkSansLight',
   medium: 'WorkSansMedium',
   semiBold: 'WorkSansSemi',
   bold: 'WorkSansBold',
 };
 
-export const font = { family, size };
+export const fontSystem = { family: fontFamilySystem, size: fontSizeSystem };

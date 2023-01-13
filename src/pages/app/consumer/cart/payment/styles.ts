@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const Section = styled.View`
@@ -9,7 +9,7 @@ export const Section = styled.View`
   min-height: 50px;
 
   border-bottom-width: 1px;
-  border-color: ${colors.others.cloud};
+  border-color: ${colorSystem.others.cloud};
 `;
 
 export const ValuesSection = styled.View`
@@ -22,23 +22,23 @@ export const ValuesSection = styled.View`
 `;
 
 export const Label = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.grey};
 `;
 
 export const Data = styled(Label)``;
 
 export const LabelMoney = styled(Label)`
-  color: ${colors.basic.black};
+  color: ${colorSystem.basic.black};
 `;
 
 export const Money = styled(Label)`
-  color: ${colors.main.primary};
+  color: ${colorSystem.main.primary};
 `;
 
 export const PaymentName = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.betweenMediumAndLarge};
-  color: ${colors.main.secondary};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.betweenMediumAndLarge};
+  color: ${colorSystem.main.secondary};
 `;

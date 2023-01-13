@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { ConsumerTopTab } from '@src/@types/routes';
 
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 
 import { showBottomTab, useAppDispatch } from '@src/store';
 import { useAppNavigation } from '@src/hooks';
@@ -32,9 +32,9 @@ export const ConsumerHome: FC = () => {
       <Tab.Navigator
         tabBar={(props) => <C.TopTabBar {...props} />}
         screenOptions={{
-          tabBarActiveTintColor: colors.main.secondary,
+          tabBarActiveTintColor: colorSystem.main.secondary,
           tabBarLabelStyle: { fontSize: 12 },
-          tabBarIndicatorStyle: { backgroundColor: colors.main.primary },
+          tabBarIndicatorStyle: { backgroundColor: colorSystem.main.primary },
         }}
       >
         <Tab.Screen name="consumer-markets" component={Consumer.Markets} />

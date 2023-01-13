@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
@@ -15,11 +15,11 @@ export const Container = styled.TouchableOpacity`
   margin: 10px 0;
   padding: 0 20px;
 
-  background: ${colors.basic.white};
+  background: ${colorSystem.basic.white};
 
   border: 1px;
   border-radius: 10px;
-  border-color: ${colors.main.secondary};
+  border-color: ${colorSystem.main.secondary};
 `;
 
 export const Content = styled.View`
@@ -37,13 +37,13 @@ export const Arrow = styled.TouchableOpacity`
 `;
 
 export const Tittle = styled.Text`
-  color: ${colors.main.secondary};
-  font-size: ${font.size.large};
-  font-family: ${font.family.bold};
+  color: ${colorSystem.main.secondary};
+  font-size: ${fontSystem.size.large};
+  font-family: ${fontSystem.family.bold};
 `;
 
 export const Description = styled.Text`
-  color: ${colors.basic.grey};
-  font-size: ${font.size.medium};
-  font-family: ${font.family.semiBold};
+  color: ${colorSystem.basic.grey};
+  font-size: ${fontSystem.size.medium};
+  font-family: ${fontSystem.family.semiBold};
 `;

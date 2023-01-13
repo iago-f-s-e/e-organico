@@ -1,4 +1,4 @@
-import { colors, dimensions, font } from '@src/config/theme';
+import { colorSystem, dimensionSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -6,7 +6,7 @@ export const Container = styled.View`
   justify-content: center;
   align-items: center;
   padding: 0 32px;
-  border: ${colors.basic.white};
+  border: ${colorSystem.basic.white};
 `;
 
 export const Content = styled.View`
@@ -23,7 +23,7 @@ export const InputContainer = styled.View`
   justify-content: center;
 
   height: 70px;
-  width: ${dimensions.screen.width - 64}px;
+  width: ${dimensionSystem.screen.width - 64}px;
 
   margin: 16px 0;
 `;
@@ -38,14 +38,14 @@ export const Input = styled.TextInput`
 
   border-width: 1px;
   border-radius: 20px;
-  border-color: ${colors.main.primary};
+  border-color: ${colorSystem.main.primary};
 `;
 
 export const Label = styled.Text`
   margin-left: 5%;
 
-  color: ${colors.basic.grey};
-  font-family: ${font.family.semiBold};
+  color: ${colorSystem.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
 `;
 
 export const SignIn = styled.TouchableOpacity`
@@ -54,25 +54,25 @@ export const SignIn = styled.TouchableOpacity`
   margin-top: 20px;
 
   height: 40px;
-  width: ${dimensions.screen.width - 64}px;
+  width: ${dimensionSystem.screen.width - 64}px;
 
   border-radius: 20px;
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const SignUp = styled(SignIn)`
-  width: ${dimensions.screen.width - 200}px;
+  width: ${dimensionSystem.screen.width - 200}px;
   height: 30px;
 
   margin-bottom: 10px;
 `;
 
 export const LabelSignIn = styled.Text`
-  font-size: ${font.size.large};
-  color: ${colors.basic.white};
+  font-size: ${fontSystem.size.large};
+  color: ${colorSystem.basic.white};
   font-weight: bold;
 `;
 
 export const LabelSignUp = styled(LabelSignIn)`
-  font-size: ${font.size.medium};
+  font-size: ${fontSystem.size.medium};
 `;

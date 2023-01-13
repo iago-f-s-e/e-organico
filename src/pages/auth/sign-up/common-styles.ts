@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -7,7 +7,7 @@ export const Container = styled.View`
 
 export const ScrollContainer = styled.ScrollView`
   flex: 1;
-  background-color: ${colors.basic.white};
+  background-color: ${colorSystem.basic.white};
 `;
 
 export const InputContainer = styled.View`
@@ -26,14 +26,14 @@ export const Input = styled.TextInput`
 
   border-width: 1px;
   border-radius: 100px;
-  border-color: ${colors.main.primary};
+  border-color: ${colorSystem.main.primary};
 
-  font-family: ${font.family.medium};
+  font-family: ${fontSystem.family.medium};
 `;
 
 export const Label = styled.Text`
   margin-left: 5%;
 
-  color: ${colors.basic.grey};
-  font-family: ${font.family.semiBold};
+  color: ${colorSystem.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
 `;

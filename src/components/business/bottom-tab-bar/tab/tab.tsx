@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import { getIcon, getLabel } from './util';
 
 import * as S from './styles';
@@ -15,7 +15,7 @@ type Props = {
 export const MyTab = ({ name, myKey, isFocused, onLongPress, onPress }: Props): JSX.Element => {
   const label = getLabel(name);
   const icon = getIcon(name, isFocused);
-  const color = isFocused ? colors.main.primary : colors.basic.grey;
+  const color = isFocused ? colorSystem.main.primary : colorSystem.basic.grey;
 
   const handlePress = () => {
     onPress(isFocused, myKey, name);

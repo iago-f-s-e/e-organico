@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const UserTypeContainer = styled.View`
@@ -8,8 +8,8 @@ export const UserTypeContainer = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: ${font.size.extraLarge};
-  font-family: ${font.family.semiBold};
+  font-size: ${fontSystem.size.extraLarge};
+  font-family: ${fontSystem.family.semiBold};
 `;
 
 export const ButtonType = styled.TouchableOpacity`
@@ -22,12 +22,12 @@ export const ButtonType = styled.TouchableOpacity`
   margin-top: 35px;
   border-radius: 100px;
 
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const Label = styled.Text`
-  color: ${colors.basic.white};
+  color: ${colorSystem.basic.white};
   text-align: center;
-  font-size: ${font.size.large};
-  font-family: ${font.family.semiBold};
+  font-size: ${fontSystem.size.large};
+  font-family: ${fontSystem.family.semiBold};
 `;

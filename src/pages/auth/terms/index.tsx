@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react';
-import { colors, dimensions } from '@src/config/theme';
+import { colorSystem, dimensionSystem } from '@src/styles';
 import { WebView } from 'react-native-webview';
 
 import * as C from '@src/components';
 import { useAppNavigation } from '@src/hooks';
 import * as S from './styles';
 
-const top = dimensions.screen.height * 0.45;
-const left = dimensions.screen.width * 0.45;
+const top = dimensionSystem.screen.height * 0.45;
+const left = dimensionSystem.screen.width * 0.45;
 
 export const Terms: FC = () => {
   const { navigateTo } = useAppNavigation();
@@ -28,7 +28,7 @@ export const Terms: FC = () => {
           toBeFalsy: () => (
             <C.Loading
               sizeType="large"
-              color={colors.main.primary}
+              color={colorSystem.main.primary}
               style={{ position: 'absolute', top, left }}
             />
           ),

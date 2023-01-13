@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -28,7 +28,7 @@ export const Header = styled.TouchableOpacity<{ selected: boolean }>`
   align-items: center;
   justify-content: space-between;
 
-  background-color: ${({ selected }) => (selected ? colors.main.primary : colors.basic.white)};
+  background-color: ${({ selected }) => (selected ? colorSystem.main.primary : colorSystem.basic.white)};
 `;
 
 export const ContentAddress = styled.View`
@@ -48,39 +48,39 @@ export const SelectOrRemove = styled.TouchableOpacity<{ selected: boolean }>`
 
   border-radius: 8px;
 
-  background-color: ${({ selected }) => (selected ? colors.actions.danger : colors.main.primary)};
+  background-color: ${({ selected }) => (selected ? colorSystem.actions.danger : colorSystem.main.primary)};
 `;
 
 export const Title = styled.Text`
   text-align: center;
 
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.greyText};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.greyText};
 `;
 
 export const LabelAddress = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
 
-  color: ${colors.main.secondary};
+  color: ${colorSystem.main.secondary};
   margin-right: 5px;
 `;
 
 export const DataAddress = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.grey};
 `;
 
 export const Name = styled.Text<{ selected: boolean }>`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.large};
-  color: ${({ selected }) => (selected ? colors.basic.white : colors.main.primary)};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.large};
+  color: ${({ selected }) => (selected ? colorSystem.basic.white : colorSystem.main.primary)};
 `;
 
 export const LabelSelectOrRemove = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.white};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.white};
 `;
