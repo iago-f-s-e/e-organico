@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -7,7 +7,7 @@ export const Container = styled.View`
 
 export const ScrollContainer = styled.ScrollView`
   flex: 1;
-  background-color: ${colors.basic.white};
+  background-color: ${colorSystem.basic.white};
 `;
 
 export const Content = styled.View`
@@ -23,7 +23,7 @@ export const MapContent = styled.View`
   align-items: center;
   justify-content: center;
 
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 
   height: 250px;
   width: 90%;
@@ -42,21 +42,21 @@ export const TitleContainer = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.black};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.black};
 `;
 
 export const SubTitle = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.small};
-  color: ${colors.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.small};
+  color: ${colorSystem.basic.grey};
 `;
 
 export const ShowMore = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.small};
-  color: ${colors.main.secondary};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.small};
+  color: ${colorSystem.main.secondary};
 `;
 
 export const ButtonConfirm = styled.TouchableOpacity`
@@ -66,15 +66,15 @@ export const ButtonConfirm = styled.TouchableOpacity`
   width: 100%;
   height: 40px;
 
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const ButtonCancel = styled(ButtonConfirm)`
-  background-color: ${colors.actions.danger};
+  background-color: ${colorSystem.actions.danger};
 `;
 
 export const ButtonLabel = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.large};
-  color: ${colors.basic.white};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.large};
+  color: ${colorSystem.basic.white};
 `;

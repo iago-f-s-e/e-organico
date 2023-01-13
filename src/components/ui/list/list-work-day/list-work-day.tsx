@@ -1,6 +1,6 @@
 import { Workday } from '@src/store/slices/market/types';
 import { AntDesign } from '@expo/vector-icons';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import { toPTDay } from '@src/utils';
 import React from 'react';
 
@@ -31,7 +31,7 @@ export const ListWorkday = ({ workDay, select, selected }: Props): JSX.Element =
           condition={isSelected}
           render={() => (
             <S.Icon>
-              <AntDesign name="checkcircle" size={20} color={colors.main.primary} />
+              <AntDesign name="checkcircle" size={20} color={colorSystem.main.primary} />
             </S.Icon>
           )}
         />

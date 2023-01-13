@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const PriceContainer = styled.View`
@@ -8,9 +8,9 @@ export const PriceContainer = styled.View`
 `;
 
 export const Price = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.large};
-  color: ${colors.entity.money};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.large};
+  color: ${colorSystem.entity.money};
 
   margin-right: 2px;
 `;

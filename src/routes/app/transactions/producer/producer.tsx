@@ -4,7 +4,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 
 import * as C from '@src/components';
 
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import * as Producer from '@src/pages/app/producer';
 import * as C_S from '../../common-styles';
 
@@ -24,9 +24,9 @@ export const ProducerTransactionsRoutes: FC = () => {
       <Tab.Navigator
         tabBar={(props) => <C.TopTabBarScroll {...props} />}
         screenOptions={{
-          tabBarActiveTintColor: colors.main.secondary,
+          tabBarActiveTintColor: colorSystem.main.secondary,
           tabBarLabelStyle: { fontSize: 12 },
-          tabBarIndicatorStyle: { backgroundColor: colors.main.primary },
+          tabBarIndicatorStyle: { backgroundColor: colorSystem.main.primary },
         }}
       >
         <Tab.Screen name="producer-transaction-pending" component={Producer.PendingTransactions} />

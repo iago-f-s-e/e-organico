@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
@@ -15,11 +15,11 @@ export const Container = styled.TouchableOpacity`
 
   border-radius: 100px;
 
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const Label = styled.Text`
-  font-size: ${font.size.large};
-  color: ${colors.basic.white};
-  font-family: ${font.family.bold};
+  font-size: ${fontSystem.size.large};
+  color: ${colorSystem.basic.white};
+  font-family: ${fontSystem.family.bold};
 `;

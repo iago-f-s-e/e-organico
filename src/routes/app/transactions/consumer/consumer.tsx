@@ -4,7 +4,7 @@ import { ConsumerTransactionTopTab } from '@src/@types/routes';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import * as Consumer from '@src/pages/app/consumer';
 import * as C from '@src/components';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import * as C_S from '../../common-styles';
 
 const Tab = createMaterialTopTabNavigator<ConsumerTransactionTopTab>();
@@ -21,9 +21,9 @@ export const ConsumerTransactionsRoutes: FC = () => {
       <Tab.Navigator
         tabBar={(props) => <C.TopTabBar {...props} />}
         screenOptions={{
-          tabBarActiveTintColor: colors.main.secondary,
+          tabBarActiveTintColor: colorSystem.main.secondary,
           tabBarLabelStyle: { fontSize: 12 },
-          tabBarIndicatorStyle: { backgroundColor: colors.main.primary },
+          tabBarIndicatorStyle: { backgroundColor: colorSystem.main.primary },
         }}
       >
         <Tab.Screen

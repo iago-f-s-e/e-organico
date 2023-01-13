@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const FinishedContainer = styled.View`
@@ -29,11 +29,11 @@ export const Button = styled.TouchableOpacity`
 
   border-radius: 100px;
 
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const Label = styled.Text`
-  font-size: ${font.size.large};
-  font-family: ${font.family.semiBold};
-  color: ${colors.basic.white};
+  font-size: ${fontSystem.size.large};
+  font-family: ${fontSystem.family.semiBold};
+  color: ${colorSystem.basic.white};
 `;

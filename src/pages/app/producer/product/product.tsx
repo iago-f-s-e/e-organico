@@ -5,7 +5,7 @@ import { Feather } from '@expo/vector-icons';
 import { useApi, useAppNavigation } from '@src/hooks';
 import { hideBottomTab, useAppDispatch } from '@src/store';
 import { handleInputMask, translateDate } from '@src/utils';
-import { colors, shadow } from '@src/config/theme';
+import { colorSystem, shadowSystem } from '@src/styles';
 
 import * as C from '@src/components';
 import { ProducerProductDetail } from '@src/store/slices/producer-product/type';
@@ -129,19 +129,19 @@ export const Product: FC = () => {
       <C.IfElse
         condition={state.loading}
         render={{
-          toBeTruthy: () => <C.Loading color={colors.main.primary} sizeType="large" />,
+          toBeTruthy: () => <C.Loading color={colorSystem.main.primary} sizeType="large" />,
           toBeFalsy: () => (
             <>
               <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
                 <C_S.Content>
                   <Animated.View
                     style={{
-                      ...shadow,
+                      ...shadowSystem,
                       width: state.imageSize.x,
                       height: state.imageSize.y,
                       overflow: 'hidden',
                       borderRadius: 5,
-                      backgroundColor: colors.basic.white,
+                      backgroundColor: colorSystem.basic.white,
                     }}
                   >
                     <S.Image source={{ uri: state.producerProduct.image }} />
@@ -160,7 +160,7 @@ export const Product: FC = () => {
                           value={state.harvestDate}
                           select={(value) => handlePickDate(value)}
                         />
-                        <Feather name="edit" size={15} color={colors.main.primary} />
+                        <Feather name="edit" size={15} color={colorSystem.main.primary} />
                         <S.LabelDate>{translateDate(state.harvestDate)}</S.LabelDate>
                       </S.DatePickerContent>
                     </S.PickerContainer>
@@ -184,11 +184,11 @@ export const Product: FC = () => {
                         <S.Label>Preço:</S.Label>
 
                         <S.PriceContainer>
-                          <Feather name="edit" size={15} color={colors.basic.white} />
+                          <Feather name="edit" size={15} color={colorSystem.basic.white} />
                           <S.InputPrice
                             value={state.price}
                             onChangeText={(value) => handleInputPrice(value)}
-                            selectionColor={colors.basic.white}
+                            selectionColor={colorSystem.basic.white}
                             onBlur={handleOnBlur}
                             onFocus={handleOnFocus}
                             keyboardType="number-pad"
@@ -213,7 +213,9 @@ export const Product: FC = () => {
                       condition={state.updating}
                       render={{
                         toBeFalsy: () => <C_S.ButtonLabel>Atualizar</C_S.ButtonLabel>,
-                        toBeTruthy: () => <C.Loading color={colors.basic.white} sizeType="large" />,
+                        toBeTruthy: () => (
+                          <C.Loading color={colorSystem.basic.white} sizeType="large" />
+                        ),
                       }}
                     />
                   </C_S.ButtonConfirm>
@@ -236,7 +238,7 @@ export const Product: FC = () => {
                             render={{
                               toBeFalsy: () => <C_S.ButtonLabel>Excluir</C_S.ButtonLabel>,
                               toBeTruthy: () => (
-                                <C.Loading color={colors.basic.white} sizeType="large" />
+                                <C.Loading color={colorSystem.basic.white} sizeType="large" />
                               ),
                             }}
                           />

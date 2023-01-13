@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import { IfElse, If } from '@src/components/business';
 import { ContentOptionProps } from './types';
 
@@ -28,14 +28,14 @@ export const ContentOption = ({
         render={{
           toBeFalsy: () => (
             <S.Arrow onPress={onClick}>
-              <AntDesign name="right" size={22} color={colors.main.secondary} />
+              <AntDesign name="right" size={22} color={colorSystem.main.secondary} />
             </S.Arrow>
           ),
 
           toBeTruthy: () => (
             <Switch
-              trackColor={{ false: colors.basic.silver, true: colors.main.primary }}
-              thumbColor={toggleValue ? colors.main.secondary : colors.main.primary}
+              trackColor={{ false: colorSystem.basic.silver, true: colorSystem.main.primary }}
+              thumbColor={toggleValue ? colorSystem.main.secondary : colorSystem.main.primary}
               onValueChange={onClick}
               value={toggleValue}
             />

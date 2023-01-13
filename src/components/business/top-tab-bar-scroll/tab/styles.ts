@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
@@ -9,8 +9,8 @@ export const Container = styled.TouchableOpacity`
   align-items: center;
 
   border-bottom-width: 1px;
-  border-color: ${colors.basic.grey};
-  background-color: ${colors.basic.white};
+  border-color: ${colorSystem.basic.grey};
+  background-color: ${colorSystem.basic.white};
 `;
 
 export const Content = styled.View`
@@ -24,7 +24,7 @@ export const Content = styled.View`
 `;
 
 export const Label = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.main.primary};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.main.primary};
 `;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useAppNavigation } from '@src/hooks';
 import { If } from '@src/components/business';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import { Payment } from '@src/store/slices/payment-method/types';
 import * as C_S from '../common-styles';
 import { Selected } from '../../selected/selected';
@@ -29,7 +29,7 @@ export const ListConsumerPaymentMethod = ({
   const borderCurrent = {
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: colors.main.primary,
+    borderColor: colorSystem.main.primary,
   };
 
   const handlePress = () => {

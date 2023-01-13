@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const Content = styled.View`
@@ -10,8 +10,8 @@ export const Content = styled.View`
   padding: 0 5px;
 
   border-bottom-width: 1px;
-  border-color: ${colors.basic.grey};
-  background-color: ${colors.basic.white};
+  border-color: ${colorSystem.basic.grey};
+  background-color: ${colorSystem.basic.white};
 `;
 
 export const RowInfo = styled.View`
@@ -23,7 +23,7 @@ export const RowInfo = styled.View`
 `;
 
 export const Info = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.small};
-  color: ${colors.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.small};
+  color: ${colorSystem.basic.grey};
 `;

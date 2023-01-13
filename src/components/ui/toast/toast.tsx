@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Animated } from 'react-native';
 import { hideToast, useAppDispatch, useAppSelector } from '@src/store';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import { getIcon } from './utils';
 
 import * as S from './styles';
@@ -47,11 +47,11 @@ export const Toast = (): JSX.Element => {
   const message = useMemo(() => toast.message, [toast.message]);
 
   const color = useMemo(() => {
-    if (toast.type === 'error') return colors.actions.error;
+    if (toast.type === 'error') return colorSystem.actions.error;
 
-    if (toast.type === 'success') return colors.actions.success;
+    if (toast.type === 'success') return colorSystem.actions.success;
 
-    return colors.actions.info;
+    return colorSystem.actions.info;
   }, [toast.type]);
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import { useApi, useAppNavigation } from '@src/hooks';
 
 import * as C from '@src/components';
 
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import { ProducerTransactionDetail } from '@src/store/slices/transaction/types';
 import * as C_S from '../../common-styles';
 import * as S from './styles';
@@ -83,7 +83,7 @@ export const Transaction: FC = () => {
       <C.IfElse
         condition={state.loading}
         render={{
-          toBeTruthy: () => <C.Loading color={colors.main.primary} sizeType="large" />,
+          toBeTruthy: () => <C.Loading color={colorSystem.main.primary} sizeType="large" />,
           toBeFalsy: () => (
             <>
               <C_S.ScrollContainer nestedScrollEnabled showsVerticalScrollIndicator={false}>
@@ -185,7 +185,7 @@ export const Transaction: FC = () => {
                               render={{
                                 toBeFalsy: () => <C_S.ButtonLabel>{state.label}</C_S.ButtonLabel>,
                                 toBeTruthy: () => (
-                                  <C.Loading color={colors.basic.white} sizeType="large" />
+                                  <C.Loading color={colorSystem.basic.white} sizeType="large" />
                                 ),
                               }}
                             />
@@ -207,7 +207,7 @@ export const Transaction: FC = () => {
                               render={{
                                 toBeFalsy: () => <C_S.ButtonLabel>Cancelar</C_S.ButtonLabel>,
                                 toBeTruthy: () => (
-                                  <C.Loading color={colors.basic.white} sizeType="large" />
+                                  <C.Loading color={colorSystem.basic.white} sizeType="large" />
                                 ),
                               }}
                             />

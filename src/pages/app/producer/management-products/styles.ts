@@ -1,10 +1,10 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const ButtonLabel = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.large};
-  color: ${colors.basic.white};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.large};
+  color: ${colorSystem.basic.white};
 `;
 
 export const ButtonConfirm = styled.TouchableOpacity`
@@ -14,11 +14,11 @@ export const ButtonConfirm = styled.TouchableOpacity`
   width: 50%;
   height: 40px;
 
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const ButtonCancel = styled(ButtonConfirm)`
-  background-color: ${colors.actions.danger};
+  background-color: ${colorSystem.actions.danger};
 `;
 
 export const Buttons = styled.View`

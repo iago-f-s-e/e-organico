@@ -1,7 +1,7 @@
-import { colors, shadow, dimensions, font } from '@src/config/theme';
+import { colorSystem, shadowSystem, dimensionSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
-const imageSize = dimensions.screen.width * 0.65;
+const imageSize = dimensionSystem.screen.width * 0.65;
 
 export const Content = styled.View`
   flex: 1;
@@ -13,17 +13,17 @@ export const Content = styled.View`
 
   padding-bottom: 5px;
   border-bottom-width: 1px;
-  border-color: ${colors.others.cloud};
+  border-color: ${colorSystem.others.cloud};
 `;
 
-export const ImageContainer = styled.View.attrs(shadow)`
+export const ImageContainer = styled.View.attrs(shadowSystem)`
   width: ${imageSize}px;
   height: ${imageSize}px;
 
   overflow: hidden;
   border-radius: 5px;
 
-  background-color: ${colors.basic.white};
+  background-color: ${colorSystem.basic.white};
 `;
 
 export const Image = styled.Image`
@@ -37,17 +37,17 @@ export const PickerContainer = styled.View`
 `;
 
 export const Label = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.small};
-  color: ${colors.main.primary};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.small};
+  color: ${colorSystem.main.primary};
 `;
 
 export const LabelDate = styled.Text`
   margin-left: 10px;
 
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.main.primary};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.main.primary};
 `;
 
 export const DatePickerContent = styled.TouchableOpacity`
@@ -61,7 +61,7 @@ export const DatePickerContent = styled.TouchableOpacity`
 
   border-width: 1px;
   border-radius: 5px;
-  border-color: ${colors.main.primary};
+  border-color: ${colorSystem.main.primary};
 `;
 
 export const StockAndPrice = styled.View`
@@ -85,7 +85,7 @@ export const StockContainer = styled.View`
 
   border-width: 1px;
   border-radius: 5px;
-  border-color: ${colors.main.primary};
+  border-color: ${colorSystem.main.primary};
 `;
 
 export const PriceContainer = styled.View`
@@ -98,16 +98,16 @@ export const PriceContainer = styled.View`
   padding: 12px;
   border-radius: 3px;
 
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const InputStock = styled.TextInput`
   flex: 1;
 
   text-align: center;
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.main.primary};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.main.primary};
 `;
 
 export const InputPrice = styled.TextInput`
@@ -115,15 +115,15 @@ export const InputPrice = styled.TextInput`
   width: 100%;
 
   padding-left: 3px;
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.white};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.white};
 `;
 
 export const Name = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.large};
-  color: ${colors.main.primary};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.large};
+  color: ${colorSystem.main.primary};
 `;
 
 export const Buttons = styled.View`

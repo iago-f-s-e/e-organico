@@ -1,4 +1,4 @@
-import { dimensions } from '@src/config/theme';
+import { dimensionSystem } from '@src/styles';
 import { defaultProducerProduct } from '@src/constants/default-entities';
 import { ProducerProductDetail } from '@src/store/slices/producer-product/type';
 import { handleInputMask, handleRemoveMask, translateDate } from '@src/utils';
@@ -42,10 +42,10 @@ type Action = {
 
 type Reducer = (state: State, action: Action) => State;
 
-const _32PerCent = dimensions.screen.width * 0.32;
-const _50PerCent = dimensions.screen.width * 0.5;
-const _65PerCent = dimensions.screen.width * 0.65;
-const _100PerCent = dimensions.screen.width;
+const _32PerCent = dimensionSystem.screen.width * 0.32;
+const _50PerCent = dimensionSystem.screen.width * 0.5;
+const _65PerCent = dimensionSystem.screen.width * 0.65;
+const _100PerCent = dimensionSystem.screen.width;
 
 const getIsDifferent = (state: State): boolean => {
   const stockIsDifferent = state.stock !== state.producerProduct.stock;

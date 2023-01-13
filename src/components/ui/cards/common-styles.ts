@@ -1,7 +1,7 @@
-import { colors, font, shadow } from '@src/config/theme';
+import { colorSystem, fontSystem, shadowSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
-export const Container = styled.View.attrs(shadow)`
+export const Container = styled.View.attrs(shadowSystem)`
   flex: 1;
 
   align-self: center;
@@ -11,10 +11,10 @@ export const Container = styled.View.attrs(shadow)`
 
   border-radius: 5px;
 
-  background-color: ${colors.basic.white};
+  background-color: ${colorSystem.basic.white};
 `;
 
-export const MediumContainer = styled.View.attrs(shadow)`
+export const MediumContainer = styled.View.attrs(shadowSystem)`
   align-self: center;
 
   width: 90%;
@@ -22,7 +22,7 @@ export const MediumContainer = styled.View.attrs(shadow)`
 
   border-radius: 5px;
 
-  background-color: ${colors.basic.white};
+  background-color: ${colorSystem.basic.white};
 `;
 
 export const BigContainer = styled(Container)`
@@ -37,7 +37,7 @@ export const SmallContainerWithoutShadow = styled.View`
 
   border-radius: 5px;
 
-  background-color: ${colors.basic.white};
+  background-color: ${colorSystem.basic.white};
 `;
 
 export const ScrollContainer = styled.ScrollView`
@@ -67,7 +67,7 @@ export const SubTitleContainer = styled.View`
   height: 20px;
 
   border-top-width: 0.5px;
-  border-color: ${colors.basic.grey};
+  border-color: ${colorSystem.basic.grey};
 `;
 
 export const ImageContainer = styled.View`
@@ -90,21 +90,21 @@ export const ImageContent = styled.Image`
 `;
 
 export const Name = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.large};
-  color: ${colors.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.large};
+  color: ${colorSystem.basic.grey};
 `;
 
 export const Info = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.grey};
 `;
 
 export const SubTitle = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.grey};
 `;
 
 // ### Address  ###
@@ -125,17 +125,17 @@ export const AddressSection = styled.View`
 `;
 
 export const AddressLabel = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
 
-  color: ${colors.basic.black};
+  color: ${colorSystem.basic.black};
   margin-right: 5px;
 `;
 
 export const AddressData = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.grey};
 `;
 
 export const WorkDaysSection = styled.View`
@@ -147,9 +147,9 @@ export const WorkDaysSection = styled.View`
 export const WorkDaysTitle = styled.Text`
   text-align: center;
 
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.greyText};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.greyText};
 `;
 
 export const WorkDaysContainer = styled.View`

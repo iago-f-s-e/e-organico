@@ -2,7 +2,7 @@ import React, { FC, useReducer } from 'react';
 import { ActivityIndicator, Animated } from 'react-native';
 import { handleInputMask } from '@src/utils';
 
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import logo from '@src/assets/icons/logo.png';
 
 import { useAppNavigation, useSignIn } from '@src/hooks';
@@ -82,7 +82,7 @@ export const Login: FC = () => {
             condition={state.loading}
             render={{
               toBeFalsy: () => <S.LabelSignIn>Entrar</S.LabelSignIn>,
-              toBeTruthy: () => <ActivityIndicator color={colors.basic.white} size="large" />,
+              toBeTruthy: () => <ActivityIndicator color={colorSystem.basic.white} size="large" />,
             }}
           />
         </S.SignIn>

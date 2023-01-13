@@ -1,7 +1,7 @@
-import { colors, dimensions, font } from '@src/config/theme';
+import { colorSystem, dimensionSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
-const imageSize = dimensions.screen.width * 0.65; // width: 65%
+const imageSize = dimensionSystem.screen.width * 0.65; // width: 65%
 
 export const ImageContainer = styled.View`
   align-self: center;
@@ -21,7 +21,7 @@ export const InputContainer = styled.View`
   width: 100%;
 
   border-top-width: 1px;
-  border-color: ${colors.basic.grey};
+  border-color: ${colorSystem.basic.grey};
 `;
 
 export const InputContent = styled.View`
@@ -31,7 +31,7 @@ export const InputContent = styled.View`
 
   border-radius: 5px;
   border-width: 1px;
-  border-color: ${colors.main.primary};
+  border-color: ${colorSystem.main.primary};
 
   width: 35%;
   height: 50px;
@@ -47,7 +47,7 @@ export const InputButton = styled.TouchableOpacity`
 
   border-radius: 5px;
 
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const IncOrDecButton = styled.TouchableOpacity`
@@ -77,56 +77,56 @@ export const InfoSection = styled.View`
 `;
 
 export const InfoLabel = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
 
-  color: ${colors.basic.black};
+  color: ${colorSystem.basic.black};
   margin-right: 5px;
 `;
 
 export const InfoData = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.grey};
 `;
 
 export const Title = styled.Text`
   text-align: center;
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.large};
-  color: ${colors.basic.black};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.large};
+  color: ${colorSystem.basic.black};
 `;
 
 export const MoneyLabel = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
 
-  color: ${colors.entity.money};
+  color: ${colorSystem.entity.money};
   margin-right: 5px;
 `;
 
 export const Money = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.betweenMediumAndLarge};
-  color: ${colors.entity.money};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.betweenMediumAndLarge};
+  color: ${colorSystem.entity.money};
 `;
 
 export const Quantity = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.betweenMediumAndLarge};
-  color: ${colors.main.primary};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.betweenMediumAndLarge};
+  color: ${colorSystem.main.primary};
 `;
 
 export const IncOrDecLabel = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.main.primary};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.main.primary};
 `;
 
 export const ButtonLabel = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.medium};
-  color: ${colors.basic.white};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.medium};
+  color: ${colorSystem.basic.white};
 `;
 
 export const ImageContent = styled.Image`

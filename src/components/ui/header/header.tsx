@@ -2,7 +2,7 @@ import React from 'react';
 import { Entypo, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
 import { If } from '@src/components/business';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import { useAppNavigation, useStorage } from '@src/hooks';
 import { useAppSelector } from '@src/store';
 import { Props } from './types';
@@ -29,7 +29,7 @@ export const Header = ({ title, subTitle, hideBackButton, showLogout }: Props): 
               condition={!hideBackButton}
               render={() => (
                 <S.BackButton onPress={() => goBack()}>
-                  <Entypo name="chevron-left" size={22} color={colors.basic.white} />
+                  <Entypo name="chevron-left" size={22} color={colorSystem.basic.white} />
                 </S.BackButton>
               )}
             />
@@ -42,7 +42,7 @@ export const Header = ({ title, subTitle, hideBackButton, showLogout }: Props): 
               condition={!cart.hasCurrent && showLogout}
               render={() => (
                 <S.LogoutButton onPress={handleLogout}>
-                  <MaterialIcons name="logout" size={20} color={colors.basic.white} />
+                  <MaterialIcons name="logout" size={20} color={colorSystem.basic.white} />
                 </S.LogoutButton>
               )}
             />
@@ -51,7 +51,7 @@ export const Header = ({ title, subTitle, hideBackButton, showLogout }: Props): 
               condition={cart.hasCurrent}
               render={() => (
                 <S.LogoutButton onPress={() => navigateTo<'consumer'>('consumer-cart')}>
-                  <FontAwesome5 name="shopping-basket" size={20} color={colors.basic.white} />
+                  <FontAwesome5 name="shopping-basket" size={20} color={colorSystem.basic.white} />
                 </S.LogoutButton>
               )}
             />

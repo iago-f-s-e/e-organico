@@ -4,7 +4,7 @@ import { Market } from '@src/store/slices/market/types';
 import { useAppNavigation } from '@src/hooks';
 import { updateMarketSection, useAppDispatch } from '@src/store';
 import { If } from '@src/components/business';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import * as C_S from '../common-styles';
 import { Selected } from '../../selected/selected';
 
@@ -26,7 +26,7 @@ export const ListConsumerMarket = ({ market, onSelect, current, selected }: Prop
   const borderCurrent = {
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: colors.main.primary,
+    borderColor: colorSystem.main.primary,
   };
 
   const handlePress = () => {

@@ -5,7 +5,7 @@ import { confirmOrCancelCartProducts, useAppDispatch, useAppSelector } from '@sr
 import { useApi, useAppNavigation, useStorage, useToast as _useToast } from '@src/hooks';
 
 import * as C from '@src/components';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import * as C_S from '../../../common-styles';
 import * as S from './styles';
 
@@ -118,7 +118,7 @@ export const Payment: FC = () => {
           <C.IfElse
             condition={state.loading}
             render={{
-              toBeTruthy: () => <C.Loading color={colors.basic.white} sizeType="large" />,
+              toBeTruthy: () => <C.Loading color={colorSystem.basic.white} sizeType="large" />,
               toBeFalsy: () => <C_S.ButtonLabel>Finalizar</C_S.ButtonLabel>,
             }}
           />

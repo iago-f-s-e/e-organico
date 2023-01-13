@@ -1,7 +1,7 @@
-import { colors, font, shadow, dimensions } from '@src/config/theme';
+import { colorSystem, fontSystem, shadowSystem, dimensionSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
-const width = dimensions.screen.width * 0.97; // width: 97%
+const width = dimensionSystem.screen.width * 0.97; // width: 97%
 
 export const Container = styled.View`
   flex: 1;
@@ -17,10 +17,10 @@ export const Container = styled.View`
   margin: 10px 0;
 `;
 
-export const ShadowContainer = styled(Container).attrs(shadow)`
+export const ShadowContainer = styled(Container).attrs(shadowSystem)`
   border-radius: 10px;
 
-  background-color: ${colors.basic.white};
+  background-color: ${colorSystem.basic.white};
 `;
 
 export const Image = styled.Image`
@@ -60,13 +60,13 @@ export const RowInfo = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.large};
-  color: ${colors.basic.black};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.large};
+  color: ${colorSystem.basic.black};
 `;
 
 export const Info = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.small};
-  color: ${colors.basic.grey};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.small};
+  color: ${colorSystem.basic.grey};
 `;

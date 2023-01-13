@@ -1,4 +1,4 @@
-import { colors, font } from '@src/config/theme';
+import { colorSystem, fontSystem } from '@src/styles';
 import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
@@ -9,7 +9,7 @@ export const Container = styled.TouchableOpacity`
 
   border-radius: 5px;
   border-width: 1px;
-  border-color: ${colors.main.primary};
+  border-color: ${colorSystem.main.primary};
 
   overflow: hidden;
 
@@ -19,7 +19,7 @@ export const Container = styled.TouchableOpacity`
 export const Border = styled.View`
   flex: 1;
   width: 1px;
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const Header = styled.View`
@@ -29,14 +29,14 @@ export const Header = styled.View`
   height: 25px;
   width: 100%;
 
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const Footer = styled.View`
   height: 10px;
   width: 100%;
 
-  background-color: ${colors.main.primary};
+  background-color: ${colorSystem.main.primary};
 `;
 
 export const Content = styled.View`
@@ -60,13 +60,13 @@ export const Icon = styled.View`
 `;
 
 export const Time = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.small};
-  color: ${colors.main.secondary};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.small};
+  color: ${colorSystem.main.secondary};
 `;
 
 export const Day = styled.Text`
-  font-family: ${font.family.semiBold};
-  font-size: ${font.size.small};
-  color: ${colors.basic.white};
+  font-family: ${fontSystem.family.semiBold};
+  font-size: ${fontSystem.size.small};
+  color: ${colorSystem.basic.white};
 `;

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Animated } from 'react-native';
-import { colors } from '@src/config/theme';
+import { colorSystem } from '@src/styles';
 import { IfElse } from '@src/components/business';
 import { Loading } from '../../loading/loading';
 
@@ -34,7 +34,7 @@ export const AnimatedButton = ({ handle, loading, animated, label }: Props): JSX
         <IfElse
           condition={loading}
           render={{
-            toBeTruthy: () => <Loading color={colors.basic.white} sizeType="large" />,
+            toBeTruthy: () => <Loading color={colorSystem.basic.white} sizeType="large" />,
             toBeFalsy: () => <S.Label>{showLabel}</S.Label>,
           }}
         />
