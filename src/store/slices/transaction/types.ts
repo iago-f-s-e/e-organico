@@ -1,4 +1,4 @@
-import { Address } from '../address/types';
+import { AddressModel } from '@src/types/models';
 import { EUDay, Market, Workday } from '../market/types';
 import { Payment } from '../payment-method/types';
 import { ProducerProductDetail } from '../producer-product/type';
@@ -33,7 +33,7 @@ type PickTransaction = {
 
 type DeliveryTransaction = {
   type: 'delivery';
-  address: Address;
+  address: AddressModel;
 };
 
 export type PickOrDelivery = PickTransaction | DeliveryTransaction;

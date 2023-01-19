@@ -1,4 +1,4 @@
-import { Address } from '../address/types';
+import { AddressModel } from '@src/types/models';
 import { Image } from '../image/types';
 
 export type SignUpPayload = {
@@ -8,5 +8,5 @@ export type SignUpPayload = {
   document: string;
   password: string;
   image: Image;
-  address: Address;
+  address: AddressModel;
 };

@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { Address } from '../address/types';
+import { AddressModel } from '@src/types/models';
 import { ConsumerType } from '../consumer/types';
 import { ProducerType } from '../producer/types';
 
@@ -19,7 +19,7 @@ export type User = {
 };
 
 export type UserDetail = User & {
-  address: Address;
+  address: AddressModel;
 };
 
 export type AuthenticatedUser = UserDetail & {
@@ -36,7 +36,7 @@ export type LoggedUser = {
     phone: string;
     email: string;
     image: string;
-    address?: Address;
+    address?: AddressModel;
     producer?: {
       makeDelivery: boolean;
     };

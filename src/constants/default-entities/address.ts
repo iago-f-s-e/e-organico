@@ -1,6 +1,6 @@
-import { Address } from '@src/store/slices/address/types';
+import { AddressModel } from '@src/types/models';
 
-export const defaultAddress: Address = {
+export const defaultAddress: AddressModel = {
   city: 'Não encontrado',
   complement: 'Não encontrado',
   district: 'Não encontrado',

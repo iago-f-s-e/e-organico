@@ -1,4 +1,4 @@
-import { Address } from '../address/types';
+import { AddressModel } from '@src/types/models';
 import { Market } from '../market/types';
 import { MinimalProducerProduct } from '../producer-product/type';
 import { MinimalProperty } from '../property/types';
@@ -18,7 +18,7 @@ export type MinimalProducer = {
 };
 
 export type ProducerWithAddressAndProperty = MinimalProducer & {
-  address: Address;
+  address: AddressModel;
   property: MinimalProperty;
 };
 

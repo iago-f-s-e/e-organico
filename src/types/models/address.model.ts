@@ -1,6 +1,4 @@
-// TODO: pegar latitude e longitude
-
-export type Address = {
+export type AddressModel = {
   street: string;
   number: string;
   zipCode: string;
