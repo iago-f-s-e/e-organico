@@ -1,4 +1,4 @@
-import { Address } from '../address/types';
+import { AddressModel } from '@src/types/models';
 import { MinimalProducer } from '../producer/types';
 
 export type EUDay =
@@ -31,7 +31,7 @@ export type Market = {
   id: string;
   name: string;
   image: string;
-  address: Address;
+  address: AddressModel;
   workdays: Workday[];
 };
 
